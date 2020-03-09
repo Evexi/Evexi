@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evexi API Demo</title>
+    <style>
+        body {
+            background-color: green;
+            transition: background-color ease-in-out 1s;
+        }
+        body.danger {
+            background-color: red;
+        }
+    </style>
+</head>
+<body class="danger">
+<h2>Evexi API Demo</h2>
+<div id="logs"></div>
+</body>
+<script type="text/javascript" async>
+
+    /**
+     * Main list event
+     */
+    window.addEventListener("load", function() {
+
+        /**
+         * Check the page is working
+         */
+        _log('ready')
+
+        /**
+         * All API responses available here
+         */
+        window.addEventListener("message", function(e) {
+            const data = JSON.parse(e.data);
+            switch (data.action) {
+                case 'info':
+                    if(data.hasOwnProperty('response')) {
+                        _setWorking(true);
+                    }
+                    _log(data);
+                    break
+                case 'storage.get':
+                    if(data.response && data.response.data !== 'My test file data')
+                        _setWorking(false);
+                    _log(data);
+                    break
+                case 'storage.download':
+                    if(data.url === 'https://mrx.technology/assets/images/compatible/mrx.png' &&
+                        data.response && data.response.error !== null) {
+                        _setWorking(false);
+                    }
+                    _log(data);
+                    break
+                default: _log(data);
+            }
+        });
+
+        /**
+         * Gets player infomation
+         */
+        _makeCall({action: 'info'});
+
+        /**
+         * Create JSON file and enter test data
+         */
+        _makeCall({action: 'storage.put', name: 'text.json', data: 'My test file data'});
+
+        /**
+         * Wait
+         */
+        _log('')
+
+        /**
+         *
+         */
+        setTimeout(function() {
+
+            /**
+             *
+             */
+            _makeCall({action: 'storage.get', name: 'text.json'});
+
+            /**
+             *
+             */
+            _makeCall({action: 'storage.exists', name: 'mrx.png'});
+
+            /**
+             *
+             */
+            _makeCall({action: 'storage.download', url: 'https://mrx.technology/assets/images/compatible/mrx.png'});
+
+            /**
+             *
+             */
+            _makeCall({action: 'storage.download', url: 'https://mrx.technology/assets/images/compatible/a.png'});
+
+            /**
+             *
+             */
+            _makeCall({action: 'storage.exists', name: 'mrx.png'});
+
+            /**
+             *
+             */
+            _makeCall({action: 'storage.list'});
+
+            /**
+             * Wait
+             */
+            _log('')
+
+            /**
+             *
+             */
+            setTimeout(function() {
+
+                /**
+                 *
+                 */
+                _makeCall({action: 'storage.delete', name: 'mrx.png'});
+
+                /**
+                 *
+                 */
+                _makeCall({action: 'storage.exists', name: 'mrx.png'});
+
+                /**
+                 *
+                 */
+                _makeCall({action: 'storage.clear'});
+
+                /**
+                 * Wait
+                 */
+                _log('')
+
+                /**
+                 *
+                 */
+                setTimeout(function() {
+
+                    /**
+                     *
+                     */
+                    _makeCall({action: 'storage.list'});
+
+                    /**
+                     *
+                     */
+                    _makeCall({action: 'log', data: 'Finished'});
+
+                }, 1000)
+
+            }, 1000);
+
+        }, 1000);
+
+    });
+
+    /**
+     * Detect if its JSON - For logging only
+     */
+    function _isJson(item) {
+        item = typeof item !== "string"
+            ? JSON.stringify(item)
+            : item;
+
+        try {
+            item = JSON.parse(item);
+        } catch (e) {
+            return false;
+        }
+
+        return typeof item === "object" && item !== null;
+
+    }
+
+    /**
+     * Log to both div, console or MRX Player logs
+     */
+    function _log(data) {
+
+        var text = _isJson(data) ? JSON.stringify(data) : data;
+
+        // Add to div
+        var logs = document.getElementById('logs');
+
+        if(data.hasOwnProperty('response')) {
+            logs.innerHTML += "<span style='background-color: darkgreen'>" + text + "</span><br/>";
+        } else {
+            logs.innerHTML += "<span style='background-color: darkred'>" + text + "</span><br/>";
+        }
+
+        // Log it locally
+        console.log(text);
+
+    }
+
+    /**
+     * Mark the API as danger or not
+     */
+    function _setWorking(working) {
+        if(working)
+            document.body.className = '';
+        else
+            document.body.className = 'danger';
+    }
+
+    /**
+     * Post a message to Evexi API
+     */
+    function _makeCall(data) {
+        window.parent.postMessage(JSON.stringify(data), '*');
+    }
+
+</script>
+</html>

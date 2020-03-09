@@ -1,0 +1,14 @@
+{
+  "name": "Evexi-API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MRXTechnology/Evexi-API.git",
+  "author": "Peter Ingram <p.ingram@managedracks.co.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^11.3.0"
+  },
+  "scripts": {
+    "serve": "serve"
+  }
+}
