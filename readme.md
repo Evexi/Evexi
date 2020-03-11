@@ -13,7 +13,7 @@ The Evexi API is available to be used on background tasks, web items or zip item
 You can communicate with the API by doing a window.parent postMessage call with structured data. The API will then respond on on window with a standard 'message' event.
 
 ````javascript
- window.parent.postMessage(JSON.stringify({action: 'storage.get', name: 'text.json'}), '*');
+window.parent.postMessage(JSON.stringify({action: 'storage.get', name: 'text.json'}), '*');
 ````
 
 ````javascript
