@@ -1,6 +1,5 @@
 # Evexi API
-
-[TOC]
+![Logo](./logo.jpg)
 
 ### Introduction
 
