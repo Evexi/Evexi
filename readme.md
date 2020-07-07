@@ -158,3 +158,28 @@ Check if a file exists on the file system. Response will be a boolean if the fil
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.exists', name: 'mrx.png'}), '*');
 ````
+
+
+##### PIP (>1.9.0)
+
+
+Picture in picture allows you to display the feed from display port within a window as part of the content you are creating.
+
+````typescript
+const settings = {
+    source: 'HDMI', // 'HDMI' | 'DVI' | 'DP'
+    num: 1, // PORT 1
+    x: '0px',
+    y: '0px',
+    width: '100%', // can be percentage or pixels
+    height: '100%' // can be percentage or pixels
+}
+
+window.parent.postMessage(JSON.stringify({action: 'pip.show', data: settings}), '*');
+````
+
+Don't forget to close the PIP once your finished with it else issues could arise.
+
+````typescript
+window.parent.postMessage(JSON.stringify({action: 'pip.hide'}), '*');
+````
