@@ -9,6 +9,6 @@
     "serve": "^11.3.0"
   },
   "scripts": {
-    "serve": "serve"
+    "serve": "cd examples && serve"
   }
 }

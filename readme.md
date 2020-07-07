@@ -3,7 +3,7 @@
 
 ### Introduction
 
-The Evexi API is available to be used on background tasks, web items or zip items used within Evexi Player. The API will manage the user_files directory within the player, when using the API it's the developers responsibility to manage stored assets correctly. On the TIZEN platform the API is only available on firmware 2070 and higher.
+The Evexi API is available to be used on background tasks, web items or zip items used within Evexi Player. The API will manage the user_files directory within the player, when using the API it's the developers responsibility to manage stored assets correctly. On the TIZEN platform the API is only available on firmware 2070 and higher. Please see the examples directory for examples of file system communication as well as picture in picture communication.
 
 
 
@@ -169,8 +169,8 @@ Picture in picture allows you to display the feed from display port within a win
 const settings = {
     source: 'HDMI', // 'HDMI' | 'DVI' | 'DP'
     num: 1, // PORT 1
-    x: '0px',
-    y: '0px',
+    x: '0px', // can be percentage or pixels
+    y: '0px', // can be percentage or pixels
     width: '100%', // can be percentage or pixels
     height: '100%' // can be percentage or pixels
 }
