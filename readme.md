@@ -3,7 +3,10 @@
 
 ### Introduction
 
-The Evexi API is available to be used on background tasks, web items or zip items used within Evexi Player. The API will manage the user_files directory within the player, when using the API it's the developers responsibility to manage stored assets correctly. On the TIZEN platform the API is only available on firmware 2070 and higher. Please see the examples directory for examples of file system communication as well as picture in picture communication.
+The Evexi API is available to be used on background tasks, web items or zip items used within Evexi Player. The API will manage the user_files directory within the player, when using the API it's the developers responsibility to manage stored assets correctly. 
+On the TIZEN platform the API is only available on firmware 2070 and higher. 
+Please see the examples directory for examples of file system communication as well as picture in picture communication.
+For an example of the file system API methods please see [here](examples/index.html)
 
 
 
@@ -162,7 +165,7 @@ window.parent.postMessage(JSON.stringify({action: 'storage.exists', name: 'mrx.p
 
 ##### PIP (>1.9.0)
 
-
+Picture in picture should be triggered within the lifecycle events 'playing' & 'stopping'. Please see [here](examples/pip.html) for details. 
 Picture in picture allows you to display the feed from display port within a window as part of the content you are creating.
 
 ````typescript
@@ -178,8 +181,50 @@ const settings = {
 window.parent.postMessage(JSON.stringify({action: 'pip.show', data: settings}), '*');
 ````
 
-Don't forget to close the PIP once your finished with it else issues could arise.
+Before the content is removed or if you wish to picture in picture should be hidden. This will also remove any fallback
+media that is being displayed if PIP failed to run. This should be ran within the 'stopping' lifecycle event.
 
 ````typescript
 window.parent.postMessage(JSON.stringify({action: 'pip.hide'}), '*');
+````
+
+
+
+##### Lifecycle Events (>1.9.0)
+
+The below lifecycle events will be triggered by the player if the functions exist within the inner content.
+
+`````typescript
+export enum LifeCycleEvent {
+    PLAYING = 'playing',
+    STOPPING = 'stopping'
+}
+`````
+
+To use these simply create a named function within the script of the loaded content. Please note the content gets loaded
+in the background before the content starts to play. This ensures the content is ready and loaded before it is displayed.
+If you wish to display a picture in picture feed or trigger animations this should be done within the 'playing' function.
+please have a look [here](examples/pip.html) for an example of lifecycle events.
+
+````html
+<script type="text/javascript">
+    
+    /**
+     * Lifecycle event (This function is triggered by the player to indicate the content is visible on the display.
+     * You should use this function to trigger any animations or if your showing a picture in picture feed you
+     * should do it here). Any code you put outside this will be ran when the content is loaded and before its displayed.
+     */
+    function playing() {
+        console.log('PLAYING ITEM')
+    }
+    
+    /**
+     * Lifecycle event (Triggered when the content has stopped showing and before the content is destroyed.
+     * You should put any clean up or reset code here.)
+     */
+    function stopping() {
+        console.log('STOPPING ITEM')
+    }
+
+</script>
 ````

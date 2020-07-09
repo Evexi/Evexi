@@ -12,7 +12,15 @@ export enum Actions {
     STORAGE_DOWNLOAD = 'storage.download',
     STORAGE_EXISTS = 'storage.exists',
     PIP_SHOW = 'pip.show',
-    PIP_HIDE = 'pip.hide'
+    PIP_HIDE = 'pip.hide',
+}
+
+/**
+ * Use this named functions for lifecycle events
+ */
+export enum LifeCycleEvent {
+    PLAYING = 'playing',
+    STOPPING = 'stopping'
 }
 
 /**
