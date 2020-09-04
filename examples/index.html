@@ -19,7 +19,21 @@
 <script type="text/javascript" async>
 
     /**
-     * Main list event
+     * Lifecycle event to indicate the item has started to play
+     */
+    function playing(item) {
+        _log('playing item ...' + JSON.stringify(item))
+    }
+
+    /**
+     * Lifecycle event to indicate the item has stopped playing
+     */
+    function stopping(item) {
+        _log('stopping item ...' + JSON.stringify(item))
+    }
+
+    /**
+     * Load event (Will run once the documents loaded into the player already)
      */
     window.addEventListener("load", function() {
 

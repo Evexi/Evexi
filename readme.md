@@ -163,7 +163,7 @@ window.parent.postMessage(JSON.stringify({action: 'storage.exists', name: 'mrx.p
 ````
 
 
-##### PIP (>1.9.0)
+##### PIP (>2.0.0)
 
 Picture in picture should be triggered within the lifecycle events 'playing' & 'stopping'. Please see [here](examples/pip.html) for details. 
 Picture in picture allows you to display the feed from display port within a window as part of the content you are creating.
@@ -190,7 +190,7 @@ window.parent.postMessage(JSON.stringify({action: 'pip.hide'}), '*');
 
 
 
-##### Lifecycle Events (>1.9.0)
+##### Lifecycle Events (>2.0.0)
 
 The below lifecycle events will be triggered by the player if the functions exist within the inner content.
 
@@ -206,6 +206,16 @@ in the background before the content starts to play. This ensures the content is
 If you wish to display a picture in picture feed or trigger animations this should be done within the 'playing' function.
 please have a look [here](examples/pip.html) for an example of lifecycle events.
 
+````typescript
+export type MediaType = 'WEB' | 'INTERACTIVE' | 'IMAGE' | 'VIDEO' | 'ZIP' | 'PIP'
+
+export interface MediaInterface {
+    id: string
+    duration: number
+    type: MediaType,
+}
+````
+
 ````html
 <script type="text/javascript">
     
@@ -213,8 +223,9 @@ please have a look [here](examples/pip.html) for an example of lifecycle events.
      * Lifecycle event (This function is triggered by the player to indicate the content is visible on the display.
      * You should use this function to trigger any animations or if your showing a picture in picture feed you
      * should do it here). Any code you put outside this will be ran when the content is loaded and before its displayed.
+     * The item is passed in so feel free to check its duration, id or anything else required.
      */
-    function playing() {
+    function playing(item: MediaInterface) {
         console.log('PLAYING ITEM')
     }
     
@@ -222,7 +233,7 @@ please have a look [here](examples/pip.html) for an example of lifecycle events.
      * Lifecycle event (Triggered when the content has stopped showing and before the content is destroyed.
      * You should put any clean up or reset code here.)
      */
-    function stopping() {
+    function stopping(item: MediaInterface) {
         console.log('STOPPING ITEM')
     }
 
