@@ -3,16 +3,17 @@
 
 ### Introduction
 
-The Evexi API is available to be used on background tasks, web items or zip items used within Evexi Player. The API will manage the user_files directory within the player, when using the API it's the developers responsibility to manage stored assets correctly. 
-On the TIZEN platform the API is only available on firmware 2070 and higher. 
-Please see the examples directory for examples of file system communication as well as picture in picture communication.
-For an example of the file system API methods please see [here](examples/index.html)
+The Evexi API is designed for use with background tasks, web items or zip items within the Evexi Player and the API’ 
+role is to manage the user_files directory within the Player. That being said, it is important to note that it is the 
+responsibility of the developer to manage the stored assets. On the Samsung TIZEN platform the API is only supported on 
+firmware 2070 and above. Within the examples directory are examples of the filesystem communication including picture 
+in picture support. Example filesystem API methods are [here](examples/index.html)
 
 
 
 #### Communication
 
-You can communicate with the API by doing a window.parent postMessage call with structured data. The API will then respond on on window with a standard 'message' event.
+Communication with the API is achieved with a window.parent postMessage call with structured data. The API responds with a standard 'message' event.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.get', name: 'text.json'}), '*');
@@ -30,7 +31,7 @@ window.addEventListener("message", function(e) {
 
 ##### Info
 
-Get information about the player itself such as its ID, its version or the provider interface the player is using to communicate with the display.
+Retrieving information about the players’ ID, version or the provider interface is achieved as follows:
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'info'}), '*');
@@ -44,7 +45,12 @@ window.parent.postMessage(JSON.stringify({action: 'info'}), '*');
 
 ##### Log
 
-You are able to add logs to the MRX log file via the following method. Most args can be provided however the method only takes one param. Please be careful with this and avoid using in production. Failed download events will already be stored within logs via our API middleware. NOTE: This is likely to be removed in later versions so please check if the function exists before using it.
+Evexi supports injecting logs to the Player logfile using the below method. 
+Most args can be provided however the method only takes one param at a time. 
+Failed download events are already supported and stored within logs via the API middleware.
+
+NOTE: Use with caution in a production environment. 
+Also this is likely to be removed in later versions, therefore remember to check if the function exists before using it.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'log', data: 'My log details'}), '*');
@@ -54,13 +60,16 @@ window.parent.postMessage(JSON.stringify({action: 'log', data: 'My log details'}
 
 #### Storage Methods
 
-The storgage API can be accessed by the following:
-
+The storage API is accessible as follows:
 
 
 ##### Get
 
-Get a single item from storage. The returned data will be different based on the type of file you are getting. If you get an item that ends with '.json' suffix the data will be returned as a JSON decoded object. If the item you are getting has the suffix ('.html', '.jpg', '.jpeg', 'png', 'bmp') then the data returned will be a path to where the file is within the file system.
+Get a single item from storage. The returned data will vary depending on the requested file type. 
+If an item has a ‘.json’ suffix the returned data will be returned as a JSON decoded object. Similarly, 
+if an item has the suffix ('.html', '.jpg', '.jpeg', 'png', 'bmp') then the data returned will be a path to where 
+the file is within the file system.
+
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.get', name: 'text.json'}), '*');
@@ -75,8 +84,6 @@ export interface GetResponse {
 }
 ````
 
-
-
 ````javascript
 // Successful
 {name: 'image.jpg', error: null, type: 'image', data: '/mtd_down/common/MrPlayer/user_files/image.jpg'}
@@ -89,7 +96,10 @@ export interface GetResponse {
 
 ##### Put
 
-This can be used for .json files ONLY. The data (second param should be JSON.parse object E.G standard json NON stringify). The PUT method will encode the data provided before it stores on the file system and the GET method will decode (if its of type text) before its returned within the callback. The response will be a boolean of if the event has been successful or not.
+Put is used solely for .json files. The second data param should be JSON.parse object, e.g. standard json NON stringify). 
+The PUT method will encode the data provided before it is stored on the file system. 
+The GET method will decode (if it’s of type text) before its returned within the callback. 
+The response will be a boolean of if the event has been successful or not.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.put', name: 'text.json', data: 'my data string'}), '*');
@@ -99,7 +109,7 @@ window.parent.postMessage(JSON.stringify({action: 'storage.put', name: 'text.jso
 
 ##### Delete
 
-Use to delete a single file or image. Response will be a success boolean.
+Deletes a single file or image. A successful response will return boolean.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.delete', name: 'mrx.png'}), '*');
@@ -109,7 +119,9 @@ window.parent.postMessage(JSON.stringify({action: 'storage.delete', name: 'mrx.p
 
 ##### List
 
-List all the items currently in storage. Boolean false will be returned if there was an issue with listing the items only. An empty array will be returned if the response is successful but no items exist.
+Lists all items currently in storage. 
+Boolean false will be returned if an issue occurs when listing the items. 
+An empty array will be returned if the response is successful but no items exist.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.list'}), '*');
@@ -121,7 +133,8 @@ An array of strings will be returned.
 
 ##### Clear
 
-Clear ALL the items from storage (user_files directory). Will return a count of how many items have been deleted. No errors are returned from this function.
+Clears ALL the items from storage (user_files directory) and will return a count of the number of deleted items. 
+No errors are returned from this function.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.clear'}), '*');
@@ -131,9 +144,11 @@ window.parent.postMessage(JSON.stringify({action: 'storage.clear'}), '*');
 
 ##### Download
 
-Download will download the file provided. Download only works for the following types ('.html', '.jpg', '.jpeg'). If a unsupported url is provided the download will return an error string.
+Download’s the requested file. Download only supports the following file types '.html', '.jpg', '.jpeg'. If a unsupported url is provided the download will return an error string.
 
-Note: You dont need to check if the file exists before downloading (like you need to on SSSP2). If the file already exists the function will return as if it were a successful download. Note: Nested folders are not supported. Downloads will be stored in the root of the user_files directory.
+NOTE: It is not necessary to validate prior to downloading a file (this was required in previous Samsung platform releases, example, SSSP2 & SSSP3). If the downloaded file already exists the function will return as if it were a successful download.
+
+NOTE: Nested folders are not supported. Downloaded files are always stored in the user_files root directory.
 
 ````javascript
 // a.png will be used for the file name
@@ -156,17 +171,19 @@ export interface GetResponse {
 
 ##### Exists
 
-Check if a file exists on the file system. Response will be a boolean if the file exists or not.
+Validates if a file exists on the file system. The response will return boolean confirming if the file exists or not.
 
 ````javascript
 window.parent.postMessage(JSON.stringify({action: 'storage.exists', name: 'mrx.png'}), '*');
 ````
 
 
-##### PIP (>2.0.0)
+##### Picture in Picture [PIP] (>2.0.0)
 
-Picture in picture should be triggered within the lifecycle events 'playing' & 'stopping'. Please see [here](examples/pip.html) for details. 
-Picture in picture allows you to display the feed from display port within a window as part of the content you are creating.
+Picture in picture is supported within the lifecycle events of 'playing' & 'stopping'. 
+Please see [here](examples/pip.html) for further details. 
+The picture in picture feature provides control of the screens display port input and delivers the input feed within a window/pane of created content.
+
 
 ````typescript
 const settings = {
@@ -181,8 +198,10 @@ const settings = {
 window.parent.postMessage(JSON.stringify({action: 'pip.show', data: settings}), '*');
 ````
 
-Before the content is removed or if you wish to picture in picture should be hidden. This will also remove any fallback
-media that is being displayed if PIP failed to run. This should be ran within the 'stopping' lifecycle event.
+Please then use the 'stopping' event to run 'pip.hide'. This will remove the picture in picture feed or remove the
+fallback image if it is being displayed.
+
+NOTE: Not running 'pip.hide' on the 'stopping' event may cause issues with further content.
 
 ````typescript
 window.parent.postMessage(JSON.stringify({action: 'pip.hide'}), '*');
@@ -192,7 +211,7 @@ window.parent.postMessage(JSON.stringify({action: 'pip.hide'}), '*');
 
 ##### Lifecycle Events (>2.0.0)
 
-The below lifecycle events will be triggered by the player if the functions exist within the inner content.
+Lifecycle events are triggered by the player if the functions exist within the inner content.
 
 `````typescript
 export enum LifeCycleEvent {
@@ -201,10 +220,12 @@ export enum LifeCycleEvent {
 }
 `````
 
-To use these simply create a named function within the script of the loaded content. Please note the content gets loaded
-in the background before the content starts to play. This ensures the content is ready and loaded before it is displayed.
-If you wish to display a picture in picture feed or trigger animations this should be done within the 'playing' function.
-please have a look [here](examples/pip.html) for an example of lifecycle events.
+To use this feature create a named function within the script of the loaded content.
+
+NOTE: It is important to note that content is pre-loaded in the background prior to being played. 
+When using picture in picture or animation triggers it must be done within the ‘playing’ function. 
+For further information click [here](examples/pip.html) for an example of lifecycle events.
+
 
 ````typescript
 export type MediaType = 'WEB' | 'INTERACTIVE' | 'IMAGE' | 'VIDEO' | 'ZIP' | 'PIP'
