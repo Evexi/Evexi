@@ -159,11 +159,10 @@ window.parent.postMessage(JSON.stringify({action: 'storage.download', url: 'http
 ````
 
 ````typescript
-export interface GetResponse {
-    name: string;
-    error: (string | null);
-    type: string; // image | text | web
-    data: (null | object | string);
+export interface DownloadResponse {
+    url: string | null | undefined
+    data: string | null // file path or null if error
+    error: string | null
 }
 ````
 
