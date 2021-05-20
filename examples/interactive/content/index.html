@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evexi Interactive Content</title>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+<h2>Evexi API Demo</h2>
+<img id="qr" src="">
+<div id="logs"></div>
+</body>
+<script type="text/javascript" async>
+
+    /**
+     * Lifecycle event to indicate the item has started to play
+     */
+    function playing(item) {
+
+        _log('playing item ...' + JSON.stringify(item))
+
+        _makeCall({action: 'interact.create', clientUrl: '1', maxClients: 2, maxRuntime: 60000});
+
+    }
+
+    /**
+     * Lifecycle event to indicate the item has stopped playing
+     */
+    function stopping(item) {
+
+        _log('stopping item ...' + JSON.stringify(item))
+
+        // clear logs
+        // var logs = document.getElementById('logs');
+        // logs.innerHTML = ''
+
+    }
+
+    /**
+     * Main list event
+     */
+    window.addEventListener("load", function() {
+
+        /**
+         * Check the page is working
+         */
+        _log('listening')
+
+        /**
+         * All API responses available here
+         */
+        window.addEventListener("message", function(e) {
+            const data = JSON.parse(e.data);
+            _log(data);
+
+            if(data.action === 'interact.create') {
+                // Our session is setup and ready to go, display the QR code for user to scan into !
+                document.getElementById('qr').src = data.response.qr
+            }
+
+            
+            if(data.action === 'interact.message' && data.event === 'connect') {
+
+                _log('1 user has connected ... start interact session');
+
+                // a user has connected, start our interactive session !!
+                _makeCall({action: 'interact.start'});
+
+            }
+
+            if(data.action === 'interact.message' && data.event === 'kick') {
+
+                _log('User kicked .... run destroy in 3 seconds ..');
+
+                window.setTimeout(function() {
+                    _makeCall({action: 'interact.destroy'});
+                }, 3000) // 3 seconds
+
+            }
+
+        });
+
+    });
+
+    /**
+     * Detect if its JSON - For logging only
+     */
+    function _isJson(item) {
+        item = typeof item !== "string"
+            ? JSON.stringify(item)
+            : item;
+
+        try {
+            item = JSON.parse(item);
+        } catch (e) {
+            return false;
+        }
+
+        return typeof item === "object" && item !== null;
+
+    }
+
+    /**
+     * Log to both div, console or MRX Player logs
+     */
+    function _log(data) {
+
+        var text = _isJson(data) ? JSON.stringify(data) : data;
+
+        // Add to div
+        var logs = document.getElementById('logs');
+
+        if(data.hasOwnProperty('response')) {
+            logs.innerHTML += "<span style='background-color: darkgreen'>" + text + "</span><br/>";
+        } else {
+            logs.innerHTML += "<span style='background-color: darkred'>" + text + "</span><br/>";
+        }
+
+        // Log it locally
+        // console.log(text);
+
+    }
+
+    /**
+     * Post a message to Evexi API
+     */
+    function _makeCall(data) {
+        window.parent.postMessage(JSON.stringify(data), '*');
+    }
+
+</script>
+</html>
