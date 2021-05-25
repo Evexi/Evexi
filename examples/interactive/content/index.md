@@ -1,4 +1,5 @@
 # Interactive Content
+Interactive content will be displayed on the player and will use the player API to pause/resume the content and send and receieve messages from the scanURL.
 
 #
 

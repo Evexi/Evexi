@@ -4,16 +4,16 @@
 ## Introduction
 
 The Evexi API is designed for use with background tasks, web items or zip items within the Evexi Player. It is important to note that it is the 
-responsibility of the developer to manage the stored assets. On the Samsung TIZEN platform the API is only supported on firmware 2070 and above. Within the examples directory are examples of the filesystem communication, picture 
+responsibility of the developer to manage any stored assets. On the Samsung TIZEN platform the API is only supported on firmware 2070 and above. Within the examples directory are examples of the filesystem communication, picture 
 in picture, interactive and more.
 
 #
 
 ###### Please see the following examples here:
-* [File System](examples/fileSystem)
-* [Picture In Picture](examples/pip)
-* [Interactive](examples/interactive)
-* [Misk](examples/misk) (info and log)
+* [File System](examples/fileSystem/index.md)
+* [Picture In Picture](examples/pip/index.md)
+* [Interactive](examples/interactive/index.md)
+* [Misk](examples/misk/index.md) (info and log)
 
 #
 
@@ -51,8 +51,7 @@ export enum LifeCycleEvent {
 To use this feature create a named function within the script of the loaded content.
 
 NOTE: It is important to note that content is pre-loaded in the background prior to being played. 
-When using picture in picture or animation triggers it must be done within the ‘playing’ function. 
-For further information click [here](examples/pip.html) for an example of lifecycle events.
+When using picture in picture or animation triggers it must be done within the ‘playing’ function.
 
 
 ````typescript
