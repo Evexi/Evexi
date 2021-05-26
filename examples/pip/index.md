@@ -1,7 +1,7 @@
 # Picture in Picture [PIP] (Experimental - Do not use in production)
 
 Picture in picture is supported within the lifecycle events of 'playing' & 'stopping'. 
-Please see [here](examples/pip.html) for further details. 
+Please see [here](examples/index.html) for further details. 
 The picture in picture feature provides control of the screens display port input and delivers the input feed within a window/pane of created content.
 
 

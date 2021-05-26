@@ -2,13 +2,15 @@
 
 Interactive scan package is designed to be installed as part of scanURL specified within [interactive content](./../content/index.md) 'interact.create' call. The package handles connecting to the interactive server, keeping the session alive and formatting for developers.
 
+You can see a example [here](./index.html)
+
 #
 
 ### Install
-You should installthe package via CDN and include as part of the scanURL page
+You should installthe package via CDN and include as part of the scanURL page. Its recommened that you version lock against majors only. Patch and minor releases will address bugs and add features that dont break compatibility within the major version only.
 
 ````javascript
-<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@mrx-technology/interactive@1"></script>
 ````
 
 #
@@ -24,7 +26,7 @@ var sessionId = Scan.urlParam(); // string
 #
 
 ### Setup the session
-Using the sessionId you can then setup a session and listen for messages.
+Using the sessionId you can then setup a session and listen for messages. The second argument to the constructor is the enviroment, by default this is pointing to the production instance but can be overridden if necessary.
 
 ````javascript
 var scan = new Scan(sessionId)

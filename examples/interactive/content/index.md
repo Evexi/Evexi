@@ -1,6 +1,8 @@
 # Interactive Content
 Interactive content will be displayed on the player and will use the player API to pause/resume the content and send and receieve messages from the scanURL.
 
+You can see a example [here](./index.html)
+
 #
 
 First create the interactive session:

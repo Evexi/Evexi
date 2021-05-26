@@ -1,6 +1,6 @@
 # File System
 
-The storage API contains the following:
+The storage API contains the below commands. You can find an example [here](./index.html)
 
 #
 
