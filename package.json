@@ -1,5 +1,6 @@
 {
-  "name": "Evexi-API",
+  "name": "evexi",
+  "description": "Evexi Player API for file system, interactive and more. Use for application to communicate with the player directly.",
   "version": "2.4.0",
   "repository": "https://github.com/MRXTechnology/Evexi-API.git",
   "author": "Peter Ingram <p.ingram@mrx.technology>",
