@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "/",
+    "lib": [
+      "esnext",
+      "dom"
+    ]
+  },
+  "include": [
+    "docs/**/*",
+    "./Evexi.d.ts"
+  ]
+}

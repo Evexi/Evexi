@@ -1,14 +1,17 @@
 {
   "name": "Evexi-API",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "2.4.0",
   "repository": "https://github.com/MRXTechnology/Evexi-API.git",
-  "author": "Peter Ingram <p.ingram@managedracks.co.uk>",
+  "author": "Peter Ingram <p.ingram@mrx.technology>",
   "license": "MIT",
-  "dependencies": {
-    "serve": "^11.3.0"
+  "types": "Evexi.d.ts",
+  "devDependencies": {
+    "@types/chai": "^4.2.21",
+    "chai": "^4.3.4",
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.5"
   },
   "scripts": {
-    "serve": "cd examples && serve"
+    "build": "bash ./build.sh"
   }
 }
