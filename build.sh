@@ -8,18 +8,17 @@ PACKAGE_VERSION=$(cat package.json \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]')
 
-NAME=fs
-
 function build {
+
   # package
-  node_modules/.bin/parcel build $NAME docs/fs/src/index.html -d $NAME --no-cache --no-minify --no-source-maps --public-url ./
+  node_modules/.bin/parcel build $1 docs/$2/index.html -d $1'-'$PACKAGE_VERSION --no-cache --no-minify --no-source-maps --public-url ./
 
   # Zip
-  zip -r $NAME.zip $NAME -x '.*' -x '__MACOSX' -x '*.DS_Store'
-  mv -f ./$NAME.zip ./docs/fs/$NAME'-'$PACKAGE_VERSION'.zip'
+  zip -r $1'-'$PACKAGE_VERSION.zip $1'-'$PACKAGE_VERSION -x '.*' -x '__MACOSX' -x '*.DS_Store'
+  mv -f ./$1'-'$PACKAGE_VERSION.zip ./examples/$1'-'$PACKAGE_VERSION'.zip'
 
-  # tidy
-  rm -r $NAME
+  # # tidy
+  rm -r $1'-'$PACKAGE_VERSION
 }
 
-build
+build $1 $2

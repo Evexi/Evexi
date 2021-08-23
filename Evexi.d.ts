@@ -1,5 +1,4 @@
 // Version: 2.4.0-Alpha.0
-export declare type PIPSource = "HDMI" | "DVI" | "DP";
 declare enum TransitionIn {
 	SLIDE_LEFT = "slide-in-from-left",
 	SLIDE_TOP = "slide-in-from-top",
@@ -25,17 +24,16 @@ export interface MediaInterface {
 	transitionDuration?: TransitionDuration;
 	transitionIn?: TransitionIn;
 	transitionOut?: TransitionOUT;
-	pipSource?: PIPSource;
-	pipSourceNumber?: number;
-	playlistHash?: string;
-	localmedia?: string;
-	shortScanUrl?: string;
 }
-export declare type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP" | "PIP";
+export declare type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
 declare enum EnviromentType {
 	SSSP2 = "SSSP2",
 	HTML = "HTML",
 	TIZEN = "TIZEN"
+}
+export interface MediaInterfaceLocal extends MediaInterface {
+	playlistHash: string;
+	localmedia: string | undefined;
 }
 declare enum Actions {
 	INFO = "info",
@@ -81,8 +79,8 @@ export interface InteractiveCreateRes {
 }
 declare global {
 	interface Window {
-		playing?: (item: MediaInterface) => void;
-		stopping?: (item: MediaInterface) => void;
+		playing?: (item: MediaInterfaceLocal) => void;
+		stopping?: (item: MediaInterfaceLocal) => void;
 		Evexi: EvexiInterface;
 	}
 }

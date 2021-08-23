@@ -13,6 +13,10 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "build": "bash ./build.sh"
+    "build": "yarn run build:fs && yarn run build:interactive",
+    "build:fs": "bash ./build.sh fs fs/src",
+    "build:interactive": "bash ./build.sh interactive interactive/content/src",
+    "prepublishOnly": "yarn run build",
+    "check-types": "tsc --noemit --skipLibCheck"
   }
 }

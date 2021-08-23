@@ -4,8 +4,7 @@
 ## Introduction
 
 The Evexi API is designed for use with background tasks, web items or zip items within the Evexi Player. It is important to note that it is the 
-responsibility of the developer to manage any stored assets. On the Samsung TIZEN platform the API is only supported on firmware 2070 and above. Within the examples directory are examples of the filesystem communication, picture 
-in picture, interactive and more.
+responsibility of the developer to manage any stored assets. On the Samsung TIZEN platform the API is only supported on firmware 2070 and above. Within the examples directory are examples of the filesystem communication, picture in picture, interactive and more.
 
 #
 
