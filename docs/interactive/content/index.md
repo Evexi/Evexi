@@ -1,104 +1,115 @@
 # Interactive Content
 Interactive content will be displayed on the player and will use the player API to pause/resume the content and send and receieve messages from the scanURL.
 
-You can see a example [here](./index.html)
+You can see a example [here](./src/index.ts)
+
+* [Event Listeners](#L11)
+* [Create Session](#L33)
+* [Start Session](#L68)
+* [Destroy Session](#L81)
+* [Message Client](#L92)
+* [Kick Client](#L105)
 
 #
 
-First create the interactive session:
-
+### Event Listeners
 ````typescript
-window.parent.postMessage(JSON.stringify({
-    
-    action: 'interact.create', 
-    
-    maxRuntime: 60000, // The maximum runtime for the content item in seconds
+window.Evexi.interactive.onConnect((clientId) => {
+    // clientId (string of the clientId connected)
+})
 
-    clientUrl: 'http://url.com', // [OPTIONAL] - If the content is going to be controlled by the user, a QR code will be generated for this address by the player for the user to scan. Once scanned their device will send them to this configured url
+window.Evexi.interactive.onDisconnect((clientId) => {
+    // clientId (string of the clientId disconnected)
+})
 
-    maxClients: 2  // [Required when using clientUrl] - Limit the number of people who can connect to the display scan URL. This will depend on the content 
+window.Evexi.interactive.onKick((clientId) => {
+    // clientId (string of the clientId kicked)
+})
 
-    noCommunicationTimeout: 50000 // [OPTIONAL] [Only available when using clientUrl] // If there is no communication between the clientUrl and the content after how long to timeout the session (in seconds).
-
-}), '*');
+window.Evexi.interactive.onMessage((message, client) => {
+    // message (string | Record<string, unknown>) // depends what the client sends
+    // client (the clientId who sent the message)
+})
 ````
 
-You listen for messages on the page like so:
+#
 
-````javascript
-window.addEventListener("message", function(e) {
-  var data = JSON.parse(e.data);
-});
-````
+### Create Session
+When the interactive content is loaded create an interactive session. There are two different types of sessions.
 
-An 'interact.create' response will return the following:
+#
 
-````javascript
-export interface InteractiveCreateRes {
-    qr: string // base64 of the url
-    url: string // url behind the QR code
-    sessionId: string // current sessionId
+Remote session's can be used when you wish a third part device to communicate with the player and vice versa.
+````typescript
+try {
+    const res = await window.Evexi.interactive.create(
+        180000, // maxRuntime (Once a user connects, after this time the content will timeout regardless of any noCommunicationTimeout set) (Once this timeout is reached the player will destroy the item and player will play the next asset)
+        'http://localhost:1234/example', // clientUrl? / scanURL? (When user scans QR code this is the URL they will be taken too)
+        2, // maxClients (How many people can connect into the session)
+        undefined // noCommunicationTimeout? (If no messages are sent or received after how long time timeout the session) (When reached the player will destroy the item and player will play the next asset)
+    ) // 
+    // Success 
+} catch(e) {
+    // Catch error
 }
 ````
 
-The message can be picked up like so. You can then display the QR code within your application for a user to interact with using the base64 provided. Please note until the QR code is scanned the interactive session is not initalized, the content will continue to run for its configured duration at this point until the scanURL is connected. If your interactive content does not require a QR code or external control (no scanURL being provided) this process works the exact same. The 'interact.create' event is triggered and you are ready to then pause the content.
+#
 
-````javascript
-window.addEventListener("message", function(e) {
-    var data = JSON.parse(e.data);
-
-    if(data.action === 'interact.create') {
-        // data.response.qr 
-        // data.response.url 
-        // data.response.sessionId 
-    }
-})
+Local session's can be used on the player when you wish to pause playback and timeout a particular session, maybe based on touch input etc where a user will interactive physically with the player device. This can be used when offline.
+````typescript
+try {
+    const res = await window.Evexi.interactive.create(
+        180000, // maxRuntime (Once a user connects, after this time the content will timeout) (Once this timeout is reached the player will destroy the item and player will play the next asset)
+} catch (e) {
+    // Catch error
+}
 ````
 
-You will then get messages into the content whenever a user connects, disconnects or messages from the scan URL as so:
+#
 
-````javascript
-window.addEventListener("message", function(e) {
-    
-    var data = JSON.parse(e.data);
-
-    // A user has connected via the scanURL
-    if(data.action === 'interact.message' && data.event === 'connect') {
-        // data.client // client id string
-
-        // You can either start the interactive session now or wait for more users
-        // window.parent.postMessage(JSON.stringify({action: 'interact.start'}))
-    }
-
-    // A message has been sent from a user to the content
-    if(data.action === 'interact.message' && data.event === 'message') {
-        // data.client // client id string
-        // data.data // can be a string or an object containing any data
-    }
-
-    // A user has disconnected from the scanURL
-    if(data.action === 'interact.message' && data.event === 'disconnect') {
-        // You can destroy the interactive session now if you want
-        // window.parent.postMessage(JSON.stringify({action: 'interact.destroy'}))
-    }
-
-    // A user has been kicked from the interactive session
-    if(data.action === 'interact.message' && data.event === 'kick') {
-        // You can destroy the interactive session now if you want
-        // window.parent.postMessage(JSON.stringify({action: 'interact.destroy'}))
-    }
-
-})
+### Start Session
+Once a user has connected (or multiple), you can start the session. Starting the session will pause the player until the timeout is reached or session destroyed.
+````typescript
+try {
+    window.Evexi.interactive.start()
+} catch (e) {
+    // Catch error
+}
 ````
 
-You can then start the interactive session by doing the following. The interactive session runTime and other config from create has already been automatically applied:
+#
 
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'interact.start'}))
+### Destroy Session
+Destroying a session will cause the player to play the next piece of content. Anyone still connected to the scanURL will get disconnected and the QR code will become invalid. All timers and event listeners will be cleared.
+````typescript
+try {
+    window.Evexi.interactive.destroy()
+} catch (e) {
+    // Catch error
+}
 ````
 
-You can also destroy the session. When destroying a session the next peice of content will start to play immediately
+#
 
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'interact.destroy'}))
+### Message Client
+Send a message to all connected clients or to a specified client from the content. Second argument to message is clientId.
+````typescript
+try {
+    window.Evexi.interactive.message({foo: 'bar'})
+} catch (e) {
+    // Catch error
+}
+````
+
+#
+
+### Kick Client
+The content can kick a particular client.
+````typescript
+try {
+    window.Evexi.interactive.kick('1234')
+} catch (e) {
+    // Catch error
+}
 ````

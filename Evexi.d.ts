@@ -99,7 +99,7 @@ declare class Evexi {
 		exists: (name: string) => Promise<boolean>;
 	};
 	readonly interactive: {
-		create: (maxRuntime: number, clientUrl?: string | undefined, maxClients?: number | undefined, noCommunicationTimeout?: number | undefined) => Promise<InteractiveCreateRes>;
+		create: (maxRuntime: number, clientUrl?: string | undefined, maxClients?: number | undefined, noCommunicationTimeout?: number | undefined) => Promise<InteractiveCreateRes | undefined>;
 		start: () => void;
 		destroy: () => void;
 		message: (data: string | Record<string, unknown>, client?: string | undefined) => void;

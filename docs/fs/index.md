@@ -1,124 +1,108 @@
 # File System
 
-The storage API contains the below commands. You can find an example [here](./index.html)
+The storage API contains the below commands. You can find a full example [here](./src/index.ts)
+
+- [Get](#L8)
+- [Put](#L24)
+- [Delete](#L36)
+- [List](#L49)
+- [Clear](#L64)
+- [Download](#L77)
+- [Exists](#L97)
 
 #
 
-### Get
+### GET
 
-Get a single item from storage. The returned data will vary depending on the requested file type. 
-If an item has a ‘.json’ suffix the returned data will be returned as a JSON decoded object. Similarly, 
-if an item has the suffix ('.html', '.jpg', '.jpeg', 'png', 'bmp') then the data returned will be a path to where 
-the file is within the file system.
+Get a single item from storage. The returned '.data' will vary depending on the requested file type. If the item is an asset such as a video or image the '.data' will be a path string for the item. If its a '.json' file then the '.data' will be the items content.
+```typescript
+try {
+    const res = await window.Evexi.fs.get('image.jpg')
+    // Successful {name: 'image.jpg', error: null, type: 'image', data: '/mtd_down/common/MrPlayer/user_files/image.jpg'}
+    // Failed {name: 'image.jpg', error: 'File does not exist', type: 'image', data: null}
+} catch (e) {
+    // Catch error
+}
+```
 
+#
 
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'storage.get', name: 'text.json'}), '*');
-````
-
+### PUT
+Put is used solely for .json files. The method will automatically encode on the PUT method and decode on the GET method so the second argument can be a string, object or bool. The response will be a boolean of if the event has been successful or not.
 ````typescript
-export interface GetResponse {
-    name: string;
-    error: (string | null);
-    type: string; // image | text | web
-    data: (null | object | string);
+try {
+    const res = await window.Evexi.fs.put('text2.json', 'my text file') // boolean
+} catch (e) {
+    // Catch error
 }
 ````
 
-````javascript
-// Successful
-{name: 'image.jpg', error: null, type: 'image', data: '/mtd_down/common/MrPlayer/user_files/image.jpg'}
+#
 
-// Failed
-{name: 'image.jpg', error: 'File does not exist', type: 'image', data: null}
+### DELETE
+Deletes a single asset. A successful response will return boolean.
+````typescript
+try {
+    const res = await window.Evexi.fs.delete('text2.json') // boolean
+} catch (e) {
+    // Catch error
+}
 ````
 
 #
 
-
-### Put
-
-Put is used solely for .json files. The second data param should be JSON.parse object, e.g. standard json NON stringify). 
-The PUT method will encode the data provided before it is stored on the file system. 
-The GET method will decode (if it’s of type text) before its returned within the callback. 
-The response will be a boolean of if the event has been successful or not.
-
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'storage.put', name: 'text.json', data: 'my data string'}), '*');
-````
-
-#
-
-
-### Delete
-
-Deletes a single file or image. A successful response will return boolean.
-
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'storage.delete', name: 'mrx.png'}), '*');
-````
-
-#
-
-### List
-
-Lists all items currently in storage. 
+### LIST
+Lists all items currently in storage for the player. 
 Boolean false will be returned if an issue occurs when listing the items. 
 An empty array will be returned if the response is successful but no items exist.
-
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'storage.list'}), '*');
-````
-
-An array of strings will be returned.
-
-
-#
-
-
-### Clear
-
-Clears ALL the items from storage (user_files directory) and will return a count of the number of deleted items. 
-No errors are returned from this function.
-
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'storage.clear'}), '*');
+````typescript
+try {
+    const res = await window.Evexi.fs.list() // ['fileA.png', 'fileB.png'] || false
+} catch (e) {
+    // Catch error
+}
 ````
 
 #
 
+### CLEAR
+Clears ALL the items from storage (user_files directory) and will return a count of the number of deleted items.
+````typescript
+try {
+    const res = await window.Evexi.fs.clear() // 3 number of items deleted
+} catch (e) {
+    // Catch error
+}
+````
 
-### Download
+#
 
+### DOWNLOAD
 Download’s the requested file. Download only supports the following file types '.html', '.jpg', '.jpeg'. If a unsupported url is provided the download will return an error string.
 
 NOTE: It is not necessary to validate prior to downloading a file (this was required in previous Samsung platform releases, example, SSSP2 & SSSP3). If the downloaded file already exists the function will return as if it were a successful download.
 
 NOTE: Nested folders are not supported. Downloaded files are always stored in the user_files root directory.
 
-````javascript
-// a.png will be used for the file name
-window.parent.postMessage(JSON.stringify({action: 'storage.download', url: 'https://mrx.technology/assets/images/compatible/a.png'}), '*');
-
-// new.png will be used for the file name
-window.parent.postMessage(JSON.stringify({action: 'storage.download', url: 'https://mrx.technology/assets/images/compatible/a.png', name: 'new.png'}), '*');
-````
-
 ````typescript
-export interface DownloadResponse {
-    url: string | null | undefined
-    data: string | null // file path or null if error
-    error: string | null
+try {
+    const download = await window.Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
+    // success {url: 'https://mrx.technology/assets/images/compatible/mrx.png', data: '/mtd_down/common/MrPlayer/user_files/mrx.png', error: null}
+
+    // error {url: 'https://mrx.technology/assets/images/compatible/mrx.png', data: null, error: 'file download failed'}
+} catch (e) {
+    Log.error('DOWNLOAD: error')
 }
 ````
 
 #
 
-
 ### Exists
-
 Validates if a file exists on the file system. The response will return boolean confirming if the file exists or not.
-
-````javascript
-window.parent.postMessage(JSON.stringify({action: 'storage.exists', name: 'mrx.png'}), '*');
+````typescript
+try {
+    const res = await window.Evexi.fs.exists('image.png') // boolean
+} catch (e) {
+    // Catch error
+}
 ````

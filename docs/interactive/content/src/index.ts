@@ -77,8 +77,9 @@ window.playing = async function playing(item) {
 
     window.Evexi.interactive.onConnect((clientId) => {
         Log.info(`client connected: ${clientId}`)
-        this.clientsIds.push(clientId)
+        clientsIds.push(clientId)
         Interactive.start()
+        ;(document.getElementById('qr') as HTMLImageElement).src = ''
     })
 
     window.Evexi.interactive.onDisconnect((clientId) => {
@@ -97,7 +98,7 @@ window.playing = async function playing(item) {
 }
 
 window.stopping = async function stopping() {
-    //
+    Log.clear()
 }
 
 // @ts-ignore
