@@ -1,22 +1,34 @@
 {
   "name": "evexi",
-  "description": "Evexi Player API for file system, interactive and more. Use for application to communicate with the player directly.",
+  "description": "Evexi Player API for file system, interactive and interactive scan library.",
   "version": "2.4.0",
   "repository": "https://github.com/MRXTechnology/Evexi-API.git",
   "author": "Peter Ingram <p.ingram@mrx.technology>",
   "license": "MIT",
-  "types": "Evexi.d.ts",
+  "types": "types/index.d.ts",
+  "main": "scan/dist/Scan.js",
   "scripts": {
-    "build": "yarn run build:fs && yarn run build:interactive",
-    "build:fs": "bash ./build.sh fs fs/src",
-    "build:interactive": "bash ./build.sh interactive interactive/content/src",
+    "build": "yarn run clean && yarn run scan:build && yarn run examples:build",
+    "examples:build": "yarn run example:build:fs && yarn run example:build:interactive && yarn run example:build:scan",
+    "example:build:fs": "bash ./.build/buildExamples.sh fs fs/src",
+    "example:build:interactive": "bash ./.build/buildExamples.sh interactive interactive/content/src",
+    "example:build:scan": "bash ./.build/buildScanExample.sh",
     "prepublishOnly": "yarn run build",
-    "check-types": "tsc --noemit --skipLibCheck"
+    "check-types": "tsc --noemit --skipLibCheck",
+    "scan:test": "jest",
+    "scan:build": "bash ./.build/buildScan.sh",
+    "scan:serve": "node_modules/.bin/parcel serve scan docs/interactive/scan/src/index.html",
+    "clean": "bash ./.build/clean.sh"
   },
   "devDependencies": {
     "@types/chai": "^4.2.21",
+    "@types/jest": "^27.0.1",
     "chai": "^4.3.4",
+    "dts-bundle-generator": "^5.9.0",
+    "jest": "^27.0.6",
+    "mock-socket": "^9.0.3",
     "parcel-bundler": "^1.12.5",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.3.5"
   }
 }

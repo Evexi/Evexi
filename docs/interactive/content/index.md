@@ -1,14 +1,16 @@
 # Interactive Content
-Interactive content will be displayed on the player and will use the player API to pause/resume the content and send and receieve messages from the scanURL.
+Interactive content will be displayed on the player and will use the player API to pause/resume the content and send and receive messages from the scanURL. Please see documentation on [packing your application](./../../../README.md#packaging) ready to deploy to a player.
 
-You can see a example [here](./src/index.ts)
+You can see a full example [here](./src/index.ts).
 
-* [Event Listeners](#L11)
-* [Create Session](#L33)
-* [Start Session](#L68)
-* [Destroy Session](#L81)
-* [Message Client](#L92)
-* [Kick Client](#L105)
+#
+
+* [Event Listeners](#event-listeners)
+* [Create Session](#create-session)
+* [Start Session](#start-session)
+* [Destroy Session](#destroy-session)
+* [Message Client](#message-client)
+* [Kick Client](#kick-client)
 
 #
 

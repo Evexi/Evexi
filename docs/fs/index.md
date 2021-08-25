@@ -2,13 +2,13 @@
 
 The storage API contains the below commands. You can find a full example [here](./src/index.ts)
 
-- [Get](#L8)
-- [Put](#L24)
-- [Delete](#L36)
-- [List](#L49)
-- [Clear](#L64)
-- [Download](#L77)
-- [Exists](#L97)
+- [Get](#get)
+- [Put](#put)
+- [Delete](#delete)
+- [List](#list)
+- [Clear](#clear)
+- [Download](#download)
+- [Exists](#exists)
 
 #
 

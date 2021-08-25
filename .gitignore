@@ -1,2 +1,4 @@
 /node_modules
 .idea
+scan/tests/coverage
+.cache

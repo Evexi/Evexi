@@ -9,9 +9,9 @@ Please note all methods that return a promise are wrapped in a timeout of 5 seco
 #
 
 ###### Details
-* [Installing](#L25)
-* [Packaging](#L44)
-* [Lifecycle Events](#L65)
+* [Install](#install)
+* [Packaging](#packaging)
+* [Lifecycle Events](#lifecycle-events)
 
 #
 
@@ -23,7 +23,7 @@ Please note all methods that return a promise are wrapped in a timeout of 5 seco
 #
 
 ### Install
-The Evexi API is available for the content to access from the window object while running on the player so there is nothing to install. We provide the [typing definitions](Evexi.d.ts) as part of this documentation repository. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version.
+The Evexi API is available for the content to access from the window object while running on the player so there is nothing to install. We provide the [typing definitions](./types/Evexi.d.ts) as part of this documentation repository. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version.
 
 To setup the definitions:
 ````bash
@@ -33,9 +33,9 @@ yarn add MRXTechnology/Evexi
 In your tsconfig.json file add the following:
 ````json
 {
-  "compilerOptions": {
-    "types": ["evexi"]
-  }
+    "compilerOptions": {
+        "types": ["evexi"]
+    }
 }
 ````
 
@@ -44,7 +44,7 @@ In your tsconfig.json file add the following:
 ### Packaging
 A '.zip' application should have no hidden files and be flat in structure (no nested directories).
 
-zipinfo example for [example](./example/fs-2.4.0.zip)
+zipinfo example for [example](./examples/fs-2.4.0.zip)
 ````bash
 Archive:  fs-2.4.0.zip
 Zip file size: 63872 bytes, number of entries: 3
@@ -68,23 +68,23 @@ Lifecycle events are triggered by the player if the functions exist within the i
 ````html
 <script type="text/javascript">
     
-    /**
-     * Lifecycle event (This function is triggered by the player to indicate the content is visible on the display.
-     * You should use this function to trigger any animations or if your showing a picture in picture feed you
-     * should do it here). Any code you put outside this will be ran when the content is loaded and before its displayed.
-     * The item is passed in so feel free to check its duration, id or anything else required.
-     */
-    function playing(item: MediaInterfaceLocal) {
-        console.log('PLAYING ITEM')
-    }
-    
-    /**
-     * Lifecycle event (Triggered when the content has stopped showing and before the content is destroyed.
-     * You should put any clean up or reset code here.)
-     */
-    function stopping(item: MediaInterfaceLocal) {
-        console.log('STOPPING ITEM')
-    }
+/**
+ * Lifecycle event (This function is triggered by the player to indicate the content is visible on the display.
+ * You should use this function to trigger any animations or if your showing a picture in picture feed you
+ * should do it here). Any code you put outside this will be ran when the content is loaded and before its displayed.
+ * The item is passed in so feel free to check its duration, id or anything else required.
+ */
+function playing(item: MediaInterfaceLocal) {
+    console.log('PLAYING ITEM')
+}
+
+/**
+ * Lifecycle event (Triggered when the content has stopped showing and before the content is destroyed.
+ * You should put any clean up or reset code here.)
+ */
+function stopping(item: MediaInterfaceLocal) {
+    console.log('STOPPING ITEM')
+}
 
 </script>
 ````

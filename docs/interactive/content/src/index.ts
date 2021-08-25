@@ -1,34 +1,34 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 // list of client id's connected
-const clientsIds = []
+const clientsIds: string[] = []
 
 /**
  * Logger
  */
 const Log = new class Log {
 
-  // Add to div
-  private logs = document.getElementById('logs') as HTMLDivElement
+    // Add to div
+    private logs = document.getElementById('logs') as HTMLDivElement
 
-  info(log: string) {
-      this.logs.innerHTML += '<span style=\'background-color: gray\'>' + log + '</span><br/>'
-      console.log(log)
-  }
+    info(log: string) {
+        this.logs.innerHTML += '<span style=\'background-color: gray\'>' + log + '</span><br/>'
+        console.log(log)
+    }
 
-  success(log: string) {
-      this.logs.innerHTML += '<span style=\'background-color: darkgreen\'>' + log + '</span><br/>'
-      console.log(log)
-  }
+    success(log: string) {
+        this.logs.innerHTML += '<span style=\'background-color: darkgreen\'>' + log + '</span><br/>'
+        console.log(log)
+    }
 
-  error(log: string) {
-      this.logs.innerHTML += '<span style=\'background-color: darkred\'>' + log + '</span><br/>'
-      console.log(log)
-  }
+    error(log: string) {
+        this.logs.innerHTML += '<span style=\'background-color: darkred\'>' + log + '</span><br/>'
+        console.log(log)
+    }
 
-  clear() {
-      this.logs.innerHTML = ''
-  }
+    clear() {
+        this.logs.innerHTML = ''
+    }
 
 }
 
@@ -40,7 +40,7 @@ const Interactive = new class Interactive {
             expect(res).to.have.all.keys(['qr', 'url', 'sessionId'])
             Log.success(`CREATE success: ${JSON.stringify(res)}`)
             return res
-        } catch(e) {
+        } catch (e) {
             Log.error('CREATE error')
         }
     }
@@ -66,20 +66,21 @@ const Interactive = new class Interactive {
 }
 
 window.playing = async function playing(item) {
-    
+
     window.Evexi ? Log.success('API Found') : Log.error('API ERROR')
 
     Log.info('')
 
     Log.info(' -- TESTING INFO -- ')
     const create = await Interactive.create()
-    ;(document.getElementById('qr') as HTMLImageElement).src = create.qr
+    
+    if (create) (document.getElementById('qr') as HTMLImageElement).src = create.qr
 
     window.Evexi.interactive.onConnect((clientId) => {
         Log.info(`client connected: ${clientId}`)
         clientsIds.push(clientId)
         Interactive.start()
-        ;(document.getElementById('qr') as HTMLImageElement).src = ''
+            ; (document.getElementById('qr') as HTMLImageElement).src = ''
     })
 
     window.Evexi.interactive.onDisconnect((clientId) => {

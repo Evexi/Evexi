@@ -11,7 +11,7 @@ PACKAGE_VERSION=$(cat package.json \
 function build {
 
   # package
-  node_modules/.bin/parcel build $1 docs/$2/index.html -d $1'-'$PACKAGE_VERSION --no-cache --no-minify --no-source-maps --public-url ./
+  node_modules/.bin/parcel build $1 docs/$2/index.html -d $1'-'$PACKAGE_VERSION --no-cache --no-minify --no-source-maps --public-url ./ --no-content-hash
 
   # Zip
   zip -r $1'-'$PACKAGE_VERSION.zip $1'-'$PACKAGE_VERSION -x '.*' -x '__MACOSX' -x '*.DS_Store'
