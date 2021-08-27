@@ -2,6 +2,7 @@ name: CI
 on: [push]
 jobs:
   build:
+    name: Test
     runs-on: ubuntu-latest
 
     strategy:
@@ -10,12 +11,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+      - uses: actions/setup-node@v2
         with:
-          cmd: install # will run `yarn install` command
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: run scan:build # will run `yarn build` command
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: run scan:test # will run `yarn test` command
+          node-version: '16'
+      - run: npm install yarn -g
+      - run: yarn install
+      - name: Build Scan
+        run: yarn run scan:build
+      - name: Test Scan
+        run: yarn run scan:test

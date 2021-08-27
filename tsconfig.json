@@ -2,8 +2,9 @@
   "compilerOptions": {
     "baseUrl": "/",
     "lib": ["esnext", "dom"],
+    "esModuleInterop": true
   },
-  "exclude": ["node_modules", "./scan/**/*"],
+  "exclude": ["node_modules"],
   "types": ["@types/node"],
   "include": [
     "docs/**/*",

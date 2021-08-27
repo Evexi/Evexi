@@ -16,7 +16,12 @@ module.exports = {
   collectCoverage: true,
 
   // ts-jest
-  globals: {'ts-jest': {diagnostics: false}},
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.scan.json',
+      diagnostics: false
+    }
+  },
 
   // Coverage locations
   coverageDirectory: './scan/tests/coverage',
