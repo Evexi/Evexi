@@ -1,7 +1,7 @@
 name: CI
 on: [push]
 jobs:
-  Build And Test:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
