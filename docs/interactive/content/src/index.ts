@@ -36,7 +36,7 @@ const Interactive = new class Interactive {
 
     async create() {
         try {
-            const res = await window.Evexi.interactive.create(180000, 'http://localhost:1234/example', 2)
+            const res = await window.Evexi.interactive.create(180000, 'https://57d2-178-17-44-81.ngrok.io', 2)
             expect(res).to.have.all.keys(['qr', 'url', 'sessionId'])
             Log.success(`CREATE success: ${JSON.stringify(res)}`)
             return res
@@ -105,8 +105,8 @@ window.stopping = async function stopping() {
 // @ts-ignore
 window.kick = () => {
     Log.info(`kicking client ${clientsIds[0]}`)
-    clientsIds.shift()
     window.Evexi.interactive.kick(clientsIds[0])
+    clientsIds.shift()
 }
 
 // @ts-ignore
@@ -116,7 +116,7 @@ window.broadcast = () => {
 }
 
 // @ts-ignore
-window.message = () => {
-    Log.info(`sending message to ${clientsIds[0]}`)
-    window.Evexi.interactive.message('direct message', clientsIds[0])
+window.message = (who: 'oldest' | 'newest') => {
+    Log.info(`sending message to ${clientsIds[who === 'oldest' ? 0 : clientsIds.length]}`)
+    window.Evexi.interactive.message('direct message', clientsIds[who === 'oldest' ? 0 : clientsIds.length])
 }

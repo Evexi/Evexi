@@ -254,7 +254,7 @@ parcelRequire = function (e, r, t, n) {
           onOpen: null,
           onClose: null
         }, !t) throw new n.InitializationError("sessionId not provided");
-        this.socket = new WebSocket(e.EnvironmentUrl(s) + "/" + t), this.socket.onmessage = function (e) {
+        this.socket = new WebSocket((0, e.EnvironmentUrl)(s) + "/" + t), this.socket.onmessage = function (e) {
           if (o.events.onMessage) {
             var n = JSON.parse(e.data);
             "ping" !== n.action && "pong" !== n.action && o.events.onMessage(n.data);
@@ -310,7 +310,7 @@ var Scan_1 = __importDefault(require("../../../../scan/dist/Scan")); // get the 
 
 var sessionId = Scan_1.default.urlParam(); // listen and send messages to the WS API (the second optional argument is the environment Prod, Dev or Edge. DEFAULT: Prod)
 
-var scan = new Scan_1.default(sessionId, 'Local').onMessage(function (message) {
+var scan = new Scan_1.default(sessionId, 'Edge').onMessage(function (message) {
   console.log('Message: ', message);
 }).onOpen(function () {
   console.log('Opened');

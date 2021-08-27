@@ -4,7 +4,7 @@ import Scan from '../../../../scan/dist/Scan'
 const sessionId = Scan.urlParam();
 
 // listen and send messages to the WS API (the second optional argument is the environment Prod, Dev or Edge. DEFAULT: Prod)
-const scan = new Scan(sessionId, 'Local')
+const scan = new Scan(sessionId, 'Edge')
   .onMessage((message) => {
     console.log('Message: ', message)
   })

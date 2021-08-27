@@ -7,10 +7,10 @@ You can see a example [here](./index.ts)
 #
 
 ### Install
-You should install the package via CDN and include as part of the scanURL page. Its recommend that you version lock against majors only. Patch and minor releases will address bugs and add features that dont break compatibility within the major version only.
+You should install the package via CDN and include as part of the scanURL page. Its recommend that you version lock against majors only. Patch and minor releases will address bugs and add features that don't break compatibility within the major version only.
 
 ````javascript
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@mrx-technology/interactive@1"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/evexi@2"></script>
 ````
 
 #
