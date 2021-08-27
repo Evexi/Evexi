@@ -6,6 +6,8 @@ The Evexi API is designed for use with background tasks, web items or zip items 
 responsibility of the developer to manage any stored assets. On the Samsung TIZEN platform the API is only supported on firmware 2070 and above. Within the docs & examples directories there are examples of the filesystem communication, interactive and more. Please be aware the player supports multiple platforms, some of which only support ES5 and others early versions of ES6. Therefor its recommended to transpile your application down to ES5.
 Please note all methods that return a promise are wrapped in a timeout of 5 seconds. If no response is received within this time they will throw an error in the catch statement.
 
+![Tests](https://github.com/MRXTechnology/Evexi/actions/workflows/build.yml/badge.svg)
+
 #
 
 ###### Details
