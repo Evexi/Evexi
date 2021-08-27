@@ -39,6 +39,8 @@ In your tsconfig.json file add the following:
 }
 ````
 
+This will give you global access to typings for `window.Evexi` and `window.Scan`. If you are making a scanURL application you can also import the package as a global `import "evexi"` which provides the library and typings (for specified version). However for a scanUrl package it is recommenced to import the package via a CDN (Specifying the major version only) and add typings to tsconfig.json if needed. This way any issues or bugs will get addressed without having to deploy your application.
+
 #
 
 ### Packaging

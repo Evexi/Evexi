@@ -7,6 +7,7 @@
   "license": "MIT",
   "types": "types/index.d.ts",
   "main": "scan/dist/Scan.js",
+  "module": "scan/src/Scan.ts",
   "scripts": {
     "build": "yarn run clean && yarn run scan:build && yarn run examples:build",
     "examples:build": "yarn run example:build:fs && yarn run example:build:interactive && yarn run example:build:scan",

@@ -6,7 +6,7 @@ mkdir ./scan/dist
 
 # package application
 function build {
-  node_modules/.bin/parcel build scan scan/src/Scan.ts -d ./scan/dist --no-cache --no-source-maps --public-url ./å --no-content-hash
+  node_modules/.bin/parcel build scan scan/src/Scan.ts -d ./scan/dist --no-cache --no-source-maps --public-url ./ --no-content-hash
 }
 
 # package typings
