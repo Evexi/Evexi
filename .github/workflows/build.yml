@@ -1,25 +1,42 @@
 name: CI
 on: [push]
 jobs:
-  build:
-    name: Test
-    runs-on: ubuntu-latest
 
+  build:
+    name: Run
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
         with:
-          node-version: '16'
-      - run: npm install yarn -g
-      - run: yarn install
+          node-version: 16
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          npm install yarn
+          node_modules/.bin/yarn install
+
       - name: Build Scan
-        run: yarn run scan:build
-      - name: Test Scan
-        run: yarn run scan:test
+        run: node_modules/.bin/yarn run scan:build
+
+      - name: Test
+        run: |
+          node_modules/.bin/yarn run scan:test
+
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
