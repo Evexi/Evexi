@@ -8,17 +8,19 @@ PACKAGE_VERSION=$(cat package.json \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]')
 
+PACKAGE_VERSION_ADJUSTED="${PACKAGE_VERSION//./}"
+
 function build {
 
   # package
-  node_modules/.bin/parcel build $1 docs/$2/index.html -d $1'-'$PACKAGE_VERSION --no-cache --no-minify --no-source-maps --public-url ./ --no-content-hash
+  node_modules/.bin/parcel build $1 docs/$2/index.html -d $1'-'$PACKAGE_VERSION_ADJUSTED --no-cache --no-minify --no-source-maps --public-url ./ --no-content-hash
 
   # Zip
-  zip -r $1'-'$PACKAGE_VERSION.zip $1'-'$PACKAGE_VERSION -x '.*' -x '__MACOSX' -x '*.DS_Store'
-  mv -f ./$1'-'$PACKAGE_VERSION.zip ./examples/$1'-'$PACKAGE_VERSION'.zip'
+  zip -r $1'-'$PACKAGE_VERSION_ADJUSTED.zip $1'-'$PACKAGE_VERSION_ADJUSTED -x '.*' -x '__MACOSX' -x '*.DS_Store'
+  mv -f ./$1'-'$PACKAGE_VERSION_ADJUSTED.zip ./examples/$1'-'$PACKAGE_VERSION_ADJUSTED'.zip'
 
   # # tidy
-  rm -r $1'-'$PACKAGE_VERSION
+  rm -r $1'-'$PACKAGE_VERSION_ADJUSTED
 }
 
 build $1 $2
