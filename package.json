@@ -18,12 +18,13 @@
     "scan:test": "jest",
     "scan:build": "bash ./.build/buildScan.sh",
     "scan:serve": "node_modules/.bin/parcel serve scan docs/interactive/scan/src/index.html",
+    "fs:serve": "node_modules/.bin/parcel serve fs docs/fs/src/index.html",
     "clean": "bash ./.build/clean.sh"
   },
   "devDependencies": {
-    "@types/node": "^16.7.2",
     "@types/chai": "^4.2.21",
     "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.2",
     "chai": "^4.3.4",
     "dts-bundle-generator": "^5.9.0",
     "jest": "^27.0.6",
@@ -31,5 +32,8 @@
     "parcel-bundler": "^1.12.5",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
   }
 }

@@ -19,7 +19,7 @@ function build {
   zip -r $1'-'$PACKAGE_VERSION_ADJUSTED.zip $1'-'$PACKAGE_VERSION_ADJUSTED -x '.*' -x '__MACOSX' -x '*.DS_Store'
   mv -f ./$1'-'$PACKAGE_VERSION_ADJUSTED.zip ./examples/$1'-'$PACKAGE_VERSION_ADJUSTED'.zip'
 
-  # # tidy
+  # tidy
   rm -r $1'-'$PACKAGE_VERSION_ADJUSTED
 }
 

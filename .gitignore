@@ -2,3 +2,4 @@
 .idea
 scan/tests/coverage
 .cache
+dist

@@ -1,4 +1,4 @@
-// Version: 2.4.0-Alpha.0
+// Version: 2.4.0-Alpha.1
 declare enum TransitionIn {
 	SLIDE_LEFT = "slide-in-from-left",
 	SLIDE_TOP = "slide-in-from-top",
@@ -26,14 +26,15 @@ export interface MediaInterface {
 	transitionOut?: TransitionOUT;
 }
 export declare type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
-declare enum EnviromentType {
+declare enum EnvironmentType {
 	SSSP2 = "SSSP2",
 	HTML = "HTML",
-	TIZEN = "TIZEN"
+	TIZEN = "TIZEN",
+	KIOSK = "KIOSK"
 }
 export interface MediaInterfaceLocal extends MediaInterface {
 	playlistHash: string;
-	localmedia: string | undefined;
+	localMedia: string | undefined;
 }
 declare enum Actions {
 	INFO = "info",
@@ -54,7 +55,7 @@ declare enum Actions {
 export interface InfoCB {
 	deviceId: string;
 	version: string;
-	provider: keyof typeof EnviromentType | false;
+	provider: keyof typeof EnvironmentType | false;
 }
 export declare type mediaType = "image" | "text" | "web";
 export interface GetResponse {
@@ -92,7 +93,7 @@ declare class Evexi {
 	readonly fs: {
 		get: (name: string) => Promise<GetResponse>;
 		put: (name: string, data: string | boolean | Record<string, unknown>) => Promise<boolean>;
-		delete: (name: string) => Promise<boolean>;
+		del: (name: string) => Promise<boolean>;
 		list: () => Promise<FileType>;
 		clear: () => Promise<boolean>;
 		download: (url: string, name?: string | undefined) => Promise<DownloadResponse>;
