@@ -1,65 +1,41 @@
-import { expect } from 'chai'
+import '@babel/polyfill'
+import './../../../../api/dist/Evexi'
+
+import {log} from './../../../common'
 
 // list of client id's connected
 const clientsIds: string[] = []
-
-/**
- * Logger
- */
-const Log = new class Log {
-
-  // Add to div
-  private logs = document.getElementById('logs') as HTMLDivElement
-
-  info(log: string) {
-    this.logs.innerHTML += '<span style=\'background-color: gray\'>' + log + '</span><br/>'
-    console.log(log)
-  }
-
-  success(log: string) {
-    this.logs.innerHTML += '<span style=\'background-color: darkgreen\'>' + log + '</span><br/>'
-    console.log(log)
-  }
-
-  error(log: string) {
-    this.logs.innerHTML += '<span style=\'background-color: darkred\'>' + log + '</span><br/>'
-    console.log(log)
-  }
-
-  clear() {
-    this.logs.innerHTML = ''
-  }
-
-}
 
 const Interactive = new class Interactive {
 
   async create() {
     try {
-      const res = await window.Evexi.interactive.create(180000, 'https://57d2-178-17-44-81.ngrok.io', 2)
-      expect(res).to.have.all.keys(['qr', 'url', 'sessionId'])
-      Log.success(`CREATE success: ${JSON.stringify(res)}`)
+      const res = await window.Evexi.interactive.create(180000, 'http://fb22-2a00-23c6-2992-b000-4071-55f7-893a-7333.ngrok.io', 2)
+
+      if(res.qr !== '' && res.sessionId && res.url !== '') log.success(`CREATE success: ${JSON.stringify(res)}`)
+      else throw new Error()
+
       return res
     } catch (e) {
-      Log.error('CREATE error')
+      log.error('CREATE error')
     }
   }
 
   start() {
     try {
       window.Evexi.interactive.start()
-      Log.success('START success')
+      log.success('START success')
     } catch (e) {
-      Log.error('START error')
+      log.error('START error')
     }
   }
 
   destroy() {
     try {
       window.Evexi.interactive.destroy()
-      Log.success('DESTROY success')
+      log.success('DESTROY success')
     } catch (e) {
-      Log.error('DESTROY error')
+      log.error('DESTROY error')
     }
   }
 
@@ -67,56 +43,56 @@ const Interactive = new class Interactive {
 
 window.playing = async function playing(item) {
 
-  window.Evexi ? Log.success('API Found') : Log.error('API ERROR')
+  window.Evexi ? log.success('API Found') : log.error('API ERROR')
 
-  Log.info('')
+  log.info('')
 
-  Log.info(' -- TESTING INFO -- ')
+  log.info(' -- TESTING INFO -- ')
   const create = await Interactive.create()
 
   if (create) (document.getElementById('qr') as HTMLImageElement).src = create.qr
 
   window.Evexi.interactive.onConnect((clientId) => {
-    Log.info(`client connected: ${clientId}`)
+    log.info(`client connected: ${clientId}`)
     clientsIds.push(clientId)
     Interactive.start()
-      ; (document.getElementById('qr') as HTMLImageElement).src = ''
+    ;(document.getElementById('qr') as HTMLImageElement).src = ''
   })
 
   window.Evexi.interactive.onDisconnect((clientId) => {
-    Log.info(`client disconnected: ${clientId} .. running destroy in 5 seconds`)
+    log.info(`client disconnected: ${clientId} .. running destroy in 5 seconds`)
     window.setTimeout(Interactive.destroy, 5000)
   })
 
   window.Evexi.interactive.onKick((clientId) => {
-    Log.info(`client kicked: ${clientId}`)
+    log.info(`client kicked: ${clientId}`)
   })
 
   window.Evexi.interactive.onMessage((message) => {
-    Log.info(`message: ${JSON.stringify(message)}`)
+    log.info(`message: ${JSON.stringify(message)}`)
   })
 
 }
 
 window.stopping = async function stopping() {
-  Log.clear()
+  log.clear()
 }
 
 // @ts-ignore
 window.kick = () => {
-  Log.info(`kicking client ${clientsIds[0]}`)
+  log.info(`kicking client ${clientsIds[0]}`)
   window.Evexi.interactive.kick(clientsIds[0])
   clientsIds.shift()
 }
 
 // @ts-ignore
 window.broadcast = () => {
-  Log.info(`sending broadcast`)
+  log.info(`sending broadcast`)
   window.Evexi.interactive.message('broadcast message')
 }
 
 // @ts-ignore
 window.message = (who: 'oldest' | 'newest') => {
-  Log.info(`sending message to ${clientsIds[who === 'oldest' ? 0 : clientsIds.length]}`)
+  log.info(`sending message to ${clientsIds[who === 'oldest' ? 0 : clientsIds.length]}`)
   window.Evexi.interactive.message('direct message', clientsIds[who === 'oldest' ? 0 : clientsIds.length])
 }

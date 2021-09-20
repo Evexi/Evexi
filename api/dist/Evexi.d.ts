@@ -1,4 +1,4 @@
-// Version: 2.4.0-Alpha.1
+// Version: 2.4.0-Alpha.3
 declare enum TransitionIn {
 	SLIDE_LEFT = "slide-in-from-left",
 	SLIDE_TOP = "slide-in-from-top",
@@ -50,7 +50,8 @@ declare enum Actions {
 	INTERACT_START = "interact.start",
 	INTERACT_DESTROY = "interact.destroy",
 	INTERACT_MESSAGE = "interact.message",
-	INTERACT_KICK = "interact.kick"
+	INTERACT_KICK = "interact.kick",
+	KIOSK_BARCODE = "kiosk.barcode"
 }
 export interface InfoCB {
 	deviceId: string;
@@ -110,7 +111,9 @@ declare class Evexi {
 		onDisconnect: (cb: (client: string) => void) => void;
 		onKick: (cb: (client: string) => void) => void;
 	};
-	readonly version: string;
+	readonly tizen: {
+		barcode: () => Promise<string>;
+	};
 	readonly log: (data: LogMessage["data"]) => void;
 	readonly info: () => Promise<InfoCB>;
 }

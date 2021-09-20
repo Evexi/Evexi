@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Evexi API Demo - FS</title>
+    <title>Evexi API Demo - Kiosk</title>
     <style>
         body {
-            background-color: green;
+            background-color: purple;
             transition: background-color ease-in-out 1s;
         }
     </style>
 </head>
 <body>
-<h2>Evexi API Demo FS - 5</h2>
+<h2>Evexi API Demo Kiosk</h2>
+
+<button onclick="window.barcode()">Barcode</button>
+<button onclick="window.print()">Print</button>
+<br/>
+
 <div id="logs"></div>
 <script type="text/javascript" src="/index.ts"></script>
 </body>

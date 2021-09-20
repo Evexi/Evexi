@@ -1,58 +1,25 @@
-/**
- * logger
- */
-const log = new class Log {
+import '@babel/polyfill'
+import './../../../api/dist/Evexi'
 
-    // Add to div
-    private logs = document.getElementById('logs') as HTMLDivElement
-
-    info(log: string) {
-        this.logs.innerHTML += '<span style=\'background-color: gray\'>' + log + '</span><br/>'
-        console.log(log)
-    }
-
-    success(log: string) {
-        this.logs.innerHTML += '<span style=\'background-color: darkgreen\'>' + log + '</span><br/>'
-        console.log(log)
-    }
-
-    error(log: string) {
-        this.logs.innerHTML += '<span style=\'background-color: darkred\'>' + log + '</span><br/>'
-        console.error(log)
-    }
-
-    clear() {
-        this.logs.innerHTML = ''
-    }
-
-}
+import { log } from './../../common'
 
 /**
  * Info events
  */
-const info = new class Info {
-
-    version() {
-        window.Evexi.version ? log.success('version: ' + window.Evexi.version) : log.error('version error')
-    }
+const info = new class {
 
     async info() {
         try {
             const info = await window.Evexi.info()
+
             log.success('INFO success:' + JSON.stringify(info))
-            
-            try {
-                // expect(info).to.have.all.keys(['deviceId', 'provider', 'version'])
-            } catch (e) {
-                log.error('INFO struct error')
-            }
 
             info.deviceId.length > 5 ? log.success('INFO device ID success') : log.error('INFO device ID error')
             info.provider && info.provider.length > 2 ? log.success('INFO provider success') : log.error('INFO provider error')
             info.version.length > 2 ? log.success('INFO version success') : log.error('INFO version error')
 
         } catch (e) {
-            log.error('INFO error')
+            log.error('INFO struct error')
         }
     }
 
@@ -61,16 +28,15 @@ const info = new class Info {
 /**
  * Storage Events
  */
-const storage = new class Storage {
-    
+const storage = new class {
+
     async put() {
         try {
             const res = await window.Evexi.fs.put('text2.json', 'my text file')
-            log.success('PUT: resolved ' + JSON.stringify(res))
 
             try {
-                // expect(res).to.eql(true)
-                log.success('PUT: success')
+                if (res) log.success('PUT: success')
+                else throw new Error()
             } catch (e) {
                 log.error('PUT struct error')
             }
@@ -85,14 +51,8 @@ const storage = new class Storage {
             const res = await window.Evexi.fs.get('text2.json')
 
             try {
-                // expect(res).to.have.all.keys(['name', 'error', 'type', 'data'])
-                log.success('GET: success')
-            } catch (e) {
-                log.error('GET struct error')
-            }
-
-            try {
-                // expect(res.data).to.eq('my text file')
+                if (res.data === 'my text file') log.success('GET: success')
+                else throw new Error()
             } catch (e) {
                 log.error('GET: failed')
             }
@@ -107,8 +67,8 @@ const storage = new class Storage {
             const exists = await window.Evexi.fs.exists('mrx.png')
 
             try {
-                // expect(exists).to.eq(false)
-                log.success('EXISTS: success')
+                if (!exists) log.success('EXISTS: success - item should not exist')
+                else throw new Error()
             } catch (e) {
                 log.error('EXISTS .. the item already exists when it shouldnt')
             }
@@ -123,9 +83,8 @@ const storage = new class Storage {
             const download = await window.Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
 
             try {
-                // expect(download).to.have.all.keys(['url', 'data', 'error'])
-                // expect(download.url).to.eql('https://mrx.technology/assets/images/compatible/mrx.png')
-                log.success('DOWNLOAD: success')
+                if (download.url === 'https://mrx.technology/assets/images/compatible/mrx.png') log.success('DOWNLOAD: success')
+                else throw new Error()
             } catch (e) {
                 log.error('DOWNLOAD: struct issue')
             }
@@ -140,8 +99,8 @@ const storage = new class Storage {
             const exists = await window.Evexi.fs.exists('mrx.png')
 
             try {
-                // expect(exists).to.eq(true)
-                log.success('EXISTS B: success')
+                if (exists) log.success('EXISTS: success')
+                else throw new Error()
             } catch (e) {
                 log.error('Exists: ERROR')
             }
@@ -155,8 +114,8 @@ const storage = new class Storage {
         try {
             const listA = await window.Evexi.fs.list()
             try {
-                // assert.deepEqual(listA, ['mrx.png', 'text2.json'])
-                log.success('LIST A: success')
+                if (listA[0] === 'mrx.png' && listA[1] === 'text2.json') log.success('LIST A: success')
+                else throw new Error()
             } catch (e) {
                 log.error('listA: ERROR' + JSON.stringify(e))
             }
@@ -170,8 +129,8 @@ const storage = new class Storage {
             const del = await window.Evexi.fs.del('mrx.png')
 
             try {
-                // expect(del).to.eql(true)
-                log.success('DELETE: success')
+                if (del) log.success('DELETE: success')
+                else throw new Error()
             } catch (e) {
                 log.error('DELETE: ERROR')
             }
@@ -186,8 +145,8 @@ const storage = new class Storage {
             const exists = await window.Evexi.fs.exists('mrx.png')
 
             try {
-                // expect(exists).to.eql(false)
-                log.success('EXISTS C: success')
+                if (!exists) log.success('EXISTS C: success - should not exist')
+                else throw new Error()
             } catch (e) {
                 log.error('ExistsC: ERROR')
             }
@@ -200,14 +159,7 @@ const storage = new class Storage {
     async clear() {
         try {
             const cleared = await window.Evexi.fs.clear()
-
-            try {
-                // expect(cleared).to.eql(1)
-                log.success('CLEAR: success')
-            } catch (e) {
-                log.error('CLEAR: ERROR')
-            }
-
+            log.success(`CLEARED: success ${cleared}`)
         } catch (e) {
             log.error('CLEARED: caught')
         }
@@ -217,8 +169,8 @@ const storage = new class Storage {
         try {
             const listB = await window.Evexi.fs.list()
             try {
-                // assert.deepEqual(listB, [])
-                log.success('LIST B: success')
+                if (!listB || listB === null || listB.length === 0) log.success('LIST B: success')
+                else throw new Error()
             } catch (e) {
                 log.error('listB: ERROR' + JSON.stringify(e))
             }
@@ -229,42 +181,38 @@ const storage = new class Storage {
 
 }
 
-const run = async () => {
-
-    log.info(' -- TESTING INFO -- ')
-    info.version()
-    await info.info()
-
-    log.info('')
-
-    log.info(' -- TESTING STORAGE -- ')
-    await storage.put()
-    await storage.get()
-    await storage.exists()
-    await storage.download()
-    await storage.existsB()
-    await storage.list()
-    await storage.deletes()
-    await storage.existsC()
-    await storage.clear()
-    await storage.listB()
-    
-}
-
 /**
  * Lifecycle event to indicate the item has started to play
  */
-window.playing = (item) => {
+window.playing = async (item) => {
 
     log.info('playing item ...' + JSON.stringify(item))
 
     try {
-        
+
         window.Evexi ? log.success('API Found') : log.error('API ERROR - doesnt exist')
 
-        if(window.Evexi) {
+        if (window.Evexi) {
+
             log.info('')
-            run()
+
+            log.info(' -- TESTING INFO -- ')
+            await info.info()
+
+            log.info('')
+
+            log.info(' -- TESTING STORAGE -- ')
+            await storage.put()
+            await storage.get()
+            await storage.exists()
+            await storage.download()
+            await storage.existsB()
+            await storage.list()
+            await storage.deletes()
+            await storage.existsC()
+            await storage.clear()
+            await storage.listB()
+
         }
 
     } catch (e) {
@@ -278,4 +226,5 @@ window.playing = (item) => {
  */
 window.stopping = () => {
     log.clear()
+    log.info(' -- STOPPING -- ')
 }
