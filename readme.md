@@ -51,18 +51,18 @@ A '.zip' application should have no hidden files and be flat in structure (no ne
 zipinfo example for [example](./examples/fs-2.4.0.zip)
 ````bash
 Archive:  fs-2.4.0.zip
-Zip file size: 63872 bytes, number of entries: 3
-drwxr-xr-x  3.0 unx        0 bx stor 21-Aug-24 08:17 fs-2.4.0/
--rw-r--r--  3.0 unx      319 tx defN 21-Aug-24 08:17 fs-2.4.0/index.html
--rw-r--r--  3.0 unx   368398 tx defN 21-Aug-24 08:17 fs-2.4.0/src.3fc41ee7.js
-3 files, 368717 bytes uncompressed, 63362 bytes compressed:  82.8%
+Zip file size: 73108 bytes, number of entries: 2
+-rw-r--r--  3.0 unx      346 tx defN 21-Sep-21 09:35 index.html
+-rw-r--r--  3.0 unx   317567 tx defN 21-Sep-21 09:35 src.77de5100.js
+2 files, 317913 bytes uncompressed, 72780 bytes compressed:  77.1%
 ````
 
 You can zip your package like so:
 ````bash
-zip -r archive.zip archive -x '.*' -x '__MACOSX' -x '*.DS_Store'
+cd $1'-'$PACKAGE_VERSION_ADJUSTED # go into directory
+zip -r $1'-'$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
 ````
-Further example can be found [here](./build.sh#L17).
+Further example can be found [here](./.build/buildExamples.sh#L18).
 
 #
 
