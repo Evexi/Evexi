@@ -8,6 +8,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v2
@@ -28,12 +29,12 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
           npm install yarn
-          node_modules/.bin/yarn install --force
+          node_modules/.bin/yarn install
 
-      - name: Build Scan
-        run: node_modules/.bin/yarn run scan:build
+      - name: Build Packages
+        run: node_modules/.bin/yarn run build:packages
 
-      - name: Test
+      - name: Test Scan
         run: |
           node_modules/.bin/yarn run scan:test
 

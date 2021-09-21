@@ -47,9 +47,9 @@ NOTE: You should include `@babel/polyfill` if you are targeting SSSP2 or SSSP4 p
 ### Packaging
 A '.zip' application should have no hidden files and be flat in structure (no nested directories).
 
-zipinfo example for [example](./examples/fs-2.4.0.zip)
+zipinfo example for [example](./examples/fs-240.zip)
 ````bash
-Archive:  fs-2.4.0.zip
+Archive:  fs-240.zip
 Zip file size: 73108 bytes, number of entries: 2
 -rw-r--r--  3.0 unx      346 tx defN 21-Sep-21 09:35 index.html
 -rw-r--r--  3.0 unx   317567 tx defN 21-Sep-21 09:35 src.77de5100.js
