@@ -25,14 +25,14 @@ Please note all methods that return a promise are wrapped in a timeout of 5 seco
 #
 
 ### Install
-This repo provides both a package for the player API and a package for Scan (remote part of interactive content). It also provides type definitions, examples and documentation for everything Evexi. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version that the package is running on.
+This repo provides a package that contains both `window.Evexi` for content API methods and `window.Scan` (remote part of interactive content). It also provides type definitions, examples and documentation for everything Evexi. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version that the package is running on.
 
 To setup:
 ````bash
 yarn add MRXTechnology/Evexi
 ````
 
-In your tsconfig.json file add the following:
+In your application you can then import the package as a whole using `import 'evexi'` or you can import the scan package only using `import Scan from 'evexi/package/Scan'`. If you want definitions only you can add these like so:
 ````json
 {
     "compilerOptions": {
@@ -40,14 +40,7 @@ In your tsconfig.json file add the following:
     }
 }
 ````
-
-This will give you global access to typings for `window.Evexi` and `window.Scan`. You should include `@babel/polyfill` if you are targeting SSSP2 or SSSP4 platforms.
-
-###### Content application
-# TODO
-
-###### Scan application
-If you are making a scanURL application you can import the package as a global `import "evexi"` which provides the library and typings (for specified version). However for a scanUrl package it is recommenced to import the package via a CDN (Specifying the major version only) and add typings to tsconfig.json if needed. This way any issues or bugs will get addressed without having to deploy your application.
+NOTE: You should include `@babel/polyfill` if you are targeting SSSP2 or SSSP4 platforms.
 
 #
 
