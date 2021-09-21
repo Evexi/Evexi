@@ -5,9 +5,9 @@
   "repository": "https://github.com/MRXTechnology/Evexi.git",
   "author": "Peter Ingram <p.ingram@mrx.technology>",
   "license": "MIT",
-  "types": "types/index.d.ts",
-  "main": "scan/dist/Scan.js",
-  "module": "scan/src/Scan.ts",
+  "types": "package/index.d.ts",
+  "main": "package/index.js",
+  "module": "src/index.ts",
   "scripts": {
     "build": "yarn run clean && yarn run scan:build && yarn run examples:build",
     "examples:build:local": "yarn run clean && yarn run example:build:fs:local && yarn run example:build:interactive:local && yarn run example:build:kiosk:local",
