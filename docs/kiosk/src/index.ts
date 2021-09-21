@@ -1,5 +1,5 @@
 import '@babel/polyfill'
-import '../../../src'
+import '../../../package/index.js'
 
 import {log} from './../../common'
 

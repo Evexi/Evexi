@@ -31,8 +31,8 @@ jobs:
           npm install yarn
           node_modules/.bin/yarn install
 
-      - name: Build Packages
-        run: node_modules/.bin/yarn run build:packages
+      # - name: Build Packages & Examples
+      #   run: node_modules/.bin/yarn run build
 
       - name: Test Scan
         run: |

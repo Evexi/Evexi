@@ -8,7 +8,6 @@
   "exclude": ["node_modules"],
   "types": ["@types/node"],
   "include": [
-    "docs/**/*",
-    "src/evexi/Evexi.d.ts"
+    "docs/**/*"
   ]
 }
