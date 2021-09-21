@@ -51,7 +51,8 @@ declare enum Actions {
 	INTERACT_DESTROY = "interact.destroy",
 	INTERACT_MESSAGE = "interact.message",
 	INTERACT_KICK = "interact.kick",
-	KIOSK_BARCODE = "kiosk.barcode"
+	KIOSK_BARCODE = "kiosk.barcode",
+	KIOSK_PRINTER = "kiosk.printer"
 }
 export interface InfoCB {
 	deviceId: string;
@@ -113,6 +114,7 @@ declare class Evexi {
 	};
 	readonly tizen: {
 		barcode: () => Promise<string>;
+		printer: (data: string) => Promise<string>;
 	};
 	readonly log: (data: LogMessage["data"]) => void;
 	readonly info: () => Promise<InfoCB>;

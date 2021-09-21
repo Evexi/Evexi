@@ -38,6 +38,31 @@ window.barcode = async () => {
 }
 
 // @ts-ignore
-window.print = () => {
-    // TODO
+window.print = async () => {
+    
+    log.info(' -- TESTING PRINTER -- ')
+    
+    try {
+
+        const data = 
+            '                                          \n' +
+            '                  EVEXI                   \n' +
+            '                  EVEXI                   \n' +
+            '                  EVEXI                   \n' +
+            '                  EVEXI                   \n' +
+            '                  EVEXI                   \n' +
+            '                                          \n' +
+            '                                          \n' +
+            '                                          \n' +
+            '                                          \n' +
+            '                                          \n'
+
+        const res = await window.Evexi.tizen.printer(data)
+        log.success('PRINTER: resolved ' + JSON.stringify(res))
+    } catch (e) {
+        log.error('PRINTER: caught')
+    }
+
+    log.info('')
+
 }
