@@ -9,6 +9,6 @@
   "exclude": ["node_modules"],
   "types": ["@types/node"],
   "include": [
-    "scan/src/*",
+    "src/scan/*",
   ]
 }

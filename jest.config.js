@@ -4,7 +4,7 @@ module.exports = {
   transform: {'^.+\\.tsx?$': require.resolve('ts-jest')},
 
   // Test files
-  testMatch: ['**/scan/tests/unit/**/*.spec.[jt]s?(x)'],
+  testMatch: ['**/tests/unit/**/*.spec.[jt]s?(x)'],
 
   // Ignore
   testPathIgnorePatterns: ['/lib/', '/node_modules/'],
@@ -24,7 +24,7 @@ module.exports = {
   },
 
   // Coverage locations
-  coverageDirectory: './scan/tests/coverage',
+  coverageDirectory: './tests/coverage',
 
   // Environment
   testEnvironment: 'jsdom'

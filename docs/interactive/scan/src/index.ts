@@ -1,4 +1,4 @@
-import Scan from '../../../../scan/dist/Scan'
+import Scan from '../../../../src/scan/Scan'
 
 // get the session id from the url param
 const sessionId = Scan.urlParam();

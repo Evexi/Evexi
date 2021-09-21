@@ -1,4 +1,4 @@
-import Scan from './../../src/Scan'
+import Scan from './../../src/scan/Scan'
 import {Server} from 'mock-socket'
 
 let mockServer: Server

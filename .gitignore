@@ -1,5 +1,5 @@
 /node_modules
-.idea
-scan/tests/coverage
-.cache
+/.idea
+/tests/coverage
+/.cache
 /dist

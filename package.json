@@ -20,7 +20,7 @@
     "example:build:scan": "bash ./.build/buildScanExample.sh",
     "example:build:kiosk": "bash ./.build/buildExamples.sh kiosk kiosk/src",
     "scan:test": "jest",
-    "scan:build": "bash ./.build/buildScan.sh",
+    "build:packages": "bash ./.build/buildPackages.sh",
     "scan:serve": "node_modules/.bin/parcel serve scan docs/interactive/scan/src/index.html",
     "fs:serve": "node_modules/.bin/parcel serve fs docs/fs/src/index.html",
     "clean": "bash ./.build/clean.sh",

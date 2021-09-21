@@ -25,9 +25,9 @@ Please note all methods that return a promise are wrapped in a timeout of 5 seco
 #
 
 ### Install
-The Evexi API is available for the content to access from the window object while running on the player so there is nothing to install. We provide the [typing definitions](./types/Evexi.d.ts) as part of this documentation repository. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version.
+This repo provides both a package for the player API and a package for Scan (remote part of interactive content). It also provides type definitions, examples and documentation for everything Evexi. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version that the package is running on.
 
-To setup the definitions:
+To setup:
 ````bash
 yarn add MRXTechnology/Evexi
 ````
@@ -41,7 +41,13 @@ In your tsconfig.json file add the following:
 }
 ````
 
-This will give you global access to typings for `window.Evexi` and `window.Scan`. If you are making a scanURL application you can also import the package as a global `import "evexi"` which provides the library and typings (for specified version). However for a scanUrl package it is recommenced to import the package via a CDN (Specifying the major version only) and add typings to tsconfig.json if needed. This way any issues or bugs will get addressed without having to deploy your application.
+This will give you global access to typings for `window.Evexi` and `window.Scan`. You should include `@babel/polyfill` if you are targeting SSSP2 or SSSP4 platforms.
+
+###### Content application
+# TODO
+
+###### Scan application
+If you are making a scanURL application you can import the package as a global `import "evexi"` which provides the library and typings (for specified version). However for a scanUrl package it is recommenced to import the package via a CDN (Specifying the major version only) and add typings to tsconfig.json if needed. This way any issues or bugs will get addressed without having to deploy your application.
 
 #
 
@@ -62,7 +68,7 @@ You can zip your package like so:
 cd $1'-'$PACKAGE_VERSION_ADJUSTED # go into directory
 zip -r $1'-'$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
 ````
-Further example can be found [here](./.build/buildExamples.sh#L18).
+Further example can be found [here](./.build/buildExamples.sh#L18-L22).
 
 #
 

@@ -1,5 +1,5 @@
 import '@babel/polyfill'
-import './../../../api/dist/Evexi'
+import '../../../src'
 
 import {log} from './../../common'
 

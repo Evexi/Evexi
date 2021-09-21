@@ -9,6 +9,6 @@
   "types": ["@types/node"],
   "include": [
     "docs/**/*",
-    "api/dist/Evexi.d.ts"
+    "src/evexi/Evexi.d.ts"
   ]
 }
