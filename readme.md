@@ -30,7 +30,7 @@ This repo provides a package that contains both `window.Evexi` for content API m
 
 To setup:
 ````bash
-yarn add MRXTechnology/Evexi
+yarn add evexi
 ````
 
 In your application you can then import the package as a whole using `import 'evexi'` or you can import the scan package only using `import Scan from 'evexi/package/Scan'`. If you want definitions only you can add these like so:
