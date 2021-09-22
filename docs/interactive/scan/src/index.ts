@@ -1,4 +1,4 @@
-import '../../../../package/index.js'
+import '../../../../package/index.js' // importing the evexi API
 
 // get the session id from the url param
 const sessionId = window.Scan.urlParam();

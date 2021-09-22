@@ -2,7 +2,7 @@
 
 Interactive scan package is designed to be installed as part of scanURL specified within [interactive content](./../content/index.md) 'interact.create' call. The package handles connecting to the interactive server, keeping the session alive and formatting for developers.
 
-You can see a example [here](./index.ts)
+You can view a [working example here](./src).
 
 #
 

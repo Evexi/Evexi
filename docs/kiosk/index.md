@@ -1,6 +1,8 @@
 # Kiosk
 The Samsung Kiosk has two hardware peripherals both of which can be controlled via the Evexi API.
 
+You can view a [working example here](./src).
+
 #
 
 * [Barcode](#barcode)

@@ -21,6 +21,7 @@ Please note all methods that return a promise are wrapped in a timeout of 5 seco
 * [File System](docs/fs/index.md)
 * [Interactive](docs/interactive/index.md)
 * [Misc](docs/misc/index.md)
+* [Kiosk](docs/kiosk/index.md)
 
 #
 

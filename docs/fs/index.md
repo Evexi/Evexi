@@ -1,6 +1,8 @@
 # File System
 
-The storage API contains the below commands. You can find a full example [here](./src/index.ts)
+The storage API contains the below commands.
+
+You can view a [working example here](./src).
 
 - [Get](#get)
 - [Put](#put)

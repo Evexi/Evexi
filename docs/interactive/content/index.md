@@ -1,7 +1,7 @@
 # Interactive Content
 Interactive content will be displayed on the player and will use the player API to pause/resume the content and send and receive messages from the scanURL. Please see documentation on [packing your application](./../../../README.md#packaging) ready to deploy to a player.
 
-You can see a full example [here](./src/index.ts).
+You can view a [working example here](./src).
 
 #
 

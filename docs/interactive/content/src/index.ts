@@ -1,5 +1,5 @@
-import '@babel/polyfill'
-import '../../../../package/index.js'
+import '@babel/polyfill' // needed for SSSP2/4
+import '../../../../package/index.js' // importing the evexi API
 
 import {log} from './../../../common'
 
