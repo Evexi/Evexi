@@ -3,14 +3,6 @@ The following can be used to get version, platform details and other platform re
 
 #
 
-### Version
-You can get the players version by the following.
-````typescript
-window.Evexi.version // 2.4.0
-````
-
-#
-
 ### Info
 Info will return further details about the type of player the content is running on.
 ````typescript

@@ -8,17 +8,17 @@ const log = new class {
 
     info(log: string) {
         this.logs.innerHTML += '<span style=\'background-color: gray\'>' + log + '</span><br/>'
-        console.log(log)
+        if (log) console.log(log)
     }
 
     success(log: string) {
         this.logs.innerHTML += '<span style=\'background-color: darkgreen\'>' + log + '</span><br/>'
-        console.log(log)
+        if (log) console.log(log)
     }
 
     error(log: string) {
         this.logs.innerHTML += '<span style=\'background-color: darkred\'>' + log + '</span><br/>'
-        console.log(log)
+        if (log) console.log(log)
     }
 
     clear() {

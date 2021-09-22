@@ -26,6 +26,44 @@ export interface MediaInterface {
 	transitionOut?: TransitionOUT;
 }
 export declare type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
+export declare namespace b2bSerialPrint {
+	export enum PrinterPort {
+		PRINTERPORT0 = "PRINTERPORT0",
+		PRINTERPORT1 = "PRINTERPORT1",
+		PRINTERPORT2 = "PRINTERPORT2"
+	}
+	export enum PrinterParity {
+		NONE = "NONE",
+		ODD = "ODD",
+		EVEN = "EVEN"
+	}
+	export enum PrinterDataBits {
+		BITS5 = "BITS5",
+		BITS6 = "BITS6",
+		BITS7 = "BITS7",
+		BITS8 = "BITS8"
+	}
+	type PrinterStopBits = "1" | "1.5" | "2";
+	export interface PrinterOptions {
+		baudRate: 9600 | 115200;
+		parity: keyof typeof PrinterParity;
+		dataBits: keyof typeof PrinterDataBits;
+		stopBits: PrinterStopBits;
+	}
+	export interface PrintSerialDataResult {
+		data: string;
+		result: number;
+	}
+	export interface b2bSerialPrint {
+		open: (port: keyof typeof PrinterPort, options: PrinterOptions, onListener: (printSerialData: PrintSerialDataResult) => void) => boolean;
+		close: (port: keyof typeof PrinterPort) => boolean;
+		writeData: (port: keyof typeof PrinterPort, data: string, length: number) => number;
+	}
+	export {};
+}
+export interface PrinterSettings extends b2bSerialPrint.PrinterOptions {
+	port: keyof typeof b2bSerialPrint.PrinterPort;
+}
 declare enum EnvironmentType {
 	SSSP2 = "SSSP2",
 	HTML = "HTML",
@@ -113,8 +151,8 @@ declare class Evexi {
 		onKick: (cb: (client: string) => void) => void;
 	};
 	readonly tizen: {
-		barcode: () => Promise<string>;
-		printer: (data: string) => Promise<string>;
+		barcode: () => Promise<string | false>;
+		printer: (data: string, printerSettings?: Partial<PrinterSettings> | undefined) => Promise<boolean>;
 	};
 	readonly log: (data: LogMessage["data"]) => void;
 	readonly info: () => Promise<InfoCB>;
