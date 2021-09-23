@@ -121,6 +121,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var define;
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+// Version: 2.4.0-Alpha.1
 parcelRequire = function (e, r, t, n) {
   var i,
       o = "function" == typeof parcelRequire && parcelRequire,
@@ -187,26 +188,26 @@ parcelRequire = function (e, r, t, n) {
     }
 
     function t(n, r) {
-      var o = e();
+      var i = e();
       return (t = function t(n, _t) {
-        return o[n -= 124];
+        return i[n -= 151];
       })(n, r);
     }
 
     function e() {
-      var n = ["label", "removeEventListener", "1072298cahpsN", "onKick", "substring", "1niPRGj", "onMessage", "sent", "split", "action", "toString", "STORAGE_CLEAR", "prototype", "CONNECT", "281183pPRCmM", "ms.", "PLAYING", "call", "11007novXaB", "STORAGE_DOWNLOAD", "INTERACT_CREATE", "STOPPING", "interactive", "interact.message", "client", "throw", "function", "2932904SpvOlE", "message", "event", "INTERACT_START", "parent", "STORAGE_GET", "interact.destroy", "push", "__assign", "length", "kick", "Actions", "response", "storage.clear", "152OwmKFO", "default", "wrapperNoListener error", "INTERACT_KICK", "playing", "setTimeout", "stringToHex", "forEach", "all", "storage.put", "wrapper", "wrapperNoListener", "apply", "LOG", "interact.kick", "hasOwnProperty", "stringify", "__awaiter", "INTERACT_DESTROY", "STORAGE_EXISTS", "addSelfDestructingEventListener", "LifeCycleEvent", "Evexi", "data", "race", "tizen", "STORAGE_LIST", "byteCount", "events", "7320eWEXai", "value", "DISCONNECT", "return", "promiseTimeout", "sendLogFormatter", "5590IgFJqP", "1488imLMQC", "iterator", "addTargetedSelfDestructingEventListener", "MESSAGE", "substr", "KICK", "pop", "__esModule", "1099191HNjhjs", "storage.get", "asyncForEach", "interact.start", "storage.list", "Timed out in ", "INFO", "postMessage", "onConnect", "addEventListener", "Generator is already executing.", "parse", "KIOSK_PRINTER", "storage.download", "onDisconnect", "then", "STORAGE_PUT", "done", "__importDefault", "ops", "charCodeAt", "disconnect", "STORAGE_DELETE", "sleep", "INTERACT_MESSAGE", "trys", "next", "defineProperty", "InteractiveEvent", "assign", "connect", "KIOSK_BARCODE", "keys", "exports", "info", "7226868lTxJdr"];
+      var n = ["Actions", "7MkGGWX", "kiosk.printer", "wrapperNoListener", "info", "LifeCycleEvent", "STORAGE_DELETE", "InteractiveEvent", "STORAGE_PUT", "playing", "PLAYING", "log", "INTERACT_KICK", "storage.get", "684168LjZDxs", "__importDefault", "sendLogFormatter", "__assign", "substring", "setTimeout", "STORAGE_DOWNLOAD", "DISCONNECT", "INFO", "stringToHex", "interact.message", "storage.exists", "length", "storage.list", "INTERACT_CREATE", "9ivWcVI", "addSelfDestructingEventListener", "split", "message", "pop", "KIOSK_BARCODE", "all", "ops", "Timed out in ", "removeEventListener", "CONNECT", "event", "done", "interactive", "byteCount", "keys", "__esModule", "STORAGE_EXISTS", "prototype", "then", "data", "KICK", "397544qNMnPD", "688786fcJpaZ", "STORAGE_GET", "exports", "4388oMoOtp", "value", "substr", "wrapperNoListener error", "default", "355116AxGDpV", "action", "kick", "apply", "storage.delete", "STORAGE_LIST", "race", "kiosk.barcode", "postMessage", "stopping", "parse", "promiseTimeout", "INTERACT_MESSAGE", "call", "throw", "trys", "events", "925iDCYnT", "clearTimeout", "wrapper", "__awaiter", "return", "connect", "charCodeAt", "sent", "1721360IVCAyx", "onKick", "INTERACT_START", "ms.", "label", "asyncForEach", "interact.start", "onConnect", "storage.clear", "KIOSK_PRINTER", "interact.destroy", "defineProperty", "next", "onDisconnect", "__generator", "33940IxRYWA", "addEventListener", "hasOwnProperty", "addTargetedSelfDestructingEventListener", "parent", "iterator", "LOG", "onMessage", "push", "function", "stringify", "INTERACT_DESTROY", "STOPPING"];
       return (e = function e() {
         return n;
       })();
     }
 
     (function (n, r) {
-      for (var o = t, i = e();;) {
+      for (var i = t, o = e();;) {
         try {
-          if (482820 === parseInt(o(131)) / 1 * (parseInt(o(128)) / 2) + parseInt(o(211)) / 3 + parseInt(o(153)) / 4 + parseInt(o(196)) / 5 * (-parseInt(o(203)) / 6) + -parseInt(o(140)) / 7 * (parseInt(o(167)) / 8) + -parseInt(o(144)) / 9 * (parseInt(o(202)) / 10) + parseInt(o(125)) / 11) break;
-          i.push(i.shift());
+          if (103856 === -parseInt(i(218)) / 1 * (parseInt(i(204)) / 2) + -parseInt(i(164)) / 3 + -parseInt(i(159)) / 4 * (-parseInt(i(181)) / 5) + parseInt(i(231)) / 6 + -parseInt(i(156)) / 7 + parseInt(i(155)) / 8 * (-parseInt(i(246)) / 9) + parseInt(i(189)) / 10) break;
+          o.push(o.shift());
         } catch (a) {
-          i.push(i.shift());
+          o.push(o.shift());
         }
       }
     })(), function () {
@@ -214,441 +215,134 @@ parcelRequire = function (e, r, t, n) {
 
       var e = {
         846: function _(n, e, r) {
-          var o = t,
-              i = this && this[o(229)] || function (n) {
-            return n && n.__esModule ? n : {
+          var i = t,
+              o = this && this[i(232)] || function (n) {
+            return n && n[i(262)] ? n : {
               "default": n
             };
           };
 
-          Object[o(238)](e, "__esModule", {
+          Object[i(200)](e, i(262), {
             value: !0
           });
           var a = r(430),
-              c = i(r(895)),
+              c = o(r(895)),
               u = r(9),
-              s = i(r(729)),
-              f = i(r(91));
-          window[o(189)] = new function () {
-            var n = o;
-            this.fs = c[n(168)][n(175)], this[n(148)] = s["default"].all, this[n(192)] = f[n(168)].all, this.log = function (t) {
+              s = o(r(729)),
+              f = o(r(91));
+          window.Evexi = new function () {
+            var n = i;
+            this.fs = c[n(163)][n(252)], this[n(259)] = s[n(163)][n(252)], this.tizen = f["default"][n(252)], this[n(228)] = function (t) {
               var e = n;
-              return (0, u.wrapperNoListener)({
-                action: a[e(164)][e(180)],
+              return (0, u[e(220)])({
+                action: a[e(217)][e(210)],
                 data: t
               });
-            }, this.info = function () {
+            }, this[n(221)] = function () {
               var t = n;
-              return (0, u[t(177)])({
-                action: a.Actions[t(217)]
+              return (0, u[t(183)])({
+                action: a[t(217)][t(239)]
               });
             };
           }();
         },
         895: function _(n, e, r) {
-          var o = t;
-          Object[o(238)](e, o(210), {
+          var i = t;
+          Object.defineProperty(e, i(262), {
             value: !0
           });
-          var i = r(430),
+          var o = r(430),
               a = r(9);
-          e[o(168)] = new function () {
-            var n = o;
-            this[n(175)] = {
-              get: function get(t) {
-                var e = n;
-                return (0, a[e(177)])({
-                  action: i[e(164)].STORAGE_GET,
-                  name: t
+          e["default"] = new function () {
+            this.all = {
+              get: function get(n) {
+                return (0, a[t(183)])({
+                  action: o.Actions.STORAGE_GET,
+                  name: n
                 }, {
-                  name: t
+                  name: n
                 });
               },
-              put: function put(t, e) {
-                var r = n;
-                return (0, a[r(177)])({
-                  action: i[r(164)][r(227)],
-                  name: t,
+              put: function put(n, e) {
+                var r = t;
+                return (0, a[r(183)])({
+                  action: o[r(217)][r(225)],
+                  name: n,
                   data: e
                 }, {
-                  name: t
+                  name: n
                 });
               },
-              del: function del(t) {
-                var e = n;
-                return (0, a[e(177)])({
-                  action: i[e(164)][e(233)],
-                  name: t
+              del: function del(n) {
+                var e = t;
+                return (0, a.wrapper)({
+                  action: o[e(217)].STORAGE_DELETE,
+                  name: n
                 }, {
-                  name: t
+                  name: n
                 });
               },
               list: function list() {
-                var t = n;
-                return (0, a.wrapper)({
-                  action: i[t(164)].STORAGE_LIST
+                var n = t;
+                return (0, a[n(183)])({
+                  action: o[n(217)][n(169)]
                 });
               },
               clear: function clear() {
-                var t = n;
-                return (0, a[t(177)])({
-                  action: i[t(164)][t(137)]
+                return (0, a[t(183)])({
+                  action: o.Actions.STORAGE_CLEAR
                 });
               },
-              download: function download(t, e) {
-                var r = n;
-                return (0, a[r(177)])({
-                  action: i[r(164)][r(145)],
-                  url: t,
+              download: function download(n, e) {
+                return (0, a[t(183)])({
+                  action: o.Actions.STORAGE_DOWNLOAD,
+                  url: n,
                   name: e
                 }, {
                   name: e
                 });
               },
-              exists: function exists(t) {
-                var e = n;
-                return (0, a[e(177)])({
-                  action: i[e(164)][e(186)],
-                  name: t
+              exists: function exists(n) {
+                var e = t;
+                return (0, a[e(183)])({
+                  action: o[e(217)][e(263)],
+                  name: n
                 }, {
-                  name: t
+                  name: n
                 });
               }
             };
           }();
         },
-        9: function _(e, r, o) {
-          var i = t,
-              a = this && this[i(161)] || function () {
-            var n = i;
+        9: function _(e, r, i) {
+          var o = t,
+              a = this && this[o(234)] || function () {
+            var n = o;
             return (a = Object.assign || function (n) {
-              for (var e, r = t, o = 1, i = arguments.length; o < i; o++) {
-                for (var a in e = arguments[o]) {
-                  Object.prototype[r(182)].call(e, a) && (n[a] = e[a]);
+              for (var e, r = t, i = 1, o = arguments.length; i < o; i++) {
+                for (var a in e = arguments[i]) {
+                  Object[r(151)][r(206)].call(e, a) && (n[a] = e[a]);
                 }
               }
 
               return n;
-            })[n(179)](this, arguments);
+            })[n(167)](this, arguments);
           },
-              c = this && this[i(184)] || function (n, e, r, o) {
-            return new (r || (r = Promise))(function (i, a) {
+              c = this && this[o(184)] || function (n, e, r, i) {
+            return new (r || (r = Promise))(function (o, a) {
               var c = t;
 
               function u(n) {
-                var e = t;
-
                 try {
-                  f(o[e(237)](n));
-                } catch (r) {
-                  a(r);
-                }
-              }
-
-              function s(n) {
-                var e = t;
-
-                try {
-                  f(o[e(151)](n));
-                } catch (r) {
-                  a(r);
-                }
-              }
-
-              function f(n) {
-                var e,
-                    o = t;
-                n[o(228)] ? i(n[o(197)]) : (e = n[o(197)], e instanceof r ? e : new r(function (n) {
-                  n(e);
-                }))[o(226)](u, s);
-              }
-
-              f((o = o.apply(n, e || []))[c(237)]());
-            });
-          },
-              u = this && this.__generator || function (e, r) {
-            var o,
-                a,
-                c,
-                u,
-                s = i,
-                f = {
-              label: 0,
-              sent: function sent() {
-                if (1 & c[0]) throw c[1];
-                return c[1];
-              },
-              trys: [],
-              ops: []
-            };
-            return u = {
-              next: v(0),
-              "throw": v(1),
-              "return": v(2)
-            }, s(152) == ("undefined" == typeof Symbol ? "undefined" : n(Symbol)) && (u[Symbol[s(204)]] = function () {
-              return this;
-            }), u;
-
-            function v(n) {
-              return function (i) {
-                return function (n) {
-                  var i = t;
-                  if (o) throw new TypeError(i(221));
-
-                  for (; f;) {
-                    try {
-                      if (o = 1, a && (c = 2 & n[0] ? a[i(199)] : n[0] ? a[i(151)] || ((c = a["return"]) && c[i(143)](a), 0) : a[i(237)]) && !(c = c[i(143)](a, n[1]))[i(228)]) return c;
-
-                      switch (a = 0, c && (n = [2 & n[0], c.value]), n[0]) {
-                        case 0:
-                        case 1:
-                          c = n;
-                          break;
-
-                        case 4:
-                          return f[i(126)]++, {
-                            value: n[1],
-                            done: !1
-                          };
-
-                        case 5:
-                          f[i(126)]++, a = n[1], n = [0];
-                          continue;
-
-                        case 7:
-                          n = f[i(230)].pop(), f[i(236)][i(209)]();
-                          continue;
-
-                        default:
-                          if (!((c = (c = f[i(236)])[i(162)] > 0 && c[c[i(162)] - 1]) || 6 !== n[0] && 2 !== n[0])) {
-                            f = 0;
-                            continue;
-                          }
-
-                          if (3 === n[0] && (!c || n[1] > c[0] && n[1] < c[3])) {
-                            f.label = n[1];
-                            break;
-                          }
-
-                          if (6 === n[0] && f[i(126)] < c[1]) {
-                            f[i(126)] = c[1], c = n;
-                            break;
-                          }
-
-                          if (c && f[i(126)] < c[2]) {
-                            f[i(126)] = c[2], f.ops.push(n);
-                            break;
-                          }
-
-                          c[2] && f[i(230)][i(209)](), f.trys[i(209)]();
-                          continue;
-                      }
-
-                      n = r[i(143)](e, f);
-                    } catch (u) {
-                      n = [6, u], a = 0;
-                    } finally {
-                      o = c = 0;
-                    }
-                  }
-
-                  if (5 & n[0]) throw n[1];
-                  return {
-                    value: n[0] ? n[1] : void 0,
-                    done: !0
-                  };
-                }([n, i]);
-              };
-            }
-          };
-
-          Object[i(238)](r, "__esModule", {
-            value: !0
-          }), r[i(205)] = r[i(177)] = r[i(178)] = void 0;
-          var s = o(519);
-
-          function f(n, t) {
-            var e = i;
-            window[e(220)](e(154), function r(o) {
-              var i = e,
-                  a = JSON.parse(o[i(190)]);
-              if (a) try {
-                (0, s[i(243)])(t)[i(174)](function (n) {
-                  if (t[n] !== a[n]) throw new Error("");
-                }), window[i(127)](i(154), r, !0), n(a);
-              } catch (c) {}
-            }, !0);
-          }
-
-          r[i(178)] = function (n) {
-            var t = i;
-
-            try {
-              window[t(157)][t(218)](JSON[t(183)](a({}, n)), "*");
-            } catch (e) {
-              throw new Error(t(169));
-            }
-          }, r[i(177)] = function (n, e, r) {
-            return c(this, void 0, void 0, function () {
-              var o;
-              return u(this, function (i) {
-                var c = t;
-
-                switch (i[c(126)]) {
-                  case 0:
-                    return i[c(236)][c(160)]([0, 2,, 3]), [4, (0, s[c(200)])(r || 5e3, new Promise(function (r) {
-                      var o = c;
-                      f(function (n) {
-                        r(n[t(165)]);
-                      }, a({
-                        action: n[o(135)]
-                      }, e)), window.parent[o(218)](JSON[o(183)](a({}, n)), "*");
-                    }))];
-
-                  case 1:
-                    return [2, i.sent()];
-
-                  case 2:
-                    throw o = i[c(133)](), new Error(o);
-
-                  case 3:
-                    return [2];
-                }
-              });
-            });
-          }, r.addTargetedSelfDestructingEventListener = f;
-        },
-        729: function _(n, e, r) {
-          var o = t,
-              i = this && this.__assign || function () {
-            var n = t;
-            return (i = Object[n(240)] || function (t) {
-              for (var e, r = n, o = 1, i = arguments[r(162)]; o < i; o++) {
-                for (var a in e = arguments[o]) {
-                  Object[r(138)][r(182)][r(143)](e, a) && (t[a] = e[a]);
-                }
-              }
-
-              return t;
-            }).apply(this, arguments);
-          };
-
-          Object[o(238)](e, o(210), {
-            value: !0
-          });
-          var a = r(430),
-              c = r(111),
-              u = r(9);
-          e[o(168)] = new function () {
-            var n = o,
-                t = this;
-            this[n(175)] = {
-              create: function create(t, e, r, o) {
-                var c = n;
-                return (0, u[c(177)])(i(i(i({
-                  action: a[c(164)][c(146)],
-                  maxRuntime: t
-                }, e && {
-                  clientUrl: e
-                }), r && {
-                  maxClients: r
-                }), o && {
-                  noCommunicationTimeout: o
-                }));
-              },
-              start: function start() {
-                var t = n;
-                return (0, u[t(178)])({
-                  action: a.Actions[t(156)]
-                });
-              },
-              destroy: function destroy() {
-                var e = n;
-                t[e(195)] = {}, (0, u.wrapperNoListener)({
-                  action: a[e(164)].INTERACT_DESTROY
-                });
-              },
-              message: function message(t, e) {
-                var r = n;
-                return (0, u.wrapperNoListener)(i({
-                  action: a[r(164)].INTERACT_MESSAGE,
-                  data: t
-                }, e && {
-                  client: e
-                }));
-              },
-              kick: function kick(t) {
-                var e = n;
-                return (0, u.wrapperNoListener)({
-                  action: a.Actions[e(170)],
-                  client: t
-                });
-              },
-              onMessage: function onMessage(e) {
-                t[n(195)].onMessage = e;
-              },
-              onConnect: function onConnect(e) {
-                t[n(195)].onConnect = e;
-              },
-              onDisconnect: function onDisconnect(e) {
-                var r = n;
-                t[r(195)][r(225)] = e;
-              },
-              onKick: function onKick(e) {
-                var r = n;
-                t.events[r(129)] = e;
-              }
-            }, this[n(195)] = {}, window[n(220)](n(154), function (e) {
-              var r = n,
-                  o = JSON[r(222)](e[r(190)]);
-              o[r(135)] === a[r(164)][r(235)] && (o.event === c[r(239)][r(206)] && t[r(195)][r(132)] && o[r(190)] && t[r(195)][r(132)](o[r(190)], o.client), o[r(155)] === c[r(239)][r(139)] && t[r(195)].onConnect && t[r(195)][r(219)](o.client), o[r(155)] === c[r(239)].DISCONNECT && t[r(195)][r(225)] && t.events.onDisconnect(o[r(150)]), o.event === c[r(239)].KICK && t[r(195)][r(129)] && t[r(195)][r(129)](o.client));
-            });
-          }();
-        },
-        91: function _(n, e, r) {
-          Object[t(238)](e, "__esModule", {
-            value: !0
-          });
-          var o = r(430),
-              i = r(9);
-          e["default"] = new function () {
-            this.all = {
-              barcode: function barcode() {
-                var n = t;
-                return (0, i[n(177)])({
-                  action: o.Actions[n(242)]
-                }, void 0, 3e4);
-              },
-              printer: function printer(n, e) {
-                var r = t;
-                return (0, i[r(177)])({
-                  action: o[r(164)].KIOSK_PRINTER,
-                  data: n,
-                  printerSettings: e
-                });
-              }
-            };
-          }();
-        },
-        519: function _(e, r) {
-          var o = t,
-              i = this && this[o(184)] || function (n, e, r, o) {
-            return new (r || (r = Promise))(function (i, a) {
-              var c = t;
-
-              function u(n) {
-                var e = t;
-
-                try {
-                  f(o[e(237)](n));
-                } catch (r) {
-                  a(r);
+                  f(i.next(n));
+                } catch (t) {
+                  a(t);
                 }
               }
 
               function s(n) {
                 try {
-                  f(o["throw"](n));
+                  f(i["throw"](n));
                 } catch (t) {
                   a(t);
                 }
@@ -656,16 +350,16 @@ parcelRequire = function (e, r, t, n) {
 
               function f(n) {
                 var e,
-                    o = t;
-                n[o(228)] ? i(n[o(197)]) : (e = n[o(197)], e instanceof r ? e : new r(function (n) {
+                    i = t;
+                n.done ? o(n[i(160)]) : (e = n[i(160)], e instanceof r ? e : new r(function (n) {
                   n(e);
-                }))[o(226)](u, s);
+                }))[i(152)](u, s);
               }
 
-              f((o = o[c(179)](n, e || []))[c(237)]());
+              f((i = i[c(167)](n, e || []))[c(201)]());
             });
           },
-              a = this && this.__generator || function (e, r) {
+              u = this && this[o(203)] || function (e, r) {
             var i,
                 a,
                 c,
@@ -684,7 +378,7 @@ parcelRequire = function (e, r, t, n) {
               next: v(0),
               "throw": v(1),
               "return": v(2)
-            }, s(152) == ("undefined" == typeof Symbol ? "undefined" : n(Symbol)) && (u[Symbol[s(204)]] = function () {
+            }, s(213) == ("undefined" == typeof Symbol ? "undefined" : n(Symbol)) && (u[Symbol[s(209)]] = function () {
               return this;
             }), u;
 
@@ -692,58 +386,58 @@ parcelRequire = function (e, r, t, n) {
               return function (o) {
                 return function (n) {
                   var o = t;
-                  if (i) throw new TypeError(o(221));
+                  if (i) throw new TypeError("Generator is already executing.");
 
                   for (; f;) {
                     try {
-                      if (i = 1, a && (c = 2 & n[0] ? a[o(199)] : n[0] ? a[o(151)] || ((c = a[o(199)]) && c[o(143)](a), 0) : a[o(237)]) && !(c = c.call(a, n[1]))[o(228)]) return c;
+                      if (i = 1, a && (c = 2 & n[0] ? a[o(185)] : n[0] ? a["throw"] || ((c = a["return"]) && c[o(177)](a), 0) : a[o(201)]) && !(c = c[o(177)](a, n[1]))[o(258)]) return c;
 
-                      switch (a = 0, c && (n = [2 & n[0], c[o(197)]]), n[0]) {
+                      switch (a = 0, c && (n = [2 & n[0], c[o(160)]]), n[0]) {
                         case 0:
                         case 1:
                           c = n;
                           break;
 
                         case 4:
-                          return f[o(126)]++, {
+                          return f.label++, {
                             value: n[1],
                             done: !1
                           };
 
                         case 5:
-                          f.label++, a = n[1], n = [0];
+                          f[o(193)]++, a = n[1], n = [0];
                           continue;
 
                         case 7:
-                          n = f[o(230)][o(209)](), f[o(236)][o(209)]();
+                          n = f[o(253)][o(250)](), f[o(179)][o(250)]();
                           continue;
 
                         default:
-                          if (!((c = (c = f.trys).length > 0 && c[c[o(162)] - 1]) || 6 !== n[0] && 2 !== n[0])) {
+                          if (!((c = (c = f.trys)[o(243)] > 0 && c[c[o(243)] - 1]) || 6 !== n[0] && 2 !== n[0])) {
                             f = 0;
                             continue;
                           }
 
                           if (3 === n[0] && (!c || n[1] > c[0] && n[1] < c[3])) {
-                            f[o(126)] = n[1];
+                            f[o(193)] = n[1];
                             break;
                           }
 
-                          if (6 === n[0] && f[o(126)] < c[1]) {
-                            f.label = c[1], c = n;
+                          if (6 === n[0] && f[o(193)] < c[1]) {
+                            f[o(193)] = c[1], c = n;
                             break;
                           }
 
-                          if (c && f.label < c[2]) {
-                            f[o(126)] = c[2], f[o(230)].push(n);
+                          if (c && f[o(193)] < c[2]) {
+                            f[o(193)] = c[2], f[o(253)][o(212)](n);
                             break;
                           }
 
-                          c[2] && f.ops[o(209)](), f[o(236)][o(209)]();
+                          c[2] && f[o(253)][o(250)](), f[o(179)][o(250)]();
                           continue;
                       }
 
-                      n = r[o(143)](e, f);
+                      n = r[o(177)](e, f);
                     } catch (u) {
                       n = [6, u], a = 0;
                     } finally {
@@ -761,40 +455,340 @@ parcelRequire = function (e, r, t, n) {
             }
           };
 
-          Object[o(238)](r, o(210), {
+          Object[o(200)](r, "__esModule", {
             value: !0
-          }), r[o(173)] = r[o(234)] = r.keys = r[o(187)] = r[o(213)] = r[o(200)] = r.sendLogFormatter = r.byteCount = void 0, r[o(194)] = function (n) {
-            var t = o;
-            return encodeURI(n)[t(134)](/%..|./).length - 1;
-          }, r[o(201)] = function (n) {
-            var t = o,
-                e = n;
-            return n ? (" " === e[t(207)](e.length - 1) && (e = e[t(130)](0, e[t(162)] - 1)), "\n" === e.substr(e.length - 1) && (e = e.substring(0, e[t(162)] - 1)), "," !== e.substr(e.length - 1) && "," !== e[t(207)](e.length - 2) || (e = e[t(130)](0, e.length - 1)), e = "[" + e + "]") : "[]";
-          }, r.promiseTimeout = function (n, e) {
-            var r = o,
-                i = new Promise(function (e, r) {
-              var o = t,
-                  i = window[o(172)](function () {
-                var t = o;
-                window.clearTimeout(i), r(t(216) + n + t(141));
-              }, n);
-            });
-            return Promise[r(191)]([e, i]);
-          }, r.asyncForEach = function (n, e) {
-            return i(this, void 0, void 0, function () {
-              var r;
-              return a(this, function (o) {
-                var i = t;
+          }), r[o(207)] = r.wrapper = r.wrapperNoListener = void 0;
+          var s = i(519);
 
-                switch (o[i(126)]) {
+          function f(n, t) {
+            var e = o;
+            window[e(205)](e(249), function r(i) {
+              var o = e,
+                  a = JSON.parse(i.data);
+              if (a) try {
+                (0, s[o(261)])(t).forEach(function (n) {
+                  if (t[n] !== a[n]) throw new Error("");
+                }), window[o(255)]("message", r, !0), n(a);
+              } catch (c) {}
+            }, !0);
+          }
+
+          r.wrapperNoListener = function (n) {
+            var t = o;
+
+            try {
+              window[t(208)][t(172)](JSON[t(214)](a({}, n)), "*");
+            } catch (e) {
+              throw new Error(t(162));
+            }
+          }, r[o(183)] = function (n, e, r) {
+            return c(this, void 0, void 0, function () {
+              var i;
+              return u(this, function (o) {
+                var c = t;
+
+                switch (o.label) {
                   case 0:
-                    r = 0, o.label = 1;
+                    return o[c(179)][c(212)]([0, 2,, 3]), [4, (0, s.promiseTimeout)(r || 5e3, new Promise(function (t) {
+                      var r = c;
+                      f(function (n) {
+                        t(n.response);
+                      }, a({
+                        action: n[r(165)]
+                      }, e)), window[r(208)][r(172)](JSON[r(214)](a({}, n)), "*");
+                    }))];
 
                   case 1:
-                    return r < n[i(162)] ? [4, e(n[r], r)] : [3, 4];
+                    return [2, o[c(188)]()];
 
                   case 2:
-                    o[i(133)](), o[i(126)] = 3;
+                    throw i = o[c(188)](), new Error(i);
+
+                  case 3:
+                    return [2];
+                }
+              });
+            });
+          }, r.addTargetedSelfDestructingEventListener = f;
+        },
+        729: function _(n, e, r) {
+          var i = t,
+              o = this && this[i(234)] || function () {
+            return (o = Object.assign || function (n) {
+              for (var e, r = t, i = 1, o = arguments[r(243)]; i < o; i++) {
+                for (var a in e = arguments[i]) {
+                  Object.prototype.hasOwnProperty[r(177)](e, a) && (n[a] = e[a]);
+                }
+              }
+
+              return n;
+            }).apply(this, arguments);
+          };
+
+          Object[i(200)](e, i(262), {
+            value: !0
+          });
+          var a = r(430),
+              c = r(111),
+              u = r(9);
+          e[i(163)] = new function () {
+            var n = i,
+                t = this;
+            this[n(252)] = {
+              create: function create(t, e, r, i) {
+                var c = n;
+                return (0, u.wrapper)(o(o(o({
+                  action: a[c(217)].INTERACT_CREATE,
+                  maxRuntime: t
+                }, e && {
+                  clientUrl: e
+                }), r && {
+                  maxClients: r
+                }), i && {
+                  noCommunicationTimeout: i
+                }));
+              },
+              start: function start() {
+                var t = n;
+                return (0, u[t(220)])({
+                  action: a[t(217)].INTERACT_START
+                });
+              },
+              destroy: function destroy() {
+                var e = n;
+                t.events = {}, (0, u[e(220)])({
+                  action: a.Actions[e(215)]
+                });
+              },
+              message: function message(t, e) {
+                var r = n;
+                return (0, u[r(220)])(o({
+                  action: a[r(217)][r(176)],
+                  data: t
+                }, e && {
+                  client: e
+                }));
+              },
+              kick: function kick(t) {
+                var e = n;
+                return (0, u.wrapperNoListener)({
+                  action: a[e(217)][e(229)],
+                  client: t
+                });
+              },
+              onMessage: function onMessage(e) {
+                var r = n;
+                t[r(180)][r(211)] = e;
+              },
+              onConnect: function onConnect(e) {
+                var r = n;
+                t[r(180)][r(196)] = e;
+              },
+              onDisconnect: function onDisconnect(e) {
+                var r = n;
+                t[r(180)][r(202)] = e;
+              },
+              onKick: function onKick(e) {
+                var r = n;
+                t.events[r(190)] = e;
+              }
+            }, this.events = {}, window[n(205)](n(249), function (e) {
+              var r = n,
+                  i = JSON[r(174)](e[r(153)]);
+              i.action === a[r(217)][r(176)] && (i[r(257)] === c[r(224)].MESSAGE && t.events.onMessage && i.data && t[r(180)][r(211)](i[r(153)], i.client), i.event === c[r(224)][r(256)] && t[r(180)][r(196)] && t[r(180)][r(196)](i.client), i[r(257)] === c[r(224)][r(238)] && t[r(180)].onDisconnect && t[r(180)][r(202)](i.client), i.event === c[r(224)][r(154)] && t[r(180)][r(190)] && t[r(180)].onKick(i.client));
+            });
+          }();
+        },
+        91: function _(n, e, r) {
+          var i = t;
+          Object.defineProperty(e, i(262), {
+            value: !0
+          });
+          var o = r(430),
+              a = r(9);
+          e[i(163)] = new function () {
+            var n = i;
+            this[n(252)] = {
+              barcode: function barcode() {
+                var t = n;
+                return (0, a.wrapper)({
+                  action: o[t(217)][t(251)]
+                }, void 0, 3e4);
+              },
+              printer: function printer(t, e) {
+                var r = n;
+                return (0, a[r(183)])({
+                  action: o.Actions[r(198)],
+                  data: t,
+                  printerSettings: e
+                });
+              }
+            };
+          }();
+        },
+        519: function _(e, r) {
+          var i = t,
+              o = this && this[i(184)] || function (n, e, r, i) {
+            return new (r || (r = Promise))(function (o, a) {
+              function c(n) {
+                try {
+                  s(i.next(n));
+                } catch (t) {
+                  a(t);
+                }
+              }
+
+              function u(n) {
+                var e = t;
+
+                try {
+                  s(i[e(178)](n));
+                } catch (r) {
+                  a(r);
+                }
+              }
+
+              function s(n) {
+                var e,
+                    i = t;
+                n[i(258)] ? o(n[i(160)]) : (e = n[i(160)], e instanceof r ? e : new r(function (n) {
+                  n(e);
+                }))[i(152)](c, u);
+              }
+
+              s((i = i[t(167)](n, e || [])).next());
+            });
+          },
+              a = this && this.__generator || function (e, r) {
+            var o,
+                a,
+                c,
+                u,
+                s = i,
+                f = {
+              label: 0,
+              sent: function sent() {
+                if (1 & c[0]) throw c[1];
+                return c[1];
+              },
+              trys: [],
+              ops: []
+            };
+            return u = {
+              next: v(0),
+              "throw": v(1),
+              "return": v(2)
+            }, s(213) == ("undefined" == typeof Symbol ? "undefined" : n(Symbol)) && (u[Symbol[s(209)]] = function () {
+              return this;
+            }), u;
+
+            function v(n) {
+              return function (i) {
+                return function (n) {
+                  var i = t;
+                  if (o) throw new TypeError("Generator is already executing.");
+
+                  for (; f;) {
+                    try {
+                      if (o = 1, a && (c = 2 & n[0] ? a[i(185)] : n[0] ? a[i(178)] || ((c = a[i(185)]) && c[i(177)](a), 0) : a[i(201)]) && !(c = c[i(177)](a, n[1])).done) return c;
+
+                      switch (a = 0, c && (n = [2 & n[0], c[i(160)]]), n[0]) {
+                        case 0:
+                        case 1:
+                          c = n;
+                          break;
+
+                        case 4:
+                          return f[i(193)]++, {
+                            value: n[1],
+                            done: !1
+                          };
+
+                        case 5:
+                          f[i(193)]++, a = n[1], n = [0];
+                          continue;
+
+                        case 7:
+                          n = f[i(253)][i(250)](), f[i(179)][i(250)]();
+                          continue;
+
+                        default:
+                          if (!((c = (c = f[i(179)])[i(243)] > 0 && c[c[i(243)] - 1]) || 6 !== n[0] && 2 !== n[0])) {
+                            f = 0;
+                            continue;
+                          }
+
+                          if (3 === n[0] && (!c || n[1] > c[0] && n[1] < c[3])) {
+                            f[i(193)] = n[1];
+                            break;
+                          }
+
+                          if (6 === n[0] && f[i(193)] < c[1]) {
+                            f.label = c[1], c = n;
+                            break;
+                          }
+
+                          if (c && f.label < c[2]) {
+                            f.label = c[2], f[i(253)].push(n);
+                            break;
+                          }
+
+                          c[2] && f[i(253)][i(250)](), f[i(179)].pop();
+                          continue;
+                      }
+
+                      n = r.call(e, f);
+                    } catch (u) {
+                      n = [6, u], a = 0;
+                    } finally {
+                      o = c = 0;
+                    }
+                  }
+
+                  if (5 & n[0]) throw n[1];
+                  return {
+                    value: n[0] ? n[1] : void 0,
+                    done: !0
+                  };
+                }([n, i]);
+              };
+            }
+          };
+
+          Object[i(200)](r, "__esModule", {
+            value: !0
+          }), r.stringToHex = r.sleep = r[i(261)] = r[i(247)] = r[i(194)] = r[i(175)] = r.sendLogFormatter = r[i(260)] = void 0, r[i(260)] = function (n) {
+            var t = i;
+            return encodeURI(n)[t(248)](/%..|./)[t(243)] - 1;
+          }, r[i(233)] = function (n) {
+            var t = i,
+                e = n;
+            return n ? (" " === e[t(161)](e.length - 1) && (e = e[t(235)](0, e[t(243)] - 1)), "\n" === e.substr(e[t(243)] - 1) && (e = e[t(235)](0, e[t(243)] - 1)), "," !== e[t(161)](e[t(243)] - 1) && "," !== e.substr(e[t(243)] - 2) || (e = e[t(235)](0, e[t(243)] - 1)), e = "[" + e + "]") : "[]";
+          }, r[i(175)] = function (n, e) {
+            var r = i,
+                o = new Promise(function (e, r) {
+              var i = t,
+                  o = window[i(236)](function () {
+                var t = i;
+                window[t(182)](o), r(t(254) + n + t(192));
+              }, n);
+            });
+            return Promise[r(170)]([e, o]);
+          }, r[i(194)] = function (n, e) {
+            return o(this, void 0, void 0, function () {
+              var r;
+              return a(this, function (i) {
+                var o = t;
+
+                switch (i[o(193)]) {
+                  case 0:
+                    r = 0, i[o(193)] = 1;
+
+                  case 1:
+                    return r < n[o(243)] ? [4, e(n[r], r)] : [3, 4];
+
+                  case 2:
+                    i[o(188)](), i[o(193)] = 3;
 
                   case 3:
                     return r++, [3, 1];
@@ -804,52 +798,52 @@ parcelRequire = function (e, r, t, n) {
                 }
               });
             });
-          }, r[o(187)] = function (n, e, r) {
-            n.addEventListener(e, function o(i) {
+          }, r[i(247)] = function (n, e, r) {
+            n.addEventListener(e, function i(o) {
               var a = t;
-              r(i), n[a(127)](e, o, !0);
+              r(o), n[a(255)](e, i, !0);
             }, !0);
-          }, r.keys = function (n) {
-            return Object[o(243)](n);
-          }, r[o(234)] = function (n) {
-            return new Promise(function (e) {
-              window[t(172)](function () {
-                return e();
+          }, r[i(261)] = function (n) {
+            return Object[i(261)](n);
+          }, r.sleep = function (n) {
+            return new Promise(function (t) {
+              window.setTimeout(function () {
+                return t();
               }, n);
             });
-          }, r[o(173)] = function (n) {
-            for (var t, e = o, r = n.length, i = "", a = 0; a < r; a += 1) {
-              "a" == (t = n[e(231)](a)[e(136)](16)) && (t = "0A"), i += t[e(136)](), a == r - 1 && (i += "1B69");
+          }, r[i(240)] = function (n) {
+            for (var t, e = i, r = n[e(243)], o = "", a = 0; a < r; a += 1) {
+              "a" == (t = n[e(187)](a).toString(16)) && (t = "0A"), o += t.toString(), a == r - 1 && (o += "1B69");
             }
 
-            return i;
+            return o;
           };
         },
         430: function _(n, e) {
           var r,
-              o,
-              i = t;
-          Object[i(238)](e, "__esModule", {
-            value: !0
-          }), e[i(188)] = e[i(164)] = void 0, (o = e.Actions || (e.Actions = {}))[i(217)] = i(124), o[i(180)] = "log", o[i(158)] = i(212), o.STORAGE_PUT = i(176), o[i(233)] = "storage.delete", o[i(193)] = i(215), o[i(137)] = i(166), o[i(145)] = i(224), o[i(186)] = "storage.exists", o[i(146)] = "interact.create", o.INTERACT_START = i(214), o[i(185)] = i(159), o[i(235)] = i(149), o[i(170)] = i(181), o[i(242)] = "kiosk.barcode", o[i(223)] = "kiosk.printer", (r = e[i(188)] || (e.LifeCycleEvent = {}))[i(142)] = i(171), r[i(147)] = "stopping";
-        },
-        111: function _(n, e) {
-          var r,
+              i,
               o = t;
           Object.defineProperty(e, "__esModule", {
             value: !0
-          }), e.InteractiveEvent = void 0, (r = e[o(239)] || (e.InteractiveEvent = {}))[o(206)] = o(154), r.CONNECT = o(241), r[o(198)] = o(232), r[o(208)] = o(163);
+          }), e[o(222)] = e[o(217)] = void 0, (i = e[o(217)] || (e[o(217)] = {}))[o(239)] = o(221), i[o(210)] = o(228), i[o(157)] = o(230), i[o(225)] = "storage.put", i[o(223)] = o(168), i[o(169)] = o(244), i.STORAGE_CLEAR = o(197), i[o(237)] = "storage.download", i[o(263)] = o(242), i[o(245)] = "interact.create", i[o(191)] = o(195), i.INTERACT_DESTROY = o(199), i.INTERACT_MESSAGE = o(241), i[o(229)] = "interact.kick", i[o(251)] = o(171), i[o(198)] = o(219), (r = e.LifeCycleEvent || (e[o(222)] = {}))[o(227)] = o(226), r[o(216)] = o(173);
+        },
+        111: function _(n, e) {
+          var r,
+              i = t;
+          Object[i(200)](e, i(262), {
+            value: !0
+          }), e[i(224)] = void 0, (r = e[i(224)] || (e[i(224)] = {})).MESSAGE = i(249), r[i(256)] = i(186), r[i(238)] = "disconnect", r[i(154)] = i(166);
         }
       },
           r = {};
-      !function n(o) {
-        var i = t,
-            a = r[o];
-        if (void 0 !== a) return a[i(244)];
-        var c = r[o] = {
+      !function n(i) {
+        var o = t,
+            a = r[i];
+        if (void 0 !== a) return a[o(158)];
+        var c = r[i] = {
           exports: {}
         };
-        return e[o][i(143)](c[i(244)], c, c[i(244)], n), c[i(244)];
+        return e[i][o(177)](c[o(158)], c, c[o(158)], n), c.exports;
       }(846);
     }();
   }, {}],

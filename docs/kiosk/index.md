@@ -46,3 +46,15 @@ try {
     //
 }
 ````
+
+The second optional argument can take an object of override settings for the printer. This can be used if the kiosk is on a different serial port or has a different baud rate. One of more overrides can be sent. Default values for everything else will be used.
+
+````typescript
+await window.Evexi.tizen.printer('PRINT DATA', {
+    port: 'PRINTERPORT1', // 'PRINTERPORT0' | 'PRINTERPORT1' | 'PRINTERPORT2'  // DEFAULT='PRINTERPORT1'
+    baudRate: 115200, // DEFAULT=115200
+    parity: 'NONE', // 'NONE' | 'ODD' | 'EVEN'  // DEFAULT='NONE'
+    dataBits: 'BITS8', // 'BITS5' | 'BITS6' | 'BITS7' | 'BITS8'  // DEFAULT='BITS8'
+    stopBits: '1' // '1' | '1.5' | '2'  // DEFAULT='1'
+})
+````
