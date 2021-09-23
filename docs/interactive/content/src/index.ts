@@ -10,7 +10,7 @@ const Interactive = new class Interactive {
 
   async create() {
     try {
-      const res = await window.Evexi.interactive.create(180000, 'http://fb22-2a00-23c6-2992-b000-4071-55f7-893a-7333.ngrok.io', 2)
+      const res = await window.Evexi.interactive.create(180000, 'https://a420-178-17-44-81.ngrok.io', 2)
 
       if(res.qr !== '' && res.sessionId && res.url !== '') log.success(`CREATE success: ${JSON.stringify(res)}`)
       else throw new Error()
