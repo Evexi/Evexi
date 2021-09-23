@@ -38,20 +38,7 @@ jobs:
         run: |
           node_modules/.bin/yarn run scan:test
 
-      # - uses: JS-DevTools/npm-publish@v1
-      #   with:
-      #     token: ${{ secrets.NPM_TOKEN }}
-
-  publish:
-    name: Run
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-    only:
-      - master
-    
-    steps:
       - uses: JS-DevTools/npm-publish@v1
+        if: github.ref == 'refs/heads/master'
         with:
           token: ${{ secrets.NPM_TOKEN }}
