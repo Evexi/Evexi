@@ -202,6 +202,7 @@ window.playing = async (item) => {
             log.info('')
 
             log.info(' -- TESTING STORAGE -- ')
+            await storage.clear()
             await storage.put()
             await storage.get()
             await storage.exists()

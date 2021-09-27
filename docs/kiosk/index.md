@@ -47,7 +47,7 @@ try {
 }
 ````
 
-The second optional argument can take an object of override settings for the printer. This can be used if the kiosk is on a different serial port or has a different baud rate. One of more overrides can be sent. Default values for everything else will be used.
+The second optional argument can take an object of override settings for the printer. This can be used if the kiosk is on a different serial port or has a different baud rate. One of more overrides can be sent. Default values for everything else will be used. If you want to check what the print settings should be for a particular device you can click the 'SELF' button on the printer to print a test page which lists out what these settings should be for that particular device.
 
 ````typescript
 await window.Evexi.tizen.printer('PRINT DATA', {
