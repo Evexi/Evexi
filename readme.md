@@ -2,9 +2,8 @@
 ![Logo](./logo.jpg)
 
 ## Introduction
-The Evexi API is designed for use with background tasks, web items or zip items within the Evexi Player. It is important to note that it is the 
-responsibility of the developer to manage any stored assets. On the Samsung TIZEN platform the API is only supported on firmware 2070 and above. Within the docs & examples directories there are examples of the filesystem communication, interactive and more. Please be aware the player supports multiple platforms, some of which only support ES5 and others early versions of ES6. Therefor its recommended to transpile your application down to ES5.
-Please note all methods that return a promise are wrapped in a timeout of 5 seconds. If no response is received within this time they will throw an error in the catch statement.
+The Evexi API is designed for use with background tasks, web items or zip items within the Evexi Player. It is important to note that it is the responsibility of the developer to manage any stored assets. The Evexi API has been tested to support Tizen firmware 2070 and later and we cannot guarantee the API to work reliably on previous firmware versions.
+The docs & examples directories contain examples of filesystem communication, interactive and more. the player supports multiple platforms, some of which only support ES5 and others early versions of ES6. Therefore, its recommended to compile your application down to ES5. All methods returning a promise are wrapped in a timeout of 5 seconds. If no response is received within this time an error will be thrown within the catch statement.
 
 ![Tests](https://github.com/MRXTechnology/Evexi/actions/workflows/build.yml/badge.svg)
 
@@ -26,14 +25,16 @@ Please note all methods that return a promise are wrapped in a timeout of 5 seco
 #
 
 ### Install
-This repo provides a package that contains both `window.Evexi` for content API methods and `window.Scan` (remote part of interactive content). It also provides type definitions, examples and documentation for everything Evexi. Please note the players API can change with the version so please ensure you are referring to the definitions that match the player version that the package is running on.
+The repo provides a package containing both `window.Evexi` for content API methods and `window.Scan` (remote part of interactive content). Included are type definitions, examples and full documentation. The Evexi API is subject to change on a per version basis so ensure to check the app definitions match the player version
 
 To setup:
 ````bash
 yarn add evexi
 ````
 
-In your application you can then import the package as a whole using `import 'evexi'` or you can import the scan package only using `import Scan from 'evexi/package/Scan'`. If you want definitions only you can add these like so:
+`import 'evexi'` or `import Scan from 'evexi/package/Scan'.`
+
+Add definitions only as follows:
 ````json
 {
     "compilerOptions": {
@@ -41,12 +42,14 @@ In your application you can then import the package as a whole using `import 'ev
     }
 }
 ````
-NOTE: You should include `@babel/polyfill` if you are targeting SSSP2 or SSSP4 platforms.
+NOTE: `import @babel/polyfill` if you are targeting SSSP2 or SSSP4 platforms.
 
 #
 
 ### Packaging
-A '.zip' application should have no hidden files and be flat in structure (no nested directories).
+
+A '.zip' application must not contain hidden files and consist of a flat structure (no nested directories).
+Zip the package as follows:
 
 zipinfo example for [example](./examples/fs-240.zip)
 ````bash
@@ -62,7 +65,7 @@ You can zip your package like so:
 cd $1'-'$PACKAGE_VERSION_ADJUSTED # go into directory
 zip -r $1'-'$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
 ````
-Further example can be found [here](./.build/buildExamples.sh#L18-L22).
+Further examples can be found [here](./.build/buildExamples.sh#L18-L22).
 
 #
 
