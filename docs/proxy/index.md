@@ -3,6 +3,8 @@ Proxy can be used when you wish to make server side requests from your player to
 
 Proxy uses standard window.fetch under the hood. The second argument (request) should match the [RequestInit structure](https://github.com/microsoft/TypeScript/blob/main/lib/lib.webworker.d.ts#L436-L489). The only difference is by default the method will use `'Content-Type': 'application/json'`. This and any other options as part of the `RequestInit` can be overridden.
 
+Please note you should only run a single proxy request at a time.
+
 #
 
 You can view a [working example here](./src).
