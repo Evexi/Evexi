@@ -121,7 +121,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var define;
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-// Version: 2.4.0-Alpha.1
+// Version: 2.4.0-Alpha.3
 parcelRequire = function (e, r, t, n) {
   var i,
       o = "function" == typeof parcelRequire && parcelRequire,
@@ -179,32 +179,24 @@ parcelRequire = function (e, r, t, n) {
   return f;
 }({
   "pk3D": [function (require, module, exports) {
-    function n(t) {
-      return (n = "function" == typeof Symbol && "symbol" == _typeof(Symbol.iterator) ? function (n) {
-        return _typeof(n);
-      } : function (n) {
-        return n && "function" == typeof Symbol && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : _typeof(n);
-      })(t);
+    function n(e, r) {
+      var i = t();
+      return (n = function n(_n, t) {
+        return i[_n -= 158];
+      })(e, r);
     }
 
-    function t(n, r) {
-      var i = e();
-      return (t = function t(n, _t) {
-        return i[n -= 151];
-      })(n, r);
-    }
-
-    function e() {
-      var n = ["Actions", "7MkGGWX", "kiosk.printer", "wrapperNoListener", "info", "LifeCycleEvent", "STORAGE_DELETE", "InteractiveEvent", "STORAGE_PUT", "playing", "PLAYING", "log", "INTERACT_KICK", "storage.get", "684168LjZDxs", "__importDefault", "sendLogFormatter", "__assign", "substring", "setTimeout", "STORAGE_DOWNLOAD", "DISCONNECT", "INFO", "stringToHex", "interact.message", "storage.exists", "length", "storage.list", "INTERACT_CREATE", "9ivWcVI", "addSelfDestructingEventListener", "split", "message", "pop", "KIOSK_BARCODE", "all", "ops", "Timed out in ", "removeEventListener", "CONNECT", "event", "done", "interactive", "byteCount", "keys", "__esModule", "STORAGE_EXISTS", "prototype", "then", "data", "KICK", "397544qNMnPD", "688786fcJpaZ", "STORAGE_GET", "exports", "4388oMoOtp", "value", "substr", "wrapperNoListener error", "default", "355116AxGDpV", "action", "kick", "apply", "storage.delete", "STORAGE_LIST", "race", "kiosk.barcode", "postMessage", "stopping", "parse", "promiseTimeout", "INTERACT_MESSAGE", "call", "throw", "trys", "events", "925iDCYnT", "clearTimeout", "wrapper", "__awaiter", "return", "connect", "charCodeAt", "sent", "1721360IVCAyx", "onKick", "INTERACT_START", "ms.", "label", "asyncForEach", "interact.start", "onConnect", "storage.clear", "KIOSK_PRINTER", "interact.destroy", "defineProperty", "next", "onDisconnect", "__generator", "33940IxRYWA", "addEventListener", "hasOwnProperty", "addTargetedSelfDestructingEventListener", "parent", "iterator", "LOG", "onMessage", "push", "function", "stringify", "INTERACT_DESTROY", "STOPPING"];
-      return (e = function e() {
+    function t() {
+      var n = ["KIOSK_PRINTER", "message", "request", "PLAYING", "split", "STORAGE_DELETE", "__esModule", "disconnect", "INTERACT_MESSAGE", "data", "pop", "stopping", "INTERACT_KICK", "STORAGE_LIST", "KIOSK_BARCODE", "KICK", "exports", "19201QIlPQA", "Generator is already executing.", "interact.create", "prototype", "defineProperty", "onKick", "8998SyJZwM", "interact.start", "onMessage", "812XgnhLc", "INTERACT_START", "length", "hasOwnProperty", "stringify", "INTERACT_DESTROY", "ops", "all", "kiosk.barcode", "4314YpNkrE", "wrapperNoListener error", "8472kAHbmj", "assign", "interact.message", "__awaiter", "byteCount", "return", "PROXY", "promiseTimeout", "LOG", "STORAGE_CLEAR", "postMessage", "call", "storage.get", "asyncForEach", "STORAGE_PUT", "tizen", "substring", "STORAGE_EXISTS", "DISCONNECT", "5605430OVQNba", "LifeCycleEvent", "Evexi", "__assign", "2010UdSsJh", "337744UAnyFe", "substr", "sendLogFormatter", "284753BWnrBY", "connect", "onConnect", "INFO", "__generator", "setTimeout", "STORAGE_DOWNLOAD", "removeEventListener", "response", "done", "action", "forEach", "storage.exists", "events", "INTERACT_CREATE", "onDisconnect", "default", "ms.", "throw", "wrapper", "Actions", "storage.list", "info", "proxy", "sent", "696ZKFmQM", "storage.clear", "push", "__importDefault", "apply", "parent", "CONNECT", "9vcuPhu", "toString", "sleep", "value", "keys", "trys", "addEventListener", "clearTimeout", "storage.put", "parse", "label", "5568CizZXC", "client", "wrapperNoListener", "STOPPING", "next", "1B69", "iterator", "InteractiveEvent", "interact.destroy", "event", "stringToHex"];
+      return (t = function t() {
         return n;
       })();
     }
 
-    (function (n, r) {
-      for (var i = t, o = e();;) {
+    (function (e, r) {
+      for (var i = n, o = t();;) {
         try {
-          if (103856 === -parseInt(i(218)) / 1 * (parseInt(i(204)) / 2) + -parseInt(i(164)) / 3 + -parseInt(i(159)) / 4 * (-parseInt(i(181)) / 5) + parseInt(i(231)) / 6 + -parseInt(i(156)) / 7 + parseInt(i(155)) / 8 * (-parseInt(i(246)) / 9) + parseInt(i(189)) / 10) break;
+          if (283757 === parseInt(i(252)) / 1 + -parseInt(i(249)) / 2 + -parseInt(i(177)) / 3 * (parseInt(i(214)) / 4) + parseInt(i(248)) / 5 * (parseInt(i(223)) / 6) + -parseInt(i(205)) / 7 * (-parseInt(i(159)) / 8) + parseInt(i(166)) / 9 * (-parseInt(i(244)) / 10) + parseInt(i(211)) / 11 * (parseInt(i(225)) / 12)) break;
           o.push(o.shift());
         } catch (a) {
           o.push(o.shift());
@@ -213,130 +205,137 @@ parcelRequire = function (e, r, t, n) {
     })(), function () {
       "use strict";
 
-      var e = {
-        846: function _(n, e, r) {
-          var i = t,
-              o = this && this[i(232)] || function (n) {
-            return n && n[i(262)] ? n : {
+      var t = {
+        846: function _(t, e, r) {
+          var i = n,
+              o = this && this[i(162)] || function (n) {
+            return n && n.__esModule ? n : {
               "default": n
             };
           };
 
-          Object[i(200)](e, i(262), {
+          Object[i(209)](e, "__esModule", {
             value: !0
           });
           var a = r(430),
               c = o(r(895)),
               u = r(9),
               s = o(r(729)),
-              f = o(r(91));
-          window.Evexi = new function () {
+              f = o(r(91)),
+              v = o(r(956));
+          window[i(246)] = new function () {
             var n = i;
-            this.fs = c[n(163)][n(252)], this[n(259)] = s[n(163)][n(252)], this.tizen = f["default"][n(252)], this[n(228)] = function (t) {
+            this.fs = c[n(268)][n(221)], this.interactive = s[n(268)][n(221)], this[n(240)] = f[n(268)][n(221)], this[n(275)] = v[n(268)][n(221)][n(190)], this.log = function (t) {
               var e = n;
-              return (0, u[e(220)])({
-                action: a[e(217)][e(210)],
+              return (0, u[e(179)])({
+                action: a[e(272)][e(233)],
                 data: t
               });
-            }, this[n(221)] = function () {
+            }, this[n(274)] = function () {
               var t = n;
-              return (0, u[t(183)])({
-                action: a[t(217)][t(239)]
+              return (0, u[t(271)])({
+                action: a[t(272)][t(255)]
               });
             };
           }();
         },
-        895: function _(n, e, r) {
-          var i = t;
-          Object.defineProperty(e, i(262), {
+        895: function _(t, e, r) {
+          var i = n;
+          Object[i(209)](e, i(194), {
             value: !0
           });
           var o = r(430),
               a = r(9);
-          e["default"] = new function () {
-            this.all = {
-              get: function get(n) {
-                return (0, a[t(183)])({
-                  action: o.Actions.STORAGE_GET,
-                  name: n
+          e[i(268)] = new function () {
+            var n = i;
+            this[n(221)] = {
+              get: function get(t) {
+                var e = n;
+                return (0, a[e(271)])({
+                  action: o[e(272)].STORAGE_GET,
+                  name: t
                 }, {
-                  name: n
+                  name: t
                 });
               },
-              put: function put(n, e) {
-                var r = t;
-                return (0, a[r(183)])({
-                  action: o[r(217)][r(225)],
-                  name: n,
+              put: function put(t, e) {
+                var r = n;
+                return (0, a[r(271)])({
+                  action: o[r(272)].STORAGE_PUT,
+                  name: t,
                   data: e
                 }, {
-                  name: n
+                  name: t
                 });
               },
-              del: function del(n) {
-                var e = t;
+              del: function del(t) {
+                var e = n;
                 return (0, a.wrapper)({
-                  action: o[e(217)].STORAGE_DELETE,
-                  name: n
+                  action: o[e(272)][e(193)],
+                  name: t
                 }, {
-                  name: n
+                  name: t
                 });
               },
               list: function list() {
-                var n = t;
-                return (0, a[n(183)])({
-                  action: o[n(217)][n(169)]
+                var t = n;
+                return (0, a[t(271)])({
+                  action: o[t(272)][t(201)]
                 });
               },
               clear: function clear() {
-                return (0, a[t(183)])({
-                  action: o.Actions.STORAGE_CLEAR
+                var t = n;
+                return (0, a[t(271)])({
+                  action: o[t(272)][t(234)]
                 });
               },
-              download: function download(n, e) {
-                return (0, a[t(183)])({
-                  action: o.Actions.STORAGE_DOWNLOAD,
-                  url: n,
+              download: function download(t, e) {
+                var r = n;
+                return (0, a[r(271)])({
+                  action: o[r(272)][r(258)],
+                  url: t,
                   name: e
                 }, {
                   name: e
                 });
               },
-              exists: function exists(n) {
-                var e = t;
-                return (0, a[e(183)])({
-                  action: o[e(217)][e(263)],
-                  name: n
+              exists: function exists(t) {
+                var e = n;
+                return (0, a[e(271)])({
+                  action: o[e(272)].STORAGE_EXISTS,
+                  name: t
                 }, {
-                  name: n
+                  name: t
                 });
               }
             };
           }();
         },
-        9: function _(e, r, i) {
-          var o = t,
-              a = this && this[o(234)] || function () {
-            var n = o;
-            return (a = Object.assign || function (n) {
-              for (var e, r = t, i = 1, o = arguments.length; i < o; i++) {
+        9: function _(t, e, r) {
+          var i = n,
+              o = this && this[i(247)] || function () {
+            var n = i;
+            return (o = Object[n(226)] || function (t) {
+              for (var e, r = n, i = 1, o = arguments[r(216)]; i < o; i++) {
                 for (var a in e = arguments[i]) {
-                  Object[r(151)][r(206)].call(e, a) && (n[a] = e[a]);
+                  Object.prototype[r(217)][r(236)](e, a) && (t[a] = e[a]);
                 }
               }
 
-              return n;
-            })[n(167)](this, arguments);
+              return t;
+            })[n(163)](this, arguments);
           },
-              c = this && this[o(184)] || function (n, e, r, i) {
+              a = this && this[i(228)] || function (t, e, r, i) {
             return new (r || (r = Promise))(function (o, a) {
-              var c = t;
+              var c = n;
 
-              function u(n) {
+              function u(t) {
+                var e = n;
+
                 try {
-                  f(i.next(n));
-                } catch (t) {
-                  a(t);
+                  f(i[e(181)](t));
+                } catch (r) {
+                  a(r);
                 }
               }
 
@@ -348,197 +347,195 @@ parcelRequire = function (e, r, t, n) {
                 }
               }
 
-              function f(n) {
+              function f(t) {
                 var e,
-                    i = t;
-                n.done ? o(n[i(160)]) : (e = n[i(160)], e instanceof r ? e : new r(function (n) {
+                    i = n;
+                t.done ? o(t[i(169)]) : (e = t.value, e instanceof r ? e : new r(function (n) {
                   n(e);
-                }))[i(152)](u, s);
+                })).then(u, s);
               }
 
-              f((i = i[c(167)](n, e || []))[c(201)]());
+              f((i = i[c(163)](t, e || []))[c(181)]());
             });
           },
-              u = this && this[o(203)] || function (e, r) {
-            var i,
+              c = this && this[i(256)] || function (t, e) {
+            var r,
+                o,
                 a,
                 c,
-                u,
-                s = o,
-                f = {
+                u = i,
+                s = {
               label: 0,
               sent: function sent() {
-                if (1 & c[0]) throw c[1];
-                return c[1];
+                if (1 & a[0]) throw a[1];
+                return a[1];
               },
               trys: [],
               ops: []
             };
-            return u = {
-              next: v(0),
-              "throw": v(1),
-              "return": v(2)
-            }, s(213) == ("undefined" == typeof Symbol ? "undefined" : n(Symbol)) && (u[Symbol[s(209)]] = function () {
+            return c = {
+              next: f(0),
+              "throw": f(1),
+              "return": f(2)
+            }, "function" == typeof Symbol && (c[Symbol[u(183)]] = function () {
               return this;
-            }), u;
+            }), c;
 
-            function v(n) {
-              return function (o) {
-                return function (n) {
-                  var o = t;
-                  if (i) throw new TypeError("Generator is already executing.");
+            function f(i) {
+              return function (c) {
+                return function (i) {
+                  var c = n;
+                  if (r) throw new TypeError(c(206));
 
-                  for (; f;) {
+                  for (; s;) {
                     try {
-                      if (i = 1, a && (c = 2 & n[0] ? a[o(185)] : n[0] ? a["throw"] || ((c = a["return"]) && c[o(177)](a), 0) : a[o(201)]) && !(c = c[o(177)](a, n[1]))[o(258)]) return c;
+                      if (r = 1, o && (a = 2 & i[0] ? o["return"] : i[0] ? o[c(270)] || ((a = o[c(230)]) && a.call(o), 0) : o[c(181)]) && !(a = a[c(236)](o, i[1]))[c(261)]) return a;
 
-                      switch (a = 0, c && (n = [2 & n[0], c[o(160)]]), n[0]) {
+                      switch (o = 0, a && (i = [2 & i[0], a.value]), i[0]) {
                         case 0:
                         case 1:
-                          c = n;
+                          a = i;
                           break;
 
                         case 4:
-                          return f.label++, {
-                            value: n[1],
+                          return s[c(176)]++, {
+                            value: i[1],
                             done: !1
                           };
 
                         case 5:
-                          f[o(193)]++, a = n[1], n = [0];
+                          s[c(176)]++, o = i[1], i = [0];
                           continue;
 
                         case 7:
-                          n = f[o(253)][o(250)](), f[o(179)][o(250)]();
+                          i = s[c(220)].pop(), s.trys.pop();
                           continue;
 
                         default:
-                          if (!((c = (c = f.trys)[o(243)] > 0 && c[c[o(243)] - 1]) || 6 !== n[0] && 2 !== n[0])) {
-                            f = 0;
+                          if (!((a = (a = s[c(171)])[c(216)] > 0 && a[a[c(216)] - 1]) || 6 !== i[0] && 2 !== i[0])) {
+                            s = 0;
                             continue;
                           }
 
-                          if (3 === n[0] && (!c || n[1] > c[0] && n[1] < c[3])) {
-                            f[o(193)] = n[1];
+                          if (3 === i[0] && (!a || i[1] > a[0] && i[1] < a[3])) {
+                            s[c(176)] = i[1];
                             break;
                           }
 
-                          if (6 === n[0] && f[o(193)] < c[1]) {
-                            f[o(193)] = c[1], c = n;
+                          if (6 === i[0] && s.label < a[1]) {
+                            s[c(176)] = a[1], a = i;
                             break;
                           }
 
-                          if (c && f[o(193)] < c[2]) {
-                            f[o(193)] = c[2], f[o(253)][o(212)](n);
+                          if (a && s[c(176)] < a[2]) {
+                            s[c(176)] = a[2], s[c(220)][c(161)](i);
                             break;
                           }
 
-                          c[2] && f[o(253)][o(250)](), f[o(179)][o(250)]();
+                          a[2] && s[c(220)][c(198)](), s[c(171)][c(198)]();
                           continue;
                       }
 
-                      n = r[o(177)](e, f);
+                      i = e[c(236)](t, s);
                     } catch (u) {
-                      n = [6, u], a = 0;
+                      i = [6, u], o = 0;
                     } finally {
-                      i = c = 0;
+                      r = a = 0;
                     }
                   }
 
-                  if (5 & n[0]) throw n[1];
+                  if (5 & i[0]) throw i[1];
                   return {
-                    value: n[0] ? n[1] : void 0,
+                    value: i[0] ? i[1] : void 0,
                     done: !0
                   };
-                }([n, o]);
+                }([i, c]);
               };
             }
           };
 
-          Object[o(200)](r, "__esModule", {
+          Object.defineProperty(e, i(194), {
             value: !0
-          }), r[o(207)] = r.wrapper = r.wrapperNoListener = void 0;
-          var s = i(519);
-
-          function f(n, t) {
-            var e = o;
-            window[e(205)](e(249), function r(i) {
-              var o = e,
-                  a = JSON.parse(i.data);
-              if (a) try {
-                (0, s[o(261)])(t).forEach(function (n) {
-                  if (t[n] !== a[n]) throw new Error("");
-                }), window[o(255)]("message", r, !0), n(a);
-              } catch (c) {}
-            }, !0);
-          }
-
-          r.wrapperNoListener = function (n) {
-            var t = o;
+          }), e.wrapper = e.wrapperNoListener = void 0;
+          var u = r(519);
+          e[i(179)] = function (n) {
+            var t = i;
 
             try {
-              window[t(208)][t(172)](JSON[t(214)](a({}, n)), "*");
+              window.parent.postMessage(JSON.stringify(o({}, n)), "*");
             } catch (e) {
-              throw new Error(t(162));
+              throw new Error(t(224));
             }
-          }, r[o(183)] = function (n, e, r) {
-            return c(this, void 0, void 0, function () {
+          }, e[i(271)] = function (t, e, r) {
+            return a(this, void 0, void 0, function () {
               var i;
-              return u(this, function (o) {
-                var c = t;
+              return c(this, function (a) {
+                var c = n;
 
-                switch (o.label) {
+                switch (a[c(176)]) {
                   case 0:
-                    return o[c(179)][c(212)]([0, 2,, 3]), [4, (0, s.promiseTimeout)(r || 5e3, new Promise(function (t) {
-                      var r = c;
-                      f(function (n) {
-                        t(n.response);
-                      }, a({
-                        action: n[r(165)]
-                      }, e)), window[r(208)][r(172)](JSON[r(214)](a({}, n)), "*");
+                    return a[c(171)][c(161)]([0, 2,, 3]), [4, (0, u[c(232)])(r || 5e3, new Promise(function (r) {
+                      var i,
+                          a,
+                          s,
+                          f = c;
+                      i = function i(t) {
+                        r(t[n(260)]);
+                      }, a = o({
+                        action: t[f(262)]
+                      }, e), s = function n(t) {
+                        var e = f,
+                            r = JSON[e(175)](t[e(197)]);
+                        if (r) try {
+                          (0, u.keys)(a)[e(263)](function (n) {
+                            if (a[n] !== r[n]) throw new Error("");
+                          }), window[e(259)](e(189), n, !0), i(r);
+                        } catch (o) {}
+                      }, window[f(172)]("message", s, !0), window[f(164)][f(235)](JSON[f(218)](o({}, t)), "*");
                     }))];
 
                   case 1:
-                    return [2, o[c(188)]()];
+                    return [2, a[c(158)]()];
 
                   case 2:
-                    throw i = o[c(188)](), new Error(i);
+                    throw i = a.sent(), new Error(i);
 
                   case 3:
                     return [2];
                 }
               });
             });
-          }, r.addTargetedSelfDestructingEventListener = f;
+          };
         },
-        729: function _(n, e, r) {
-          var i = t,
-              o = this && this[i(234)] || function () {
-            return (o = Object.assign || function (n) {
-              for (var e, r = t, i = 1, o = arguments[r(243)]; i < o; i++) {
+        729: function _(t, e, r) {
+          var i = n,
+              o = this && this[i(247)] || function () {
+            var n = i;
+            return (o = Object[n(226)] || function (t) {
+              for (var e, r = n, i = 1, o = arguments.length; i < o; i++) {
                 for (var a in e = arguments[i]) {
-                  Object.prototype.hasOwnProperty[r(177)](e, a) && (n[a] = e[a]);
+                  Object[r(208)].hasOwnProperty[r(236)](e, a) && (t[a] = e[a]);
                 }
               }
 
-              return n;
-            }).apply(this, arguments);
+              return t;
+            })[n(163)](this, arguments);
           };
 
-          Object[i(200)](e, i(262), {
+          Object.defineProperty(e, "__esModule", {
             value: !0
           });
           var a = r(430),
               c = r(111),
               u = r(9);
-          e[i(163)] = new function () {
+          e[i(268)] = new function () {
             var n = i,
                 t = this;
-            this[n(252)] = {
+            this[n(221)] = {
               create: function create(t, e, r, i) {
                 var c = n;
                 return (0, u.wrapper)(o(o(o({
-                  action: a[c(217)].INTERACT_CREATE,
+                  action: a[c(272)][c(266)],
                   maxRuntime: t
                 }, e && {
                   clientUrl: e
@@ -550,20 +547,20 @@ parcelRequire = function (e, r, t, n) {
               },
               start: function start() {
                 var t = n;
-                return (0, u[t(220)])({
-                  action: a[t(217)].INTERACT_START
+                return (0, u.wrapperNoListener)({
+                  action: a[t(272)].INTERACT_START
                 });
               },
               destroy: function destroy() {
                 var e = n;
-                t.events = {}, (0, u[e(220)])({
-                  action: a.Actions[e(215)]
+                t[e(265)] = {}, (0, u[e(179)])({
+                  action: a.Actions[e(219)]
                 });
               },
               message: function message(t, e) {
                 var r = n;
-                return (0, u[r(220)])(o({
-                  action: a[r(217)][r(176)],
+                return (0, u.wrapperNoListener)(o({
+                  action: a.Actions[r(196)],
                   data: t
                 }, e && {
                   client: e
@@ -572,53 +569,53 @@ parcelRequire = function (e, r, t, n) {
               kick: function kick(t) {
                 var e = n;
                 return (0, u.wrapperNoListener)({
-                  action: a[e(217)][e(229)],
+                  action: a[e(272)][e(200)],
                   client: t
                 });
               },
               onMessage: function onMessage(e) {
                 var r = n;
-                t[r(180)][r(211)] = e;
+                t[r(265)][r(213)] = e;
               },
               onConnect: function onConnect(e) {
                 var r = n;
-                t[r(180)][r(196)] = e;
+                t[r(265)][r(254)] = e;
               },
               onDisconnect: function onDisconnect(e) {
                 var r = n;
-                t[r(180)][r(202)] = e;
+                t[r(265)][r(267)] = e;
               },
               onKick: function onKick(e) {
                 var r = n;
-                t.events[r(190)] = e;
+                t[r(265)][r(210)] = e;
               }
-            }, this.events = {}, window[n(205)](n(249), function (e) {
+            }, this.events = {}, window[n(172)]("message", function (e) {
               var r = n,
-                  i = JSON[r(174)](e[r(153)]);
-              i.action === a[r(217)][r(176)] && (i[r(257)] === c[r(224)].MESSAGE && t.events.onMessage && i.data && t[r(180)][r(211)](i[r(153)], i.client), i.event === c[r(224)][r(256)] && t[r(180)][r(196)] && t[r(180)][r(196)](i.client), i[r(257)] === c[r(224)][r(238)] && t[r(180)].onDisconnect && t[r(180)][r(202)](i.client), i.event === c[r(224)][r(154)] && t[r(180)][r(190)] && t[r(180)].onKick(i.client));
+                  i = JSON[r(175)](e[r(197)]);
+              i[r(262)] === a[r(272)][r(196)] && (i.event === c[r(184)].MESSAGE && t[r(265)].onMessage && i[r(197)] && t[r(265)].onMessage(i[r(197)], i[r(178)]), i.event === c[r(184)].CONNECT && t.events[r(254)] && t.events[r(254)](i.client), i[r(186)] === c[r(184)][r(243)] && t[r(265)].onDisconnect && t.events[r(267)](i[r(178)]), i[r(186)] === c[r(184)][r(203)] && t[r(265)][r(210)] && t[r(265)][r(210)](i[r(178)]));
             });
           }();
         },
-        91: function _(n, e, r) {
-          var i = t;
-          Object.defineProperty(e, i(262), {
+        91: function _(t, e, r) {
+          var i = n;
+          Object.defineProperty(e, "__esModule", {
             value: !0
           });
           var o = r(430),
               a = r(9);
-          e[i(163)] = new function () {
+          e[i(268)] = new function () {
             var n = i;
-            this[n(252)] = {
+            this[n(221)] = {
               barcode: function barcode() {
                 var t = n;
-                return (0, a.wrapper)({
-                  action: o[t(217)][t(251)]
+                return (0, a[t(271)])({
+                  action: o[t(272)][t(202)]
                 }, void 0, 3e4);
               },
               printer: function printer(t, e) {
                 var r = n;
-                return (0, a[r(183)])({
-                  action: o.Actions[r(198)],
+                return (0, a.wrapper)({
+                  action: o[r(272)].KIOSK_PRINTER,
                   data: t,
                   printerSettings: e
                 });
@@ -626,169 +623,193 @@ parcelRequire = function (e, r, t, n) {
             };
           }();
         },
-        519: function _(e, r) {
-          var i = t,
-              o = this && this[i(184)] || function (n, e, r, i) {
+        956: function _(t, e, r) {
+          var i = n;
+          Object[i(209)](e, i(194), {
+            value: !0
+          });
+          var o = r(430),
+              a = r(9);
+          e[i(268)] = new function () {
+            var n = i;
+            this[n(221)] = {
+              request: function request(t, e) {
+                var r = n;
+                return (0, a[r(271)])({
+                  action: o[r(272)].PROXY,
+                  proxy: {
+                    url: t,
+                    request: e
+                  }
+                });
+              }
+            };
+          }();
+        },
+        519: function _(t, e) {
+          var r = n,
+              i = this && this[r(228)] || function (t, e, r, i) {
             return new (r || (r = Promise))(function (o, a) {
-              function c(n) {
+              var c = n;
+
+              function u(n) {
                 try {
-                  s(i.next(n));
+                  f(i.next(n));
                 } catch (t) {
                   a(t);
                 }
               }
 
-              function u(n) {
-                var e = t;
+              function s(t) {
+                var e = n;
 
                 try {
-                  s(i[e(178)](n));
+                  f(i[e(270)](t));
                 } catch (r) {
                   a(r);
                 }
               }
 
-              function s(n) {
+              function f(t) {
                 var e,
-                    i = t;
-                n[i(258)] ? o(n[i(160)]) : (e = n[i(160)], e instanceof r ? e : new r(function (n) {
+                    i = n;
+                t[i(261)] ? o(t[i(169)]) : (e = t[i(169)], e instanceof r ? e : new r(function (n) {
                   n(e);
-                }))[i(152)](c, u);
+                })).then(u, s);
               }
 
-              s((i = i[t(167)](n, e || [])).next());
+              f((i = i[c(163)](t, e || []))[c(181)]());
             });
           },
-              a = this && this.__generator || function (e, r) {
-            var o,
+              o = this && this[r(256)] || function (t, e) {
+            var i,
+                o,
                 a,
                 c,
-                u,
-                s = i,
-                f = {
+                u = r,
+                s = {
               label: 0,
               sent: function sent() {
-                if (1 & c[0]) throw c[1];
-                return c[1];
+                if (1 & a[0]) throw a[1];
+                return a[1];
               },
               trys: [],
               ops: []
             };
-            return u = {
-              next: v(0),
-              "throw": v(1),
-              "return": v(2)
-            }, s(213) == ("undefined" == typeof Symbol ? "undefined" : n(Symbol)) && (u[Symbol[s(209)]] = function () {
+            return c = {
+              next: f(0),
+              "throw": f(1),
+              "return": f(2)
+            }, "function" == typeof Symbol && (c[Symbol[u(183)]] = function () {
               return this;
-            }), u;
+            }), c;
 
-            function v(n) {
-              return function (i) {
-                return function (n) {
-                  var i = t;
-                  if (o) throw new TypeError("Generator is already executing.");
+            function f(r) {
+              return function (c) {
+                return function (r) {
+                  var c = n;
+                  if (i) throw new TypeError("Generator is already executing.");
 
-                  for (; f;) {
+                  for (; s;) {
                     try {
-                      if (o = 1, a && (c = 2 & n[0] ? a[i(185)] : n[0] ? a[i(178)] || ((c = a[i(185)]) && c[i(177)](a), 0) : a[i(201)]) && !(c = c[i(177)](a, n[1])).done) return c;
+                      if (i = 1, o && (a = 2 & r[0] ? o[c(230)] : r[0] ? o[c(270)] || ((a = o[c(230)]) && a.call(o), 0) : o[c(181)]) && !(a = a[c(236)](o, r[1])).done) return a;
 
-                      switch (a = 0, c && (n = [2 & n[0], c[i(160)]]), n[0]) {
+                      switch (o = 0, a && (r = [2 & r[0], a[c(169)]]), r[0]) {
                         case 0:
                         case 1:
-                          c = n;
+                          a = r;
                           break;
 
                         case 4:
-                          return f[i(193)]++, {
-                            value: n[1],
+                          return s[c(176)]++, {
+                            value: r[1],
                             done: !1
                           };
 
                         case 5:
-                          f[i(193)]++, a = n[1], n = [0];
+                          s[c(176)]++, o = r[1], r = [0];
                           continue;
 
                         case 7:
-                          n = f[i(253)][i(250)](), f[i(179)][i(250)]();
+                          r = s.ops[c(198)](), s[c(171)][c(198)]();
                           continue;
 
                         default:
-                          if (!((c = (c = f[i(179)])[i(243)] > 0 && c[c[i(243)] - 1]) || 6 !== n[0] && 2 !== n[0])) {
-                            f = 0;
+                          if (!((a = (a = s.trys)[c(216)] > 0 && a[a[c(216)] - 1]) || 6 !== r[0] && 2 !== r[0])) {
+                            s = 0;
                             continue;
                           }
 
-                          if (3 === n[0] && (!c || n[1] > c[0] && n[1] < c[3])) {
-                            f[i(193)] = n[1];
+                          if (3 === r[0] && (!a || r[1] > a[0] && r[1] < a[3])) {
+                            s[c(176)] = r[1];
                             break;
                           }
 
-                          if (6 === n[0] && f[i(193)] < c[1]) {
-                            f.label = c[1], c = n;
+                          if (6 === r[0] && s[c(176)] < a[1]) {
+                            s[c(176)] = a[1], a = r;
                             break;
                           }
 
-                          if (c && f.label < c[2]) {
-                            f.label = c[2], f[i(253)].push(n);
+                          if (a && s[c(176)] < a[2]) {
+                            s[c(176)] = a[2], s[c(220)][c(161)](r);
                             break;
                           }
 
-                          c[2] && f[i(253)][i(250)](), f[i(179)].pop();
+                          a[2] && s[c(220)].pop(), s[c(171)][c(198)]();
                           continue;
                       }
 
-                      n = r.call(e, f);
+                      r = e[c(236)](t, s);
                     } catch (u) {
-                      n = [6, u], a = 0;
+                      r = [6, u], o = 0;
                     } finally {
-                      o = c = 0;
+                      i = a = 0;
                     }
                   }
 
-                  if (5 & n[0]) throw n[1];
+                  if (5 & r[0]) throw r[1];
                   return {
-                    value: n[0] ? n[1] : void 0,
+                    value: r[0] ? r[1] : void 0,
                     done: !0
                   };
-                }([n, i]);
+                }([r, c]);
               };
             }
           };
 
-          Object[i(200)](r, "__esModule", {
+          Object[r(209)](e, r(194), {
             value: !0
-          }), r.stringToHex = r.sleep = r[i(261)] = r[i(247)] = r[i(194)] = r[i(175)] = r.sendLogFormatter = r[i(260)] = void 0, r[i(260)] = function (n) {
-            var t = i;
-            return encodeURI(n)[t(248)](/%..|./)[t(243)] - 1;
-          }, r[i(233)] = function (n) {
-            var t = i,
+          }), e[r(187)] = e.sleep = e.keys = e.addSelfDestructingEventListener = e[r(238)] = e.promiseTimeout = e[r(251)] = e[r(229)] = void 0, e[r(229)] = function (n) {
+            var t = r;
+            return encodeURI(n)[t(192)](/%..|./)[t(216)] - 1;
+          }, e.sendLogFormatter = function (n) {
+            var t = r,
                 e = n;
-            return n ? (" " === e[t(161)](e.length - 1) && (e = e[t(235)](0, e[t(243)] - 1)), "\n" === e.substr(e[t(243)] - 1) && (e = e[t(235)](0, e[t(243)] - 1)), "," !== e[t(161)](e[t(243)] - 1) && "," !== e.substr(e[t(243)] - 2) || (e = e[t(235)](0, e[t(243)] - 1)), e = "[" + e + "]") : "[]";
-          }, r[i(175)] = function (n, e) {
-            var r = i,
-                o = new Promise(function (e, r) {
-              var i = t,
-                  o = window[i(236)](function () {
-                var t = i;
-                window[t(182)](o), r(t(254) + n + t(192));
-              }, n);
+            return n ? (" " === e[t(250)](e[t(216)] - 1) && (e = e[t(241)](0, e.length - 1)), "\n" === e[t(250)](e.length - 1) && (e = e[t(241)](0, e.length - 1)), "," !== e.substr(e[t(216)] - 1) && "," !== e[t(250)](e[t(216)] - 2) || (e = e[t(241)](0, e[t(216)] - 1)), e = "[" + e + "]") : "[]";
+          }, e[r(232)] = function (t, e) {
+            var r = new Promise(function (e, r) {
+              var i = n,
+                  o = window[i(257)](function () {
+                var n = i;
+                window[n(173)](o), r("Timed out in " + t + n(269));
+              }, t);
             });
-            return Promise[r(170)]([e, o]);
-          }, r[i(194)] = function (n, e) {
-            return o(this, void 0, void 0, function () {
+            return Promise.race([e, r]);
+          }, e[r(238)] = function (t, e) {
+            return i(this, void 0, void 0, function () {
               var r;
-              return a(this, function (i) {
-                var o = t;
+              return o(this, function (i) {
+                var o = n;
 
-                switch (i[o(193)]) {
+                switch (i.label) {
                   case 0:
-                    r = 0, i[o(193)] = 1;
+                    r = 0, i[o(176)] = 1;
 
                   case 1:
-                    return r < n[o(243)] ? [4, e(n[r], r)] : [3, 4];
+                    return r < t[o(216)] ? [4, e(t[r], r)] : [3, 4];
 
                   case 2:
-                    i[o(188)](), i[o(193)] = 3;
+                    i[o(158)](), i[o(176)] = 3;
 
                   case 3:
                     return r++, [3, 1];
@@ -798,52 +819,53 @@ parcelRequire = function (e, r, t, n) {
                 }
               });
             });
-          }, r[i(247)] = function (n, e, r) {
-            n.addEventListener(e, function i(o) {
-              var a = t;
-              r(o), n[a(255)](e, i, !0);
+          }, e.addSelfDestructingEventListener = function (n, t, e) {
+            var i = r;
+            n[i(172)](t, function r(o) {
+              var a = i;
+              e(o), n[a(259)](t, r, !0);
             }, !0);
-          }, r[i(261)] = function (n) {
-            return Object[i(261)](n);
-          }, r.sleep = function (n) {
-            return new Promise(function (t) {
-              window.setTimeout(function () {
-                return t();
-              }, n);
+          }, e.keys = function (n) {
+            return Object[r(170)](n);
+          }, e[r(168)] = function (t) {
+            return new Promise(function (e) {
+              window[n(257)](function () {
+                return e();
+              }, t);
             });
-          }, r[i(240)] = function (n) {
-            for (var t, e = i, r = n[e(243)], o = "", a = 0; a < r; a += 1) {
-              "a" == (t = n[e(187)](a).toString(16)) && (t = "0A"), o += t.toString(), a == r - 1 && (o += "1B69");
+          }, e[r(187)] = function (n) {
+            for (var t, e = r, i = n.length, o = "", a = 0; a < i; a += 1) {
+              "a" == (t = n.charCodeAt(a)[e(167)](16)) && (t = "0A"), "a3" == t && (t = "9c"), o += t[e(167)](), a == i - 1 && (o += e(182));
             }
 
             return o;
           };
         },
-        430: function _(n, e) {
+        430: function _(t, e) {
           var r,
               i,
-              o = t;
-          Object.defineProperty(e, "__esModule", {
+              o = n;
+          Object[o(209)](e, "__esModule", {
             value: !0
-          }), e[o(222)] = e[o(217)] = void 0, (i = e[o(217)] || (e[o(217)] = {}))[o(239)] = o(221), i[o(210)] = o(228), i[o(157)] = o(230), i[o(225)] = "storage.put", i[o(223)] = o(168), i[o(169)] = o(244), i.STORAGE_CLEAR = o(197), i[o(237)] = "storage.download", i[o(263)] = o(242), i[o(245)] = "interact.create", i[o(191)] = o(195), i.INTERACT_DESTROY = o(199), i.INTERACT_MESSAGE = o(241), i[o(229)] = "interact.kick", i[o(251)] = o(171), i[o(198)] = o(219), (r = e.LifeCycleEvent || (e[o(222)] = {}))[o(227)] = o(226), r[o(216)] = o(173);
+          }), e.LifeCycleEvent = e[o(272)] = void 0, (i = e[o(272)] || (e[o(272)] = {}))[o(255)] = o(274), i.LOG = "log", i.STORAGE_GET = o(237), i[o(239)] = o(174), i[o(193)] = "storage.delete", i[o(201)] = o(273), i[o(234)] = o(160), i.STORAGE_DOWNLOAD = "storage.download", i[o(242)] = o(264), i[o(266)] = o(207), i[o(215)] = o(212), i.INTERACT_DESTROY = o(185), i[o(196)] = o(227), i.INTERACT_KICK = "interact.kick", i[o(202)] = o(222), i[o(188)] = "kiosk.printer", i[o(231)] = o(275), (r = e.LifeCycleEvent || (e[o(245)] = {}))[o(191)] = "playing", r[o(180)] = o(199);
         },
-        111: function _(n, e) {
+        111: function _(t, e) {
           var r,
-              i = t;
-          Object[i(200)](e, i(262), {
+              i = n;
+          Object[i(209)](e, i(194), {
             value: !0
-          }), e[i(224)] = void 0, (r = e[i(224)] || (e[i(224)] = {})).MESSAGE = i(249), r[i(256)] = i(186), r[i(238)] = "disconnect", r[i(154)] = i(166);
+          }), e.InteractiveEvent = void 0, (r = e[i(184)] || (e[i(184)] = {})).MESSAGE = i(189), r[i(165)] = i(253), r[i(243)] = i(195), r[i(203)] = "kick";
         }
       },
-          r = {};
-      !function n(i) {
-        var o = t,
-            a = r[i];
-        if (void 0 !== a) return a[o(158)];
-        var c = r[i] = {
+          e = {};
+      !function r(i) {
+        var o = n,
+            a = e[i];
+        if (void 0 !== a) return a[o(204)];
+        var c = e[i] = {
           exports: {}
         };
-        return e[i][o(177)](c[o(158)], c, c[o(158)], n), c.exports;
+        return t[i][o(236)](c[o(204)], c, c.exports, r), c[o(204)];
       }(846);
     }();
   }, {}],

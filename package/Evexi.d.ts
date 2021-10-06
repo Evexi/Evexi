@@ -1,4 +1,4 @@
-// Version: 2.4.0-alpha.2
+// Version: 2.4.0-Alpha.3
 declare enum TransitionIn {
 	SLIDE_LEFT = "slide-in-from-left",
 	SLIDE_TOP = "slide-in-from-top",
@@ -90,7 +90,8 @@ declare enum Actions {
 	INTERACT_MESSAGE = "interact.message",
 	INTERACT_KICK = "interact.kick",
 	KIOSK_BARCODE = "kiosk.barcode",
-	KIOSK_PRINTER = "kiosk.printer"
+	KIOSK_PRINTER = "kiosk.printer",
+	PROXY = "proxy"
 }
 export interface InfoCB {
 	deviceId: string;
@@ -109,6 +110,13 @@ export interface DownloadResponse {
 	data: string | null;
 	error: string | null;
 }
+export interface ProxyResponse {
+	status: Response["status"];
+	statusText: Response["statusText"];
+	url: Response["url"];
+	ok: Response["ok"];
+	json: any;
+}
 export interface BaseMessage {
 	action: Actions;
 }
@@ -118,6 +126,7 @@ export interface InteractiveCreateRes {
 	url: string;
 	sessionId: string;
 }
+export declare type PlayerProxyResponse = ProxyResponse | false;
 declare global {
 	interface Window {
 		playing?: (item: MediaInterfaceLocal) => void;
@@ -154,6 +163,7 @@ declare class Evexi {
 		barcode: () => Promise<string | false>;
 		printer: (data: string, printerSettings?: Partial<PrinterSettings> | undefined) => Promise<boolean>;
 	};
+	readonly proxy: (url: string, request?: RequestInit | undefined) => Promise<PlayerProxyResponse>;
 	readonly log: (data: LogMessage["data"]) => void;
 	readonly info: () => Promise<InfoCB>;
 }
