@@ -30,7 +30,7 @@ async function request() {
     try {
         const res = await window.Evexi.proxy('/square', {
             method: 'POST',
-            body: JSON.stringify({ fod: 'bar' })
+            body: JSON.stringify({ foo: 'bar' })
         })
         if (res && res.ok) log.success(`REQUEST Success: ${JSON.stringify(res)}`)
         else if (res && !res.ok) log.success(`REQUEST Not Ok: ${JSON.stringify(res)}`)
