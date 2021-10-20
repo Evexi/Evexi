@@ -22,6 +22,7 @@ The docs & examples directories contain examples of filesystem communication, in
 * [Misc](docs/misc/index.md)
 * [Kiosk](docs/kiosk/index.md)
 * [Proxy](docs/proxy/index.md)
+* [Environment Variables](docs/envVars/index.md)
 
 #
 

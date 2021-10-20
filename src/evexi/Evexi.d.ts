@@ -1,31 +1,6 @@
-// Version: 2.4.0-Alpha.3
-declare enum TransitionIn {
-	SLIDE_LEFT = "slide-in-from-left",
-	SLIDE_TOP = "slide-in-from-top",
-	SLIDE_BOTTOM = "slide-in-from-bottom",
-	SLIDE_RIGHT = "slide-in-from-right",
-	FADE = "fade-in",
-	ZOOM = "zoom-in"
-}
-declare enum TransitionOUT {
-	SLIDE_LEFT = "slide-out-to-left",
-	SLIDE_TOP = "slide-out-to-top",
-	SLIDE_BOTTOM = "slide-out-to-bottom",
-	SLIDE_RIGHT = "slide-out-to-right",
-	FADE = "fade-out",
-	ZOOM = "zoom-out"
-}
-export declare type TransitionDuration = 500 | 1000 | 2000 | 3000 | 4000 | 5000 | 6000 | 7000 | 8000 | 9000 | 10000;
-export interface MediaInterface {
-	id: string;
-	media?: string;
-	duration: number;
-	type: MediaType;
-	transitionDuration?: TransitionDuration;
-	transitionIn?: TransitionIn;
-	transitionOut?: TransitionOUT;
-}
-export declare type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
+// Version: 2.4.0-alpha.3
+import EvexiType from 'evexi-types';
+
 export declare namespace b2bSerialPrint {
 	export enum PrinterPort {
 		PRINTERPORT0 = "PRINTERPORT0",
@@ -70,7 +45,7 @@ declare enum EnvironmentType {
 	TIZEN = "TIZEN",
 	KIOSK = "KIOSK"
 }
-export interface MediaInterfaceLocal extends MediaInterface {
+export interface MediaInterfaceLocal extends EvexiType.Websocket.MediaInterface {
 	playlistHash: string;
 	localMedia: string | undefined;
 }
@@ -91,7 +66,8 @@ declare enum Actions {
 	INTERACT_KICK = "interact.kick",
 	KIOSK_BARCODE = "kiosk.barcode",
 	KIOSK_PRINTER = "kiosk.printer",
-	PROXY = "proxy"
+	PROXY = "proxy",
+	ENV_VAR = "envVar"
 }
 export interface InfoCB {
 	deviceId: string;
@@ -164,6 +140,7 @@ declare class Evexi {
 		printer: (data: string, printerSettings?: Partial<PrinterSettings> | undefined) => Promise<boolean>;
 	};
 	readonly proxy: (url: string, request?: RequestInit | undefined) => Promise<PlayerProxyResponse>;
+	readonly env: (name: string) => Promise<string | undefined>;
 	readonly log: (data: LogMessage["data"]) => void;
 	readonly info: () => Promise<InfoCB>;
 }
