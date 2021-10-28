@@ -1,4 +1,4 @@
-// Version: 2.4.0-alpha.3
+// Version: 2.4.0-alpha.5
 import EvexiType from 'evexi-types';
 
 export declare namespace b2bSerialPrint {
