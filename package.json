@@ -1,7 +1,7 @@
 {
   "name": "evexi",
   "description": "Evexi Player API for file system, interactive and interactive scan library.",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "repository": "https://github.com/MRXTechnology/Evexi.git",
   "author": "Peter Ingram <p.ingram@mrx.technology>",
   "license": "MIT",

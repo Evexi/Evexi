@@ -1,3 +1,6 @@
+# 2.4.3
+* Bug fix
+
 # 2.4.2
 * Typings bug fix
 

@@ -1,4 +1,32 @@
 // Version: 2.4.0-alpha.5
+enum TransitionIn {
+	SLIDE_LEFT = "slide-in-from-left",
+	SLIDE_TOP = "slide-in-from-top",
+	SLIDE_BOTTOM = "slide-in-from-bottom",
+	SLIDE_RIGHT = "slide-in-from-right",
+	FADE = "fade-in",
+	ZOOM = "zoom-in"
+}
+enum TransitionOUT {
+	SLIDE_LEFT = "slide-out-to-left",
+	SLIDE_TOP = "slide-out-to-top",
+	SLIDE_BOTTOM = "slide-out-to-bottom",
+	SLIDE_RIGHT = "slide-out-to-right",
+	FADE = "fade-out",
+	ZOOM = "zoom-out"
+}
+export type TransitionDuration = 500 | 1000 | 2000 | 3000 | 4000 | 5000 | 6000 | 7000 | 8000 | 9000 | 10000;
+export interface MediaInterface {
+	id: string;
+	media?: string; // not used for interactive
+	duration: number | 0; // 0 duration is indefinite item
+	type: MediaType;
+	// Transition
+	transitionDuration?: TransitionDuration;
+	transitionIn?: TransitionIn;
+	transitionOut?: TransitionOUT;
+}
+export type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
 export declare namespace b2bSerialPrint {
 	export enum PrinterPort {
 		PRINTERPORT0 = "PRINTERPORT0",
@@ -43,33 +71,6 @@ declare enum EnvironmentType {
 	TIZEN = "TIZEN",
 	KIOSK = "KIOSK"
 }
-declare enum TransitionIn {
-	SLIDE_LEFT = "slide-in-from-left",
-	SLIDE_TOP = "slide-in-from-top",
-	SLIDE_BOTTOM = "slide-in-from-bottom",
-	SLIDE_RIGHT = "slide-in-from-right",
-	FADE = "fade-in",
-	ZOOM = "zoom-in"
-}
-declare enum TransitionOUT {
-	SLIDE_LEFT = "slide-out-to-left",
-	SLIDE_TOP = "slide-out-to-top",
-	SLIDE_BOTTOM = "slide-out-to-bottom",
-	SLIDE_RIGHT = "slide-out-to-right",
-	FADE = "fade-out",
-	ZOOM = "zoom-out"
-}
-export declare type TransitionDuration = 500 | 1000 | 2000 | 3000 | 4000 | 5000 | 6000 | 7000 | 8000 | 9000 | 10000;
-export interface MediaInterface {
-	id: string;
-	media?: string;
-	duration: number | 0;
-	type: MediaType;
-	transitionDuration?: TransitionDuration;
-	transitionIn?: TransitionIn;
-	transitionOut?: TransitionOUT;
-}
-export declare type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
 export interface MediaInterfaceLocal extends MediaInterface {
 	playlistHash: string;
 	localMedia: string | undefined;
