@@ -1,4 +1,4 @@
-// Version: 2.4.0-alpha.5
+// Version: 2.4.0-alpha.8
 enum TransitionIn {
 	SLIDE_LEFT = "slide-in-from-left",
 	SLIDE_TOP = "slide-in-from-top",
