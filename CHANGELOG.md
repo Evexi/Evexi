@@ -1,6 +1,9 @@
 # 2.5.0
 * Added example for stripe proxy
 
+# 2.4.5
+* Update Dependencies
+
 # 2.4.3
 * Bug fix
 
