@@ -3,7 +3,7 @@ import '../../../package/index.js' // importing the evexi API
 
 import { log } from '../../common'
 
-window.playing = (item) => {
+window.playing = async (item) => {
 
     log.info('playing item ...' + JSON.stringify(item))
 
@@ -13,7 +13,8 @@ window.playing = (item) => {
 
         if (window.Evexi) {
             log.info('')
-            request()
+            await squareRequest()
+            await stripeRequest()
         }
 
     } catch (e) {
@@ -22,10 +23,9 @@ window.playing = (item) => {
 
 }
 
-// @ts-ignore
-async function request() {
+async function squareRequest() {
 
-    log.info(' -- TESTING REQUEST -- ')
+    log.info(' -- TESTING SQUARE REQUEST -- ')
 
     try {
         const res = await window.Evexi.proxy('/square/v2/catalog/list', {
@@ -33,11 +33,32 @@ async function request() {
             // method: 'POST',
             // body: JSON.stringify({ foo: 'bar' })
         })
-        if (res && res.ok) log.success(`REQUEST Success: ${JSON.stringify(res)}`)
-        else if (res && !res.ok) log.success(`REQUEST Not Ok: ${JSON.stringify(res)}`)
-        else log.error(`REQUEST Error: ${JSON.stringify(res)}`)
+        if (res && res.ok) log.success(`SQUARE REQUEST Success: ${JSON.stringify(res).substring(0, 100)}`)
+        else if (res && !res.ok) log.success(`SQUARE REQUEST Not Ok: ${JSON.stringify(res)}`)
+        else log.error(`SQUARE REQUEST Error: ${JSON.stringify(res)}`)
     } catch (e) {
-        log.error(`REQUEST: caught .. ${JSON.stringify(e)}`)
+        log.error(`SQUARE REQUEST: caught .. ${JSON.stringify(e)}`)
+    }
+
+    log.info('')
+
+}
+
+async function stripeRequest() {
+
+    log.info(' -- TESTING STRIPE REQUEST -- ')
+
+    try {
+        const res = await window.Evexi.proxy('/stripe/v1/products', {
+            method: 'GET',
+            // method: 'POST',
+            // body: JSON.stringify({ foo: 'bar' })
+        })
+        if (res && res.ok) log.success(`STRIPE REQUEST Success: ${JSON.stringify(res).substring(0, 100)}`)
+        else if (res && !res.ok) log.success(`STRIPE REQUEST Not Ok: ${JSON.stringify(res)}`)
+        else log.error(`STRIPE REQUEST Error: ${JSON.stringify(res)}`)
+    } catch (e) {
+        log.error(`STRIPE REQUEST: caught .. ${JSON.stringify(e)}`)
     }
 
     log.info('')
