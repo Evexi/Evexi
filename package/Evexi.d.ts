@@ -1,4 +1,4 @@
-// Version: 2.4.0-alpha.8
+// Version: 2.5.0
 enum TransitionIn {
 	SLIDE_LEFT = "slide-in-from-left",
 	SLIDE_TOP = "slide-in-from-top",
@@ -27,7 +27,7 @@ export interface MediaInterface {
 	transitionOut?: TransitionOUT;
 }
 export type MediaType = "WEB" | "IMAGE" | "VIDEO" | "ZIP";
-export declare namespace b2bSerialPrint {
+export namespace b2bSerialPrint {
 	export enum PrinterPort {
 		PRINTERPORT0 = "PRINTERPORT0",
 		PRINTERPORT1 = "PRINTERPORT1",
@@ -60,7 +60,6 @@ export declare namespace b2bSerialPrint {
 		close: (port: keyof typeof PrinterPort) => boolean;
 		writeData: (port: keyof typeof PrinterPort, data: string, length: number) => number;
 	}
-	export {};
 }
 export interface PrinterSettings extends b2bSerialPrint.PrinterOptions {
 	port: keyof typeof b2bSerialPrint.PrinterPort;
