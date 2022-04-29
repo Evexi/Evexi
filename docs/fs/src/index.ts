@@ -1,7 +1,5 @@
-import '@babel/polyfill' // needed for SSSP2/4
-import '../../../package/index.js' // importing the evexi API
-
-import { log } from './../../common'
+import {log} from './../../common'
+import Evexi from 'evexi'
 
 /**
  * Info events
@@ -10,7 +8,7 @@ const info = new class {
 
     async info() {
         try {
-            const info = await window.Evexi.info()
+            const info = await Evexi.info()
 
             log.success('INFO success:' + JSON.stringify(info))
 
@@ -25,14 +23,14 @@ const info = new class {
 
 }
 
-/**
+/**s
  * Storage Events
  */
 const storage = new class {
 
     async put() {
         try {
-            const res = await window.Evexi.fs.put('text2.json', 'my text file')
+            const res = await Evexi.fs.put('text2.json', 'my text file')
 
             try {
                 if (res) log.success('PUT: success')
@@ -48,7 +46,7 @@ const storage = new class {
 
     async get() {
         try {
-            const res = await window.Evexi.fs.get('text2.json')
+            const res = await Evexi.fs.get('text2.json')
 
             try {
                 if (res.data === 'my text file') log.success('GET: success')
@@ -64,7 +62,7 @@ const storage = new class {
 
     async exists() {
         try {
-            const exists = await window.Evexi.fs.exists('mrx.png')
+            const exists = await Evexi.fs.exists('mrx.png')
 
             try {
                 if (!exists) log.success('EXISTS: success - item should not exist')
@@ -80,7 +78,7 @@ const storage = new class {
 
     async download() {
         try {
-            const download = await window.Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
+            const download = await Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
 
             try {
                 if (download.url === 'https://mrx.technology/assets/images/compatible/mrx.png') log.success('DOWNLOAD: success')
@@ -96,7 +94,7 @@ const storage = new class {
 
     async existsB() {
         try {
-            const exists = await window.Evexi.fs.exists('mrx.png')
+            const exists = await Evexi.fs.exists('mrx.png')
 
             try {
                 if (exists) log.success('EXISTS: success')
@@ -112,7 +110,7 @@ const storage = new class {
 
     async list() {
         try {
-            const listA = await window.Evexi.fs.list()
+            const listA = await Evexi.fs.list()
             try {
                 if (listA[0] === 'mrx.png' && listA[1] === 'text2.json') log.success('LIST A: success')
                 else throw new Error()
@@ -126,7 +124,7 @@ const storage = new class {
 
     async deletes() {
         try {
-            const del = await window.Evexi.fs.del('mrx.png')
+            const del = await Evexi.fs.del('mrx.png')
 
             try {
                 if (del) log.success('DELETE: success')
@@ -142,7 +140,7 @@ const storage = new class {
 
     async existsC() {
         try {
-            const exists = await window.Evexi.fs.exists('mrx.png')
+            const exists = await Evexi.fs.exists('mrx.png')
 
             try {
                 if (!exists) log.success('EXISTS C: success - should not exist')
@@ -158,7 +156,7 @@ const storage = new class {
 
     async clear() {
         try {
-            const cleared = await window.Evexi.fs.clear()
+            const cleared = await Evexi.fs.clear()
             log.success(`CLEARED: success ${cleared}`)
         } catch (e) {
             log.error('CLEARED: caught')
@@ -167,7 +165,7 @@ const storage = new class {
 
     async listB() {
         try {
-            const listB = await window.Evexi.fs.list()
+            const listB = await Evexi.fs.list()
             try {
                 if (!listB || listB === null || listB.length === 0) log.success('LIST B: success')
                 else throw new Error()
@@ -190,9 +188,9 @@ window.playing = async (item) => {
 
     try {
 
-        window.Evexi ? log.success('API Found') : log.error('API ERROR - doesnt exist')
+        Evexi ? log.success('API Found') : log.error('API ERROR - doesnt exist')
 
-        if (window.Evexi) {
+        if (Evexi) {
 
             log.info('')
 

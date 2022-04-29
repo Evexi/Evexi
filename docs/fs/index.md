@@ -19,7 +19,7 @@ You can view a [working example here](./src).
 Get a single item from storage. The returned '.data' will vary depending on the requested file type. If the item is an asset such as a video or image the '.data' will be a path string for the item. If its a '.json' file then the '.data' will be the items content.
 ```typescript
 try {
-    const res = await window.Evexi.fs.get('image.jpg')
+    const res = await Evexi.fs.get('image.jpg')
     // Successful {name: 'image.jpg', error: null, type: 'image', data: '/mtd_down/common/MrPlayer/user_files/image.jpg'}
     // Failed {name: 'image.jpg', error: 'File does not exist', type: 'image', data: null}
 } catch (e) {
@@ -33,7 +33,7 @@ try {
 Put is used solely for .json files. The method will automatically encode on the PUT method and decode on the GET method so the second argument can be a string, object or bool. The response will be a boolean of if the event has been successful or not.
 ````typescript
 try {
-    const res = await window.Evexi.fs.put('text2.json', 'my text file') // boolean
+    const res = await Evexi.fs.put('text2.json', 'my text file') // boolean
 } catch (e) {
     // Catch error
 }
@@ -45,7 +45,7 @@ try {
 Deletes a single asset. A successful response will return boolean.
 ````typescript
 try {
-    const res = await window.Evexi.fs.delete('text2.json') // boolean
+    const res = await Evexi.fs.delete('text2.json') // boolean
 } catch (e) {
     // Catch error
 }
@@ -54,12 +54,12 @@ try {
 #
 
 ### LIST
-Lists all items currently in storage for the player. 
-Boolean false will be returned if an issue occurs when listing the items. 
+Lists all items currently in storage for the player.
+Boolean false will be returned if an issue occurs when listing the items.
 An empty array will be returned if the response is successful but no items exist.
 ````typescript
 try {
-    const res = await window.Evexi.fs.list() // ['fileA.png', 'fileB.png'] || false
+    const res = await Evexi.fs.list() // ['fileA.png', 'fileB.png'] || false
 } catch (e) {
     // Catch error
 }
@@ -71,7 +71,7 @@ try {
 Clears ALL the items from storage (user_files directory) and will return a count of the number of deleted items.
 ````typescript
 try {
-    const res = await window.Evexi.fs.clear() // 3 number of items deleted
+    const res = await Evexi.fs.clear() // 3 number of items deleted
 } catch (e) {
     // Catch error
 }
@@ -88,7 +88,7 @@ NOTE: Nested folders are not supported. Downloaded files are always stored in th
 
 ````typescript
 try {
-    const download = await window.Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
+    const download = await Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
     // success {url: 'https://mrx.technology/assets/images/compatible/mrx.png', data: '/mtd_down/common/MrPlayer/user_files/mrx.png', error: null}
 
     // error {url: 'https://mrx.technology/assets/images/compatible/mrx.png', data: null, error: 'file download failed'}
@@ -103,7 +103,7 @@ try {
 Validates if a file exists on the file system. The response will return boolean confirming if the file exists or not.
 ````typescript
 try {
-    const res = await window.Evexi.fs.exists('image.png') // boolean
+    const res = await Evexi.fs.exists('image.png') // boolean
 } catch (e) {
     // Catch error
 }

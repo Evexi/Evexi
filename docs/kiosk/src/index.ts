@@ -1,17 +1,15 @@
-import '@babel/polyfill' // needed for SSSP2/4
-import '../../../package/index.js' // importing the evexi API
-
 import {log} from './../../common'
+import Evexi from 'evexi'
 
 window.playing = (item) => {
-    
+
     log.info('playing item ...' + JSON.stringify(item))
 
     try {
-        
-        window.Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
 
-        if(window.Evexi) {
+        Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
+
+        if(Evexi) {
             log.info('')
         }
 
@@ -23,11 +21,11 @@ window.playing = (item) => {
 
 // @ts-ignore
 window.barcode = async () => {
-    
+
     log.info(' -- TESTING BARCODE -- ')
-    
+
     try {
-        const res = await window.Evexi.tizen.barcode()
+        const res = await Evexi.tizen.barcode()
         if(res) log.success('BARCODE: resolved ' + JSON.stringify(res))
         else log.error('BARCODE: false')
     } catch (e) {
@@ -40,12 +38,12 @@ window.barcode = async () => {
 
 // @ts-ignore
 window.print = async () => {
-    
+
     log.info(' -- TESTING PRINTER -- ')
-    
+
     try {
 
-        const data = 
+        const data =
             '                                          \n' +
             '                  EVEXI                   \n' +
             '                  EVEXI                   \n' +
@@ -58,7 +56,7 @@ window.print = async () => {
             '                                          \n' +
             '                                          \n'
 
-        const res = await window.Evexi.tizen.printer(data)
+        const res = await Evexi.tizen.printer(data)
         if(res) log.success('PRINTER: resolved ' + JSON.stringify(res))
         else log.error('PRINTER: false')
     } catch (e) {
@@ -71,12 +69,12 @@ window.print = async () => {
 
 // @ts-ignore
 window.printWrongPort = async () => {
-    
+
     log.info(' -- TESTING PRINTER - WRONG PORT -- ')
-    
+
     try {
 
-        const data = 
+        const data =
             '                                          \n' +
             '                  EVEXI                   \n' +
             '                  EVEXI                   \n' +
@@ -89,7 +87,7 @@ window.printWrongPort = async () => {
             '                                          \n' +
             '                                          \n'
 
-        const res = await window.Evexi.tizen.printer(data, {port: 'PRINTERPORT0'})
+        const res = await Evexi.tizen.printer(data, {port: 'PRINTERPORT0'})
         if(res) log.success('PRINTER: resolved ' + JSON.stringify(res))
         else log.error('PRINTER: false')
     } catch (e) {

@@ -1,36 +1,34 @@
-import '@babel/polyfill' // needed for SSSP2/4
-import '../../../package/index.js' // importing the evexi API
-
+import {Evexi} from 'evexi'
 import {log} from './../../common'
 
-const envVar = new class {
 
-  async env(name: string) {
-    try {
-      const foo = await window.Evexi.env(name)
-      log.success(`Env Var foo:${foo}`)
-    } catch(e) {
-      log.error('Env Var error')
-    }
+async function env(name: string) {
+  console.log('here ')
+  log.info('aaa')
+  try {
+    const foo = await Evexi.env(name)
+    log.success(`Env Var foo:${foo}`)
+  } catch(e) {
+    log.error('Env Var error')
   }
-
 }
 
+
 window.playing = async (item) => {
-    
-  log.info('playing item ...' + JSON.stringify(item))
+
+  log.info('playing item ........' + JSON.stringify(item))
 
   try {
-      
-      window.Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
 
-      if(window.Evexi) {
+      Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
 
-          log.info('')
 
-          envVar.env('foo')
+      console.log('a')
 
-      }
+          await env('foo')
+
+          console.log('b')
+
 
   } catch (e) {
       log.error('API ERROR - caught')

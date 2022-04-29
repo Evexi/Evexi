@@ -1,3 +1,11 @@
+# 2.6.0-alpha.0
+* Update the way we bundle examples (Parcel update)
+* Repo is now examples and documentation only (Brings in evexi script published to NPM)
+* Helpers added to documentation
+* Legacy added to documentation
+* Mock added to documentation
+* Updated branding
+
 # 2.5.0
 * Added example for stripe proxy
 

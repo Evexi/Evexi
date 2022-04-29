@@ -1,7 +1,5 @@
-import '@babel/polyfill' // needed for SSSP2/4
-import '../../../package/index.js' // importing the evexi API
-
 import { log } from '../../common'
+import Evexi from 'evexi'
 
 window.playing = async (item) => {
 
@@ -9,9 +7,9 @@ window.playing = async (item) => {
 
     try {
 
-        window.Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
+        Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
 
-        if (window.Evexi) {
+        if (Evexi) {
             log.info('')
             await squareRequest()
             await stripeRequest()
@@ -28,7 +26,7 @@ async function squareRequest() {
     log.info(' -- TESTING SQUARE REQUEST -- ')
 
     try {
-        const res = await window.Evexi.proxy('/square/v2/catalog/list', {
+        const res = await Evexi.proxy('/square/v2/catalog/list', {
             method: 'GET',
             // method: 'POST',
             // body: JSON.stringify({ foo: 'bar' })
@@ -49,7 +47,7 @@ async function stripeRequest() {
     log.info(' -- TESTING STRIPE REQUEST -- ')
 
     try {
-        const res = await window.Evexi.proxy('/stripe/v1/products', {
+        const res = await Evexi.proxy('/stripe/v1/products', {
             method: 'GET',
             // method: 'POST',
             // body: JSON.stringify({ foo: 'bar' })
