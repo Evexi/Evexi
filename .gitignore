@@ -2,3 +2,4 @@
 /.idea
 .npmrc
 .parcel-cache
+.tmp

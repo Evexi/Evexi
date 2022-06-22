@@ -54,5 +54,6 @@ buildDir docs/interactive/scan/src/index.html interactive-scan
 buildZip docs/kiosk/src/index.html kiosk
 buildZip docs/proxy/src/index.html proxy
 buildZip docs/mock/src/index.html mock
+buildZip docs/touchToEngage/src/index.html touchToEngage
 
 rm -r .tmp

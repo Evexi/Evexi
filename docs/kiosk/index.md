@@ -7,6 +7,7 @@ You can view a [working example here](./src).
 
 * [Barcode](#barcode)
 * [Printer](#printer)
+* [Touch To Engage](./../touchToEngage/index.md)
 
 #
 
