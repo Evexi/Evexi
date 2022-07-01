@@ -678,7 +678,7 @@ try {
 
 /**
  * Evexi API
- * Version 2.6.0-alpha.8
+ * Version 2.6.0-alpha.9
  */ var $0e35149d9d947b11$var$e159, $0e35149d9d947b11$var$t, $0e35149d9d947b11$var$n49, $0e35149d9d947b11$var$o, $0e35149d9d947b11$var$r, $0e35149d9d947b11$var$i, $0e35149d9d947b11$var$a1, $0e35149d9d947b11$var$s1 = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof $parcel$global ? $parcel$global : "undefined" != typeof self ? self : {}, $0e35149d9d947b11$var$c = {};
 $0e35149d9d947b11$var$e159 = $0e35149d9d947b11$var$c, Object.defineProperty($0e35149d9d947b11$var$e159, "__esModule", {
     value: !0
@@ -4797,7 +4797,6 @@ var $0e35149d9d947b11$var$Ae = function(e160) {
 }(), $0e35149d9d947b11$export$429f1c4820dd15e8 = function ke() {
     this.api = new $0e35149d9d947b11$var$Oe, this.helper = $0e35149d9d947b11$var$Re, this.Scan = $0e35149d9d947b11$var$Se, this.env = this.api.env, this.fs = this.api.fs, this.info = this.api.info, this.interactive = this.api.interactive, this.log = this.api.log, this.proxy = this.api.proxy, this.tizen = this.api.tizen;
 }, $0e35149d9d947b11$export$a228efff746656cd = new $0e35149d9d947b11$export$429f1c4820dd15e8;
-console.log("Running Evexi API");
 
 
 // get the session id from the url param
