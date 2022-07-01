@@ -112,7 +112,7 @@ const storage = new class {
         try {
             const listA = await Evexi.fs.list()
             try {
-                if (listA[0] === 'mrx.png' && listA[1] === 'text2.json') log.success('LIST A: success')
+                if (listA && listA[0] === 'mrx.png' && listA[1] === 'text2.json') log.success('LIST A: success')
                 else throw new Error()
             } catch (e) {
                 log.error('listA: ERROR' + JSON.stringify(e))

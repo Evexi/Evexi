@@ -10,9 +10,15 @@ PACKAGE_VERSION=$(cat package.json \
 
 PACKAGE_VERSION_ADJUSTED="${PACKAGE_VERSION//./}"
 
-rm -r .tmp
-rm -r examples
+if [ -d ".tmp" ]; then
+  rm -r .tmp
+fi
 
+if [ -d "examples" ]; then
+  rm -r examples
+fi
+
+mkdir .tmp
 mkdir examples
 
 function buildZip {
@@ -42,11 +48,14 @@ function buildDir {
 }
 
 function copy {
-  cp -r $1 examples/$2
-  cp node_modules/evexi/dist/evexi.legacy.iife.min.js examples/$2
+  cp -r $1 .tmp/$2
+  cp -r node_modules/evexi/dist/evexi.legacy.iife.min.js .tmp/$2
+  cd .tmp/$2
+  zip -r $2"-"$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store'
+  cd ../../
+  mv .tmp/$2/$2"-"$PACKAGE_VERSION_ADJUSTED.zip examples
 }
 
-copy docs/legacy/src legacy
 buildZip docs/envVars/src/index.html envVars
 buildZip docs/fs/src/index.html fs
 buildZip docs/interactive/content/src/index.html interactive
@@ -55,5 +64,6 @@ buildZip docs/kiosk/src/index.html kiosk
 buildZip docs/proxy/src/index.html proxy
 buildZip docs/mock/src/index.html mock
 buildZip docs/touchToEngage/src/index.html touchToEngage
+copy docs/legacy/src legacy
 
 rm -r .tmp
