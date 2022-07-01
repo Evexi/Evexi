@@ -1,10 +1,13 @@
-# 2.6.0-alpha.0
-* Update the way we bundle examples (Parcel update)
-* Repo is now examples and documentation only (Brings in evexi script published to NPM)
-* Helpers added to documentation
-* Legacy added to documentation
-* Mock added to documentation
-* Updated branding
+# 2.6.0
+The package has been re-written from the ground up for an improved structure and tree-shaking ability.
+
+* [IMPROVEMENT] Update the way we bundle examples (Parcel 2.X)
+* [IMPROVEMENT] Repo now only contains examples (src and build (ready to put onto Evexi platform)). Evexi package itself publishes to NPM
+* [FEATURE] Helpers added
+* [FEATURE] Offer a legacy script and a modern script (Modern is tree-shakable)
+* [IMPROVEMENT] Update branding
+* [FEATURE] Interactive Scan is now offered within the Evexi namespace
+* [FEATURE] Offers EvexiMock class and service for working locally without the need to publish to Evexi to use the API
 
 # 2.5.0
 * Added example for stripe proxy
