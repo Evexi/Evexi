@@ -1,5 +1,5 @@
 # 2.6.0
-The package has been re-written from the ground up for an improved structure and tree-shaking ability.
+The package has been re-written from the ground up for an improved structure and tree-shaking ability. Package provides an ES build by default.
 
 * [IMPROVEMENT] Update the way we bundle examples (Parcel 2.X)
 * [IMPROVEMENT] Repo now only contains examples (src and build (ready to put onto Evexi platform)). Evexi package itself publishes to NPM

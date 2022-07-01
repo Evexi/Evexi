@@ -678,7 +678,7 @@ try {
 
 /**
  * Evexi API
- * Version 2.6.0-alpha.7
+ * Version 2.6.0-alpha.8
  */ var $0e35149d9d947b11$var$e159, $0e35149d9d947b11$var$t, $0e35149d9d947b11$var$n49, $0e35149d9d947b11$var$o, $0e35149d9d947b11$var$r, $0e35149d9d947b11$var$i, $0e35149d9d947b11$var$a1, $0e35149d9d947b11$var$s1 = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof $parcel$global ? $parcel$global : "undefined" != typeof self ? self : {}, $0e35149d9d947b11$var$c = {};
 $0e35149d9d947b11$var$e159 = $0e35149d9d947b11$var$c, Object.defineProperty($0e35149d9d947b11$var$e159, "__esModule", {
     value: !0
