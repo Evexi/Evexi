@@ -81,7 +81,7 @@ const storage = new class {
             const download = await Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
 
             try {
-                if (download.url === 'https://mrx.technology/assets/images/compatible/mrx.png') log.success('DOWNLOAD: success')
+                if (download.url === 'https://mrx.technology/assets/images/compatible/mrx.png') log.success(`DOWNLOAD: success: Stored: ${download.data}`)
                 else throw new Error()
             } catch (e) {
                 log.error('DOWNLOAD: struct issue')
