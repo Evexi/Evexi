@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Evexi API Demo - Interactive</title>
-    <style>
-        body {
-            background-color: lightblue;
-            transition: background-color ease-in-out 1s;
-        }
-    </style>
+  <title>Evexi API Demo - Interactive</title>
+  <style>
+    body {
+      background-color: lightblue;
+      transition: background-color ease-in-out 1s;
+    }
+  </style>
 </head>
+
 <body>
-<h2>Evexi API Demo Interactive</h2>
-<image id="qr"/>
+  <h2>Evexi API Demo Interactive</h2>
+  <image id="qr" />
 
-<br/>
-<button onclick="window.kick()">Kick oldest client</button>
-<button onclick="window.broadcast()">Broadcast message</button>
-<button onclick="window.message('oldest')">Message oldest client</button>
-<button onclick="window.message('newest')">Message newest client</button>
-<br/>
+  <br />
+  <button onclick="window.kick()">Kick oldest client</button>
+  <button onclick="window.broadcast()">Broadcast message</button>
+  <button onclick="window.message('oldest')">Message oldest client</button>
+  <button onclick="window.message('newest')">Message newest client</button>
+  <br />
 
-<div id="logs"></div>
-<script type="module" src="index.ts"></script>
+  <div id="logs"></div>
+  <script type="module" src="index.ts"></script>
 </body>
+
 </html>

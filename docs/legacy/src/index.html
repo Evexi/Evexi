@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Evexi API Demo - LEGACY</title>
-    <style>
-        body {
-            background-color: purple;
-            transition: background-color ease-in-out 1s;
-        }
-    </style>
-</head>
-<body>
-<h2>Evexi API Demo - LEGACY</h2>
-
-<br/>
-
-<div id="logs"></div>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-<script type="text/javascript" src="./evexi.legacy.iife.min.js"></script>
-<script type="text/javascript">
-var log = {
-    info: function(log) {
-        document.getElementById('logs').innerHTML += '<span style=\'background-color: gray\'>' + log + '</span><br/>'
-    },
-    success: function(log) {
-        document.getElementById('logs').innerHTML += '<span style=\'background-color: darkgreen\'>' + log + '</span><br/>'
-    },
-    error: function(log) {
-        document.getElementById('logs').innerHTML +=  '<span style=\'background-color: darkred\'>' + log + '</span><br/>'
-        console.log(log)
-    },
-    clear: function() {
-        this.logs.innerHTML = ''
+  <title>Evexi API Demo - LEGACY</title>
+  <style>
+    body {
+      background-color: purple;
+      transition: background-color ease-in-out 1s;
     }
-}
+  </style>
+</head>
 
-new window.EvexiMock(window.Evexi)
-  .env({foo: 'bar'})
+<body>
+  <h2>Evexi API Demo - LEGACY</h2>
+  <br />
+  <div id="logs"></div>
 
-window.playing = function(item) {
-    log.info('playing item ...' + JSON.stringify(item))
-    log.info('')
+  <script type="text/javascript" src="./polyfill.min.js"></script>
+  <script type="text/javascript" src="./evexi.legacy.iife.min.js"></script>
 
-    try {
+  <script type="text/javascript">
+    var log = {
+      info: function (log) {
+        document.getElementById('logs').innerHTML += '<span style=\'background-color: gray\'>' + log +
+          '</span><br/>'
+      },
+      success: function (log) {
+        document.getElementById('logs').innerHTML += '<span style=\'background-color: darkgreen\'>' + log +
+          '</span><br/>'
+      },
+      error: function (log) {
+        document.getElementById('logs').innerHTML += '<span style=\'background-color: darkred\'>' + log +
+          '</span><br/>'
+        console.log(log)
+      },
+      clear: function () {
+        this.logs.innerHTML = ''
+      }
+    }
+
+    new window.EvexiMock(window.Evexi)
+      .env({
+        foo: 'bar'
+      })
+
+    window.playing = function (item) {
+      log.info('playing item ...' + JSON.stringify(item))
+      log.info('')
+
+      try {
 
         window.Evexi ? log.success('API Found') :
-            log.error('API ERROR - does not exist')
+          log.error('API ERROR - does not exist')
 
         window.Evexi.env('foo')
-            .then(function(val) {
-                val === 'bar' ? log.success('Env Var foo: ' + val) :
-                    log.error('Env Var error')
-            })
+          .then(function (val) {
+            val === 'bar' ? log.success('Env Var foo: ' + val) : log.error('Env Var error')
+          })
 
-    } catch (e) {
+      } catch (e) {
         log.error('Env Var error 2')
         console.log(e)
+      }
     }
-}
 
-window.stopping = function() {
-    log.info('')
-    log.info(' -- STOPPING -- ')
-}
-</script>
+    window.stopping = function () {
+      log.info('')
+      log.info(' -- STOPPING -- ')
+    }
+  </script>
 </body>
+
 </html>

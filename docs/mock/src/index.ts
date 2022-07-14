@@ -60,6 +60,7 @@ window.playing = async (item) => {
     if (Evexi) log.info('')
 
     await env.check('a', 'b')
+    // @ts-ignore
     await env.check('b', undefined)
     await env.check('c', 'd')
 
@@ -76,6 +77,7 @@ window.playing = async (item) => {
   } catch (e) {
     log.error('API ERROR - caught')
   }
-};
+}
 
+// @ts-ignore
 window.playing({playlistHash: '', id: '', localMedia: '', duration: 0, type: 'ZIP'})

@@ -8,6 +8,8 @@ The package has been re-written from the ground up for an improved structure and
 * [IMPROVEMENT] Update branding
 * [FEATURE] Interactive Scan is now offered within the Evexi namespace
 * [FEATURE] Offers EvexiMock class and service for working locally without the need to publish to Evexi to use the API
+* [IMPROVEMENT] Tidy linting
+* [BUG] Bugfix for legacy on SSSP2 (polyfill local rather then CDN)
 
 # 2.5.0
 * Added example for stripe proxy

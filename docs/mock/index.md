@@ -4,6 +4,7 @@ The Evexi package includes a object which can be used to mock the Evexi API. Thi
 When importing the mock all methods will be mocked by default. You can then override the proxy URL to point to your proxy.js service, or mock endpoints with static data, mock env variables, barcode results etc.
 
 Note: `Make sure in production builds you don't use this class`
+Note: `The player will trigger window.playing event. Remember to manually call this method when working locally`
 
 #
 
