@@ -1,5 +1,5 @@
 /node_modules
 /.idea
-/tests/coverage
-/.cache
-/dist
+.npmrc
+.parcel-cache
+.tmp

@@ -1,17 +1,8 @@
 # Interactive Scan
 
-Interactive scan package is designed to be installed as part of scanURL specified within [interactive content](./../content/index.md) 'interact.create' call. The package handles connecting to the interactive server, keeping the session alive and formatting for developers.
+Interactive scan package should be installed on page that your customers will be scanning the content on the display with.
 
 You can view a [working example here](./src).
-
-#
-
-### Install
-You should install the package via CDN and include as part of the scanURL page. Its recommend that you version lock against majors only. Patch and minor releases will address bugs and add features that don't break compatibility within the major version only.
-
-````javascript
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/evexi@2"></script>
-````
 
 #
 
@@ -20,7 +11,7 @@ When scanning the QR code for the session we will automatally append a URL param
 
 ````javascript
 // get the session id from the url param
-var sessionId = Scan.urlParam(); // string
+var sessionId = Evexi.Scan.urlParam(); // string
 ````
 
 #
@@ -29,7 +20,7 @@ var sessionId = Scan.urlParam(); // string
 Using the sessionId you can then setup a session and listen for messages. The second argument to the constructor is the enviroment, by default this is pointing to the production instance but can be overridden if necessary.
 
 ````javascript
-var scan = new Scan(sessionId)
+var scan = new Evexi.Scan(sessionId)
   .onMessage(function(message) {
     // message = string (message sent from the content)
     console.log('Message: ', message)

@@ -1,59 +1,55 @@
 # Evexi API
-![Logo](./logo.jpg)
+![Banner](./banner.png)
 
 ## Introduction
-The Evexi API is designed for use with background tasks, web items or zip items within the Evexi Player. It is important to note that it is the responsibility of the developer to manage any stored assets. The Evexi API has been tested to support Tizen firmware 2070 and later and we cannot guarantee the API to work reliably on previous firmware versions.
-The docs & examples directories contain examples of filesystem communication, interactive and more. the player supports multiple platforms, some of which only support ES5 and others early versions of ES6. Therefore, its recommended to compile your application down to ES5. All methods returning a promise are wrapped in a timeout of 5 seconds. If no response is received within this time an error will be thrown within the catch statement.
+The Evexi API provides content connectivity to either the underlying player hardware, software or evexi platform features. This can be used in either zip items, web items or background tasks.
 
-![Tests](https://github.com/MRXTechnology/Evexi/actions/workflows/build.yml/badge.svg)
+It is important to note that it is the responsibility of the developer to manage any stored assets. The Evexi API has been tested to support Tizen firmware 2070 and later and we cannot guarantee the API to work reliably on previous firmware versions.
+
+All filesystem methods returning a promise are wrapped in a timeout of 5 seconds. If no response is received within this time an error will be thrown within the catch statement.
 
 #
 
-###### Details
+###### Overview
 * [Install](#install)
 * [Packaging](#packaging)
 * [Lifecycle Events](#lifecycle-events)
+* [Legacy Script](docs/legacy/index.md)
 
 #
 
-###### API Details
+###### API Features & Methods
 * [File System](docs/fs/index.md)
 * [Interactive](docs/interactive/index.md)
 * [Misc](docs/misc/index.md)
 * [Kiosk](docs/kiosk/index.md)
 * [Proxy](docs/proxy/index.md)
 * [Environment Variables](docs/envVars/index.md)
+* [Mock & Server](docs/mock/index.md)
+* [Helpers](docs/helpers/index.md)
 
 #
 
 ### Install
-The repo provides a package containing both `window.Evexi` for content API methods and `window.Scan` (remote part of interactive content). Included are type definitions, examples and full documentation. The Evexi API is subject to change on a per version basis so ensure to check the app definitions match the player version
+Install the evexi package from NPM. This repo provides examples and documentation. The Evexi API is subject to change on a per version basis so ensure to check the app definitions match the player version.
 
 To setup:
 ````bash
 yarn add evexi
 ````
 
-`import 'evexi'` or `import Scan from 'evexi/package/Scan'.`
-
-Add definitions only as follows:
-````json
-{
-    "compilerOptions": {
-        "types": ["evexi"]
-    }
-}
+````typescript
+import {Evexi, EvexiMock} from 'evexi'
 ````
-NOTE: `import @babel/polyfill` if you are targeting SSSP2 or SSSP4 platforms.
+
+NOTE: Use the legacy script if your targeting SSSP2 or SSSP4 platforms `evexi/dist/evexi.legacy.iife.min.js`. It contains all polyfills needed.
 
 #
 
 ### Packaging
 
-A '.zip' application must not contain hidden files and consist of a flat structure (no nested directories).
-Zip the package as follows:
+A '.zip' application must not contain hidden files and consist of a flat structure (no nested directories for SSSP2). A zip should contain at least an index.html file in the root level.
 
-zipinfo example for [example](./examples/fs-240.zip)
 ````bash
 Archive:  fs-240.zip
 Zip file size: 73108 bytes, number of entries: 2
@@ -62,12 +58,12 @@ Zip file size: 73108 bytes, number of entries: 2
 2 files, 317913 bytes uncompressed, 72780 bytes compressed:  77.1%
 ````
 
-You can zip your package like so:
+You can zip your application like so:
 ````bash
-cd $1'-'$PACKAGE_VERSION_ADJUSTED # go into directory
-zip -r $1'-'$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
+cd app # go into directory
+zip app.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
 ````
-Further examples can be found [here](./.build/buildExamples.sh#L18-L22).
+Further examples can be found [here](./.build/build.sh#L18-L33).
 
 #
 
@@ -76,7 +72,7 @@ Lifecycle events are triggered by the player if the functions exist within the i
 
 ````html
 <script type="text/javascript">
-    
+
 /**
  * Lifecycle event (This function is triggered by the player to indicate the content is visible on the display.
  * You should use this function to trigger any animations or if your showing a picture in picture feed you

@@ -1,3 +1,16 @@
+# 2.6.0
+The package has been re-written from the ground up for an improved structure and tree-shaking ability. Package provides an ES build by default.
+
+* [IMPROVEMENT] Update the way we bundle examples (Parcel 2.X)
+* [IMPROVEMENT] Repo now only contains examples (src and build (ready to put onto Evexi platform)). Evexi package itself publishes to NPM
+* [FEATURE] Helpers added
+* [FEATURE] Offer a legacy script and a modern script (Modern is tree-shakable)
+* [IMPROVEMENT] Update branding
+* [FEATURE] Interactive Scan is now offered within the Evexi namespace
+* [FEATURE] Offers EvexiMock class and service for working locally without the need to publish to Evexi to use the API
+* [IMPROVEMENT] Tidy linting
+* [BUG] Bugfix for legacy on SSSP2 (polyfill local rather then CDN)
+
 # 2.5.0
 * Added example for stripe proxy
 

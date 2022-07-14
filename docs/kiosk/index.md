@@ -7,6 +7,7 @@ You can view a [working example here](./src).
 
 * [Barcode](#barcode)
 * [Printer](#printer)
+* [Touch To Engage](./../touchToEngage/index.md)
 
 #
 
@@ -15,7 +16,7 @@ This method will trigger the barcode scanner for 30 seconds. Once a barcode has 
 
 ````typescript
 try {
-    const res = await window.Evexi.tizen.barcode() // string
+    const res = await Evexi.tizen.barcode() // string
 } catch (e) {
     //
 }
@@ -28,7 +29,7 @@ The method will trigger the printer to print the provided data.
 
 ````typescript
 try {
-    const data = 
+    const data =
         '                                          \n' +
         '                  EVEXI                   \n' +
         '                  EVEXI                   \n' +
@@ -41,7 +42,7 @@ try {
         '                                          \n' +
         '                                          \n'
 
-    const res = await window.Evexi.tizen.printer(data)
+    const res = await Evexi.tizen.printer(data)
 } catch (e) {
     //
 }
@@ -50,7 +51,7 @@ try {
 The second optional argument can take an object of override settings for the printer. This can be used if the kiosk is on a different serial port or has a different baud rate. One of more overrides can be sent. Default values for everything else will be used. If you want to check what the print settings should be for a particular device you can click the 'SELF' button on the printer to print a test page which lists out what these settings should be for that particular device.
 
 ````typescript
-await window.Evexi.tizen.printer('PRINT DATA', {
+await Evexi.tizen.printer('PRINT DATA', {
     port: 'PRINTERPORT1', // 'PRINTERPORT0' | 'PRINTERPORT1' | 'PRINTERPORT2'  // DEFAULT='PRINTERPORT1'
     baudRate: 115200, // DEFAULT=115200
     parity: 'NONE', // 'NONE' | 'ODD' | 'EVEN'  // DEFAULT='NONE'

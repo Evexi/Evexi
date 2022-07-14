@@ -7,7 +7,7 @@ You can get individual values by running the following. A promise is returned wi
 
 ```typescript
 try {
-    const res = await window.Evexi.env('foo') // bar || undefined
+    const res = await Evexi.env('foo') // bar || undefined
 } catch (e) {
     // Catch error
 }
