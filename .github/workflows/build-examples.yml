@@ -1,0 +1,20 @@
+name: Build Examples
+on: [push]
+jobs:
+  Build-Examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      - name: Run bash script
+        run: |
+         chmod +x ./.build/build.sh
+         bash ./.build/build.sh
+        shell: bash
+      - name: Upload output file
+        uses: actions/upload-artifact@v3
+        with:
+          name: Examples
+          path: examples/*

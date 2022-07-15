@@ -23,6 +23,8 @@ mkdir examples
 
 function buildZip {
 
+  mkdir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED
+
   # package
   node_modules/.bin/parcel build $1 --dist-dir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED --no-cache --no-optimize --no-source-maps --no-content-hash --public-url ./
 
@@ -57,13 +59,13 @@ function copy {
 }
 
 buildZip docs/envVars/src/index.html envVars
-buildZip docs/fs/src/index.html fs
-buildZip docs/interactive/content/src/index.html interactive
-buildDir docs/interactive/scan/src/index.html interactive-scan
-buildZip docs/kiosk/src/index.html kiosk
-buildZip docs/proxy/src/index.html proxy
-buildZip docs/mock/src/index.html mock
-buildZip docs/touchToEngage/src/index.html touchToEngage
-copy docs/legacy/src legacy
+# buildZip docs/fs/src/index.html fs
+# buildZip docs/interactive/content/src/index.html interactive
+# buildDir docs/interactive/scan/src/index.html interactive-scan
+# buildZip docs/kiosk/src/index.html kiosk
+# buildZip docs/proxy/src/index.html proxy
+# buildZip docs/mock/src/index.html mock
+# buildZip docs/touchToEngage/src/index.html touchToEngage
+# copy docs/legacy/src legacy
 
 rm -r .tmp
