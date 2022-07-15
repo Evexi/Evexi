@@ -1,5 +1,8 @@
 name: Build Examples
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   Build-Examples:
     runs-on: ubuntu-latest
