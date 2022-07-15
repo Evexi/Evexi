@@ -23,6 +23,8 @@ mkdir examples
 
 function buildZip {
 
+  mkdir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED
+
   # package
   node_modules/.bin/parcel build $1 --dist-dir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED --no-cache --no-optimize --no-source-maps --no-content-hash --public-url ./
 

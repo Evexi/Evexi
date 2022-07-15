@@ -10,6 +10,7 @@ The package has been re-written from the ground up for an improved structure and
 * [FEATURE] Offers EvexiMock class and service for working locally without the need to publish to Evexi to use the API
 * [IMPROVEMENT] Tidy linting
 * [BUG] Bugfix for legacy on SSSP2 (polyfill local rather then CDN)
+* [IMPROVEMENT] Examples are built with Github actions
 
 # 2.5.0
 * Added example for stripe proxy
