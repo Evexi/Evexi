@@ -88,10 +88,10 @@ NOTE: Nested folders are not supported. Downloaded files are always stored in th
 
 ````typescript
 try {
-    const download = await Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
-    // success {url: 'https://mrx.technology/assets/images/compatible/mrx.png', data: '/mtd_down/common/MrPlayer/user_files/mrx.png', error: null}
+    const download = await Evexi.fs.download('https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png')
+    // success {url: 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png', data: '/mtd_down/common/MrPlayer/user_files/mrx.png', error: null}
 
-    // error {url: 'https://mrx.technology/assets/images/compatible/mrx.png', data: null, error: 'file download failed'}
+    // error {url: 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png', data: null, error: 'file download failed'}
 } catch (e) {
     Log.error('DOWNLOAD: error')
 }

@@ -1,3 +1,8 @@
+# 2.6.2
+* [BUG] Fix URL for FS/download method to test download functionality
+* [BUG] Window.playing and window.stopping event can sometimes be provided with null
+* [IMPROVEMENT] Update documentation for touch to engage feature
+
 # 2.6.0
 The package has been re-written from the ground up for an improved structure and tree-shaking ability. Package provides an ES build by default.
 

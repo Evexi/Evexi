@@ -15,10 +15,10 @@ window.end = async () => {
 /**
  * Lifecycle event
  */
-window.playing = (item) => {
-  log.info('playing item ...' + JSON.stringify(item))
+window.playing = () => {
   try {
-    Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
+    log.info(' -- PLAYING -- ')
+    if(!Evexi) log.error('API ERROR - does not exist')
   } catch (e) {
     log.error('API ERROR - caught')
   }
@@ -28,6 +28,5 @@ window.playing = (item) => {
  * Lifecycle event to indicate the item has stopped playing
  */
 window.stopping = () => {
-  log.clear()
   log.info(' -- STOPPING -- ')
 }

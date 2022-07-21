@@ -62,7 +62,7 @@ const storage = new class {
 
   async exists() {
     try {
-      const exists = await Evexi.fs.exists('mrx.png')
+      const exists = await Evexi.fs.exists('Evexi_logo_whitered.png')
 
       try {
         if (!exists) log.success('EXISTS: success - item should not exist')
@@ -78,10 +78,10 @@ const storage = new class {
 
   async download() {
     try {
-      const download = await Evexi.fs.download('https://mrx.technology/assets/images/compatible/mrx.png')
+      const download = await Evexi.fs.download('https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png')
 
       try {
-        if (download.url === 'https://mrx.technology/assets/images/compatible/mrx.png') log.success(`DOWNLOAD: success: Stored: ${download.data}`)
+        if (download.url === 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png') log.success(`DOWNLOAD: success: Stored: ${download.data}`)
         else throw new Error()
       } catch (e) {
         log.error('DOWNLOAD: struct issue')
@@ -94,7 +94,7 @@ const storage = new class {
 
   async existsB() {
     try {
-      const exists = await Evexi.fs.exists('mrx.png')
+      const exists = await Evexi.fs.exists('Evexi_logo_whitered.png')
 
       try {
         if (exists) log.success('EXISTS: success')
@@ -112,7 +112,7 @@ const storage = new class {
     try {
       const listA = await Evexi.fs.list()
       try {
-        if (listA && listA[0] === 'mrx.png' && listA[1] === 'text2.json') log.success('LIST A: success')
+        if (listA && listA[0] === 'Evexi_logo_whitered.png' && listA[1] === 'text2.json') log.success('LIST A: success')
         else throw new Error()
       } catch (e) {
         log.error('listA: ERROR' + JSON.stringify(e))
@@ -124,7 +124,7 @@ const storage = new class {
 
   async deletes() {
     try {
-      const del = await Evexi.fs.del('mrx.png')
+      const del = await Evexi.fs.del('Evexi_logo_whitered.png')
 
       try {
         if (del) log.success('DELETE: success')
@@ -140,7 +140,7 @@ const storage = new class {
 
   async existsC() {
     try {
-      const exists = await Evexi.fs.exists('mrx.png')
+      const exists = await Evexi.fs.exists('Evexi_logo_whitered.png')
 
       try {
         if (!exists) log.success('EXISTS C: success - should not exist')
