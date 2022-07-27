@@ -53,7 +53,7 @@ NOTE: Use the legacy script if your targeting SSSP2 or SSSP4 platforms `evexi/di
 
 ### Packaging
 
-A '.zip' application must not contain hidden files and consist of a flat structure (no nested directories for SSSP2). A zip should contain at least an index.html file in the root level.
+A '.zip' application must not contain hidden files and consist of a flat structure (no nested directories for SSSP2). The index.html should be in the root of the zip. A zip should contain at least an index.html file in the root level.
 
 ````bash
 Archive:  fs-240.zip
