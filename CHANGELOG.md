@@ -1,3 +1,7 @@
+# 2.7.1
+* [IMPROVEMENT] OTI Payment
+* [IMPROVEMENT] Serial
+
 # 2.6.2
 * [BUG] Fix URL for FS/download method to test download functionality
 * [BUG] Window.playing and window.stopping event can sometimes be provided with null

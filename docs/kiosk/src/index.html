@@ -14,10 +14,36 @@
 <body>
   <h2>Evexi API Demo Kiosk</h2>
 
-  <button onclick="window.barcode()">Barcode</button>
-  <button onclick="window.print()">Print</button>
-  <button onclick="window.printWrongPort()">Print - Wrong port</button>
+  <div>
+    <button onclick="window.barcode()">Barcode</button>
+  </div>
+
   <br />
+
+  <div>
+    <button onclick="window.print()">Print</button>
+    <button onclick="window.printWrongPort()">Print - Wrong port</button>
+  </div>
+
+  <br />
+
+  <div>
+    <button onclick="window.serialOpen()">Open Serial</button>
+    <button onclick="window.serialClose()">Close Serial</button>
+    <button onclick="window.serialWriteData(`4765745374617475732869643d3129`)">Write Serial ... GetStatus(id=1)</button> <!-- GetStatus(id=1) -->
+  </div>
+
+  <br />
+
+  <div>
+    <button onclick="window.otiPay(6.20)">PAY £6.20</button>
+    <button onclick="window.otiPay(5)">PAY £5.00 --- Mimic Declined Transaction</button>
+    <button onclick="window.otiPay(0.50)">PAY £0.50 --- Smallest Amount</button>
+    <button onclick="window.otiPay(1.00, 5)">PAY £1.00 --- 5 Second timeout duration</button>
+    <button onclick="window.otiPay(0.55, 978, 30)">PAY €0.55 Euros --- 30 Second timeout duration</button>
+
+    <button onclick="window.otiCancel()">CANCEL</button>
+  </div>
 
   <div id="logs"></div>
   <script type="module" src="index.ts"></script>
