@@ -126,7 +126,7 @@ try {
     const res = await Evexi.oti.pay(5.20) // Payment for £5.20
     // res = OK | Declined | Error | Timeout | Cancelled
 } catch (e) {
-    //
+    // catch will throw if Evexi does not get a response within timeout duration plus 10 milliseconds.
 }
 ````
 You can override the currency code with the second argument and the timeout with the third. By default the timeout is 60 seconds unless specified.

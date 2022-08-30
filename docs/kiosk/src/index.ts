@@ -108,9 +108,9 @@ window.serialClose = async () => {
 let count = 0
 
 // @ts-ignore
-window.otiPay = async (amount: number, duration = 60) => {
+window.otiPay = async (amount: number, currencyCode?: number, duration?: number) => {
   new PayWrapper()
-    .run(amount, duration)
+    .run(amount, currencyCode, duration)
 }
 
 class PayWrapper {
@@ -122,10 +122,10 @@ class PayWrapper {
     count++
   }
 
-  async run(amount: number, duration: number) {
+  async run(amount: number, currencyCode?: number, duration?: number) {
     log.info(` -- STARTING OTI PAY ${this.id} -- `)
     try {
-      const res = await Evexi.oti.pay(amount, undefined, duration)
+      const res = await Evexi.oti.pay(amount, currencyCode ?? undefined, duration ?? undefined)
       log.info(` -- FINISHED OTI PAY ${this.id}: ${res} -- `)
     } catch(e) {
       log.info(` -- FINISHED OTI PAY ${this.id}: CAUGHT -- ${e}`)
