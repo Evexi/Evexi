@@ -107,8 +107,6 @@ OTI configuration should include the following: Note: OTI should be on firmware 
 ````bash
 # kiosk mode should be turned on
 KIOSK_ENABLED=1
-# Shorter messages so less to decode
-KIOSK_SHORT_MESSAGES=1
 
 # connected to host via serial
 SERIAL_SCRIPT_INTERFACE_ENABLED=1
@@ -120,11 +118,12 @@ MIN_PRICE_LIMIT=0
 ````
 
 ##
-Create a payment. If OTI is not ready to take a payment (no internet connection or updating etc) 'Error' will be returned.
+Create a payment. If OTI is not ready to take a payment (no internet connection or updating etc) 'Error' will be returned. The return will provide a status along with a reference id, card type and a card reference number.
 ````typescript
 try {
     const res = await Evexi.oti.pay(5.20) // Payment for £5.20
-    // res = OK | Declined | Error | Timeout | Cancelled
+    // TransactionStatus = OK | Declined | Error | Timeout | Cancelled
+    // res = {status: TransactionStatus, ref?: string, cardType?: string, cardRef?: string}
 } catch (e) {
     // catch will throw if Evexi does not get a response within timeout duration plus 10 milliseconds.
 }

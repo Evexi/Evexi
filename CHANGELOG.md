@@ -1,4 +1,7 @@
-# 2.7.1
+# 2.7.0-alpha.2
+* [IMPROVEMENT] Adjust OTI payment response (include additional info)
+
+# 2.7.0-alpha.1
 * [IMPROVEMENT] OTI Payment
 * [IMPROVEMENT] Serial
 

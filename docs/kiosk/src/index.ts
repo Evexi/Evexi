@@ -126,7 +126,7 @@ class PayWrapper {
     log.info(` -- STARTING OTI PAY ${this.id} -- `)
     try {
       const res = await Evexi.oti.pay(amount, currencyCode ?? undefined, duration ?? undefined)
-      log.info(` -- FINISHED OTI PAY ${this.id}: ${res} -- `)
+      log.info(` -- FINISHED OTI PAY ${this.id}: ${JSON.stringify(res)} -- `)
     } catch(e) {
       log.info(` -- FINISHED OTI PAY ${this.id}: CAUGHT -- ${e}`)
     }
