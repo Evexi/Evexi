@@ -1,7 +1,7 @@
 # Kiosk
-The Samsung Kiosk has two hardware peripherals both of which can be controlled via the Evexi API. Additionally you can connect a OTI payment device or communicate with a third party serial device on the additional ports.
+The Samsung Kiosk includes two integrated hardware peripherals both controllable via the Evexi API. Additionally communication to an OTI payment device or communicate with a third party serial device on the additional ports is supported.
 
-You can view a [working example here](./src).
+See a [working example here](./src).
 
 #
 
@@ -14,7 +14,7 @@ You can view a [working example here](./src).
 #
 
 ### Barcode
-This method will trigger the barcode scanner for 30 seconds. Once a barcode has been scanned the method will return the barcode as a promise. If no barcode is scanned or there was a error else where the promise will be rejected.
+This method triggers the integrated barcode scanner for a 30 second period. Following a successful barcode scan the method will return the barcode as a promise. If no barcode is scanned or there was a error else where the promise will be rejected.
 
 ````typescript
 try {
@@ -50,7 +50,7 @@ try {
 }
 ````
 
-The second optional argument can take an object of override settings for the printer. This can be used if the kiosk is on a different serial port or has a different baud rate. One of more overrides can be sent. Default values for everything else will be used. If you want to check what the print settings should be for a particular device you can click the 'SELF' button on the printer to print a test page which lists out what these settings should be for that particular device.
+The second optional argument can take an object to override settings for the printer. This is useful if the kiosk is on a different serial port or has a different baud rate. One or more overrides can be sent. Default values for everything else will be used. To query the print settings for particular device you can click the 'SELF' button on the printer to print a test page which lists out what these settings should be for that particular device.
 
 ````typescript
 await Evexi.tizen.printer('PRINT DATA', {
@@ -65,7 +65,7 @@ await Evexi.tizen.printer('PRINT DATA', {
 #
 
 ### Serial
-Serial methods can be used to communicate with a serial connected device. When writing data it will be sent as provided so if you wish to send hex please convert your string to hex before writing. Each returned message will be 8 bits in length by default.
+Serial methods are used to communicate with a serial connected device. When writing data it will be sent as provided. When sending HEX please convert your string to HEX before writing. Each returned message will be 8 bits in length by default.
 
 ````typescript
 // Messages from the serial device to the Kiosk
@@ -98,7 +98,7 @@ export interface SerialOptions {
 #
 
 ### OTI
-OTI Telebox can be connected to the Samsung Kiosk on the middle port. Once connected your content can control the device using the pay and cancel methods. Once the Kiosk has established communication 'Welcome' will be displayed on the reader. If for what ever reason the OTI device is not able to process payments it will present 'Not Ready' on the reader and 'Error' will be returned if currently running a transaction.
+OTI Telebox needs to be connected to the Samsung Kiosk on the middle port. Once connected your webapp can control the device using the "pay" and "cancel" methods. Successful connection to the Kiosk subsequently  displays 'Welcome' on the OTI reader. If connection is not availble or working the OTI device will present 'Not Ready' on the reader and 'Error' will be returned when processing a transaction.
 
 ##
 
@@ -129,14 +129,14 @@ try {
     // catch will throw if Evexi does not get a response within timeout duration plus 10 milliseconds.
 }
 ````
-You can override the currency code with the second argument and the timeout with the third. By default the timeout is 60 seconds unless specified.
+Overriding currency code is performed with the second argument and timeout with the third argument. By default the timeout is set to 60 seconds unless specified.
 
 ````typescript
 Evexi.oti.pay(0.55, 978, 30) // 0.55 Euros with timeout if no payment within 30 seconds
 ````
 
 ##
-You can also cancel a running transaction. When ran you should continue to wait for the response on oti.pay method which should be 'Cancelled' after running this method (if canceled in time). If no transaction is currently running nothing will happen.
+To cancel a running transaction please wait for the response on oti.pay method which should be 'Cancelled' after running this method (if cancelled in time). If no transaction is currently running nothing will happen.
 ````typescript
 try {
     Evexi.oti.cancel()
