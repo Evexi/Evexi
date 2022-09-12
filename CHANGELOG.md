@@ -1,3 +1,6 @@
+# 2.7.0-alpha.3
+* [BUG] Fixes bug with ReceiptGenerator helper not reporting when throwing
+
 # 2.7.0-alpha.2
 * [IMPROVEMENT] Adjust OTI payment response (include additional info)
 
