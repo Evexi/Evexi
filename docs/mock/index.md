@@ -1,8 +1,6 @@
 # Mock & Proxy Server
 The Evexi package includes a object which can be used to mock the Evexi API. This is useful for local development when you want to develop in chrome and deploy onto Evexi later. We have also included a local proxy server (server.js) which can be ran locally to mock any communications to Square or Stripe integration services.
 
-When importing the mock all methods will be mocked by default. You can then override the proxy URL to point to your proxy.js service, or mock endpoints with static data, mock env variables, barcode results etc.
-
 Note: `Make sure in production builds you don't use this class`
 
 Note: `The player will trigger window.playing event. Remember to manually call this method when working locally`
@@ -17,6 +15,7 @@ The following example would stub any calls to '/square/a?ver=123' and return the
 import {Evexi, EvexiMock} from 'evexi'
 
 new EvexiMock(Evexi)
+  .all() // Mock all objects
   .env({a: 'b', c: 'd'})
   .proxy([
     {
@@ -43,5 +42,5 @@ Mock Proxy:
 import {Evexi, EvexiMock} from 'evexi'
 
 new EvexiMock(Evexi)
-  .proxy('http://localhost:9063')
+  .proxy('http://localhost:9063') // Only mock the evexi proxy methods
 ````
