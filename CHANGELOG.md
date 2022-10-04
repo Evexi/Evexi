@@ -1,3 +1,16 @@
+# 2.7.0-alpha.4 (2.7.0)
+* [IMPROVEMENT] [BREAKING] Adds the ability to mock only certain parts of the Evexi API and not others via the .all()
+
+# 2.7.0-alpha.3
+* [BUG] Fixes bug with ReceiptGenerator helper not reporting when throwing
+
+# 2.7.0-alpha.2
+* [IMPROVEMENT] Adjust OTI payment response (include additional info)
+
+# 2.7.0-alpha.1
+* [IMPROVEMENT] OTI Payment
+* [IMPROVEMENT] Serial
+
 # 2.6.2
 * [BUG] Fix URL for FS/download method to test download functionality
 * [BUG] Window.playing and window.stopping event can sometimes be provided with null

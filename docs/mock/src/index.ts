@@ -2,6 +2,7 @@ import {log} from './../../common'
 import {Evexi, EvexiMock} from 'evexi'
 
 new EvexiMock(Evexi)
+  .all() // Mock all objects
   .env({a: 'b', c: 'd'})
   .proxy([
     {
