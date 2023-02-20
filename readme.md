@@ -30,6 +30,7 @@ All examples shown in /docs directory are built at CI level and available to dow
 * [Kiosk](docs/kiosk/index.md)
 * [Proxy](docs/proxy/index.md)
 * [Environment Variables](docs/envVars/index.md)
+* [Nexmosphere](docs/nexmosphere/index.md)
 * [Mock & Server](docs/mock/index.md)
 * [Helpers](docs/helpers/index.md)
 
