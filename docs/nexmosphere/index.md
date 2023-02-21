@@ -1,9 +1,13 @@
 # Nexmosphere
-[Nexmosphere](https://nexmosphere.com/) provides a variety of sensors that can be utilized by the Evexi platform to offer users content with sensor messages.
+[Nexmosphere](https://nexmosphere.com/) provides a variety of sensors that can be utilized by the Evexi platform to offer users content with sensor messages. You can see a [working example here](./src/index.ts).
 
 #
 
 If you are creating [interactive content](./../interactive/content/index.md#start-session), it is recommended that you call `Evexi.interactive.start()` within the `Evexi.nexmosphere.onMessage()` callback function once you receive the desired start message for your application. This will pause playback and display your application until the `Evexi.interactive.destroy()` method is invoked. If you attach your content to a player as engage content it will be loaded and in the background so you should open and listen for messages outside the [Evexi lifecycle](./../../readme.md#lifecycle-events) events.
+
+#
+
+When working locally you are able to [mock](./../mock/index.md#mocking-nexmosphere-messages) the Evexi Nexmosphere API to mimic inbound messages.
 
 #
 
