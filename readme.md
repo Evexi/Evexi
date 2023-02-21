@@ -10,7 +10,7 @@ All filesystem methods returning a promise are wrapped in a timeout of 5 seconds
 
 #
 
-All examples shown in /docs directory are built at CI level and available to download from Github Actions:
+All examples shown in /docs directory are built at CI level and available to download from Github Actions. Alternatively clone this repo and run `yarn run build`.
 
 ![Build-Examples](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml/badge.svg)
 [Download](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml)

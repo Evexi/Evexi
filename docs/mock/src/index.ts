@@ -1,7 +1,7 @@
 import {log} from './../../common'
 import {Evexi, EvexiMock} from 'evexi'
 
-new EvexiMock(Evexi)
+const mock = new EvexiMock(Evexi)
   .all() // Mock all objects
   .env({a: 'b', c: 'd'})
   .proxy([
@@ -56,6 +56,11 @@ const barcode = new class {
 window.playing = async (item) => {
   log.info('playing item ...' + JSON.stringify(item))
 
+  Evexi.nexmosphere.onMessage(msg => {
+    if(msg === 'message from nexmosphere controller') return log.success(msg)
+    log.error(msg)
+  })
+
   try {
     Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
     if (Evexi) log.info('')
@@ -74,6 +79,10 @@ window.playing = async (item) => {
     log.info('')
 
     await barcode.check('12345')
+
+    log.info('')
+
+    mock.nexmosphereMessage('message from nexmosphere controller')
 
   } catch (e) {
     log.error('API ERROR - caught')
