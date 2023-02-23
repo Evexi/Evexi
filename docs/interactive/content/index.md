@@ -71,7 +71,8 @@ try {
 #
 
 ### Start Session
-Once a user has connected (or multiple), you can start the session. Starting the session will pause the player until the timeout is reached or session destroyed.
+Once a user has connected (or multiple), you can start the session. Starting the session will pause playback on the current item until the timeout is reached or session destroyed. Passing an argument with true
+will indicate that the player should pause playback and display the players application content (engage content).
 ````typescript
 try {
     Evexi.interactive.start()
