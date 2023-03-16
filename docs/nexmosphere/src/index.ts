@@ -38,3 +38,9 @@ window.close = async () => {
   const res = await Evexi.nexmosphere.close();
   log.info(` -- CLOSED NEXMOSPHERE -- ${res}`)
 }
+
+// @ts-ignore
+window.write = async (message: string) => {
+  const res = await Evexi.nexmosphere.write(message);
+  log.info(` -- NEXMOSPHERE WRITE -- ${res}`)
+}
