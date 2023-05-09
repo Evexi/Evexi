@@ -67,5 +67,6 @@ buildZip docs/proxy/src/index.html proxy
 buildZip docs/mock/src/index.html mock
 buildZip docs/touchToEngage/src/index.html touchToEngage
 copy docs/legacy/src legacy
+buildZip docs/nexmosphere/src/index.html nexmosphere
 
 rm -r .tmp

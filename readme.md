@@ -10,7 +10,7 @@ All filesystem methods returning a promise are wrapped in a timeout of 5 seconds
 
 #
 
-All examples shown in /docs directory are built at CI level and available to download from Github Actions:
+All examples shown in /docs directory are built at CI level and available to download from Github Actions. Alternatively clone this repo and run `yarn run build`.
 
 ![Build-Examples](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml/badge.svg)
 [Download](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml)
@@ -30,6 +30,7 @@ All examples shown in /docs directory are built at CI level and available to dow
 * [Kiosk](docs/kiosk/index.md)
 * [Proxy](docs/proxy/index.md)
 * [Environment Variables](docs/envVars/index.md)
+* [Nexmosphere](docs/nexmosphere/index.md)
 * [Mock & Server](docs/mock/index.md)
 * [Helpers](docs/helpers/index.md)
 
