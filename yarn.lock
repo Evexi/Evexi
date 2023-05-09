@@ -2114,10 +2114,10 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-evexi@2.9.0-alpha.4:
-  version "2.9.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/evexi/-/evexi-2.9.0-alpha.4.tgz#3dfd039b132d28b73edbd967e3bd58c585dca538"
-  integrity sha512-iCF8/Y7BZbWLUVtyd/DPz1g5NSePYr7mjxZf3Cgk87TA/pP71kFMYMzhVR8jdesrwFoZbEjZRqGM0APjttDoeA==
+evexi@2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/evexi/-/evexi-2.9.0.tgz#610a9afd40cd3c804e0339acc1e6ae7fff683c4f"
+  integrity sha512-LUklWI1L8aiIolt8mD8JC8P6OUA3IqBq4pxHVg4jNorCF3Nhk2vnXOv6djz/rXn4owmSoVF/j1cKiUfngYus+g==
 
 express@^4.18.0:
   version "4.18.1"
