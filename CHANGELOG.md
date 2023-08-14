@@ -1,3 +1,7 @@
+# 2.9.1
+* [IMPROVEMENT] ReceiptGenerator helper now supports text wrapping on .left, .right, .streach, .centre and .fill methods. It will force break for words longer then 42 characters and word break for longer sentences.
+* [BUG] Some development services for live refreshing the broweser send window events wtihout data causing e.data to throw. This patch release early returns this preventing any development errors (reactJS)
+
 # 2.9.0-alpha.1
 * [FEATURE] Add in nexmosphere docs and examples
 
