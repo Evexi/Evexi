@@ -13,33 +13,33 @@ Note: `Make sure you don't include this class in production`
 You can mock all of the Evexi API by calling `.all()`. You can additionally mock returns of some of the Evexi API sets. All mocks can be chained against a single EvexiMock instance.
 
 ```typescript
-import { Evexi, EvexiMock } from "evexi";
+import { Evexi, EvexiMock } from 'evexi'
 
 new EvexiMock(Evexi)
   .all() // Mock the whole API
 
   // Mock the evexi KEY=>VALUE environment variables
   .env({
-    foo: "bar",
-    biz: "baz",
+    foo: 'bar',
+    biz: 'baz',
   })
 
   // Proxy can mock messages and responses to communicate with a hosted SAS payment provider (Square and Stripe)
   .proxy([
     {
-      endpoint: "/square/a?ver=123",
-      response: { foo: "bar with ver" },
+      endpoint: '/square/a?ver=123',
+      response: { foo: 'bar with ver' },
     },
   ])
 
   // Mock tizen barcode scanner return value
-  .tizen({ barcodeReturn: "12345" })
+  .tizen({ barcodeReturn: '12345' })
 
   // Evexi.oti.pay() method will return this TransactionStatus
   .oti(TransactionStatus.Cancelled)
 
   // Evexi.serial.write with the data of 'foo' will trigger a onMessage event with 'bar'
-  .serial({ foo: "bar", aaa: "bbb" });
+  .serial({ foo: 'bar', aaa: 'bbb' })
 ```
 
 #
@@ -57,9 +57,9 @@ This will start a service which will expose all endpoints that you can then dire
 ### Mocking Proxy
 
 ```typescript
-import { Evexi, EvexiMock } from "evexi";
+import { Evexi, EvexiMock } from 'evexi'
 
-new EvexiMock(Evexi).proxy("http://localhost:9063"); // All proxy messages will be sent here
+new EvexiMock(Evexi).proxy('http://localhost:9063') // All proxy messages will be sent here
 ```
 
 #
@@ -69,14 +69,14 @@ new EvexiMock(Evexi).proxy("http://localhost:9063"); // All proxy messages will 
 You can mock the requests to Nexmosphere controller by calling the method `nexmosphereMessage()` on the instance of the `EvexiMock` class.
 
 ```typescript
-import { Evexi, EvexiMock } from "evexi";
+import { Evexi, EvexiMock } from 'evexi'
 
-const mock = new EvexiMock(Evexi).nexmosphere();
+const mock = new EvexiMock(Evexi).nexmosphere()
 
-Evexi.nexmosphere.open();
+Evexi.nexmosphere.open()
 Evexi.nexmosphere.onMessage((msg) => {
   // msg === 'X001A[A2]'
-});
+})
 
-mock.nexmosphereMessage("X001A[A2]"); // Fire a message as the controller
+mock.nexmosphereMessage('X001A[A2]') // Fire a message as the controller
 ```

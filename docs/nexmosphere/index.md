@@ -22,7 +22,7 @@ To open a connection to the Nexmosphere device, connect the Nexmosphere controll
 
 ```typescript
 try {
-  const res = await Evexi.nexmosphere.open();
+  const res = await Evexi.nexmosphere.open()
 } catch (e) {
   //
 }
@@ -39,7 +39,7 @@ The Nexmosphere controller sends data bits to the Evexi player, which then group
 ```typescript
 Evexi.nexmosphere.onMessage((message) => {
   // message as a string // 'X003A[3]'
-});
+})
 ```
 
 #
@@ -50,7 +50,7 @@ To stop Nexmosphere communication, you can close the connection using the `close
 
 ```typescript
 try {
-  const res = await Evexi.nexmosphere.close();
+  const res = await Evexi.nexmosphere.close()
 } catch (e) {
   //
 }

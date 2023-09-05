@@ -12,7 +12,7 @@ When scanning the QR code for the session we will automatically append a URL par
 
 ```javascript
 // get the session id from the URL parameter
-var sessionId = Evexi.Scan.urlParam(); // string
+var sessionId = Evexi.Scan.urlParam() // string
 ```
 
 #
@@ -25,7 +25,7 @@ Using the sessionId you can then setup a session and listen for messages. The se
 var scan = new Evexi.Scan(sessionId)
   .onMessage(function (message) {
     // message = string (message sent from the content)
-    console.log("Message: ", message);
+    console.log('Message: ', message)
   })
   .onOpen(function () {
     // Session has been opened and ready to use. You can then send any messages to the content like so:
@@ -34,8 +34,8 @@ var scan = new Evexi.Scan(sessionId)
   .onClose(function (code) {
     // Will run if the session has been closed, if the user has been kicked by the content or if the interactive session does not exist.
     // code = number (close code)
-    console.log("Closed: ", code);
-  });
+    console.log('Closed: ', code)
+  })
 ```
 
 #
@@ -43,7 +43,7 @@ var scan = new Evexi.Scan(sessionId)
 Once setup and opened you can use the instance to send messages to the content like so
 
 ```javascript
-scan.send({ foo: "bar" });
+scan.send({ foo: 'bar' })
 ```
 
 #
@@ -53,5 +53,5 @@ scan.send({ foo: "bar" });
 The instance is automatically destroyed when 'onClose' method is ran but you can manually destroy the instance like so.
 
 ```javascript
-scan.destroy();
+scan.destroy()
 ```

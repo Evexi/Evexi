@@ -20,7 +20,7 @@ Get a single item from storage. The returned '.data' will vary depending on the 
 
 ```typescript
 try {
-  const res = await Evexi.fs.get("image.jpg");
+  const res = await Evexi.fs.get('image.jpg');
   // Successful {name: 'image.jpg', error: null, type: 'image', data: '/mtd_down/common/MrPlayer/user_files/image.jpg'}
   // Failed {name: 'image.jpg', error: 'File does not exist', type: 'image', data: null}
 } catch (e) {
@@ -36,7 +36,7 @@ Put is used solely for .json files. The method will automatically encode on the 
 
 ```typescript
 try {
-  const res = await Evexi.fs.put("text2.json", "my text file"); // boolean
+  const res = await Evexi.fs.put('text2.json', 'my text file'); // boolean
 } catch (e) {
   // Catch error
 }
@@ -50,7 +50,7 @@ Deletes a single asset. A successful response will return boolean.
 
 ```typescript
 try {
-  const res = await Evexi.fs.delete("text2.json"); // boolean
+  const res = await Evexi.fs.delete('text2.json'); // boolean
 } catch (e) {
   // Catch error
 }
@@ -99,13 +99,13 @@ NOTE: Nested folders are not supported. Downloaded files are always stored in th
 ```typescript
 try {
   const download = await Evexi.fs.download(
-    "https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png",
+    'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png'
   );
   // success {url: 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png', data: '/mtd_down/common/MrPlayer/user_files/mrx.png', error: null}
 
   // error {url: 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png', data: null, error: 'file download failed'}
 } catch (e) {
-  Log.error("DOWNLOAD: error");
+  Log.error('DOWNLOAD: error');
 }
 ```
 
@@ -117,7 +117,7 @@ Validates if a file exists on the file system. The response will return boolean 
 
 ```typescript
 try {
-  const res = await Evexi.fs.exists("image.png"); // boolean
+  const res = await Evexi.fs.exists('image.png'); // boolean
 } catch (e) {
   // Catch error
 }

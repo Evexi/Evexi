@@ -6,12 +6,12 @@ You can view a [working example here](./src).
 
 #
 
-- [Event Listeners](#event-listeners)
-- [Create Session](#create-session)
-- [Start Session](#start-session)
-- [Destroy Session](#destroy-session)
-- [Message Client](#message-client)
-- [Kick Client](#kick-client)
+* [Event Listeners](#event-listeners)
+* [Create Session](#create-session)
+* [Start Session](#start-session)
+* [Destroy Session](#destroy-session)
+* [Message Client](#message-client)
+* [Kick Client](#kick-client)
 
 #
 
@@ -20,20 +20,20 @@ You can view a [working example here](./src).
 ```typescript
 Evexi.interactive.onConnect((clientId) => {
   // clientId (string of the clientId connected)
-});
+})
 
 Evexi.interactive.onDisconnect((clientId) => {
   // clientId (string of the clientId disconnected)
-});
+})
 
 Evexi.interactive.onKick((clientId) => {
   // clientId (string of the clientId kicked)
-});
+})
 
 Evexi.interactive.onMessage((message, client) => {
   // message (string | Record<string, unknown>) // depends what the client sends
   // client (the clientId who sent the message)
-});
+})
 ```
 
 #
@@ -50,10 +50,10 @@ Remote session's can be used when you wish a third part device to communicate wi
 try {
   const res = await Evexi.interactive.create(
     180000, // maxRuntime (Once a user connects, after this time the content will timeout regardless of any noCommunicationTimeout set) (Once this timeout is reached the player will destroy the item and player will play the next asset)
-    "http://localhost:1234/example", // clientUrl? / scanURL? (When user scans QR code this is the URL they will be taken too)
+    'http://localhost:1234/example', // clientUrl? / scanURL? (When user scans QR code this is the URL they will be taken too)
     2, // maxClients (How many people can connect into the session)
     undefined, // noCommunicationTimeout? (If no messages are sent or received after how long time timeout the session) (When reached the player will destroy the item and player will play the next asset)
-  ); //
+  ) //
   // Success
 } catch (e) {
   // Catch error
@@ -82,7 +82,7 @@ will indicate that the player should pause playback and display the players appl
 
 ```typescript
 try {
-  Evexi.interactive.start();
+  Evexi.interactive.start()
 } catch (e) {
   // Catch error
 }
@@ -96,7 +96,7 @@ Destroying a session will cause the player to play the next piece of content. An
 
 ```typescript
 try {
-  Evexi.interactive.destroy();
+  Evexi.interactive.destroy()
 } catch (e) {
   // Catch error
 }
@@ -110,7 +110,7 @@ Send a message to all connected clients or to a specified client from the conten
 
 ```typescript
 try {
-  Evexi.interactive.message({ foo: "bar" });
+  Evexi.interactive.message({ foo: 'bar' })
 } catch (e) {
   // Catch error
 }
@@ -124,7 +124,7 @@ The content can kick a particular client.
 
 ```typescript
 try {
-  Evexi.interactive.kick("1234");
+  Evexi.interactive.kick('1234')
 } catch (e) {
   // Catch error
 }

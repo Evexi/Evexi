@@ -12,7 +12,7 @@ The Legacy script should be used like so:
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
 <script type="text/javascript" src="./evexi.legacy.iife.min.js"></script>
 <script>
-  console.log(window.Evexi);
+  console.log(window.Evexi)
 </script>
 ```
 
@@ -21,5 +21,5 @@ The Legacy script should be used like so:
 For the latest/modern script you can import like normal:
 
 ```typescript
-import Evexi from "evexi";
+import Evexi from 'evexi'
 ```
