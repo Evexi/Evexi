@@ -1,3 +1,6 @@
+# 2.9.2
+* [IMPROVEMENT] ReceiptGenerator helper now supports text wrapping on the `streach()` method. Documented that methods on this class can throw an error
+
 # 2.9.1
 * [IMPROVEMENT] ReceiptGenerator helper now supports text wrapping on .left, .right, .streach, .centre and .fill methods. It will force break for words longer then 42 characters and word break for longer sentences.
 * [BUG] Some development services for live refreshing the broweser send window events wtihout data causing e.data to throw. This patch release early returns this preventing any development errors (reactJS)
