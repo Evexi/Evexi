@@ -1,11 +1,12 @@
 import { log } from '../../common'
 import Evexi from 'evexi'
 
+window.onmessage = (data) => {
+  debugger;
+    Evexi.square.event(msg => {
+      debugger;
+      log.info(JSON.stringify(msg))
+    })
+  }
 
-// @ts-ignore
-window.open = async (port?: string) => {
 
-  // Listen for Square web hook messages. Setup before opening but should reinitialize if close has been ran
-  Evexi.square.event(msg => log.info(msg))
-
-}

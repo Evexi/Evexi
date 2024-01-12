@@ -79,6 +79,7 @@ window.stopping = async function stopping() {
 
 // @ts-ignore
 window.kick = () => {
+  debugger;
   log.info(`kicking client ${clientsIds[0]}`)
   Evexi.interactive.kick(clientsIds[0])
   clientsIds.shift()
@@ -92,6 +93,7 @@ window.broadcast = () => {
 
 // @ts-ignore
 window.message = (who: 'oldest' | 'newest') => {
+  debugger;
   log.info(`sending message to ${clientsIds[who === 'oldest' ? 0 : clientsIds.length]}`)
   Evexi.interactive.message('direct message', clientsIds[who === 'oldest' ? 0 : clientsIds.length])
 }
