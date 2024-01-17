@@ -33,6 +33,7 @@ All examples shown in /docs directory are built at CI level and available to dow
 * [Nexmosphere](docs/nexmosphere/index.md)
 * [Mock & Server](docs/mock/index.md)
 * [Helpers](docs/helpers/index.md)
+* [Square Webhooks](docs/square/index.md)
 
 #
 
