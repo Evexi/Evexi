@@ -68,5 +68,6 @@ buildZip docs/mock/src/index.html mock
 buildZip docs/touchToEngage/src/index.html touchToEngage
 copy docs/legacy/src legacy
 buildZip docs/nexmosphere/src/index.html nexmosphere
+buildZip docs/lifecycle/src/index.html lifecycle 
 
 rm -r .tmp
