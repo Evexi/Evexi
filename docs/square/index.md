@@ -4,7 +4,7 @@ Customers who use Square can now receive a specified number of supported Webhook
 
 #
 
-Note: You need to grant the relivant Square permissions per hook you plan to use
+Note: You need to grant the relevant Square permissions per hook you plan to use
 Note: We use our own structs rather than the structs on the Square documentation
 
 ## Supported Webhooks
