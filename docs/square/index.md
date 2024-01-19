@@ -5,7 +5,9 @@ Customers who use Square can now receive a specified number of supported Webhook
 #
 
 Note: You need to grant the relevant Square permissions per hook you plan to use
+
 Note: We use our own structs rather than the structs on the Square documentation
+
 Note: You need to add a bespoke player env var to be able to get the Square web hooks events sent
 
 
