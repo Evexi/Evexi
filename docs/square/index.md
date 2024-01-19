@@ -21,8 +21,13 @@ Note: You need to add a bespoke player env var to be able to get the Square web 
 
 ### Configure
 
-To get the webhook data sent to a player you need to add new player environment variable key called `environment`. This should have
-the value of either `live` or `sandbox`.
+To get the webhook data sent to a player you need to add some player environment variables (these can either be at group or player level):
+
+| NAME        | VALUE                | NOTES                         |
+|-------------|----------------------|-------------------------------|
+| LOCATION    | {square location id} | Used for orders and catalog   |
+| TERMINAL_ID | {square terminal id} | Used for payments             |
+| ENVIRONMENT | LIVE                 | "LIVE" or "SANDBOX" supported |
 
 #
 
