@@ -1,3 +1,6 @@
+# 3.0.0
+// TODO
+
 # 2.9.2
 * [IMPROVEMENT] ReceiptGenerator helper now supports text wrapping on the `streach()` method. Documented that methods on this class can throw an error
 

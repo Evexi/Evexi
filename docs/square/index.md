@@ -6,6 +6,8 @@ Customers who use Square can now receive a specified number of supported Webhook
 
 Note: You need to grant the relevant Square permissions per hook you plan to use
 Note: We use our own structs rather than the structs on the Square documentation
+Note: You need to add a bespoke player env var to be able to get the Square web hooks events sent
+
 
 ## Supported Webhooks
 
@@ -14,6 +16,15 @@ Note: We use our own structs rather than the structs on the Square documentation
 3. Order updated - https://developer.squareup.com/reference/square/orders-api/webhooks/order.updated
 4. Payment updated - https://developer.squareup.com/reference/square/payments-api/webhooks/payment.updated
 5. Terminal checkout updated - https://developer.squareup.com/reference/square/terminal-api/webhooks/terminal.checkout.updated  
+
+#
+
+### Configure
+
+To get the webhook data sent to a player you need to add new player environment variable key called `environment`. This should have
+the value of either `live` or `sandbox`.
+
+#
 
 ### Listen
 
