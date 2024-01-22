@@ -34,6 +34,7 @@ All examples shown in /docs directory are built at CI level and available to dow
 * [Mock & Server](docs/mock/index.md)
 * [Helpers](docs/helpers/index.md)
 * [Square Webhooks](docs/square/index.md)
+* [Lifecycle Events](docs/lifecycle/index.md)
 
 #
 
@@ -74,29 +75,3 @@ Further examples can be found [here](./.build/build.sh#L18-L33).
 
 #
 
-### Lifecycle Events
-Lifecycle events are triggered by the player if the functions exist within the inner content. To use this feature create a named function on the window object within the script of the loaded content.
-
-````html
-<script type="text/javascript">
-
-/**
- * Lifecycle event (This function is triggered by the player to indicate the content is visible on the display.
- * You should use this function to trigger any animations or if your showing a picture in picture feed you
- * should do it here). Any code you put outside this will be ran when the content is loaded and before its displayed.
- * The item is passed in so feel free to check its duration, id or anything else required.
- */
-function playing(item: MediaInterfaceLocal) {
-    console.log('PLAYING ITEM')
-}
-
-/**
- * Lifecycle event (Triggered when the content has stopped showing and before the content is destroyed.
- * You should put any clean up or reset code here.)
- */
-function stopping(item: MediaInterfaceLocal) {
-    console.log('STOPPING ITEM')
-}
-
-</script>
-````
