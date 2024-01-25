@@ -8,7 +8,6 @@ See a [working example here](./src).
 
 * [Barcode](#barcode)
 * [Printer](#printer)
-* [Touch To Engage](./../touchToEngage/index.md)
 * [Serial](#serial)
 * [OTI](#oti)
 

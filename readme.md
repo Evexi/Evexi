@@ -18,23 +18,23 @@ All examples shown in /docs directory are built at CI level and available to dow
 ###### Overview
 * [Install](#install)
 * [Packaging](#packaging)
-* [Lifecycle Events](#lifecycle-events)
 * [Legacy Script](docs/legacy/index.md)
 
 #
 
 ###### API Features & Methods
+* [Lifecycle Events](docs/lifecycle/index.md)
 * [File System](docs/fs/index.md)
+* [Touch To Engage](docs/touchToEngage/index.md)
 * [Interactive](docs/interactive/index.md)
 * [Misc](docs/misc/index.md)
 * [Kiosk](docs/kiosk/index.md)
-* [Proxy](docs/proxy/index.md)
 * [Environment Variables](docs/envVars/index.md)
 * [Nexmosphere](docs/nexmosphere/index.md)
 * [Mock & Server](docs/mock/index.md)
 * [Helpers](docs/helpers/index.md)
-* [Square Webhooks](docs/square/index.md)
-* [Lifecycle Events](docs/lifecycle/index.md)
+* [Square](docs/square/index.md)
+* [Stripe](docs/stripe/index.md)
 
 #
 

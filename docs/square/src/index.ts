@@ -1,24 +1,44 @@
 import { log } from '../../common'
 import Evexi from 'evexi'
 
-window.playing = async (item) => {
+// XHR request to Square
+async function squareRequest() {
 
-  log.info('loaded' + JSON.stringify(item))
+  log.info(' -- TESTING SQUARE REQUEST -- ')
 
   try {
-    
-    Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
-
-    // Check we have the required env vars
-    log.success(`ENVIRONMENT: ${await Evexi.env('ENVIRONMENT')}`)
-    log.success(`LOCATION: ${await Evexi.env('LOCATION')}`)
-    log.success(`TERMINAL_ID: ${await Evexi.env('ENVIRONMENT')}`)
-
-    Evexi.square.event(msg => {
-      log.success(JSON.stringify(msg))
+    const res = await Evexi.proxy('/square/v2/catalog/list', {
+      method: 'GET',
     })
-
+    if (res && res.ok) log.success(`SQUARE REQUEST Success: ${JSON.stringify(res).substring(0, 100)}`)
+    else if (res && !res.ok) log.success(`SQUARE REQUEST Not Ok: ${JSON.stringify(res)}`)
+    else log.error(`SQUARE REQUEST Error: ${JSON.stringify(res)}`)
   } catch (e) {
-    log.error('API ERROR - caught')
+    log.error(`SQUARE REQUEST: caught .. ${JSON.stringify(e)}`)
   }
+
+  log.info('')
+
 }
+
+// Triggers when the player plays the content
+Evexi.lifecycle.playing(async (item) => {
+
+  // Lets see whats inside item param
+  log.info('loaded: ' + JSON.stringify(item))
+
+  // Check we have the required env vars
+  log.success(`ENVIRONMENT: ${await Evexi.env('ENVIRONMENT')}`)
+  log.success(`LOCATION: ${await Evexi.env('LOCATION')}`)
+  log.success(`TERMINAL_ID: ${await Evexi.env('ENVIRONMENT')}`)
+
+  // Listen for Square web hook messages
+  Evexi.square.event(msg => {
+    // Log them to the display
+    log.success(JSON.stringify(msg))
+  })
+
+  // Make XHR request to Square via Evexi platform and log to display
+  await squareRequest()
+
+})

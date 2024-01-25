@@ -1,5 +1,5 @@
 # Lifecycle Events
-Lifecycle events are triggered by the player. You can listen for these events with your content like so.
+Lifecycle events are triggered by the player. You can listen for these events with your content and use to start animations, sessions or whatever is needed within your application. You can also pre-load content outside these methods.
 
 #
 
@@ -14,6 +14,8 @@ Evexi.lifecycle.playing((item: MediaInterfaceLocal) => {
     console.log('PLAYING ITEM')
 })
 ```
+
+#
 
 ### Stopping
 
