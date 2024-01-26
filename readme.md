@@ -23,7 +23,7 @@ All examples shown in /docs directory are built at CI level and available to dow
 #
 
 ###### API Features & Methods
-* [Lifecycle Events](docs/lifecycle/index.md)
+* [Lifecycle](docs/lifecycle/index.md)
 * [File System](docs/fs/index.md)
 * [Touch To Engage](docs/touchToEngage/index.md)
 * [Interactive](docs/interactive/index.md)
