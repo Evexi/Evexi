@@ -63,12 +63,11 @@ buildZip docs/fs/src/index.html fs
 buildZip docs/interactive/content/src/index.html interactive
 buildDir docs/interactive/scan/src/index.html interactive-scan
 buildZip docs/kiosk/src/index.html kiosk
-buildZip docs/proxy/src/index.html proxy
 buildZip docs/mock/src/index.html mock
 buildZip docs/touchToEngage/src/index.html touchToEngage
 copy docs/legacy/src legacy
 buildZip docs/nexmosphere/src/index.html nexmosphere
-buildZip docs/lifecycle/src/index.html lifecycle 
+buildZip docs/lifecycle/src/index.html lifecycle
 buildZip docs/square/src/index.html square
 
 rm -r .tmp
