@@ -1,10 +1,10 @@
-# Mock & Proxy Server
+# Developer Tooling
 
-The Evexi package includes a EvexiMock class which can be used to mock various Evexi API endpoints. This is useful for local development when you want to develop in chrome and deploy as an Evexi later. We have also included a local proxy server (server.js) which can be ran locally to mock any communications to Square or Stripe integration services when calling `Evexi.proxy()` method. You can view a [working example here](./src/index.ts).
+As part of the Evexi library we provide a `EvexiMock` class which can use used to mock all `Evexi.{method}` calls. This allows you to develop your application locally ensuring you handle different responses from the Evexi platform.
 
-#
+We have also included a local proxy server (server.js) which can be ran locally to mock any communications to Square or Stripe integration services when calling `Evexi.proxy()` method. You can view a [working example here](./src/index.ts).
 
-Note: `Make sure you don't include this class in production`
+> Note: Make sure you don't include this class in production!!!
 
 #
 
@@ -44,7 +44,7 @@ new EvexiMock(Evexi)
 
 #
 
-As part of the evexi package there is a proxy.js file included. You can call this file with a auth token. The auth token is either a Square or a Stripe auth token:
+As part of the evexi package there is a `proxy.js` file included. You can call this file with a auth token. The auth token is either a Square or a Stripe auth token:
 
 ```bash
 TOKEN=123 node node_modules/evexi/dist/proxy.js
@@ -78,5 +78,5 @@ Evexi.nexmosphere.onMessage((msg) => {
   // msg === 'X001A[A2]'
 })
 
-mock.nexmosphereMessage('X001A[A2]') // Fire a message as the controller
+mock.nexmosphereMessage('X001A[A2]') // Fire a message as the controller back to the media content
 ```

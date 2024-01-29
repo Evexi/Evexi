@@ -10,8 +10,8 @@ You should use this function to trigger any animations or if your showing a pict
 The item is passed in so feel free to check its duration, id or anything else required.
 
 ```typescript
-Evexi.lifecycle.playing((item: MediaInterfaceLocal) => {
-    console.log('PLAYING ITEM')
+Evexi.lifecycle.playing(item => {
+    console.log('PLAYING ITEM', item)
 })
 ```
 
@@ -23,8 +23,8 @@ Triggered when the content has stopped showing and before the content is destroy
 You should put any clean up or reset code here.
 
 ```typescript
-Evexi.lifecycle.stopping((item: MediaInterfaceLocal) => {
-    console.log('STOPPING ITEM')
+Evexi.lifecycle.stopping(item => {
+    console.log('STOPPING ITEM', item)
 })
 
 ```

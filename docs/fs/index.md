@@ -2,7 +2,7 @@
 
 The storage API contains the following commands:
 
-You can view a [working example here](./src).
+You can view a [working example here](./src/index.ts).
 
 - [Get](#get)
 - [Put](#put)
