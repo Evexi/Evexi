@@ -4,13 +4,18 @@ import Evexi from 'evexi'
 const env = new class {
   async env(name: string) {
     try {
-      const foo = await Evexi.env(name)
+      const foo = await Evexi.env.env(name)
       log.success(`Env Var foo:${foo}`)
     } catch (e) {
       log.error('Env Var error')
     }
   }
 }
+
+Evexi.env.envChange('blue', (res) => {
+  log.info(JSON.stringify(res))
+})
+
 
 /**
  * Lifecycle event
@@ -32,3 +37,6 @@ window.stopping = () => {
   log.clear()
   log.info(' -- STOPPING -- ')
 }
+
+
+
