@@ -1,10 +1,11 @@
-import {log} from './../../common'
 import Evexi from 'evexi'
+import {log} from './../../common'
+
 
 const env = new class {
   async env(name: string) {
     try {
-      const foo = await Evexi.env.env(name)
+      const foo = await Evexi.env(name)
       log.success(`Env Var foo:${foo}`)
     } catch (e) {
       log.error('Env Var error')
@@ -12,7 +13,8 @@ const env = new class {
   }
 }
 
-Evexi.env.envChange('blue', (res) => {
+Evexi.envChange('blue',(res) => {
+  debugger;
   log.info(JSON.stringify(res))
 })
 
