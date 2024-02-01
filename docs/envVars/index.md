@@ -16,9 +16,9 @@ try {
 }
 ```
 
-### Var On Change
+### Env Var OnChange
 
-You can listen to env value changes by adding the following. If the Env Var exists and the value changes, the callback will run.
+You can listen to env var value changes by adding the following. If the Env Variable exists and the value changes, the callback will run.
 
 ```typescript
 Evexi.envChange('FOO', (res) => {
