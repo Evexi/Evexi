@@ -15,3 +15,14 @@ try {
   // Catch error
 }
 ```
+
+### Var On Change
+
+You can listen to env value changes by adding the following. If the Env Var exists and the value changes, the callback will run.
+
+```typescript
+Evexi.envChange('FOO', (res) => {
+  // Add code here
+})
+
+```

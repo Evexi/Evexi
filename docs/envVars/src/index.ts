@@ -13,9 +13,8 @@ const env = new class {
   }
 }
 
-Evexi.envChange('blue',(res) => {
-  debugger;
-  log.info(JSON.stringify(res))
+Evexi.envChange('FOO',(res) => {
+  log.info(`Env Var FOO value changed ${JSON.stringify(res)}`)
 })
 
 
