@@ -17,7 +17,6 @@ Evexi.envChange('FOO',(res) => {
   log.info(`Env Var FOO value changed ${JSON.stringify(res)}`)
 })
 
-
 /**
  * Lifecycle event
  */
@@ -38,6 +37,3 @@ window.stopping = () => {
   log.clear()
   log.info(' -- STOPPING -- ')
 }
-
-
-
