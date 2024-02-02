@@ -1,34 +1,35 @@
-import {log} from './../../common'
 import Evexi from 'evexi'
+import {log} from './../../common'
 
-const env = new class {
-  async env(name: string) {
-    try {
-      const foo = await Evexi.env(name)
-      log.success(`Env Var foo:${foo}`)
-    } catch (e) {
-      log.error('Env Var error')
-    }
-  }
-}
+// Listen for platform changes on the env var
+Evexi.envChange('FOO', res => {
+  log.info(`Env Var FOO value changed ${JSON.stringify(res)}`)
+})
+
+// Listen for platform changes on the env var
+Evexi.envChange('FIZZ', res => {
+  log.info(`Env Var FIZZ value changed ${JSON.stringify(res)}`)
+})
 
 /**
  * Lifecycle event
  */
-window.playing = (item) => {
+Evexi.lifecycle.playing(async (item) => {
+
+  // Log the playing instance  
   log.info('playing item ........' + JSON.stringify(item))
-  try {
-    Evexi ? log.success('API Found') : log.error('API ERROR - does not exist')
-    env.env('foo')
-  } catch (e) {
-    log.error('API ERROR - caught')
-  }
-}
+  log.info('')
+
+  // Request the FOO env var
+  const foo = await Evexi.env('FOO')
+  log.success(`Env Var FOO:${foo}`)
+
+})
 
 /**
  * Lifecycle event to indicate the item has stopped playing
  */
-window.stopping = () => {
+Evexi.lifecycle.stopping(() => {
   log.clear()
   log.info(' -- STOPPING -- ')
-}
+})
