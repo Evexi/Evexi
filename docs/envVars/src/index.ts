@@ -3,12 +3,12 @@ import {log} from './../../common'
 
 // Listen for platform changes on the env var
 Evexi.envChange('FOO', res => {
-  log.info(`Env Var FOO value changed ${JSON.stringify(res)}`)
+  log.success(`CHANGE - Env Var FOO value changed ${JSON.stringify(res)}`)
 })
 
 // Listen for platform changes on the env var
 Evexi.envChange('FIZZ', res => {
-  log.info(`Env Var FIZZ value changed ${JSON.stringify(res)}`)
+  log.success(`CHANGE - Env Var FIZZ value changed ${JSON.stringify(res)}`)
 })
 
 /**
@@ -17,12 +17,16 @@ Evexi.envChange('FIZZ', res => {
 Evexi.lifecycle.playing(async (item) => {
 
   // Log the playing instance  
-  log.info('playing item ........' + JSON.stringify(item))
+  log.info('LIFECYCLE -- playing item ........' + JSON.stringify(item))
   log.info('')
 
-  // Request the FOO env var
-  const foo = await Evexi.env('FOO')
-  log.success(`Env Var FOO:${foo}`)
+  try {
+    // Request the FOO env var
+    const foo = await Evexi.env('FOO')
+    log.success(`LOAD -- LIFECYCLE - Env Var FOO:${foo}`)
+  } catch (e) {
+    log.error(`LOAD -- LIFECYCLE - Error ${e}`)
+  }
 
 })
 
