@@ -1,5 +1,9 @@
 # 3.0.0
-// TODO
+* [FEATURE] Introduces change listener for env variables.
+* [FEATURE] Playing and stopping as callback events
+* [FEATURE] Introduce Square web hook events
+* [IMPROVEMENT] Improvement to documentation. Adding @since and @deprecated to methods
+* [BUG] Proxy mock was rejecting if there is no body/json .. This is not how the player works, it will only be false if we cant talk to the proxy itself
 
 # 2.9.2
 * [IMPROVEMENT] ReceiptGenerator helper now supports text wrapping on the `streach()` method. Documented that methods on this class can throw an error
