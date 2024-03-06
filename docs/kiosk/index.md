@@ -2,13 +2,12 @@
 
 The Samsung Kiosk includes two integrated hardware peripherals both controllable via the Evexi API. Additionally communication to an OTI payment device or communicate with a third party serial device on the additional ports is supported.
 
-See a [working example here](./src).
+See a [working example here](./src/index.ts).
 
 #
 
 * [Barcode](#barcode)
 * [Printer](#printer)
-* [Touch To Engage](./../touchToEngage/index.md)
 * [Serial](#serial)
 * [OTI](#oti)
 
