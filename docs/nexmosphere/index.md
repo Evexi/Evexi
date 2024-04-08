@@ -55,3 +55,17 @@ try {
   //
 }
 ```
+
+
+### Write
+
+To send Nexmosphere messages from the content to the controller you can use the `write()` method. Commands may vary based on your Nexmosphere controller so please ensure you read your documentation.
+
+An example message can be `X111B[Lc=R99108]`. This would write Red to port: 111
+
+```typescript
+  Evexi.nexmosphere.write(message: string);
+```
+
+
+
