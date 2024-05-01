@@ -7,7 +7,7 @@ async function stripeRequest() {
   log.info(' -- TESTING STRIPE REQUEST -- ')
 
   try {
-    const res = await Evexi.proxy('/stripe/v1/products', {
+    const res = await Evexi.proxy<any>('/stripe/v1/products', {
       method: 'GET',
       // method: 'POST',
       // body: JSON.stringify({ foo: 'bar' })
