@@ -1,3 +1,9 @@
+# 3.0.2
+* [IMPROVEMENT] [BREAKING] `Evexi.proxy` method now supports a generic for the .json response from the API. Semi breaking change as we are moving from `any` type to `unknown` on the method. If you want `any` please use `Evexi.proxy<any>('url')`.
+
+# 3.0.1
+* [IMPROVEMENT] Includes the API version within the license making it easier to work out what API version customers are using
+
 # 3.0.0
 * [FEATURE] Introduces change listener for env variables.
 * [FEATURE] Playing and stopping as callback events

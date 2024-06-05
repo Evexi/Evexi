@@ -24,6 +24,8 @@ Proxy can be used when you wish to make Square requests from your players media 
 
 Proxy uses standard window.fetch under the hood. The second argument (request) should match the [RequestInit structure](https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.requestinit.html). The only difference is by default the method will use `'Content-Type': 'application/json'`. This and any other options as part of the `RequestInit` can be overridden.
 
+You can provide a generic to the `Evexi.proxy` method for the returned `.json` property. By default this is of `unknown`.
+
 > Please note you should only run a single proxy request at a time.
 
 
@@ -33,7 +35,7 @@ try {
   const request: RequestInit = {
     method: 'POST'
   }
-  const res = await Evexi.proxy('/square/v2/catalog/list', request) // A custom object will be returned with pre decoded json from the body
+  const res = await Evexi.proxy<unknown>('/square/v2/catalog/list', request) // A custom object will be returned with pre decoded json from the body
 } catch (e) {
   console.log(`CAUGHT PROXY ${e}`)
 }

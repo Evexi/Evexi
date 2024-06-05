@@ -26,7 +26,7 @@ try {
   const request: RequestInit = {
     method: 'POST'
   }
-  const res = await Evexi.proxy('/stripe', request) // A custom object will be returned with pre decoded json from the body
+  const res = await Evexi.proxy<any>('/stripe', request) // A custom object will be returned with pre decoded json from the body
 } catch (e) {
   console.log(`CAUGHT PROXY ${e}`)
 }

@@ -7,7 +7,7 @@ async function squareRequest() {
   log.info(' -- TESTING SQUARE REQUEST -- ')
 
   try {
-    const res = await Evexi.proxy('/square/v2/catalog/list', {
+    const res = await Evexi.proxy<any>('/square/v2/catalog/list', {
       method: 'GET',
     })
     if (res && res.ok) log.success(`SQUARE REQUEST Success: ${JSON.stringify(res).substring(0, 100)}`)
