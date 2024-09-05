@@ -21,6 +21,8 @@ try {
 
 You can listen to env var value changes by adding the following. If the Env Variable exists and the value changes, the callback will run.
 
+Note: Monitoring the same key in multiple locations will result in the functionality not working as expected.
+
 ```typescript
 Evexi.envChange('FOO', (res) => {
   // Add code here
