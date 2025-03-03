@@ -96,6 +96,8 @@ NOTE: It is not necessary to validate prior to downloading a file (this was requ
 
 NOTE: Nested folders are not supported. Downloaded files are always stored in the user_files root directory.
 
+NOTE: An optional third parameter can be specified - options including authentication tokens. Currently only supporting bearer tokens.
+
 ```typescript
 try {
   const download = await Evexi.fs.download(
@@ -108,6 +110,24 @@ try {
   Log.error('DOWNLOAD: error');
 }
 ```
+
+```typescript
+try {
+  const download = await Evexi.fs.download(
+    'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png',
+    'logo.png',
+    {
+      bearer: "Bearer YOUR_TOKEN_HERE"
+    }
+  );
+  // success {url: 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png', data: '/mtd_down/common/MrPlayer/user_files/mrx.png', error: null}
+
+  // error {url: 'https://admin.evexi.technology/img/logo/Evexi_logo_whitered.png', data: null, error: 'file download failed'}
+} catch (e) {
+  Log.error('DOWNLOAD: error');
+}
+```
+
 
 #
 
