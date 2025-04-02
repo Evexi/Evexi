@@ -53,7 +53,8 @@ try {
     'http://localhost:1234/example', // clientUrl? / scanURL? (When user scans QR code this is the URL they will be taken too)
     2, // maxClients (How many people can connect into the session)
     undefined, // noCommunicationTimeout? (If no messages are sent or received after how long time timeout the session) (When reached the player will destroy the item and player will play the next asset)
-  ) //
+    30 // timeout? (Timeout override in seconds. As this API uses network messages under the hood its recommended to increase this value from the default 5 seconds)
+  )
   // Success
 } catch (e) {
   // Catch error
