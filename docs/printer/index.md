@@ -36,7 +36,7 @@ try {
 The `Evexi.printer.print` method also takes an optional second argument, an object used to override settings for the printer. This is useful if the kiosk is on a different serial port or has a different baud rate. One or more overrides can be sent, and default values for everything else will be used. 
 
 ```typescript
-await Evexi.tizen.printer('PRINT DATA', {
+await Evexi.printer.print('PRINT DATA', {
   port: 'PRINTERPORT1', // 'PRINTERPORT0' | 'PRINTERPORT1' | 'PRINTERPORT2'  // DEFAULT='PRINTERPORT1'
   baudRate: 115200, // DEFAULT=115200
   parity: 'NONE', // 'NONE' | 'ODD' | 'EVEN'  // DEFAULT='NONE'
