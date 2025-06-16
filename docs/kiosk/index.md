@@ -7,7 +7,6 @@ See a [working example here](./src/index.ts).
 #
 
 * [Barcode](#barcode)
-* [Printer](#printer)
 * [Serial](#serial)
 * [OTI](#oti)
 
@@ -24,47 +23,6 @@ try {
   //
 }
 ```
-
-#
-
-### Printer
-
-The method will trigger the printer to print the provided data.
-
-```typescript
-try {
-  const data =
-    '                                          \n' +
-    '                  EVEXI                   \n' +
-    '                  EVEXI                   \n' +
-    '                  EVEXI                   \n' +
-    '                  EVEXI                   \n' +
-    '                  EVEXI                   \n' +
-    '                                          \n' +
-    '                                          \n' +
-    '                                          \n' +
-    '                                          \n' +
-    '                                          \n'
-
-  const res = await Evexi.tizen.printer(data)
-} catch (e) {
-  //
-}
-```
-
-The second optional argument can take an object to override settings for the printer. This is useful if the kiosk is on a different serial port or has a different baud rate. One or more overrides can be sent. Default values for everything else will be used. To query the print settings for particular device you can click the 'SELF' button on the printer to print a test page which lists out what these settings should be for that particular device.
-
-```typescript
-await Evexi.tizen.printer('PRINT DATA', {
-  port: 'PRINTERPORT1', // 'PRINTERPORT0' | 'PRINTERPORT1' | 'PRINTERPORT2'  // DEFAULT='PRINTERPORT1'
-  baudRate: 115200, // DEFAULT=115200
-  parity: 'NONE', // 'NONE' | 'ODD' | 'EVEN'  // DEFAULT='NONE'
-  dataBits: 'BITS8', // 'BITS5' | 'BITS6' | 'BITS7' | 'BITS8'  // DEFAULT='BITS8'
-  stopBits: '1', // '1' | '1.5' | '2'  // DEFAULT='1'
-})
-```
-
-#
 
 ### Serial
 

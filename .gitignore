@@ -4,3 +4,4 @@
 .parcel-cache
 .tmp
 /examples
+.DS_Store
