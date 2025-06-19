@@ -26,7 +26,7 @@ const defaultText =
 
 
 // @ts-ignore 
-window.print = async () => {
+window.myPrint = async () => {
   const text = document.querySelector('textarea')?.value || defaultText
   log.info(' -- PRINTING -- ')
   try {
