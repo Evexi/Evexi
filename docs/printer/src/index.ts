@@ -27,6 +27,7 @@ const defaultText =
 
 // @ts-ignore 
 window.myPrint = async () => {
+  Evexi.printer ? log.success('API Found') : log.error('API ERROR - does not exist')
   const text = document.querySelector('textarea')?.value || defaultText
   log.info(' -- PRINTING -- ')
   try {
