@@ -1,5 +1,5 @@
 # 3.7.0
-* [FEATURE] Star printer support
+* [FEATURE] Star printer support 
 
 # 3.0.2
 * [IMPROVEMENT] [BREAKING] `Evexi.proxy` method now supports a generic for the .json response from the API. Semi breaking change as we are moving from `any` type to `unknown` on the method. If you want `any` please use `Evexi.proxy<any>('url')`.
