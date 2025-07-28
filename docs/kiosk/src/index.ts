@@ -33,58 +33,6 @@ window.barcode = async () => {
 }
 
 // @ts-ignore
-window.print = async () => {
-  log.info(' -- TESTING PRINTER -- ')
-  try {
-    const data =
-      '                                          \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                                          \n' +
-      '                                          \n' +
-      '                                          \n' +
-      '                                          \n' +
-      '                                          \n'
-
-    const res = await Evexi.tizen.printer(data)
-    if (res) log.success('PRINTER: resolved ' + JSON.stringify(res))
-    else log.error('PRINTER: false')
-  } catch (e) {
-    log.error('PRINTER: caught')
-  }
-  log.info('')
-}
-
-// @ts-ignore
-window.printWrongPort = async () => {
-  log.info(' -- TESTING PRINTER - WRONG PORT -- ')
-  try {
-    const data =
-      '                                          \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                  EVEXI                   \n' +
-      '                                          \n' +
-      '                                          \n' +
-      '                                          \n' +
-      '                                          \n' +
-      '                                          \n'
-
-    const res = await Evexi.tizen.printer(data, { port: 'PRINTERPORT0' })
-    if (res) log.success('PRINTER: resolved ' + JSON.stringify(res))
-    else log.error('PRINTER: false')
-  } catch (e) {
-    log.error('PRINTER: caught' + JSON.stringify(e))
-  }
-  log.info('')
-}
-
-// @ts-ignore
 window.serialOpen = async () => {
   Evexi.serial.onMessage(msg => log.info(`serial message: ${msg}`))
   const res = await Evexi.serial.open('PORT0') // Top port on Samsung Kiosk

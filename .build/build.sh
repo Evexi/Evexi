@@ -69,5 +69,6 @@ copy docs/legacy/src legacy
 buildZip docs/nexmosphere/src/index.html nexmosphere
 buildZip docs/lifecycle/src/index.html lifecycle
 buildZip docs/square/src/index.html square
+buildZip docs/printer/src/index.html printer
 
 rm -r .tmp
