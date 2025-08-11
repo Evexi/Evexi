@@ -90,7 +90,7 @@ try {
 
 ### DOWNLOAD
 
-Download’s the requested file. Download only supports the following file types .html, .jpg, .jpeg & .png. If an unsupported URL is provided the download assume it's a HTML type.
+Download’s the requested file. Download only supports the following file types .html, .jpg, .jpeg, .png & .mp4. If an unsupported URL is provided the download assume it's a HTML type.
 
 NOTE: It is not necessary to validate prior to downloading a file (this was required in previous Samsung platform releases, example, SSSP2 & SSSP3). If the downloaded file already exists, the function will return as if it were a successful download.
 
