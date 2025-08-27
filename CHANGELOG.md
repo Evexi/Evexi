@@ -1,3 +1,6 @@
+# 3.8.0
+* [FEATURE] Player overlay content example
+
 # 3.7.0
 * [FEATURE] Star printer support 
 
