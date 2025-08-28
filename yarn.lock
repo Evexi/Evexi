@@ -2298,10 +2298,10 @@ etag@~1.8.1:
   resolved "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-evexi@3.7.0:
-  version "3.7.0"
-  resolved "https://registry.npmjs.org/evexi/-/evexi-3.7.0.tgz"
-  integrity sha512-20EKEDBsipL7CNvNGWZ71pBekyjsJjhDnCwq4/HYF/j0bgRCFEr0RJfdzj/50MtJFlAoDK05p5AAEJxtzYuABw==
+evexi@3.8.0-alpha.2:
+  version "3.8.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/evexi/-/evexi-3.8.0-alpha.2.tgz#52bc0c81a1a8bc5272300eb5beb564129a3bb357"
+  integrity sha512-S2Psh2Gz8eq2Dv1Y9qA8FoWkW2K9mTrcy8ZmaXELyVuDlUTi1GQwz0SWDbRSSMLwMoXL1piauKZVrU/Sk9XP6A==
 
 express@^4.18.0:
   version "4.18.2"
