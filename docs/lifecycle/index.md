@@ -29,3 +29,17 @@ Evexi.lifecycle.stopping(item => {
 
 ```
 
+#
+
+
+### Changed
+
+Triggered when a new piece of media begins to play
+You should use this function to listen for item changes and updates on the player.
+
+```typescript
+Evexi.lifecycle.changed(item => {
+    console.log('Next item playing: ', item)
+})
+```
+
