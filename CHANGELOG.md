@@ -1,5 +1,8 @@
-# 3.8.0-alpha.1
+# 3.8.0-alpha.2
 * [FEATURE] Lifecycle `change` event support for when a new item is played.
+
+# 3.8.0-alpha.1
+* [FEATURE] Player overlay content example
 
 # 3.7.0
 * [FEATURE] Star printer support 
