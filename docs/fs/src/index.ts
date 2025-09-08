@@ -177,6 +177,36 @@ const storage = new class {
     }
   }
 
+  async downloadVideo() {
+    try {
+      const { error, data } = await Evexi.fs.download('https://www.w3schools.com/html/mov_bbb.mp4', 'myvideo.mp4')
+
+      try {
+        if (error) throw new Error('downloadVideo: error')
+        log.success(`DOWNLOAD VIDEO: success: Stored: ${data}`)
+      } catch (e) {
+        log.error('DOWNLOAD VIDEO: struct issue')
+      }
+    } catch (e) {
+      log.error('downloadVideo: caught')
+    }
+  }
+
+  async getVideo() {
+    try {
+      const {data, error, type, name} = await Evexi.fs.get('myvideo.mp4')
+      try {
+        if (error) throw new Error('getVideo: error')
+        log.success(`GET VIDEO: success: Stored: ${data}, type: ${type}, name: ${name}`)
+      } catch (e) {
+        log.error('GET VIDEO: struct issue')
+      }
+    } catch (e) {
+      log.error('getVideo: caught')
+    }
+  }
+
+
 }
 
 /**
@@ -211,6 +241,9 @@ window.playing = async (item) => {
       await storage.existsC()
       await storage.clear()
       await storage.listB()
+
+      await storage.downloadVideo()
+      await storage.getVideo()
 
     }
 
