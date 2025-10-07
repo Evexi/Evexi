@@ -1,68 +1,59 @@
-import Evexi from "evexi";
+import Evexi from "evexi"
 
 const STORAGE_KEY = "bbc_feed_data";
-
-const DEFAULT_RSS_URL =
-  "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml";
-const DEFAULT_COLOR_START = "#c8102e";
-const DEFAULT_COLOR_END = "#ffcc00";
+const DEFAULT_RSS_URL = "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml";
 
 let RSS_URL = DEFAULT_RSS_URL;
-let COLOR_START = DEFAULT_COLOR_START;
-let COLOR_END = DEFAULT_COLOR_END;
+let COLORS = ['white']
+let FOREGROUND_COLOR = 'black'
 
-async function loadEnv() {
-  try {
-    const rss = await Evexi.env("RSS_URL");
-    if (rss) RSS_URL = rss;
-    const start = await Evexi.env("COLOR_START");
-    if (start) COLOR_START = start;
-    const end = await Evexi.env("COLOR_END");
-    if (end) COLOR_END = end;
-    updateContainerColors();
-  } catch (err) {
-    console.error("Failed to load env vars:", err);
-  }
+function pad(num: number) {
+  return (num < 10 ? '0' : '') + num;
+}
+
+function updateTime() {
+  var timeDisplay = document.getElementById('time-display');
+  if (!timeDisplay) return;
+
+  var now = new Date();
+  var hours = pad(now.getHours());
+  var minutes = pad(now.getMinutes());
+  timeDisplay.textContent = hours + ':' + minutes;
 }
 
 function updateContainerColors() {
-  const container = document.querySelector<HTMLDivElement>("#rss-container");
+  const container = document.querySelector<HTMLDivElement>('#rss-container');
   if (container) {
-    container.style.background = `linear-gradient(90deg, ${COLOR_START}, ${COLOR_END})`;
+    container.style.background = COLORS.length > 1 ? `linear-gradient(90deg, ${COLORS.join(', ')})` : COLORS[0];
   }
 }
 
 async function fetchFeed() {
-  const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-    RSS_URL
-  )}`;
+  const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
   try {
     const res = await fetch(API_URL);
     const data = await res.json();
     if (!data.items) throw new Error("No items found");
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ timestamp: Date.now(), data })
-    );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
     renderHeadlines(data);
   } catch (err) {
     console.error("Failed to fetch feed:", err);
   }
 }
 
-function renderHeadlines(feedData: any) {
-  const container = document.querySelector<HTMLDivElement>("#rss-content");
+function renderHeadlines(feedData) {
+  const container = document.querySelector<HTMLDivElement>('#rss-content');
   if (!container) return console.error("Container not found");
   container.innerHTML = "";
 
-  feedData.items.forEach((item: any) => {
+  feedData.items.forEach(item => {
     const span = document.createElement("span");
     span.className = "headline";
     span.textContent = item.title;
     container.appendChild(span);
   });
 
-  feedData.items.forEach((item: any) => {
+  feedData.items.forEach(item => {
     const span = document.createElement("span");
     span.className = "headline";
     span.textContent = item.title;
@@ -85,59 +76,105 @@ function loadFromLocalStorage() {
   }
 }
 
+async function listeners() {
+  const color = await Evexi.env('COLORS')
+  if (color) COLORS = color.split(',').map(c => c.trim());
+
+  const rss = await Evexi.env('RSS_URL')
+  if (rss) RSS_URL = rss.trim();
+
+  const fg = await Evexi.env('FOREGROUND_COLOR')
+  if (fg) FOREGROUND_COLOR = fg.trim();
+  document.body.style.color = FOREGROUND_COLOR;
+
+  Evexi.envChange('COLORS', (newColors) => {
+    if (newColors) {
+      COLORS = newColors.split(',').map(c => c.trim());
+    } else {
+      COLORS = ['white'];
+    }
+
+    updateContainerColors();
+  })
+
+  Evexi.envChange('FOREGROUND_COLOR', (newFG) => {
+    if (newFG) {
+      FOREGROUND_COLOR = newFG.trim();
+    } else {
+      FOREGROUND_COLOR = 'black';
+    }
+    document.body.style.color = FOREGROUND_COLOR;
+  })
+
+  Evexi.envChange('RSS_URL', (newRSS) => {
+    if (newRSS) {
+      RSS_URL = newRSS.trim();
+      if (navigator.onLine) {
+        fetchFeed();
+      } else {
+        const cached = loadFromLocalStorage();
+        if (cached) {
+          console.log("Offline — using cached data");
+          renderHeadlines(cached);
+        } else {
+          console.log("Offline — no cached data available");
+        }
+      }
+    } else {
+      RSS_URL = DEFAULT_RSS_URL;
+      if (navigator.onLine) {
+        fetchFeed();
+      } else {
+        const cached = loadFromLocalStorage();
+        if (cached) {
+          console.log("Offline — using cached data");
+          renderHeadlines(cached);
+        } else {
+          console.log("Offline — no cached data available");
+        }
+      }
+    }
+  })
+}
+
 async function init() {
-  await loadEnv();
+  try {
 
-  if (!navigator.onLine) {
-    const cached = loadFromLocalStorage();
-    if (cached) {
-      console.log("Offline — using cached data");
-      renderHeadlines(cached);
+    await listeners()
+
+    updateContainerColors();
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    if (!navigator.onLine) {
+      const cached = loadFromLocalStorage();
+      if (cached) {
+        console.log("Offline — using cached data");
+        Evexi.log("Using cached data");
+        renderHeadlines(cached);
+      } else {
+        Evexi.log("No cached data available");
+        console.log("Offline — no cached data available");
+      }
     } else {
-      console.log("Offline — no cached data available");
+      await fetchFeed();
     }
-  } else {
-    fetchFeed();
+
+    console.log("Initialization complete");
+    Evexi.log("Initialization complete");
+
+    setInterval(() => {
+      if (navigator.onLine) {
+        fetchFeed();
+      } else {
+        console.log("Still offline — skipping fetch");
+        Evexi.log("Still offline, skipping fetch");
+      }
+    }, 10 * 60 * 1000);
+  } catch (e) {
+    console.error("Initialization error:", e);
+    Evexi.log("Initialization error: " + e.message);
   }
-
-  setInterval(() => {
-    if (navigator.onLine) {
-      fetchFeed();
-    } else {
-      console.log("Still offline — skipping fetch");
-    }
-  }, 10 * 60 * 1000);
-
-  Evexi.envChange("RSS_URL", newValue => {
-    RSS_URL = newValue ?? DEFAULT_RSS_URL;
-    fetchFeed();
-  });
-
-  Evexi.envChange("COLOR_START", newValue => {
-    COLOR_START = newValue ?? DEFAULT_COLOR_START;
-    updateContainerColors();
-  });
-
-  Evexi.envChange("COLOR_END", newValue => {
-    COLOR_END = newValue ?? DEFAULT_COLOR_END;
-    updateContainerColors();
-  });
-
-  // showPiP();
 }
-
-/*
-function showPiP() {
-  Evexi.log("Showing PiP window");
-  Evexi.pip.show({
-    height: 800,
-    width: 600,
-    number: 1,
-    type: "HDMI",
-    x: 50,
-    y: 50,
-  });
-}
-*/
 
 init();

@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "bash .build/build.sh",
+    "dev": "bash .build/dev.sh",
     "proxy": "TOKEN=123 node node_modules/evexi/dist/proxy.js"
   },
   "browserslist": "> 100%",
@@ -20,6 +21,7 @@
     "evexi": "3.8.0-alpha.2",
     "express": "^4.18.0",
     "node-fetch": "^3.2.4",
+    "nodemon": "^3.1.10",
     "parcel": "^2.6.0",
     "url": "^0.11.0"
   }
