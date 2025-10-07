@@ -85,7 +85,9 @@ async function listeners() {
 
   const fg = await Evexi.env('FOREGROUND_COLOR')
   if (fg) FOREGROUND_COLOR = fg.trim();
+
   document.body.style.color = FOREGROUND_COLOR;
+  document.body.style.setProperty('--border-color', FOREGROUND_COLOR);
 
   Evexi.envChange('COLORS', (newColors) => {
     if (newColors) {
