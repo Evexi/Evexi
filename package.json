@@ -1,12 +1,13 @@
 {
   "name": "evexi",
   "description": "Evexi Player API for file system, interactive and interactive scan library.",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "repository": "https://github.com/MRXTechnology/Evexi.git",
   "author": "Peter Ingram <p.ingram@mrx.technology>",
   "license": "MIT",
   "scripts": {
     "build": "bash .build/build.sh",
+    "dev": "bash .build/dev.sh",
     "proxy": "TOKEN=123 node node_modules/evexi/dist/proxy.js"
   },
   "browserslist": "> 100%",
@@ -17,9 +18,10 @@
     "@parcel/babel-preset-env": "^2.6.0",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "evexi": "3.7.0",
+    "evexi": "3.8.0",
     "express": "^4.18.0",
     "node-fetch": "^3.2.4",
+    "nodemon": "^3.1.10",
     "parcel": "^2.6.0",
     "url": "^0.11.0"
   }

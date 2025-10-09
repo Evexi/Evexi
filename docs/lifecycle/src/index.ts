@@ -4,6 +4,7 @@ import { log } from '../../common'
 // New
 Evexi.lifecycle.playing(msg => log.info('EVEXI PLAYING -- ' + JSON.stringify(msg)))
 Evexi.lifecycle.stopping(msg => log.info('EVEXI STOPPING -- ' + JSON.stringify(msg)))
+Evexi.lifecycle.changed(msg => log.info('EVEXI CHANGED -- ' + JSON.stringify(msg)))
 
 // Old
 window.playing = (item) => log.info('WINDOW PLAYING -- ' + JSON.stringify(item))
