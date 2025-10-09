@@ -28,6 +28,7 @@ All filesystem methods returning a promise are wrapped in a timeout of 5 seconds
 * [Helpers](docs/helpers/index.md)
 * [Square](docs/square/index.md)
 * [Stripe](docs/stripe/index.md)
+* [Picture In Picture](docs/pip/index.md)
 
 #
 
