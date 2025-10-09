@@ -1,4 +1,4 @@
-# 3.8.0-alpha.3
+# 3.8.0-alpha.3 (3.8.0)
 * [FEATURE] Adds documentation around video download and get.
 
 # 3.8.0-alpha.2
