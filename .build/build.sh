@@ -58,6 +58,7 @@ function copy {
   mv .tmp/$2/$2"-"$PACKAGE_VERSION_ADJUSTED.zip examples
 }
 
+buildZip docs/pip/src/index.html pip
 buildZip docs/envVars/src/index.html envVars
 buildZip docs/fs/src/index.html fs
 buildZip docs/interactive/content/src/index.html interactive
@@ -70,6 +71,5 @@ buildZip docs/nexmosphere/src/index.html nexmosphere
 buildZip docs/lifecycle/src/index.html lifecycle
 buildZip docs/square/src/index.html square
 buildZip docs/printer/src/index.html printer
-buildZip docs/pipOverlayDemo/src/index.html pipOverlayDemo
 
 rm -r .tmp

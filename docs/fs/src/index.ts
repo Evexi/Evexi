@@ -194,7 +194,7 @@ const storage = new class {
 
   async getVideo() {
     try {
-      const {data, error, type, name} = await Evexi.fs.get('myvideo.mp4')
+      const { data, error, type, name } = await Evexi.fs.get('myvideo.mp4')
       try {
         if (error) throw new Error('getVideo: error')
         log.success(`GET VIDEO: success: Stored: ${data}, type: ${type}, name: ${name}`)
@@ -212,7 +212,7 @@ const storage = new class {
 /**
  * Lifecycle event to indicate the item has started to play
  */
-window.playing = async (item) => {
+Evexi.lifecycle.playing(async (item) => {
 
   log.info('playing item ...' + JSON.stringify(item))
 
@@ -251,12 +251,12 @@ window.playing = async (item) => {
     log.error('API ERROR - caught')
   }
 
-}
+})
 
 /**
  * Lifecycle event to indicate the item has stopped playing
  */
-window.stopping = () => {
+Evexi.lifecycle.stopping(() => {
   log.clear()
   log.info(' -- STOPPING -- ')
-}
+})
