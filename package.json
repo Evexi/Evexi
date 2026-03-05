@@ -10,7 +10,7 @@
     "dev": "bash .build/dev.sh",
     "proxy": "TOKEN=123 node node_modules/evexi/dist/proxy.js"
   },
-  "browserslist": "> 100%",
+  "browserslist": "chrome >= 36",
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
