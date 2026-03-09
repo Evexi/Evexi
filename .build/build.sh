@@ -8,8 +8,6 @@ PACKAGE_VERSION=$(cat package.json \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]')
 
-PACKAGE_VERSION_ADJUSTED="${PACKAGE_VERSION//./}"
-
 if [ -d ".tmp" ]; then
   rm -r .tmp
 fi
@@ -23,41 +21,49 @@ mkdir examples
 
 function buildZip {
 
-  mkdir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED
+  local ZIP_NAME="$2 - v${PACKAGE_VERSION}"
+
+  mkdir ".tmp/${ZIP_NAME}"
 
   # package
-  node_modules/.bin/parcel build $1 --dist-dir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED --no-cache --no-optimize --no-source-maps --no-content-hash --public-url ./
+  node_modules/.bin/parcel build $1 --dist-dir ".tmp/${ZIP_NAME}" --no-cache --no-optimize --no-source-maps --no-content-hash --public-url ./
 
   # Zip - Remote (Zip like this when uploading to the platform)
-  cd .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED
-  zip -r $2"-"$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store'
-  cd ..
-  cd ..
-  mv .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED/$2'-'$PACKAGE_VERSION_ADJUSTED.zip examples/$2"-"$PACKAGE_VERSION_ADJUSTED'.zip'
+  cd ".tmp/${ZIP_NAME}"
+  zip -r "${ZIP_NAME}.zip" . -x '.*' -x '__MACOSX' -x '*.DS_Store'
+  cd ../..
+  mv ".tmp/${ZIP_NAME}/${ZIP_NAME}.zip" "examples/${ZIP_NAME}.zip"
 
   # tidy
-  rm -r .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED
+  rm -r ".tmp/${ZIP_NAME}"
 
 }
 
 function buildDir {
 
-  # package
-  node_modules/.bin/parcel build $1 --dist-dir .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED --no-cache --no-optimize --no-source-maps --no-content-hash --public-url ./
+  local DIR_NAME="$2 - v${PACKAGE_VERSION}"
 
-  mv .tmp/$2"-"$PACKAGE_VERSION_ADJUSTED examples
+  # package
+  node_modules/.bin/parcel build $1 --dist-dir ".tmp/${DIR_NAME}" --no-cache --no-optimize --no-source-maps --no-content-hash --public-url ./
+
+  mv ".tmp/${DIR_NAME}" examples
 
 }
 
 function copy {
-  cp -r $1 .tmp/$2
-  cp -r node_modules/evexi/dist/evexi.legacy.iife.min.js .tmp/$2
-  cd .tmp/$2
-  zip -r $2"-"$PACKAGE_VERSION_ADJUSTED.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store'
+
+  local ZIP_NAME="$2 - v${PACKAGE_VERSION}"
+
+  cp -r $1 ".tmp/$2"
+  cp -r node_modules/evexi/dist/evexi.legacy.iife.min.js ".tmp/$2"
+  cd ".tmp/$2"
+  zip -r "${ZIP_NAME}.zip" . -x '.*' -x '__MACOSX' -x '*.DS_Store'
   cd ../../
-  mv .tmp/$2/$2"-"$PACKAGE_VERSION_ADJUSTED.zip examples
+  mv ".tmp/$2/${ZIP_NAME}.zip" examples
+
 }
 
+buildZip docs/pip/src/index.html pip
 buildZip docs/envVars/src/index.html envVars
 buildZip docs/fs/src/index.html fs
 buildZip docs/interactive/content/src/index.html interactive
@@ -70,6 +76,5 @@ buildZip docs/nexmosphere/src/index.html nexmosphere
 buildZip docs/lifecycle/src/index.html lifecycle
 buildZip docs/square/src/index.html square
 buildZip docs/printer/src/index.html printer
-buildZip docs/pipOverlayDemo/src/index.html pipOverlayDemo
 
 rm -r .tmp
