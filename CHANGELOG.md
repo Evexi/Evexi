@@ -1,3 +1,6 @@
+# 3.11.0-alpha.1 (3.11.0)
+* [FEATURE] Adds documentation around the new `message` namespace.
+
 # 3.8.0-alpha.3 (3.8.0)
 * [FEATURE] Adds documentation around video download and get.
 
