@@ -22,7 +22,7 @@ if (!response.success) {
 To listen for messages sent by other players in the same group, use the `onMessage()` method. 
 
 ```typescript
-Evexi.message.onMessage((data) => {
-  const { ip, data, playerId } = data
+Evexi.message.onMessage((message) => {
+  const { ip, data, playerId } = message
 })
 ```
