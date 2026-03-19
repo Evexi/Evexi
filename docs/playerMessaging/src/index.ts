@@ -10,11 +10,11 @@ Evexi.lifecycle.playing((item) => {
 // @ts-ignore
 window.sendMessage = async () => {
   const content = textArea.value
-  const res = await Evexi.message.send(content || 'Hello World')
+  const res = await Evexi.playerMessaging.send(content || 'Hello World')
 
   log.info('Message sent, response: ' + JSON.stringify(res))
 }
 
-Evexi.message.onMessage(msg => {
+Evexi.playerMessaging.onMessage(msg => {
   log.info('Received message: ' + JSON.stringify(msg))
 })
