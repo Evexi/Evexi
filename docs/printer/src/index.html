@@ -7,6 +7,125 @@
     body {
       background-color: lightskyblue;
       transition: background-color ease-in-out 1s;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h3 {
+      margin-top: 0;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 8px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .control-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 120px;
+    }
+
+    .control-item label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    button.primary {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button.primary:hover {
+      background-color: #45a049;
+    }
+
+    button.secondary {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    button.secondary:hover {
+      background-color: #1976D2;
+    }
+
+    button.danger {
+      background-color: #f44336;
+      color: white;
+    }
+
+    button.danger:hover {
+      background-color: #d32f2f;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    #logs {
+      background: #1e1e1e;
+      color: #00ff00;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -14,13 +133,129 @@
 <body>
   <h2>Evexi API Demo Printer</h2>
 
-  <textarea rows="4" placeholder="Leave blank for default text..." id="textarea"></textarea>
-
-  <div>
-    <button onclick="window.myPrint()">Print</button>
+  <div class="section">
+    <div class="button-group">
+      <button class="primary" onclick="window.blankSpace()">Blank Space</button>
+    </div>
   </div>
 
-  <div id="logs"></div>
+  <div class="section">
+    <h3>Text Content</h3>
+    <textarea rows="4" placeholder="Enter text to print..." id="textarea">Hello World!</textarea>
+  </div>
+
+  <div class="section">
+    <h3>Text Styling</h3>
+    <div class="control-group">
+      <div class="control-item">
+        <label>Alignment</label>
+        <select id="alignment">
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+        </select>
+      </div>
+      <div class="control-item">
+        <label>Font Size</label>
+        <select id="fontSize">
+          <option value="1">1 (Small)</option>
+          <option value="2" selected>2 (Normal)</option>
+          <option value="3">3 (Large)</option>
+          <option value="4">4 (Extra Large)</option>
+        </select>
+      </div>
+      <div class="control-item">
+        <label>Font Weight</label>
+        <select id="fontWeight">
+          <option value="normal">Normal</option>
+          <option value="bold">Bold</option>
+        </select>
+      </div>
+      <div class="control-item">
+        <div class="checkbox-group">
+          <input type="checkbox" id="underline">
+          <label for="underline">Underline</label>
+        </div>
+      </div>
+    </div>
+    <div class="button-group">
+      <button class="primary" onclick="window.printStyled()">Print Styled Text</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Alignment Tests</h3>
+    <div class="button-group">
+      <button class="secondary" onclick="window.printLeft()">Print Left</button>
+      <button class="secondary" onclick="window.printCenter()">Print Center</button>
+      <button class="secondary" onclick="window.printRight()">Print Right</button>
+      <button class="secondary" onclick="window.printAllAlignments()">Print All Alignments</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>QR Code</h3>
+    <div class="control-group">
+      <div class="control-item" style="flex: 1;">
+        <label>QR Code URL</label>
+        <input type="text" id="qrUrl" placeholder="https://example.com" value="https://evexi.com">
+      </div>
+      <div class="control-item">
+        <label>QR Size</label>
+        <select id="qrSize">
+          <option value="1">1 (Very Tiny)</option>
+          <option value="2">2 (Tiny)</option>
+          <option value="3" selected>3 (Small)</option>
+          <option value="4">4 (Medium)</option>
+          <option value="5">5 (Large)</option>
+          <option value="6">6 (Extra Large)</option>
+          <option value="7">7 (XXL)</option>
+        </select>
+      </div>
+    </div>
+    <div class="button-group">
+      <button class="secondary" onclick="window.printQR()">Print QR Code</button>
+      <button class="secondary" onclick="window.printQRWithText()">Print QR with Text</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Logo</h3>
+    <div class="control-group">
+      <div class="control-item" style="flex: 1;">
+        <label>Logo URL</label>
+        <input type="text" id="logoUrl" placeholder="Base 64 Image Data"
+          value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAv1QTFRFAAAA/////////////////////////////////////////////////////////////////////v7+/////////////////////////////////////////////////////////////////////////////////////////v7+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v7+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v7+/////////////v7+/////////////////////////////////////v7+/////////////////////////////////////////////////////////////////////////////////////////////v7+/////////////////////////////////////////////////////v7+/////////////v7+/////////////////////////v7+/////v7+/////////////////////////////////////////////////////////////////////////////////////////////v7+/////v7+/v7+////////1BS/AgAAAP90Uk5TAEAqDJm/ATXl/CwDgf+qDrckId2yMvD+M0j3zk/4XUX59As7qfNCFOAHBca2lFlL/RoX4rqvXGxRRuw8E6zRAo4W7jn7BpO9uMsx6sGgTEMohWXannVwbRBncg9qaNNTRyM4CIBmsNUVhJ1an9ioud/Qwl4hEe9xomu1yK3AiujhN2AEx1YeLz+HpuM98glEzPEnMDYZro8lItxS0omlf0rpiBsR6zRBXm86msnUDNbmtAe7ww2x+tmXpItkEiBJLpDkCntiEPWrTbN5px9j53Y+eL5xc4KjCfaGVMRXfkV3CFgdmyZ6lZHeUMorknQtfYwYzW6Yll9bEtcFKnxVFVcoHAAAC+NJREFUeJztnXl8DVcbx89YLuZSVxOV8Ja3riZoSW1NP4JrC5pXvSrkjSUIKSGi9n1JxFIVSwiCEvuSoCleXlFRSxtLUFVbNcVbihdFfRpLk3rnzs1y79yZO89Zbox+5vvHuXPnPHPm+eXOnDlzznNOOPQXgXvRDrBCF6I1dCFaQxeiNXQhWkMXojV0IVpDF6I1dCFaQxeiNXQhWkMXojV0IVpDF6I1dCFaQxeiNXQhWsNNQjjuT/cUrHxGdxRakuO4Z+4o2AXuEFJG0JHjhnJdwl6Ikcsrxf3GvFg1mAupyOWh3LL3WRerCmshr1pvjjJ3GZcKgLGQytxjhHjuFttSIbAV4s09EtJXbjAtFAZTIX/jHlg/Kv2XZaFAWAqpwd2zfnhyPzEsFApDIeZn4u+BqvzIrkw47ISUMOff4t4/MCsTA2ZCfLn8W7ycxwVWZeLASkhdruAOr/E9oyLxYCWk3tWCrTe+Y1QkHoyE+N0qaCWaudNsisSEjZCG1x8XbPqcLe4GvA02QhpfKtysfYJJidjQCjFY//7v2tVTdY9RlkgIpZD3uEzhhdD/bNGe+l/TlUgKlZBmwqvgQYRanrTb1/gApUeE0Ajx8zj39n6hjdjI7mryrH6Q2iciyIUEcv/LbrpX2OhgfzE1OETtEhnEQhpWOWJ7gwr6Jdtut28WA6dIIBVS+V3hT2/ZhSQ/CGq5k94nIgiFdMqyvgq2/gKhzlftfxDU9nMGTpFAJqTLnlJC2m6n8BDputchp0MqA6dIIBISclBsWQVtQSj00COHrI6bGDhFAomQHufFq8nUYgNCvb5wzKtznIFTJBAICTtruyvE3qveknviJRLS50z+3R28GqHw09mOuS+PkH4Z92wbnq1XIhSxRZIduoKBUyTgCmlQqaCZ3n250PYN3yjJf1lqrcDzhf3s1lfayDWlJAa9ljJwigRMIYPXFWyZS5xCKGqt1KBPIr1PROAJidpaOIDTd5GQDE2WWvRLoPeJCCwhra4XdbOLf/phK6UmEfPpfSICR4ilkV2V1HuxcIsczZbaeF17MX0PWEJGLi/a5sPihYPLOxv1TKL2iQgMIaM5uxrJs9Y+hMYucbZ6zelHKh4whAxZY/elxzIhGbdYxmoWrUtkwIXwz+2fGdEzhWTiQmezj6dT+0QEXMjkBfbfhk8TkqnznM1GztR4T2PsEocYgNFTEIpbec/ZTut9v4Ypsx2+W99yfcvJ3djjJlI7RQJUiNdzx6CMPOFr+G65QI0XMciO4EIGSF5hx09AaNYCOSGDTu+jdYoEoJCZcY7NXN50yflXys8aPo7eLXyAQmZLKlXzW8L7eoD82NTkMZQ+EQETEld2muMO85WHCMXHyhrHcCNovSIAJmT+FMkO/wN5wm1tkLfuLfPAdzswIbVuS3aIv0jQSfnwsrhhlE6RABJSd+AkyR6+9xyEFio8MfhJ0ZReEQASkjheuoefEoVQwxsKAX+zB9M5RQJIyFLnemhOJEL9rymMF+YuGEjlFAkQIYbEkU77uq0SkjFKXSYvoAaGCGl4Qdrpg9C8j4Tks+EKR+S2T6NxigSIED+Z+CuxI675t0qHFP/AFUTISpnqNKGfkCQPVTqEr5lJ7hMRECEjZPpzh84QktXK1Wy1AKeeIvcCEGJYMcR554ivDiI0ap1ywPXi3hReEQAQsm6UjLvmUb0EicmRikf59+tB4RY+ACHxc+T+7su7C4kpT/kwQ+divbgAQjZ/JLf3X58JyZYIF8e130rmEhkAIeVlbcQx9qSprmYlFGv8L0DIB1/J7RW7Gi0dp8nl5VMh2qmN5j4AQuRvBH5RiJCm9nN1ZGLCKSKnSAAI2Rouu1usX53bxQ6s5roQ+EQEQMjn8k+EuUOeIWTcEObyWEuV4qq6AEJi5sru5mOtDxG55os90Wnn8Z0iASCkkUKIuFgBOw20S1nPdcJ2igQKIT7lrcFyO9Ue4Ju4f+A6RQKFENuYzj+Pqk1w63GiOOougJDo1QoZW4KExLCpr1oBib8VQ2cEQMj7RxQyUiZa/9Qr1LvjTN7uj1ABCLELs5YgPkqM27qpl7H1qbtveYCQ9GClnJhTG4S0xhPANNCR3FQMrwgACJF2YNsh1sCGbZA3D/+xZ93aJQwQ8uWHilleSW2ENONpCORUPvGtoF5JMKS3VLUBCPF5qHzp7LJY07VRIH/4X/epOyRDUNOa6r85QMiyKcpCPAZMENIdY4BTKHMX35oAsywi6c/l3+eqmwGEGI2PlTNtM6racNDJFv7Hy9wBmloxrP92d/a/uebqlpDuILm4gAL46eKL8JH3gZ4JR7QfGAaccflNfFhkDvKvvgpgCxHSzlVnWwuTtQo2bukO800knRs+XvW5Mi+ACxZnaGY0gZQJEdJnu6vcA42tqW+oTBSEC7zuJL05QnGGhqVm9A3Pdrbt2cNAoRQQISf7u2qq8x3EYJsyHo9cGMlhTv7DEFzqisRNS4kFXIuArKJIvRDADYJgQizHSrvKjmnQ2voxI5UkwIlPi4/ZU2H00QSEhnF3jDGZZfIc6sikeGBECGigRxLIL6Vvjvg+e641+xUrPG9DywQJ8bnpOv+4n3h9DFoPPCkYUznwBGaQkItcY9cGh98RP9Re4HGpUPkM2BY2PP2xSk1uDrANrf/QnOXVlc77wY1hQi43VDEwXX8ufp7ryS6kscnXTzGsYULm7VKbuJo+ab/4OWMxbi2shCG1NY45MKimVDk1C8+qtkljXgPxnoxKWA4/xLIHCuErqF786Z/YJvf4vslgSqW5U+nJeEdAA89+bKBq4rHfLH4azw6gnXicFIu9bgRUyJX66jbmNB9be8MrlKrHl082NcU+CCrEMh7QV4K2+dYQPwNr7ZEJQAWSmLFG3cgJcLjssbYQq7XVG9k2wrtEkD1STDEDXAxMKgMWYqktnYUki9f+6rYNw4m5e/Gl5JY+9zr2QSLwSGz1Tl4R/nHQZtuWpeKDS3hScsMaKo93q4AR5K/c4+jIoak78rcMPV7fCX/SZxm3K4aEqIMh5MZ7D2CG/PK0wilL4c1+lh8nkmDuey7F9gSMy95IEl2PMxHmF1+oZco73Qp7vi3GVVx915dYysIKc/NvDYP3siU7XBorgCMksPZqsG362q5tCr8YMhd0L99NVgxfL2pfzPANBV/PVH17XTsMl4rAmix2NxTjkZ3us9t+oNQw/9PTadldPzRl87Yd3ks79mm/zBRcNJ5lrDU5KudQS7w2VgF40/d+wnhBQMh/xNZsabsrcJwpLnnDqxGXM/6T9rtDzuhr2UK7xJxDuKgVnhBjK8wGYbWjb4BWOrz4ya7yYlvgekW8ExSCOTO02SjX4+rO8INaZV523fTKMK3Znl8hPjH87tJUGdxJx7OWAOtgO/iS4TUPL/xA5sc0XK6zI7Li9cJq4NDGOdil54M9DZys+0q4+Pm91dpk93h+L0O42e9Mul8iK5HL6OvYi5X1WiWisq3gT8z/LpCug4H3RugmkisjZRpFRCfBUgk5VchP5wrzuFCKowmEWN5ap26ET25XqmJJVuGwTOhKc0p5cr8MoDqeaF0UQ9MLrLt5c39V7adxDeGSOyw74qykl/CnLIF0EaQnB0BD0kDqdaeOViFelir2OLuVtCJiX6Eug3yhsKedvqE+uwh/vjmDKDuKpdssCTdZXF6DgmlvDxGqxfTuGz2oHVi/h83aCnTLG/7xswW/DWlP0tVYRtPfaRecvPH3suQH5/a/u5ny/IXQLwHqnTiY7Olotsx1nrtFDIO1TC0xDyLxpZirlNxNf+4imCzKaum8/wSelJRKTRn/Oww2q8si1Hmpn4sYIgk+CZOZLxTKSghCO+pcHAgZP5y+KGKPG5YJZSdEoKLlfGoHV9eYeXDP+vPdE2/KVIiAZeftqjkbZzq9yvLo09SQjMoJbls0hbUQEUvIxj8yt8em7TqFUIttddqOPWgq1+S4exd+cYuQF4EuRGvoQrSGLkRr6EK0hi5Ea+hCtIYuRGvoQrSGLkRr6EK0hi5Ea+hCtIYuRGvoQrSGLkRr6EK0xl9GyP8BH2y957uYQiYAAAAASUVORK5CYII=">
+      </div>
+    </div>
+    <div class="button-group">
+      <button class="secondary" onclick="window.printLogo()">Print Logo</button>
+      <button class="secondary" onclick="window.printLogoWithText()">Print Logo with Text</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Combined Print (Receipt Example)</h3>
+    <div class="button-group">
+      <button class="primary" onclick="window.printReceipt()">Print Full Receipt</button>
+      <button class="secondary" onclick="window.printBlankLines()">Print Blank Lines (3)</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Quick Print Presets</h3>
+    <div class="button-group">
+      <button class="secondary" onclick="window.bigText()">Big Bold Text</button>
+      <button class="secondary" onclick="window.smallText()">Small Text</button>
+      <button class="secondary" onclick="window.underlinedText()">Underlined Text</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Logs</h3>
+    <div id="logs"></div>
+  </div>
+
   <script type="module" src="index.ts"></script>
 </body>
 
