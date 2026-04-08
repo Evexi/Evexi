@@ -52,11 +52,10 @@ The star printer generator class is used to generate receipts that are designed 
 ````typescript
 import Evexi from 'evexi'
 
-const generator = new Evexi.helper.starReceiptGenerator()
+const generator = new StarReceiptGenerator()
 
-await generator.image(url)
-
-generator
+let receipt = await generator.image(url)
+receipt
   .blank(1)
   .center('Order Number', { fontSize: 1.5 })
   .center('#7719', { fontSize: 2, fontWeight: 'bold' })
@@ -75,7 +74,8 @@ generator
   .center('Scan for more info:')
   .qrCode('URL', 4)
   .blank(3)
-  .build()
 
+receipt = await generator.image(url)
+receipt.build()
 ````
 
