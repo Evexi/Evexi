@@ -53,9 +53,10 @@ The star printer generator class is used to generate receipts that are designed 
 import Evexi from 'evexi'
 
 const generator = new Evexi.helper.starReceiptGenerator()
-const withLogo = await generator.image(url)
 
-withLogo
+await generator.image(url)
+
+generator
   .blank(1)
   .center('Order Number', { fontSize: 1.5 })
   .center('#7719', { fontSize: 2, fontWeight: 'bold' })

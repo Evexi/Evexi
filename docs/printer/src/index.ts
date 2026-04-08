@@ -173,8 +173,10 @@ window.printLogoWithText = async () => {
   const url = await getLogoUrl()
   const text = getText()
   const generator = new Evexi.helper.starReceiptGenerator()
-  const withLogo = await generator.image(url)
-  const buffer = withLogo
+
+  await generator.image(url)
+
+  const buffer = generator
     .blank(1)
     .center(text, { fontSize: 2 })
     .build()
