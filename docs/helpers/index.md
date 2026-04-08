@@ -52,28 +52,29 @@ The star printer generator class is used to generate receipts that are designed 
 ````typescript
 import Evexi from 'evexi'
 
-  const generator = new Evexi.helper.starReceiptGenerator()
-  const withLogo = await generator.image(url)
-  withLogo
-    .blank(1)
-    .center('Order Number', { fontSize: 1.5 })
-    .center('#7719', { fontSize: 2, fontWeight: 'bold' })
-    .blank(1)
-    .right(dateTimeString, { fontSize: 1 })
-    .right(`Payment ID: 123`, { fontSize: 1 })
-    .blank(1)
-    .center('PURCHASE ITEMS', { fontSize: 1, fontWeight: 'bold', underline: true })
-    .blank(1)
-    .left('--------------------------------')
-    .left('Total:', { fontWeight: 'bold' })
-    .right('$30.00', { fontWeight: 'bold' })
-    .blank(2)
-    .center('Thank you for your purchase!', { fontSize: 1 })
-    .blank(1)
-    .center('Scan for more info:')
-    .qrCode(getQrUrl(), getQrSize())
-    .blank(3)
-    .build()
+const generator = new Evexi.helper.starReceiptGenerator()
+const withLogo = await generator.image(url)
+
+withLogo
+  .blank(1)
+  .center('Order Number', { fontSize: 1.5 })
+  .center('#7719', { fontSize: 2, fontWeight: 'bold' })
+  .blank(1)
+  .right(dateTimeString, { fontSize: 1 })
+  .right(`Payment ID: 123`, { fontSize: 1 })
+  .blank(1)
+  .center('PURCHASE ITEMS', { fontSize: 1, fontWeight: 'bold', underline: true })
+  .blank(1)
+  .left('--------------------------------')
+  .left('Total:', { fontWeight: 'bold' })
+  .right('$30.00', { fontWeight: 'bold' })
+  .blank(2)
+  .center('Thank you for your purchase!', { fontSize: 1 })
+  .blank(1)
+  .center('Scan for more info:')
+  .qrCode('URL', 4)
+  .blank(3)
+  .build()
 
 ````
 
