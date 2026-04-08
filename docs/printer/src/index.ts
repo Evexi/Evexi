@@ -82,7 +82,7 @@ window.printStyled = async () => {
   const styles = getStyles()
   const alignment = getAlignment()
 
-  const receiptGen = new Evexi.helper.richReceiptGenerator()
+  const receiptGen = new Evexi.helper.starReceiptGenerator()
 
   switch (alignment) {
     case 'left':
@@ -103,28 +103,28 @@ window.printStyled = async () => {
 // @ts-ignore
 window.printLeft = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator().left(text).build()
+  const buffer = new Evexi.helper.starReceiptGenerator().left(text).build()
   await doPrint(buffer, 'Left Aligned')
 }
 
 // @ts-ignore
 window.printCenter = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator().center(text).build()
+  const buffer = new Evexi.helper.starReceiptGenerator().center(text).build()
   await doPrint(buffer, 'Center Aligned')
 }
 
 // @ts-ignore
 window.printRight = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator().right(text).build()
+  const buffer = new Evexi.helper.starReceiptGenerator().right(text).build()
   await doPrint(buffer, 'Right Aligned')
 }
 
 // @ts-ignore
 window.printAllAlignments = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .left(`Left: ${text}`)
     .blank(1)
     .center(`Center: ${text}`)
@@ -138,7 +138,7 @@ window.printAllAlignments = async () => {
 window.printQR = async () => {
   const url = getQrUrl()
   const size = getQrSize()
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .qrCode(url, size)
     .build()
   await doPrint(buffer, `QR Code (${url}, size: ${size})`)
@@ -149,7 +149,7 @@ window.printQRWithText = async () => {
   const url = getQrUrl()
   const size = getQrSize()
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .center('Scan the QR Code', { fontSize: 2, fontWeight: 'bold' })
     .blank(1)
     .qrCode(url, size)
@@ -162,8 +162,8 @@ window.printQRWithText = async () => {
 // @ts-ignore
 window.printLogo = async () => {
   const url = await getLogoUrl()
-  const generator = new Evexi.helper.richReceiptGenerator()
-  const withLogo = await generator.logo(url)
+  const generator = new Evexi.helper.starReceiptGenerator()
+  const withLogo = await generator.image(url)
   const buffer = withLogo.build()
   await doPrint(buffer, `Logo`)
 }
@@ -172,8 +172,8 @@ window.printLogo = async () => {
 window.printLogoWithText = async () => {
   const url = await getLogoUrl()
   const text = getText()
-  const generator = new Evexi.helper.richReceiptGenerator()
-  const withLogo = await generator.logo(url)
+  const generator = new Evexi.helper.starReceiptGenerator()
+  const withLogo = await generator.image(url)
   const buffer = withLogo
     .blank(1)
     .center(text, { fontSize: 2 })
@@ -200,8 +200,8 @@ window.printReceipt = async () => {
   ]
   const dateTimeString = `Date: ${formattedDate} ${formattedTime}`
   const url = await getLogoUrl()
-  const generator = new Evexi.helper.richReceiptGenerator()
-  const withLogo = await generator.logo(url)
+  const generator = new Evexi.helper.starReceiptGenerator()
+  const withLogo = await generator.image(url)
   withLogo
     .blank(1)
     .center('Order Number', { fontSize: 1.5 })
@@ -243,7 +243,7 @@ window.printReceipt = async () => {
 
 // @ts-ignore
 window.printBlankLines = async () => {
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .center('--- Before Blank ---')
     .blank(3)
     .center('--- After Blank ---')
@@ -254,7 +254,7 @@ window.printBlankLines = async () => {
 // @ts-ignore
 window.bigText = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .left(text, { fontSize: 3, fontWeight: 'bold', underline: true })
     .build()
   await doPrint(buffer, 'Big Bold Text')
@@ -263,7 +263,7 @@ window.bigText = async () => {
 // @ts-ignore
 window.smallText = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .left(text, { fontSize: 1 })
     .build()
   await doPrint(buffer, 'Small Text')
@@ -272,7 +272,7 @@ window.smallText = async () => {
 // @ts-ignore
 window.underlinedText = async () => {
   const text = getText()
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .center(text, { fontSize: 2, underline: true })
     .build()
   await doPrint(buffer, 'Underlined Text')
@@ -280,7 +280,7 @@ window.underlinedText = async () => {
 
 // @ts-ignore
 window.blankSpace = async () => {
-  const buffer = new Evexi.helper.richReceiptGenerator()
+  const buffer = new Evexi.helper.starReceiptGenerator()
     .blank(5)
     .build()
   await doPrint(buffer, 'Blank Space')
