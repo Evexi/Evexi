@@ -244,11 +244,9 @@ window.printReceipt = async () => {
 }
 
 // @ts-ignore
-window.printBlankLines = async () => {
+window.printBlankLines = async (lines: number) => {
   const buffer = new Evexi.helper.starReceiptGenerator()
-    .center('--- Before Blank ---')
-    .blank(3)
-    .center('--- After Blank ---')
+    .blank(lines)
     .build()
   await doPrint(buffer, 'Blank Lines')
 }
