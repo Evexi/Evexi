@@ -195,10 +195,10 @@ window.printReceipt = async () => {
     minute: '2-digit'
   }).format(new Date())
   const items = [
-    { name: 'Item 1', price: '$10.00', quantity: 1, modifiers: ['Add Cherries', 'Option 1'] },
-    { name: 'Item 2', price: '$4.00', quantity: 3, modifiers: ['Add Blueberries'] },
-    { name: 'Item 3', price: '$5.00', quantity: 2, modifiers: [] },
-    { name: 'Item 4', price: '$2.00', quantity: 5, modifiers: ['Option 3'] },
+    { name: 'Item 1', price: '£10.00', quantity: 1, modifiers: ['Add Cherries', 'Option 1'] },
+    { name: 'Item 2', price: '£4.00', quantity: 3, modifiers: ['Add Blueberries'] },
+    { name: 'Item 3', price: '£5.00', quantity: 2, modifiers: [] },
+    { name: 'Item 4', price: '£2.00', quantity: 5, modifiers: ['Option 3'] },
   ]
   const dateTimeString = `Date: ${formattedDate} ${formattedTime}`
   const url = await getLogoUrl()
@@ -232,7 +232,7 @@ window.printReceipt = async () => {
     .blank(1)
     .left('--------------------------------')
     .left('Total:', { fontWeight: 'bold' })
-    .right('$30.00', { fontWeight: 'bold' })
+    .right('£30.00', { fontWeight: 'bold' })
     .blank(2)
     .center('Thank you for your purchase!', { fontSize: 1 })
     .blank(1)
