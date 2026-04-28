@@ -1,4 +1,4 @@
-# 3.11.0-alpha.2 
+# 3.11.0-alpha.2 (3.11.0)
 * [FEATURE] Adds documentation around the new `RichReceiptGenerator` class.
 
 # 3.11.0-alpha.1
