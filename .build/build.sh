@@ -63,6 +63,7 @@ function copy {
 
 }
 
+buildZip docs/printer/src/index.html printer
 buildZip docs/pip/src/index.html pip
 buildZip docs/envVars/src/index.html envVars
 buildZip docs/fs/src/index.html fs
@@ -75,6 +76,6 @@ copy docs/legacy/src legacy
 buildZip docs/nexmosphere/src/index.html nexmosphere
 buildZip docs/lifecycle/src/index.html lifecycle
 buildZip docs/square/src/index.html square
-buildZip docs/printer/src/index.html printer
+buildZip docs/playerMessaging/src/index.html playerMessaging
 
 rm -r .tmp

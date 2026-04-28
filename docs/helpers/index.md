@@ -1,6 +1,7 @@
 # Helpers
 
 * [Receipt Generator](#Receipt-generator)
+* [Star Receipt Generator](#star-receipt-generator)
 
 #
 
@@ -40,3 +41,41 @@ const data = new Evexi.helper.receiptGenerator()
   .centre('THANK YOU')
   .generate()
 ````
+
+* [Star Receipt Generator](#Star-Receipt-generator)
+
+#
+
+### Star Receipt Generator
+The star printer generator class is used to generate receipts that are designed to be printed on the star printer. It provides methods to design up the perfect receipt and can also include a logo and QR code, as well as different font sizes and weights.
+
+````typescript
+import Evexi from 'evexi'
+
+const generator = new StarReceiptGenerator()
+
+let receipt = await generator.image(url)
+receipt
+  .blank(1)
+  .center('Order Number', { fontSize: 1.5 })
+  .center('#7719', { fontSize: 2, fontWeight: 'bold' })
+  .blank(1)
+  .right(dateTimeString, { fontSize: 1 })
+  .right(`Payment ID: 123`, { fontSize: 1 })
+  .blank(1)
+  .center('PURCHASE ITEMS', { fontSize: 1, fontWeight: 'bold', underline: true })
+  .blank(1)
+  .left('--------------------------------')
+  .left('Total:', { fontWeight: 'bold' })
+  .right('$30.00', { fontWeight: 'bold' })
+  .blank(2)
+  .center('Thank you for your purchase!', { fontSize: 1 })
+  .blank(1)
+  .center('Scan for more info:')
+  .qrCode('URL', 4)
+  .blank(3)
+
+receipt = await generator.image(url)
+receipt.build()
+````
+
