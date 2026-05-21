@@ -1,0 +1,60 @@
+.loading {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0f10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.loading>img {
+    width: 15%;
+}
+
+.wrapper.portrait .loading>img {
+    width: 50%;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    transform-origin: center;
+    animation: spin 1s linear infinite;
+    margin: 3rem 0;
+}
+
+.loader .track {
+    fill: none;
+    stroke: rgba(20, 184, 166, 0.15);
+    stroke-width: 4;
+}
+
+.loader .arc {
+    fill: none;
+    stroke: #34d399;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 70 200;
+}
+
+.loading>span {
+    color: #ffffff40;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

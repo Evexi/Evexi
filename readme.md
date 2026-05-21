@@ -1,81 +1,36 @@
-# Evexi API
-![Banner](./banner.png)
+## Usage
 
-## Introduction
-The Evexi API provides content connectivity to either the underlying player hardware, software or evexi platform features. This can be used in either zip media, web media, background tasks or assigned applications.
+Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
 
-It is important to note that it is the responsibility of the developer to manage any stored assets. The Evexi API has been tested to support Tizen firmware 2070 and later and we cannot guarantee the API to work reliably on previous firmware versions.
-
-All filesystem methods returning a promise are wrapped in a timeout of 5 seconds. If no response is received within this time an error will be thrown within the catch statement.
-
-#
-
-###### Overview
-* [Install](#install)
-* [Build](#build)
-* [Packaging](#packaging)
-* [Developer Tools](docs/mock/index.md)
-
-###### API Features & Methods
-* [Lifecycle](docs/lifecycle/index.md)
-* [File System](docs/fs/index.md)
-* [Touch To Engage](docs/touchToEngage/index.md)
-* [Interactive](docs/interactive/index.md)
-* [Misc](docs/misc/index.md)
-* [Kiosk](docs/kiosk/index.md)
-* [Environment Variables](docs/envVars/index.md)
-* [Nexmosphere](docs/nexmosphere/index.md)
-* [Helpers](docs/helpers/index.md)
-* [Square](docs/square/index.md)
-* [Stripe](docs/stripe/index.md)
-* [Picture In Picture](docs/pip/index.md)
-
-#
-
-### Install
-Install the Evexi package from [NPM](https://www.npmjs.com/package/evexi). This Github repo provides examples and documentation. The Evexi API is subject to change on a per version basis so ensure to check the app definitions match the player version.
-
-````bash
-yarn add evexi
-npm i evexi
-````
-
-````typescript
-import {Evexi, EvexiMock} from 'evexi'
-````
-
-> Note: If you plan to target SSSP2 or SSSP4 platform you should use the legacy script. [Example Here](/docs/legacy/index.md)
-
-#
-
-### Build
-
-All examples shown in [/docs](./docs/) directory are built on Github CI and available to download from [Github Actions](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml). Alternatively clone this repo and build the examples locally. Once built you can upload to the Evexi platform and assign to a player. ![Build-Examples](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml/badge.svg)
+This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
 
 ```bash
-yarn run build
+$ npm install # or pnpm install or yarn install
 ```
 
-#
+### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
 
-### Packaging
+## Available Scripts
 
-A Evexi `.zip` application must not contain hidden files and consist of a flat structure (no nested directories for SSSP2). The `index.html` should be in the root of the zip. A zip should contain at least an index.html file in the root level.
+In the project directory, you can run:
 
-If you run `zipinfo` against the .zip file you should see an output like so.
-````bash
-Archive:  fs-240.zip
-Zip file size: 73108 bytes, number of entries: 2
--rw-r--r--  3.0 unx      346 tx defN 21-Sep-21 09:35 index.html
--rw-r--r--  3.0 unx   317567 tx defN 21-Sep-21 09:35 src.77de5100.js
-2 files, 317913 bytes uncompressed, 72780 bytes compressed:  77.1%
-````
+### `npm run dev` or `npm start`
 
-#
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You can zip your application using standard `zip` CLI.
-````bash
-cd app # go into directory
-zip app.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
-````
-Further examples can be found [here](./.build/build.sh#L63-L71).
+The page will reload if you make edits.<br>
+
+### `npm run build`
+
+Builds the app for production to the `dist` folder.<br>
+It correctly bundles Solid in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
+
+## Deployment
+
+You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+## This project was created with the [Solid CLI](https://github.com/solidjs-community/solid-cli)

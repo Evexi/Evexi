@@ -1,0 +1,17 @@
+import Evexi from "evexi"
+
+class Environment {
+
+  async retrieve() {
+    return {
+      type: await Evexi.env('type'),
+      docs: await Evexi.env('docs'),
+    }
+  }
+
+  listen() {
+
+  }
+}
+
+export default new Environment()
