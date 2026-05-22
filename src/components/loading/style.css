@@ -21,10 +21,6 @@
     width: 15%;
 }
 
-.wrapper.portrait .loading>img {
-    width: 50%;
-}
-
 .loader {
     width: 48px;
     height: 48px;

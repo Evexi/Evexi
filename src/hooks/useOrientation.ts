@@ -4,6 +4,10 @@ const [orientation, setOrientation] = createSignal<'portrait' | 'landscape'>(win
 
 createEffect(() => {
   setOrientation(window.innerWidth < window.innerHeight ? 'portrait' : 'landscape')
+
+  window.addEventListener('resize', () => {
+    setOrientation(window.innerWidth < window.innerHeight ? 'portrait' : 'landscape')
+  })
 })
 
 export const useOrientation = () => orientation
