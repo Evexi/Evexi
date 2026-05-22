@@ -1,15 +1,16 @@
 {
-  "name": "vite-template-solid",
-  "version": "0.0.0",
-  "description": "",
+  "name": "evexi",
+  "description": "The Evexi Player API",
+  "version": "3.13.0",
+  "author": "Evexi <development@managedracks.co.uk>",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
-  "license": "MIT",
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",
     "path": "^0.12.7",

@@ -5,7 +5,7 @@ class Environment {
   async retrieve() {
     return {
       type: await Evexi.env('type'),
-      docs: await Evexi.env('docs'),
+      docs: (await Evexi.env('docs') === 'true')
     }
   }
 

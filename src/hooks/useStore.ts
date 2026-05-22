@@ -8,6 +8,7 @@ const [loading, setLoading] = createSignal<boolean>(true)
 const [activeApp, setActiveApp] = createSignal<App | null>(null)
 const [activeAppTest, setActiveAppTest] = createSignal<AppTest | null>(null)
 const [orientation, setOrientation] = createSignal<'portrait' | 'landscape'>(window.innerWidth < window.innerHeight ? 'portrait' : 'landscape')
+const [docsVisible, setDocsVisible] = createSignal<boolean>(false)
 const [info, setInfo] = createSignal<Info | null>(null)
 
 createEffect(() => {
@@ -25,4 +26,6 @@ export const useStore = () => ({
   setOrientation,
   info,
   setInfo,
+  docsVisible,
+  setDocsVisible,
 })
