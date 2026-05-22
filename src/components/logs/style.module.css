@@ -32,8 +32,11 @@
 .logs-nav-left {
     display: flex;
     align-items: center;
-    gap: 8px;
     height: 100%;
+}
+
+.logs-nav-left > * + * {
+    margin-left: 8px;
 }
 
 .logs-nav-separator {
@@ -130,8 +133,9 @@
 
 .log {
     width: 100%;
-    display: grid;
-    grid-template-columns: 80px 48px 1fr;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: baseline;
     align-items: baseline;
     padding: 2px 10px;
     border-radius: 3px;
@@ -150,6 +154,9 @@
 }
 
 .log-time {
+    width: 80px;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
     color: #ffffff30;
     font-size: 11px;
     white-space: nowrap;
@@ -157,6 +164,9 @@
 }
 
 .log-type {
+    width: 48px;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
@@ -178,6 +188,9 @@
 }
 
 .log-message {
+    -webkit-flex: 1;
+    flex: 1;
+    min-width: 0;
     font-size: 12px;
     color: #ffffffcc;
     word-break: break-word;

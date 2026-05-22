@@ -1,5 +1,5 @@
 {
-  "name": "evexi",
+  "name": "Evexi",
   "description": "The Evexi Player API",
   "version": "3.13.0",
   "author": "Evexi <development@managedracks.co.uk>",
@@ -8,8 +8,8 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "build": "bash ./scripts/build.sh",
+    "serve": "bash ./scripts/serve.sh"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",

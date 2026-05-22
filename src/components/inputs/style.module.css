@@ -4,22 +4,30 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 6px 12px;
     padding: 7px 10px;
     border-bottom: 1px solid #1f2c2f;
     background: #0e1517;
 }
 
+.inputs > * {
+    margin-right: 12px;
+    margin-bottom: 6px;
+}
+
 .group {
     display: flex;
     align-items: center;
-    gap: 6px;
+}
+
+.group > * + * {
+    margin-left: 6px;
 }
 
 .label {
     font-size: 11px;
     color: #ffffff40;
     white-space: nowrap;
+    -webkit-user-select: none;
     user-select: none;
 }
 

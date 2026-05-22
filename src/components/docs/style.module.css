@@ -24,10 +24,13 @@
     min-height: 36px;
     display: flex;
     align-items: center;
-    gap: 8px;
     padding: 0 14px;
     border-bottom: 1px solid #1f2c2f;
     flex-shrink: 0;
+}
+
+.header > * + * {
+    margin-left: 8px;
 }
 
 .header-app {
