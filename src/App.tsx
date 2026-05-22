@@ -10,6 +10,7 @@ import Evexi from 'evexi';
 import Navbar from './components/navbar/navbar';
 import Sidebar from './components/sidebar/sidebar';
 import Logs from './components/logs/logs';
+import Docs from './components/docs/docs';
 import apps from './utils/registry';
 
 const App: Component = () => {
@@ -37,6 +38,7 @@ const App: Component = () => {
       <div class='main-container'>
         <Sidebar />
         <Logs />
+        <Docs />
       </div>
     </div>
   );

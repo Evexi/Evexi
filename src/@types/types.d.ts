@@ -1,4 +1,12 @@
 declare global {
+  interface PropertyDef {
+    key: string
+    label: string
+    type: 'text' | 'number' | 'union'
+    default: string | number
+    options?: string[]
+  }
+
   interface App {
     name: string
     label: string
@@ -11,7 +19,10 @@ declare global {
     label: string
     status: AppTestStatus
     duration?: number
-    execute: () => Promise<boolean>
+    documentation?: string
+    properties: PropertyDef[]
+    getProperty<T = unknown>(key: string): T
+    execute(): Promise<boolean>
   }
 
   interface Log {

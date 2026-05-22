@@ -1,6 +1,7 @@
 import { useStore } from '@/hooks/useStore';
 import styles from './style.module.css'
 import { Component, For, Show, createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import Inputs from '@/components/inputs/inputs';
 import { numberFormat } from '@/utils/misc';
 import { useLogger, addLog } from '@/hooks/useLogger';
 
@@ -88,6 +89,8 @@ const Logs: Component = () => {
           </div>
         </div>
       </div>
+
+      <Inputs />
 
       <div class={styles['logs-content-container']} ref={logsContainer}>
         <For each={filteredLogs()}>
