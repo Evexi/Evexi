@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class NexmosphereApp implements App {
@@ -7,7 +7,7 @@ class NexmosphereApp implements App {
   label = 'Nexmosphere'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Open Connection',
       documentation: `# Open Connection
 
@@ -63,7 +63,7 @@ Requires Evexi player 2.9.0+ on Windows or Linux.`,
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Write Command',
       documentation: `# Write Command
 
@@ -113,7 +113,7 @@ Use the command input above to send a custom command to the controller.`,
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Close Connection',
       documentation: `# Close Connection
 

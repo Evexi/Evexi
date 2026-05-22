@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import withTimeout from "@/utils/timeout"
 import Evexi from "evexi"
 
@@ -8,7 +8,7 @@ class KioskApp implements App {
   label = 'Kiosk'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Barcode Scan',
       documentation: `# Barcode Scan
 
@@ -64,7 +64,7 @@ This test will wait for a scan for the duration set in the timeout input above. 
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Open Serial Port',
       documentation: `# Open Serial Port
 
@@ -122,7 +122,7 @@ Use the port input above to select which serial port to open.`,
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Close Serial Port',
       documentation: `# Close Serial Port
 

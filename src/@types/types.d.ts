@@ -19,6 +19,7 @@ declare global {
     label: string
     status: AppTestStatus
     duration?: number
+    logs?: Log[]
     documentation?: string
     properties: PropertyDef[]
     getProperty<T = unknown>(key: string): T

@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class MiscApp implements App {
@@ -7,7 +7,7 @@ class MiscApp implements App {
   label = 'Misc'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Get Info',
       documentation: `# Get Info
 
@@ -53,7 +53,7 @@ const info = await Evexi.info()
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Write Log',
       documentation: `# Write Log
 

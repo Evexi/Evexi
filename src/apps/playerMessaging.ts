@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class PlayerMessagingApp implements App {
@@ -7,7 +7,7 @@ class PlayerMessagingApp implements App {
   label = 'Player Messaging'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Register Message Listener',
       documentation: `# Register Message Listener
 
@@ -49,7 +49,7 @@ Players must be in the same group on the Evexi CMS and on the same network.`,
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Send Message',
       documentation: `# Send Message
 

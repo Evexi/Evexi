@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class StripeApp implements App {
@@ -7,7 +7,7 @@ class StripeApp implements App {
   label = 'Stripe'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Proxy Request',
       documentation: `# Proxy Request
 

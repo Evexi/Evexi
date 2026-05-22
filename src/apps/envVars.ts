@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class EnvVarsApp implements App {
@@ -7,7 +7,7 @@ class EnvVarsApp implements App {
   label = 'Env Variables'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Get Env Variable',
       documentation: `# Get Env Variable
 
@@ -54,7 +54,7 @@ Environment variables are useful for passing configuration values (API keys, dis
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Listen For Env Variable Change',
       documentation: `# Listen For Env Variable Change
 

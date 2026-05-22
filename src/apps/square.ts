@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class SquareApp implements App {
@@ -7,7 +7,7 @@ class SquareApp implements App {
   label = 'Square'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Register Event Listener',
       documentation: `# Register Event Listener
 
@@ -53,7 +53,7 @@ Requires \`ENVIRONMENT\`, \`LOCATION\`, and \`TERMINAL_ID\` env variables to be 
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Proxy Request',
       documentation: `# Proxy Request
 

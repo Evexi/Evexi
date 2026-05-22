@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class FsApp implements App {
@@ -7,7 +7,7 @@ class FsApp implements App {
   label = 'File System'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Put File',
       documentation: `# Put File
 
@@ -55,7 +55,7 @@ Only \`.txt\` and \`.json\` files are supported. Use the filename and content in
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Get File',
       documentation: `# Get File
 
@@ -104,7 +104,7 @@ For media files (images, video) \`data\` will be a local file path rather than t
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Check File Exists',
       documentation: `# Check File Exists
 
@@ -149,7 +149,7 @@ const exists = await Evexi.fs.exists('myFile.txt')
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Download File',
       documentation: `# Download File
 
@@ -198,7 +198,7 @@ An optional third argument supports bearer token authentication: \`{ bearer: 'Be
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'List Files',
       documentation: `# List Files
 
@@ -254,7 +254,7 @@ An empty array is returned if storage is empty. \`false\` indicates an error.`,
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Delete File',
       documentation: `# Delete File
 
@@ -298,7 +298,7 @@ const success = await Evexi.fs.del('myFile.txt')
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'List Files (Post-Delete)',
       documentation: `# List Files (Post-Delete)
 
@@ -352,7 +352,7 @@ const files = await Evexi.fs.list()
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Clear Files',
       documentation: `# Clear Files
 

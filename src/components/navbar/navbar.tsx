@@ -4,15 +4,32 @@ import { Component, Show } from "solid-js";
 import Logo from "/logo.svg"
 import { useConnection } from '@/hooks/useConnection';
 import { useStore } from '@/hooks/useStore';
-import { useLogger } from '@/hooks/useLogger';
+import { useLogger, clearLogs } from '@/hooks/useLogger';
+import apps from '@/utils/registry';
 
 const Navbar: Component = () => {
   const connected = useConnection()
-  const { info, docsVisible, setDocsVisible } = useStore()
+  const { info, docsVisible, setDocsVisible, setIsRunning, setActiveApp, setActiveAppTest, setResultsVisible } = useStore()
   const { errors, warnings } = useLogger()
 
   const toggleDocsVisible = () => {
     setDocsVisible(prev => !prev)
+  }
+
+  const handleReset = () => {
+    setIsRunning(false)
+    clearLogs()
+    const allApps = Object.values(apps).map(m => m.default)
+    for (const app of allApps) {
+      for (const test of app.tests) {
+        test.status = 'pending'
+        test.duration = undefined
+        test.logs = undefined
+      }
+    }
+    const firstApp = allApps[0] ?? null
+    setActiveApp(firstApp)
+    setActiveAppTest(firstApp?.tests[0] ?? null)
   }
 
   return (
@@ -21,7 +38,7 @@ const Navbar: Component = () => {
       <div>
 
         <Show when={errors().length > 0 || warnings().length > 0}>
-          <div class={styles['logs-info']}>
+          <div class={styles['logs-info']} onClick={() => setResultsVisible(true)}>
             <Show when={warnings().length > 0}>
               <div class={styles['logs-info-warnings']}>
                 <span>{warnings().length}</span>
@@ -36,6 +53,10 @@ const Navbar: Component = () => {
             </Show>
           </div>
         </Show>
+
+        <button class={styles.resetBtn} onClick={handleReset}>
+          Reset
+        </button>
 
         <div class={styles.info}>
           <div class={styles['connected-icon']} classList={{

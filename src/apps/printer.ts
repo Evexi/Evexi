@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class PrinterApp implements App {
@@ -7,7 +7,7 @@ class PrinterApp implements App {
   label = 'Printer'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Print Receipt',
       documentation: `# Print Receipt
 

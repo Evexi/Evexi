@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class InteractiveApp implements App {
@@ -7,7 +7,7 @@ class InteractiveApp implements App {
   label = 'Interactive'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Create Local Session',
       documentation: `# Create Local Session
 
@@ -54,7 +54,7 @@ For a remote session (with QR scan), pass a \`clientUrl\` as the second argument
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Start Session',
       documentation: `# Start Session
 
@@ -86,7 +86,7 @@ Evexi.interactive.start()
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Destroy Session',
       documentation: `# Destroy Session
 

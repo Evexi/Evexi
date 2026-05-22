@@ -1,18 +1,12 @@
 import styles from './style.module.css'
-import { Component, createMemo, createSignal, For, Show } from "solid-js";
+import { Component, createEffect, createMemo, createSignal, For, Show } from "solid-js";
 import { useStore } from '@/hooks/useStore';
+import { useLogger } from '@/hooks/useLogger';
 import apps from '@/utils/registry';
 
-const handleRunAll = () => {
-  // TODO: run all apps
-}
-
-const handleTestClick = (app: App, test: App['tests'][number]) => {
-  // TODO: handle test click
-}
-
 const Sidebar: Component = () => {
-  const { activeApp, setActiveApp, activeAppTest, setActiveAppTest } = useStore()
+  const { activeApp, setActiveApp, activeAppTest, setActiveAppTest, isRunning, setIsRunning, setResultsVisible } = useStore()
+  const { logs } = useLogger()
 
   const allApps = createMemo(() => Object.values(apps).map(m => m.default))
   const totalCases = createMemo(() => allApps().reduce((sum, a) => sum + a.tests.length, 0))
@@ -20,6 +14,17 @@ const Sidebar: Component = () => {
   const [expanded, setExpanded] = createSignal<Set<string>>(
     new Set(activeApp() ? [activeApp()!.name] : [])
   )
+
+  const testRefs = new Map<AppTest, HTMLDivElement>()
+
+  createEffect(() => {
+    const test = activeAppTest()
+    if (!test) return
+    // rAF ensures the DOM has settled after any expand/re-render
+    requestAnimationFrame(() => {
+      testRefs.get(test)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    })
+  })
 
   const toggleApp = (name: string) => {
     setExpanded(prev => {
@@ -32,6 +37,54 @@ const Sidebar: Component = () => {
 
   const errorCount = (app: App) => app.tests.filter(t => t.status === 'error').length
 
+  const runTest = async (app: App, test: AppTest) => {
+    setActiveApp(app)
+    setActiveAppTest(test)
+    test.status = 'running'
+    test.duration = undefined
+    test.logs = undefined
+    const logsBefore = logs().length
+    const start = Date.now()
+    try {
+      const [result] = await Promise.all([
+        test.execute().then(r => { test.duration = Date.now() - start; return r }),
+        new Promise(resolve => setTimeout(resolve, 3000)),
+      ])
+      if (!isRunning()) return
+      test.logs = logs().slice(logsBefore)
+      test.status = result ? 'success' : 'error'
+    } catch {
+      if (!isRunning()) return
+      test.duration = Date.now() - start
+      test.logs = logs().slice(logsBefore)
+      test.status = 'error'
+    }
+  }
+
+  const handleRunAll = async () => {
+    if (isRunning()) return
+    setIsRunning(true)
+    for (const app of allApps()) {
+      for (const test of app.tests) {
+        test.status = 'pending'
+        test.duration = undefined
+        test.logs = undefined
+      }
+    }
+    for (const app of allApps()) {
+      if (!isRunning()) break
+      setExpanded(prev => { const n = new Set(prev); n.add(app.name); return n })
+      for (const test of app.tests) {
+        if (!isRunning()) break
+        await runTest(app, test)
+      }
+    }
+    if (isRunning()) {
+      setIsRunning(false)
+      setResultsVisible(true)
+    }
+  }
+
   return (
     <div class={styles.sidebar}>
 
@@ -40,7 +93,7 @@ const Sidebar: Component = () => {
           <span class={styles.autorunTitle}>Global autorun</span>
           <span class={styles.autorunMeta}>{allApps().length} apps · {totalCases()} cases</span>
         </div>
-        <button class={styles.runAllBtn} onClick={handleRunAll}>
+        <button class={styles.runAllBtn} onClick={handleRunAll} disabled={isRunning()}>
           <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 8.5L10 12.5L3 16.5V8.5Z" />
             <path d="M10 8.5L17 12.5L10 16.5V8.5Z" />
@@ -80,9 +133,17 @@ const Sidebar: Component = () => {
                   <For each={app.tests}>
                     {(test) => (
                       <div
+                        ref={el => testRefs.set(test, el)}
                         class={styles.testRow}
                         classList={{ [styles.testRowActive]: activeAppTest() === test }}
-                        onClick={() => { setActiveApp(app); setActiveAppTest(test); handleTestClick(app, test) }}
+                        onClick={() => { setActiveApp(app); setActiveAppTest(test) }}
+                        onDblClick={async (e) => {
+                          e.stopPropagation()
+                          if (isRunning()) return
+                          setIsRunning(true)
+                          await runTest(app, test)
+                          if (isRunning()) setIsRunning(false)
+                        }}
                       >
                         <div
                           class={styles.statusDot}

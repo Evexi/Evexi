@@ -20,6 +20,12 @@ const addLog = (log: Omit<Log, 'time'>) => {
   }
 }
 
+const clearLogs = () => {
+  setLogs([])
+  setWarnings([])
+  setErrors([])
+}
+
 const useLogger = () => ({ logs, warnings, errors })
 
-export { useLogger, addLog }
+export { useLogger, addLog, clearLogs }

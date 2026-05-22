@@ -5,10 +5,12 @@ import { createEffect, createSignal } from "solid-js"
 type Info = Awaited<ReturnType<typeof Evexi.info>>
 
 const [loading, setLoading] = createSignal<boolean>(true)
+const [isRunning, setIsRunning] = createSignal<boolean>(false)
 const [activeApp, setActiveApp] = createSignal<App | null>(null)
 const [activeAppTest, setActiveAppTest] = createSignal<AppTest | null>(null)
 const [orientation, setOrientation] = createSignal<'portrait' | 'landscape'>(window.innerWidth < window.innerHeight ? 'portrait' : 'landscape')
 const [docsVisible, setDocsVisible] = createSignal<boolean>(false)
+const [resultsVisible, setResultsVisible] = createSignal<boolean>(false)
 const [info, setInfo] = createSignal<Info | null>(null)
 
 createEffect(() => {
@@ -18,6 +20,8 @@ createEffect(() => {
 export const useStore = () => ({
   loading,
   setLoading,
+  isRunning,
+  setIsRunning,
   activeApp,
   setActiveApp,
   activeAppTest,
@@ -28,4 +32,6 @@ export const useStore = () => ({
   setInfo,
   docsVisible,
   setDocsVisible,
+  resultsVisible,
+  setResultsVisible,
 })

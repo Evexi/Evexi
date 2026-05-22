@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class PipApp implements App {
@@ -7,7 +7,7 @@ class PipApp implements App {
   label = 'Picture in Picture'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Show PIP',
       documentation: `# Show PIP
 
@@ -71,7 +71,7 @@ Valid input types and numbers are platform-dependent. See the [WebOS SCAP docume
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Hide PIP',
       documentation: `# Hide PIP
 

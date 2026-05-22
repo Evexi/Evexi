@@ -1,6 +1,6 @@
 .loading {
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease;
     position: absolute;
     inset: 0;
     width: 100%;
@@ -11,6 +11,29 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* subtle grid overlay */
+.loading::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(52, 211, 153, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* radial glow */
+.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(52, 211, 153, 0.06) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .loading.visible {
@@ -18,16 +41,50 @@
     pointer-events: all;
 }
 
-.loading>img {
-    width: 15%;
+/* ── Corner brackets ── */
+.corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #34d399;
+    border-style: solid;
+    opacity: 0.5;
 }
 
+.corner[data-pos="tl"] { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+.corner[data-pos="tr"] { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+.corner[data-pos="bl"] { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+.corner[data-pos="br"] { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+
+/* ── Content stack ── */
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Logo ── */
+.logoWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content img {
+    width: 200px;
+}
+
+/* ── Spinner ── */
 .loader {
     width: 48px;
     height: 48px;
     transform-origin: center;
     animation: spin 1s linear infinite;
-    margin: 3rem 0;
+    margin: 2.5rem 0 2rem;
+    filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.5));
 }
 
 .loader .track {
@@ -44,14 +101,34 @@
     stroke-dasharray: 70 200;
 }
 
-.loading>span {
-    color: #ffffff40;
-    font-size: 1rem;
-    font-weight: bold;
+/* ── Label ── */
+.label {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 2px;
 }
 
+.dots::after {
+    content: '';
+    display: inline-block;
+    width: 1.2em;
+    animation: dots 1.4s steps(4, end) infinite;
+}
+
+/* ── Keyframes ── */
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes dots {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+    100% { content: ''; }
 }

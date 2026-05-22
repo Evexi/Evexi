@@ -1,5 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
-import { TestCase } from "@/utils/testCase"
+import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 
 class LifecycleApp implements App {
@@ -7,7 +7,7 @@ class LifecycleApp implements App {
   label = 'Lifecycle'
 
   tests: AppTest[] = [
-    new TestCase({
+    new TestRunner({
       label: 'Register Playing Handler',
       documentation: `# Register Playing Handler
 
@@ -48,7 +48,7 @@ The \`item\` object includes the content \`id\`, \`duration\`, \`type\`, and oth
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Register Stopping Handler',
       documentation: `# Register Stopping Handler
 
@@ -88,7 +88,7 @@ Evexi.lifecycle.stopping((item) => {
       }
     }),
 
-    new TestCase({
+    new TestRunner({
       label: 'Register Changed Handler',
       documentation: `# Register Changed Handler
 

@@ -11,6 +11,7 @@ import Navbar from './components/navbar/navbar';
 import Sidebar from './components/sidebar/sidebar';
 import Logs from './components/logs/logs';
 import Docs from './components/docs/docs';
+import Results from './components/results/results';
 import apps from './utils/registry';
 
 const App: Component = () => {
@@ -18,8 +19,11 @@ const App: Component = () => {
   const { setInfo, setLoading, setDocsVisible, setActiveApp, setActiveAppTest } = useStore()
 
   onMount(async () => {
-    const environment = await Environment.retrieve()
-    const info = await Evexi.info()
+    const [environment, info] = await Promise.all([
+      Environment.retrieve(),
+      Evexi.info(),
+      new Promise(resolve => setTimeout(resolve, 5000)),
+    ])
 
     setInfo(info)
     setDocsVisible(environment.docs)
@@ -33,6 +37,7 @@ const App: Component = () => {
     <div class="wrapper">
       <Loading />
       <Error />
+      <Results />
 
       <Navbar />
       <div class='main-container'>
