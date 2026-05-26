@@ -30,6 +30,6 @@ body {
     flex-grow: 1;
     min-height: 0;
     overflow: hidden;
-    background: red;
     display: flex;
+    background-color: #0a0f10;
 }
