@@ -16,7 +16,8 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 if (import.meta.env.DEV) {
   new EvexiMock(Evexi).fs().info().env({
     'type': "Hello World",
-    'docs': "false"
+    'docs': "false",
+    'helper': "false"
   })
 }
 

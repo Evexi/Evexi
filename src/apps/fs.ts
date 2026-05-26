@@ -20,8 +20,8 @@ const success = await Evexi.fs.put('myFile.txt', 'Hello World!')
 
 Only \`.txt\` and \`.json\` files are supported. Use the filename and content inputs above to customise this test.`,
       properties: [
-        { key: 'filename', label: 'Filename', type: 'text', default: 'My Text.txt' },
-        { key: 'content', label: 'Content', type: 'text', default: 'Hello World!' },
+        { key: 'filename', label: 'Filename', type: 'text', default: 'My JSON.json' },
+        { key: 'content', label: 'Content', type: 'text', default: '{"content": "Hello World!"}' },
       ],
       async execute() {
         const filename = this.getProperty<string>('filename')
@@ -68,7 +68,7 @@ const res = await Evexi.fs.get('myFile.txt')
 
 For media files (images, video) \`data\` will be a local file path rather than the file's content.`,
       properties: [
-        { key: 'filename', label: 'Filename', type: 'text', default: 'My Text.txt' },
+        { key: 'filename', label: 'Filename', type: 'text', default: 'My JSON.json' },
         { key: 'expected', label: 'Expected Content', type: 'text', default: 'Hello World!' },
       ],
       async execute() {
@@ -78,7 +78,18 @@ For media files (images, video) \`data\` will be a local file path rather than t
           // Evexi.fs.get() retrieves a file from local storage; returns an object with 'data', 'type', 'name', and 'error' fields
           const response = await Evexi.fs.get(filename)
 
-          if (response.data === expected) {
+          if (response.error) {
+            addLog({
+              message: 'Failed to get file: ' + response.error,
+              type: 'error',
+            })
+
+            return false
+          }
+
+          const parsed = JSON.parse(response.data ?? '{}')
+
+          if (parsed.content === expected) {
             addLog({
               message: 'File received successfully. Content matches expected value',
               type: 'info',
@@ -88,7 +99,7 @@ For media files (images, video) \`data\` will be a local file path rather than t
           }
 
           addLog({
-            message: 'File received successfully. Content does not match expected value',
+            message: 'File received successfully. Content does not match expected value. Expected: ' + expected + ' but got: ' + response.data,
             type: 'warning',
           })
 
@@ -115,7 +126,7 @@ const exists = await Evexi.fs.exists('myFile.txt')
 // Returns true if the file exists, false otherwise
 \`\`\``,
       properties: [
-        { key: 'filename', label: 'Filename', type: 'text', default: 'My Text.txt' },
+        { key: 'filename', label: 'Filename', type: 'text', default: 'My JSON.json' },
       ],
       async execute() {
         const filename = this.getProperty<string>('filename')
@@ -206,7 +217,7 @@ Returns all filenames currently in local storage. Expects both the text file and
 
 \`\`\`typescript
 const files = await Evexi.fs.list()
-// ['My Video.mp4', 'My Text.txt'] or false on error
+// ['My Video.mp4', 'My JSON.json'] or false on error
 \`\`\`
 
 An empty array is returned if storage is empty. \`false\` indicates an error.`,
@@ -225,7 +236,7 @@ An empty array is returned if storage is empty. \`false\` indicates an error.`,
             return false
           }
 
-          const expected = ['My Video.mp4', 'My Text.txt']
+          const expected = ['My Video.mp4', 'My JSON.json']
 
           const hasExpectedFiles = expected.every((file) => files.includes(file))
           if (hasExpectedFiles) {
@@ -306,7 +317,7 @@ Validates that the deleted video file is gone and only the text file remains.
 
 \`\`\`typescript
 const files = await Evexi.fs.list()
-// Should now only contain ['My Text.txt']
+// Should now only contain ['My JSON.json']
 \`\`\``,
       properties: [],
       async execute() {
@@ -323,7 +334,7 @@ const files = await Evexi.fs.list()
             return false
           }
 
-          const expected = ['My Text.txt']
+          const expected = ['My JSON.json']
 
           const hasExpectedFiles = expected.every((file) => files.includes(file))
           if (hasExpectedFiles) {

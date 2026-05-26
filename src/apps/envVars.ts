@@ -66,7 +66,7 @@ Evexi.envChange('MY_KEY', (value) => {
 })
 \`\`\`
 
-**Note:** Monitoring the same key in multiple locations will cause unexpected behaviour. Only register one listener per key.`,
+**Note:** Monitoring the same key in multiple locations will cause the previous listener to be overwritten. Only register one listener per key.`,
       properties: [
         { key: 'key', label: 'Key', type: 'text', default: 'DISPLAY_ID' },
       ],

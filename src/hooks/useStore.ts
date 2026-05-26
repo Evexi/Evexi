@@ -12,6 +12,9 @@ const [orientation, setOrientation] = createSignal<'portrait' | 'landscape'>(win
 const [docsVisible, setDocsVisible] = createSignal<boolean>(false)
 const [resultsVisible, setResultsVisible] = createSignal<boolean>(false)
 const [info, setInfo] = createSignal<Info | null>(null)
+const [logFilter, setLogFilter] = createSignal({ info: false, warning: false, error: false })
+const [helperVisible, setHelperVisible] = createSignal<boolean>(false)
+const [reportsUrl, setReportsUrl] = createSignal<string | undefined>(undefined)
 
 createEffect(() => {
   setOrientation(window.innerWidth < window.innerHeight ? 'portrait' : 'landscape')
@@ -34,4 +37,10 @@ export const useStore = () => ({
   setDocsVisible,
   resultsVisible,
   setResultsVisible,
+  logFilter,
+  setLogFilter,
+  helperVisible,
+  setHelperVisible,
+  reportsUrl,
+  setReportsUrl,
 })

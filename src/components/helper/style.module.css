@@ -1,0 +1,225 @@
+/* ── Overlay ── */
+.helper {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #0a0f10;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 998;
+    padding: 24px 28px 20px;
+}
+
+/* subtle grid overlay */
+.helper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image:
+        linear-gradient(rgba(52, 211, 153, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* radial glow */
+.helper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 20%, rgba(52, 211, 153, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.helper.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ── Content ── */
+.content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header (horizontal strip) ── */
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 14px;
+    flex-shrink: 0;
+}
+
+.logoWrap {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logoWrap img {
+    width: 80px;
+}
+
+.headerText {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.5;
+}
+
+/* ── Divider ── */
+.divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #34d39930, transparent);
+    flex-shrink: 0;
+}
+
+/* ── Vars grid ── */
+.vars {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    background: #1a2628;
+    gap: 1px;
+    margin: 14px 0;
+}
+
+/* run spans 2 columns (3rd item in the list) */
+.var:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* ── Individual env var cell ── */
+.var {
+    background: #0a0f10;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 18px;
+    gap: 8px;
+    min-height: 0;
+}
+
+.varHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.varName {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #34d399;
+    flex-shrink: 0;
+}
+
+.varValues {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.2);
+    text-align: right;
+}
+
+.varDesc {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.6;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.varExample {
+    margin: 0;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.18);
+    background: #0e1517;
+    border: 1px solid #1f2c2f;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-family: monospace;
+    flex-shrink: 0;
+}
+
+/* ── Run: app keys ── */
+.varAppKeys {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-height: 0;
+}
+
+.varAppKeysLabel {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.18);
+}
+
+.varAppKeysList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.varAppKey {
+    font-size: 0.62rem;
+    font-weight: 600;
+    font-family: monospace;
+    color: #34d399;
+    background: #34d39912;
+    border: 1px solid #34d39930;
+    border-radius: 3px;
+    padding: 1px 6px;
+}
+
+/* ── Footer ── */
+.footer {
+    margin: 0;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.15);
+    line-height: 1.6;
+}

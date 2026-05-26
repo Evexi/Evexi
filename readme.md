@@ -13,9 +13,9 @@ The application is fully self-contained and deploys as a single ZIP archive to t
 
 The application reads two environment variables from the Evexi admin portal at startup.
 
-### `type`
+### `autorun`
 
-Determines which API test suite is loaded by default when the application starts.
+Determines which API test suite is loaded and ran by default when the application starts.
 
 ### `docs`
 
@@ -27,6 +27,31 @@ Controls whether the inline documentation panel is visible for the currently sel
 | `false` | The documentation panel is hidden |
 
 This is useful when deploying to a display where screen space should be reserved entirely for testing and results, with documentation toggled off unless needed.
+
+### `filter`
+
+Pre-sets which log types are visible in the live log panel. Accepts a comma-separated list of log type names.
+
+| Value | Behaviour |
+|---|---|
+| `info` | Show only info logs |
+| `warning` | Show only warning logs |
+| `error` | Show only error logs |
+| `error,warning` | Show errors and warnings only |
+| *(unset)* | All log types are visible |
+
+The filter can be changed at any time and the log panel updates immediately. Setting it back to an empty value restores the default (show all).
+
+### `results`
+
+Controls whether the run summary modal is open.
+
+| Value | Behaviour |
+|---|---|
+| `true` | Opens the run summary modal |
+| `false` | Closes the run summary modal |
+
+Useful for surfacing the results view on a remote display without physically interacting with the screen.
 
 ---
 
@@ -41,7 +66,7 @@ npm run build     # Produce dist/ and Evexi.zip in builds/
 In development, an `EvexiMock` instance is automatically configured so the SDK can be exercised without a live player. Selective mocking is supported — only the API namespaces you need can be stubbed:
 
 ```ts
-new EvexiMock(Evexi).fs().info().env({ type: 'Hello World', docs: 'false' })
+new EvexiMock(Evexi).fs().info().env({ autorun: 'true', docs: 'false' })
 ```
 
 ---

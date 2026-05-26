@@ -65,6 +65,17 @@
     margin: 0 15px;
 }
 
+.helper-toggle {
+    height: 70%;
+    color: #ffffff50;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.helper-toggle.toggled {
+    color: #34d399;
+}
+
 .settings-toggle {
     height: 70%;
     color: #ffffff50;

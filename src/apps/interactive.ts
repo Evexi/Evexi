@@ -5,8 +5,43 @@ import Evexi from "evexi"
 class InteractiveApp implements App {
   name = 'interactive'
   label = 'Interactive'
+  order = 0
 
   tests: AppTest[] = [
+    new TestRunner({
+      label: 'Destroy Session',
+      documentation: `# Destroy Session
+
+Ends the interactive session and returns the player to its normal playlist. Call this when the user interaction is complete or when the session times out.
+
+\`\`\`typescript
+Evexi.interactive.destroy()
+\`\`\`
+
+This is also used by the Touch To Engage pattern — assign your content as \`application content\` and call \`destroy()\` when you want to hand control back to the playlist.`,
+      properties: [],
+      async execute() {
+        try {
+          // Evexi.interactive.destroy() ends the interactive session and returns the player to its normal playlist
+          Evexi.interactive.destroy()
+
+          addLog({
+            message: 'Interactive session destroyed.',
+            type: 'info',
+          })
+
+          return true
+        } catch (e) {
+          addLog({
+            message: 'Failed to destroy interactive session. Trace: ' + e,
+            type: 'error',
+          })
+
+          return false
+        }
+      }
+    }),
+
     new TestRunner({
       label: 'Create Local Session',
       documentation: `# Create Local Session
@@ -78,40 +113,6 @@ Evexi.interactive.start()
         } catch (e) {
           addLog({
             message: 'Failed to start interactive session. Trace: ' + e,
-            type: 'error',
-          })
-
-          return false
-        }
-      }
-    }),
-
-    new TestRunner({
-      label: 'Destroy Session',
-      documentation: `# Destroy Session
-
-Ends the interactive session and returns the player to its normal playlist. Call this when the user interaction is complete or when the session times out.
-
-\`\`\`typescript
-Evexi.interactive.destroy()
-\`\`\`
-
-This is also used by the Touch To Engage pattern — assign your content as \`application content\` and call \`destroy()\` when you want to hand control back to the playlist.`,
-      properties: [],
-      async execute() {
-        try {
-          // Evexi.interactive.destroy() ends the interactive session and returns the player to its normal playlist
-          Evexi.interactive.destroy()
-
-          addLog({
-            message: 'Interactive session destroyed.',
-            type: 'info',
-          })
-
-          return true
-        } catch (e) {
-          addLog({
-            message: 'Failed to destroy interactive session. Trace: ' + e,
             type: 'error',
           })
 

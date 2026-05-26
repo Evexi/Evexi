@@ -15,8 +15,8 @@ Registers a callback that fires whenever a message is received from another play
 
 \`\`\`typescript
 Evexi.playerMessaging.onMessage((message) => {
-  const { ip, data, playerId } = message
-  console.log(\`Message from \${playerId}: \${data}\`)
+  const { ip, data, deviceId } = message
+  console.log(\`Message from \${deviceId}: \${data}\`)
 })
 \`\`\`
 
@@ -24,10 +24,10 @@ Players must be in the same group on the Evexi CMS and on the same network.`,
       properties: [],
       async execute() {
         try {
-          // Evexi.playerMessaging.onMessage() registers a callback that fires when a message is received from another player in the same group; the payload includes ip, data, and playerId
+          // Evexi.playerMessaging.onMessage() registers a callback that fires when a message is received from another player in the same group; the payload includes ip, data, and deviceId
           Evexi.playerMessaging.onMessage((message) => {
             addLog({
-              message: `Message received from player ${message.playerId} (${message.ip}): ${message.data}`,
+              message: `Message received from player ${message.deviceId} (${message.ip}): ${message.data}`,
               type: 'info',
             })
           })

@@ -1,14 +1,12 @@
 import styles from './style.module.css'
 import { Component, createEffect, createMemo, createSignal, For, Show } from "solid-js";
 import { useStore } from '@/hooks/useStore';
-import { useLogger } from '@/hooks/useLogger';
-import apps from '@/utils/registry';
+import { allApps as getApps, runAll, runApp, runTest } from '@/hooks/useRunner';
 
 const Sidebar: Component = () => {
-  const { activeApp, setActiveApp, activeAppTest, setActiveAppTest, isRunning, setIsRunning, setResultsVisible } = useStore()
-  const { logs } = useLogger()
+  const { activeApp, setActiveApp, activeAppTest, setActiveAppTest, isRunning, setIsRunning } = useStore()
 
-  const allApps = createMemo(() => Object.values(apps).map(m => m.default))
+  const allApps = createMemo(() => getApps())
   const totalCases = createMemo(() => allApps().reduce((sum, a) => sum + a.tests.length, 0))
 
   const [expanded, setExpanded] = createSignal<Set<string>>(
@@ -20,7 +18,6 @@ const Sidebar: Component = () => {
   createEffect(() => {
     const test = activeAppTest()
     if (!test) return
-    // rAF ensures the DOM has settled after any expand/re-render
     requestAnimationFrame(() => {
       testRefs.get(test)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     })
@@ -37,52 +34,9 @@ const Sidebar: Component = () => {
 
   const errorCount = (app: App) => app.tests.filter(t => t.status === 'error').length
 
-  const runTest = async (app: App, test: AppTest) => {
-    setActiveApp(app)
-    setActiveAppTest(test)
-    test.status = 'running'
-    test.duration = undefined
-    test.logs = undefined
-    const logsBefore = logs().length
-    const start = Date.now()
-    try {
-      const [result] = await Promise.all([
-        test.execute().then(r => { test.duration = Date.now() - start; return r }),
-        new Promise(resolve => setTimeout(resolve, 3000)),
-      ])
-      if (!isRunning()) return
-      test.logs = logs().slice(logsBefore)
-      test.status = result ? 'success' : 'error'
-    } catch {
-      if (!isRunning()) return
-      test.duration = Date.now() - start
-      test.logs = logs().slice(logsBefore)
-      test.status = 'error'
-    }
-  }
-
-  const handleRunAll = async () => {
-    if (isRunning()) return
-    setIsRunning(true)
-    for (const app of allApps()) {
-      for (const test of app.tests) {
-        test.status = 'pending'
-        test.duration = undefined
-        test.logs = undefined
-      }
-    }
-    for (const app of allApps()) {
-      if (!isRunning()) break
-      setExpanded(prev => { const n = new Set(prev); n.add(app.name); return n })
-      for (const test of app.tests) {
-        if (!isRunning()) break
-        await runTest(app, test)
-      }
-    }
-    if (isRunning()) {
-      setIsRunning(false)
-      setResultsVisible(true)
-    }
+  const handleRunAll = () => {
+    allApps().forEach(app => setExpanded(prev => { const n = new Set(prev); n.add(app.name); return n }))
+    runAll()
   }
 
   return (
@@ -106,7 +60,7 @@ const Sidebar: Component = () => {
         <For each={allApps()}>
           {(app) => (
             <div class={styles.appSection}>
-              <div class={styles.appRow} onClick={() => toggleApp(app.name)}>
+              <div class={styles.appRow} onClick={() => toggleApp(app.name)} onDblClick={() => runApp(app.name)}>
                 <div class={styles.appRowLeft}>
                   <svg
                     class={styles.chevron}

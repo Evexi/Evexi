@@ -1,24 +1,18 @@
 import { useStore } from '@/hooks/useStore';
 import styles from './style.module.css'
-import { Component, For, Show, createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import { Component, For, Show, createEffect, createMemo, onCleanup, onMount } from "solid-js";
 import Inputs from '@/components/inputs/inputs';
 import { numberFormat } from '@/utils/misc';
 import { useLogger, addLog } from '@/hooks/useLogger';
 
 const Logs: Component = () => {
-  const { activeApp, activeAppTest } = useStore()
+  const { activeApp, activeAppTest, logFilter, setLogFilter } = useStore()
   const { logs } = useLogger()
-
-  const [filters, setFilters] = createSignal({
-    info: false,
-    error: false,
-    warning: false,
-  })
 
   let logsContainer!: HTMLDivElement
 
-  const toggleFilter = (filter: keyof ReturnType<typeof filters>) => {
-    setFilters(prev => ({ ...prev, [filter]: !prev[filter] }))
+  const toggleFilter = (filter: keyof ReturnType<typeof logFilter>) => {
+    setLogFilter(prev => ({ ...prev, [filter]: !prev[filter] }))
   }
 
   const formatLogTime = (timestamp: number) => {
@@ -27,7 +21,7 @@ const Logs: Component = () => {
   }
 
   const filteredLogs = createMemo(() => {
-    const active = Object.entries(filters()).filter(([, v]) => v).map(([k]) => k)
+    const active = Object.entries(logFilter()).filter(([, v]) => v).map(([k]) => k)
     if (active.length === 0) return logs()
     return logs().filter(log => active.includes(log.type))
   })
@@ -70,19 +64,19 @@ const Logs: Component = () => {
 
         <div class={styles['logs-nav-filter-wrapper']}>
           <div class={styles['logs-nav-filter']} classList={{
-            [styles.active]: filters().info
+            [styles.active]: logFilter().info
           }} onClick={() => toggleFilter('info')}>
             <div class={`${styles['logs-nav-filter-indicator']} ${styles.info}`}></div>
             <span class={styles['logs-nav-filter-name']}>Info</span>
           </div>
           <div class={styles['logs-nav-filter']} classList={{
-            [styles.active]: filters().warning
+            [styles.active]: logFilter().warning
           }} onClick={() => toggleFilter('warning')}>
             <div class={`${styles['logs-nav-filter-indicator']} ${styles.warning}`}></div>
             <span class={styles['logs-nav-filter-name']}>Warning</span>
           </div>
           <div class={styles['logs-nav-filter']} classList={{
-            [styles.active]: filters().error
+            [styles.active]: logFilter().error
           }} onClick={() => toggleFilter('error')}>
             <div class={`${styles['logs-nav-filter-indicator']} ${styles.error}`}></div>
             <span class={styles['logs-nav-filter-name']}>Error</span>

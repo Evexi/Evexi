@@ -9,7 +9,7 @@ import apps from '@/utils/registry';
 
 const Navbar: Component = () => {
   const connected = useConnection()
-  const { info, docsVisible, setDocsVisible, setIsRunning, setActiveApp, setActiveAppTest, setResultsVisible } = useStore()
+  const { info, docsVisible, setDocsVisible, setIsRunning, setActiveApp, setActiveAppTest, setResultsVisible, helperVisible, setHelperVisible } = useStore()
   const { errors, warnings } = useLogger()
 
   const toggleDocsVisible = () => {
@@ -68,6 +68,13 @@ const Navbar: Component = () => {
           <span>{info()?.version || 'v3.12.0'}</span>
         </div>
         <div class={styles.divider}></div>
+        <svg class={styles['helper-toggle']} onClick={() => setHelperVisible(prev => !prev)} classList={{
+          [styles.toggled]: helperVisible()
+        }} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="17" r="0.5" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
         <svg class={styles['settings-toggle']} onClick={toggleDocsVisible} classList={{
           [styles.toggled]: docsVisible()
         }} viewBox="0 0 24 24" fill="transparent" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.75 9H8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.75 15H8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>

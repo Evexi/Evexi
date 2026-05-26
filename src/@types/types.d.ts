@@ -10,6 +10,8 @@ declare global {
   interface App {
     name: string
     label: string
+    order?: number
+    skip?: boolean
     tests: AppTest[]
   }
 
