@@ -5,6 +5,7 @@ import devtools from 'solid-devtools/vite';
 import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
+  base: './',
   plugins: [
     devtools(),
     solidPlugin(),
@@ -17,7 +18,6 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-
   },
   resolve: {
     alias: {

@@ -34,7 +34,7 @@ const Logs: Component = () => {
 
   createEffect(() => {
     filteredLogs();
-    logsContainer.scrollTo({ top: logsContainer.scrollHeight, behavior: 'smooth' })
+    logsContainer.scrollTop = logsContainer.scrollHeight
   })
 
   // onMount(() => {

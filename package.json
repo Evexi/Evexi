@@ -12,6 +12,7 @@
     "serve": "bash ./scripts/serve.sh"
   },
   "devDependencies": {
+    "@types/node": "^25.9.1",
     "@vitejs/plugin-legacy": "^7.2.1",
     "path": "^0.12.7",
     "solid-devtools": "^0.34.3",
