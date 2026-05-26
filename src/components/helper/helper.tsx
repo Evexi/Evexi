@@ -43,6 +43,12 @@ const ENV_VARS = [
     example: 'results = true',
   },
   {
+    name: 'reports_url',
+    values: 'URL string',
+    description: 'When set, posts a JSON summary report to this URL at the end of every autorun. The payload includes errors and warnings grouped by app and test label.',
+    example: null,
+  },
+  {
     name: 'helper',
     values: 'true | false',
     description: 'Shows or hides this overlay.',

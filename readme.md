@@ -53,6 +53,30 @@ Controls whether the run summary modal is open.
 
 Useful for surfacing the results view on a remote display without physically interacting with the screen.
 
+### `reports_url`
+
+When set, the application will POST a JSON report to this URL at the end of every autorun. The payload has the following shape:
+
+```json
+{
+  "summary": {
+    "errors": {
+      "fs": { "Put File": ["error message"] }
+    },
+    "warnings": {
+      "fs": { "List Files": ["warning message"] }
+    }
+  }
+}
+```
+
+`errors` and `warnings` are only included when non-empty. Each key is an app label, with test labels as sub-keys mapping to arrays of log messages.
+
+| Value | Behaviour |
+|---|---|
+| *(unset)* | No report is sent |
+| `https://example.com/hook` | POSTs the summary JSON to the given URL after each autorun |
+
 ---
 
 ## Development

@@ -1,81 +1,40 @@
 import { useStore } from '@/hooks/useStore'
 
+type AppLabel = string
+type TestLabel = string
+
+interface Summary {
+  errors?: Record<AppLabel, Record<TestLabel, string[]>>
+  warnings?: Record<AppLabel, Record<TestLabel, string[]>>
+}
+
 const sendReport = async (allApps: App[]) => {
   const { reportsUrl } = useStore()
   const url = reportsUrl()
   if (!url) return
 
-  const failed = allApps.reduce<{ app: string; test: App['tests'][number] }[]>((acc, app) => {
-    const appFailed = app.tests
-      .filter(t => t.status === 'error')
-      .map(t => ({ app: app.label, test: t }))
-    return acc.concat(appFailed)
-  }, [])
+  const errors: Record<AppLabel, Record<TestLabel, string[]>> = {}
+  const warnings: Record<AppLabel, Record<TestLabel, string[]>> = {}
 
-  const warned = allApps.reduce<{ app: string; label: string; log: NonNullable<App['tests'][number]['logs']>[number] }[]>((acc, app) => {
-    const appWarned = app.tests.reduce<{ app: string; label: string; log: NonNullable<App['tests'][number]['logs']>[number] }[]>((innerAcc, t) => {
-      const testWarned = (t.logs ?? [])
-        .filter(l => l.type === 'warning')
-        .map(l => ({ app: app.label, label: t.label, log: l }))
-      return innerAcc.concat(testWarned)
-    }, [])
-    return acc.concat(appWarned)
-  }, [])
-
-  const total = allApps.reduce((n, a) => n + a.tests.length, 0)
-  const passed = total - failed.length
-  const statusEmoji = failed.length === 0 ? ':white_check_mark:' : ':x:'
-
-  const blocks: object[] = [
-    {
-      type: 'header',
-      text: { type: 'plain_text', text: `${statusEmoji} Autorun Report`, emoji: true },
-    },
-    {
-      type: 'section',
-      fields: [
-        { type: 'mrkdwn', text: `*Total*\n${total}` },
-        { type: 'mrkdwn', text: `*Passed*\n${passed}` },
-        { type: 'mrkdwn', text: `*Failed*\n${failed.length}` },
-        { type: 'mrkdwn', text: `*Warnings*\n${warned.length}` },
-      ],
-    },
-  ]
-
-  if (failed.length > 0) {
-    blocks.push({ type: 'divider' })
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: '*:x: Failures*' },
-    })
-    for (let i = 0; i < failed.length; i++) {
-      const { app, test } = failed[i]
-      const errorLogs = (test.logs ?? []).filter(l => l.type === 'error')
-      const detail = errorLogs.length > 0
-        ? errorLogs.map(l => `> ${l.message}`).join('\n')
-        : '> No error logs captured.'
-      blocks.push({
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: `*${app} — ${test.label}*${test.duration != null ? ` _(${test.duration}ms)_` : ''}\n${detail}`,
-        },
-      })
+  for (const app of allApps) {
+    for (const test of app.tests) {
+      for (const log of test.logs ?? []) {
+        if (log.type === 'error') {
+          errors[app.label] ??= {}
+          errors[app.label][test.label] ??= []
+          errors[app.label][test.label].push(log.message)
+        } else if (log.type === 'warning') {
+          warnings[app.label] ??= {}
+          warnings[app.label][test.label] ??= []
+          warnings[app.label][test.label].push(log.message)
+        }
+      }
     }
   }
 
-  if (warned.length > 0) {
-    blocks.push({ type: 'divider' })
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: '*:warning: Warnings*' },
-    })
-    const warningLines = warned.map(w => `• *${w.app} — ${w.label}*: ${w.log.message}`).join('\n')
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: warningLines },
-    })
-  }
+  const summary: Summary = {}
+  if (Object.keys(errors).length > 0) summary.errors = errors
+  if (Object.keys(warnings).length > 0) summary.warnings = warnings
 
   await new Promise<void>((resolve, reject) => {
     const xhr = new XMLHttpRequest()
@@ -89,7 +48,7 @@ const sendReport = async (allApps: App[]) => {
       }
     }
     xhr.onerror = () => reject(new Error('Network error'))
-    xhr.send(JSON.stringify({ blocks }))
+    xhr.send(JSON.stringify({ summary }))
   })
 }
 
