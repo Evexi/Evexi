@@ -1,40 +1,27 @@
 import { useStore } from '@/hooks/useStore'
 
-type AppLabel = string
-type TestLabel = string
-
-interface Summary {
-  errors?: Record<AppLabel, Record<TestLabel, string[]>>
-  warnings?: Record<AppLabel, Record<TestLabel, string[]>>
+interface TestResult {
+  label: string
+  status: AppTestStatus
+  logs: Log[]
 }
 
+type Summary = Record<string, TestResult[]>
+
 const sendReport = async (allApps: App[]) => {
-  const { reportsUrl } = useStore()
+  const { reportsUrl, info } = useStore()
   const url = reportsUrl()
   if (!url) return
 
-  const errors: Record<AppLabel, Record<TestLabel, string[]>> = {}
-  const warnings: Record<AppLabel, Record<TestLabel, string[]>> = {}
+  const summary: Summary = {}
 
   for (const app of allApps) {
-    for (const test of app.tests) {
-      for (const log of test.logs ?? []) {
-        if (log.type === 'error') {
-          errors[app.label] ??= {}
-          errors[app.label][test.label] ??= []
-          errors[app.label][test.label].push(log.message)
-        } else if (log.type === 'warning') {
-          warnings[app.label] ??= {}
-          warnings[app.label][test.label] ??= []
-          warnings[app.label][test.label].push(log.message)
-        }
-      }
-    }
+    summary[app.label] = app.tests.map(test => ({
+      label: test.label,
+      status: test.status,
+      logs: test.logs ?? [],
+    }))
   }
-
-  const summary: Summary = {}
-  if (Object.keys(errors).length > 0) summary.errors = errors
-  if (Object.keys(warnings).length > 0) summary.warnings = warnings
 
   await new Promise<void>((resolve, reject) => {
     const xhr = new XMLHttpRequest()
@@ -48,7 +35,7 @@ const sendReport = async (allApps: App[]) => {
       }
     }
     xhr.onerror = () => reject(new Error('Network error'))
-    xhr.send(JSON.stringify({ summary }))
+    xhr.send(JSON.stringify({ summary, info: info() }))
   })
 }
 
