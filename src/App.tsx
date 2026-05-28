@@ -38,6 +38,8 @@ const App: Component = () => {
   }
 
   const handleRun = (value: string) => {
+    if (value === 'all') return runAll()
+
     const dot = value.indexOf('.')
     if (dot === -1) runApp(value.trim())
     else runSingle(value.slice(0, dot).trim(), value.slice(dot + 1).trim())
@@ -72,14 +74,9 @@ const App: Component = () => {
       setActiveApp(apps.fs.default)
       setActiveAppTest(apps.fs.default.tests[0])
 
-      if (environment.autorun === 'true') runAll()
       if (environment.run) handleRun(environment.run)
-      Environment.listen(['autorun', 'docs', 'helper', 'filter', 'results', 'reset', 'run', 'reports_url'], (item, value) => {
+      Environment.listen(['docs', 'helper', 'filter', 'results', 'reset', 'run', 'reports_url'], (item, value) => {
         switch (item) {
-          case 'autorun': {
-            if (value === 'true') runAll()
-            break
-          }
           case 'docs': {
             setDocsVisible(value === 'true')
             break

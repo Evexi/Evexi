@@ -7,12 +7,6 @@ import apps from "@/utils/registry";
 
 const ENV_VARS = [
   {
-    name: 'autorun',
-    values: 'true | false',
-    description: 'Automatically runs all test suites when the application starts. Also fires whenever this value is changed to true.',
-    example: 'autorun = true',
-  },
-  {
     name: 'docs',
     values: 'true | false',
     description: 'Shows or hides the documentation panel on the right side of the screen.',
@@ -20,8 +14,8 @@ const ENV_VARS = [
   },
   {
     name: 'run',
-    values: '{appKey} | {appKey}.{testLabel}',
-    description: 'Runs a specific app or an individual test case. Fires whenever this value is changed. Set to an app key to run all tests in that app, or use dot notation to target a single test by its exact label as shown in the sidebar.',
+    values: 'all {appKey} | {appKey}.{testLabel}',
+    description: 'Runs a specific app or an individual test case. Fires whenever this value is changed. Set to an app key to run all tests in that app, or use dot notation to target a single test by its exact label as shown in the sidebar. Set to "all" to run every test across all apps.',
     example: null,
   },
   {
@@ -45,7 +39,7 @@ const ENV_VARS = [
   {
     name: 'reports_url',
     values: 'URL string',
-    description: 'When set, posts a JSON summary report to this URL at the end of every autorun. The payload includes errors and warnings grouped by app and test label.',
+    description: 'When set, posts a JSON summary report to this URL at the end of every run. The payload includes errors and warnings grouped by app and test label.',
     example: null,
   },
   {

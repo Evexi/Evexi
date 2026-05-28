@@ -13,10 +13,6 @@ The application is fully self-contained and deploys as a single ZIP archive to t
 
 The application reads two environment variables from the Evexi admin portal at startup.
 
-### `autorun`
-
-Determines which API test suite is loaded and ran by default when the application starts.
-
 ### `docs`
 
 Controls whether the inline documentation panel is visible for the currently selected test.
@@ -55,7 +51,7 @@ Useful for surfacing the results view on a remote display without physically int
 
 ### `reports_url`
 
-When set, the application will POST a JSON report to this URL at the end of every autorun. The payload has the following shape:
+When set, the application will POST a JSON report to this URL at the end of every run. The payload has the following shape:
 
 ```json
 {
@@ -75,7 +71,7 @@ When set, the application will POST a JSON report to this URL at the end of ever
 | Value | Behaviour |
 |---|---|
 | *(unset)* | No report is sent |
-| `https://example.com/hook` | POSTs the summary JSON to the given URL after each autorun |
+| `https://example.com/hook` | POSTs the summary JSON to the given URL after each run |
 
 ---
 
@@ -90,7 +86,7 @@ npm run build     # Produce dist/ and Evexi.zip in builds/
 In development, an `EvexiMock` instance is automatically configured so the SDK can be exercised without a live player. Selective mocking is supported — only the API namespaces you need can be stubbed:
 
 ```ts
-new EvexiMock(Evexi).fs().info().env({ autorun: 'true', docs: 'false' })
+new EvexiMock(Evexi).fs().info().env({ run: 'all', docs: 'false' })
 ```
 
 ---

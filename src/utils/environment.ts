@@ -4,7 +4,6 @@ class Environment {
 
   async retrieve() {
     return {
-      autorun: await Evexi.env('autorun'),
       docs: (await Evexi.env('docs') === 'true'),
       helper: (await Evexi.env('helper') === 'true'),
       run: await Evexi.env('run'),
