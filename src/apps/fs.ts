@@ -414,6 +414,58 @@ const count = await Evexi.fs.clear()
         }
       }
     }),
+    new TestRunner({
+      label: 'List Files (Post-Clear)',
+      documentation: `# List Files
+
+Returns all filenames currently in local storage. Expects both the text file and video file from previous tests to be present.
+
+\`\`\`typescript
+const files = await Evexi.fs.list()
+// ['My Video.mp4', 'My JSON.json'] or false on error
+\`\`\`
+
+An empty array is returned if storage is empty. \`false\` indicates an error.`,
+      properties: [],
+      async execute() {
+        try {
+          // Evexi.fs.list() returns an array of filenames currently in local storage, or false if an error occurs
+          const files = await Evexi.fs.list()
+
+          if (!files) {
+            addLog({
+              message: 'No files found.',
+              type: 'error',
+            })
+
+            return false
+          }
+
+          if (files.length === 0) {
+            addLog({
+              message: 'No files found, as expected after clear.',
+              type: 'info',
+            })
+
+            return true
+          }
+
+          addLog({
+            message: 'Unexpected files found after clear: ' + files.join(', '),
+            type: 'error',
+          })
+
+          return false
+        } catch (e) {
+          addLog({
+            message: 'Failed to list files. Trace: ' + e,
+            type: 'error',
+          })
+
+          return false
+        }
+      }
+    }),
   ]
 }
 
