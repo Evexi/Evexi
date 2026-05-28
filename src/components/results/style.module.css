@@ -250,11 +250,11 @@
 }
 
 /* Warning-coloured cards sit inside the "Passed with Warnings" section */
-.section:has(.inlineLogWarning) .testCard {
+.section.inlineLogWarning .testCard {
     border-color: #faee6d30;
 }
 
-.section:has(.inlineLogWarning) .testCardHeader {
+.section.inlineLogWarning .testCardHeader {
     background: #faee6d08;
 }
 

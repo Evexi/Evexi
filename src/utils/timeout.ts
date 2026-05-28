@@ -7,10 +7,16 @@ const withTimeout = <T>(promise: Promise<T>, ms: number): Promise<T | null> => {
   })
 
   return Promise.race([
-    promise.then((result) => {
-      clearTimeout(timer)
-      return result
-    }),
+    promise.then(
+      (result) => {
+        clearTimeout(timer)
+        return result
+      },
+      (err) => {
+        clearTimeout(timer)
+        throw err
+      }
+    ),
     timeout,
   ])
 }

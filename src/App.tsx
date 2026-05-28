@@ -19,7 +19,7 @@ import apps from './utils/registry';
 
 const App: Component = () => {
 
-  const { setInfo, setLoading, setDocsVisible, setActiveApp, setActiveAppTest, setResultsVisible, setLogFilter, setHelperVisible, setIsRunning, setReportsUrl } = useStore()
+  const { setInfo, setLoading, setDocsVisible, setActiveApp, setActiveAppTest, setResultsVisible, setLogFilter, setHelperVisible, setIsRunning, setReportsUrl, setError } = useStore()
 
   const handleReset = () => {
     setIsRunning(false)
@@ -53,63 +53,68 @@ const App: Component = () => {
     // Start the interactive session
     Evexi.interactive.start()
 
-    const [environment, info] = await Promise.all([
-      Environment.retrieve(),
-      Evexi.info(),
-      new Promise(resolve => setTimeout(resolve, 5000)),
-    ])
+    try {
 
-    setInfo(info)
+      const [environment, info] = await Promise.all([
+        Environment.retrieve(),
+        Evexi.info(),
+        new Promise(resolve => setTimeout(resolve, 5000)),
+      ])
 
-    setDocsVisible(environment.docs)
-    setHelperVisible(environment.helper)
-    setLogFilter(parseFilter(environment.filter))
-    setReportsUrl(environment.reportsUrl)
-    setResultsVisible(environment.results)
+      setInfo(info)
 
-    setActiveApp(apps.fs.default)
-    setActiveAppTest(apps.fs.default.tests[0])
+      setDocsVisible(environment.docs)
+      setHelperVisible(environment.helper)
+      setLogFilter(parseFilter(environment.filter))
+      setReportsUrl(environment.reportsUrl)
+      setResultsVisible(environment.results)
 
-    if (environment.autorun === 'true') runAll()
-    if (environment.run) handleRun(environment.run)
-    Environment.listen(['autorun', 'docs', 'helper', 'filter', 'results', 'reset', 'run', 'reports_url'], (item, value) => {
-      switch (item) {
-        case 'autorun': {
-          if (value === 'true') runAll()
-          break
-        }
-        case 'docs': {
-          setDocsVisible(value === 'true')
-          break
-        }
-        case 'helper': {
-          setHelperVisible(value === 'true')
-          break
-        }
-        case 'filter': {
-          setLogFilter(parseFilter(value))
-          break
-        }
-        case 'results': {
-          setResultsVisible(value === 'true')
-          break
-        }
-        case 'reset': {
-          handleReset()
-          break
-        }
-        case 'run': {
-          if (value) handleRun(value)
-          break
-        }
-        case 'reports_url': {
-          setReportsUrl(value)
-          break
-        }
-      }
-    })
+      setActiveApp(apps.fs.default)
+      setActiveAppTest(apps.fs.default.tests[0])
 
-    setLoading(false)
+      if (environment.autorun === 'true') runAll()
+      if (environment.run) handleRun(environment.run)
+      Environment.listen(['autorun', 'docs', 'helper', 'filter', 'results', 'reset', 'run', 'reports_url'], (item, value) => {
+        switch (item) {
+          case 'autorun': {
+            if (value === 'true') runAll()
+            break
+          }
+          case 'docs': {
+            setDocsVisible(value === 'true')
+            break
+          }
+          case 'helper': {
+            setHelperVisible(value === 'true')
+            break
+          }
+          case 'filter': {
+            setLogFilter(parseFilter(value))
+            break
+          }
+          case 'results': {
+            setResultsVisible(value === 'true')
+            break
+          }
+          case 'reset': {
+            handleReset()
+            break
+          }
+          case 'run': {
+            if (value) handleRun(value)
+            break
+          }
+          case 'reports_url': {
+            setReportsUrl(value)
+            break
+          }
+        }
+      })
+    } catch (e) {
+      setError(`Failed to initialise the Evexi application: ${(e as Error).message}`)
+    } finally {
+      setLoading(false)
+    }
   })
 
   return (

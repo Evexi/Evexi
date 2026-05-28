@@ -28,9 +28,10 @@ const Inputs: Component = () => {
         <For each={properties()}>
           {(prop) => (
             <div class={styles.group}>
-              <label class={styles.label}>{prop.label}</label>
+              <label class={styles.label} for={prop.key}>{prop.label}</label>
               <Show when={prop.type === 'text'}>
                 <input
+                  id={prop.key}
                   class={styles.control}
                   type="text"
                   value={getValue(prop.key) as string}
@@ -39,6 +40,7 @@ const Inputs: Component = () => {
               </Show>
               <Show when={prop.type === 'number'}>
                 <input
+                  id={prop.key}
                   class={`${styles.control} ${styles.number}`}
                   type="number"
                   value={getValue(prop.key) as number}
@@ -47,6 +49,7 @@ const Inputs: Component = () => {
               </Show>
               <Show when={prop.type === 'union'}>
                 <select
+                  id={prop.key}
                   class={`${styles.control} ${styles.select}`}
                   onChange={(e) => handleChange(prop.key, e.currentTarget.value)}
                 >

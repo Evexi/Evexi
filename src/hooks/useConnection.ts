@@ -1,15 +1,23 @@
-import { createEffect, createSignal } from "solid-js"
+import { createEffect, createSignal, onCleanup } from "solid-js"
 
 const [connected, setConnected] = createSignal<boolean>(navigator.onLine)
 
-createEffect(() => {
-  window.addEventListener('online', () => {
-    setConnected(true)
-  })
+function handleOnline() {
+  setConnected(true)
+}
 
-  window.addEventListener('offline', () => {
-    setConnected(false)
-  })
+function handleOffline() {
+  setConnected(false)
+}
+
+createEffect(() => {
+  window.addEventListener('online', handleOnline)
+  window.addEventListener('offline', handleOffline)
+})
+
+onCleanup(() => {
+  window.removeEventListener('online', handleOnline)
+  window.removeEventListener('offline', handleOffline)
 })
 
 export const useConnection = () => connected
