@@ -92,11 +92,12 @@ const Helper: Component = () => {
                   <div class={styles.varAppKeys}>
                     <span class={styles.varAppKeysLabel}>Available app keys:</span>
                     <div class={styles.varAppKeysList}>
+                      <span class={styles.varAppKey}>all</span>
                       <For each={appKeys()}>
                         {(key) => <span class={styles.varAppKey}>{key}</span>}
                       </For>
                     </div>
-                    <p class={styles.varExample}>run = fs &nbsp;&nbsp; run = fs.Put File</p>
+                    <p class={styles.varExample}>run = all &nbsp;&nbsp; run = fs &nbsp;&nbsp; run = fs.Put File</p>
                   </div>
                 )}
                 {v.example && (
