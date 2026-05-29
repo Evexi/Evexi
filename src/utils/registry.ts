@@ -2,6 +2,12 @@ interface Module {
   default: App
 }
 
+export const supportsPlatform = (app: App, platform: Platform | undefined) => {
+  if (!app.platforms?.length) return true
+  if (!platform) return false
+  return app.platforms.includes(platform)
+}
+
 const modules = import.meta.glob<Module>('../apps/*.ts', { eager: true })
 
 const apps = Object.fromEntries(

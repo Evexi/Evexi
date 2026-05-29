@@ -1,4 +1,8 @@
+import type Evexi from "evexi"
+
 declare global {
+  type Platform = Awaited<ReturnType<typeof Evexi.info>>['provider']
+
   interface PropertyDef {
     key: string
     label: string
@@ -12,6 +16,7 @@ declare global {
     label: string
     order?: number
     skip?: boolean
+    platforms?: Platform[]
     tests: AppTest[]
   }
 

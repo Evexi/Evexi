@@ -17,8 +17,9 @@ if (import.meta.env.DEV) {
   new EvexiMock(Evexi).fs().info().env({
     'type': "Hello World",
     'docs': "false",
-    'helper': "false"
-  })
+    'helper': "false",
+    "reports_url": "https://utility-service.evexi.technology/evexi-qa"
+  }).info()
 }
 
 render(() => <App />, root!);

@@ -8,7 +8,8 @@ import Environment from "@/utils/environment"
 import Error from './components/error/error';
 import { useStore } from '@/hooks/useStore';
 import Evexi from 'evexi';
-import { runAll, runApp, runSingle } from '@/hooks/useRunner';
+import { allApps, runAll, runApp, runSingle } from '@/hooks/useRunner';
+import { supportsPlatform } from '@/utils/registry';
 import { clearLogs } from '@/hooks/useLogger';
 import Navbar from './components/navbar/navbar';
 import Sidebar from './components/sidebar/sidebar';
@@ -24,15 +25,14 @@ const App: Component = () => {
   const handleReset = () => {
     setIsRunning(false)
     clearLogs()
-    const allApps = Object.values(apps).map(m => m.default)
-    for (const app of allApps) {
+    for (const app of allApps()) {
       for (const test of app.tests) {
         test.status = 'pending'
         test.duration = undefined
         test.logs = undefined
       }
     }
-    const firstApp = allApps[0] ?? null
+    const firstApp = allApps()[0] ?? null
     setActiveApp(firstApp)
     setActiveAppTest(firstApp?.tests[0] ?? null)
   }
@@ -71,8 +71,9 @@ const App: Component = () => {
       setReportsUrl(environment.reportsUrl)
       setResultsVisible(environment.results)
 
-      setActiveApp(apps.fs.default)
-      setActiveAppTest(apps.fs.default.tests[0])
+      const landing = supportsPlatform(apps.fs.default, info.provider) ? apps.fs.default : allApps()[0] ?? null
+      setActiveApp(landing)
+      setActiveAppTest(landing?.tests[0] ?? null)
 
       if (environment.run) handleRun(environment.run)
       Environment.listen(['docs', 'helper', 'filter', 'results', 'reset', 'run', 'reports_url'], (item, value) => {

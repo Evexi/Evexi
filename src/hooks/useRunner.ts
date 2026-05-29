@@ -1,9 +1,15 @@
 import { useStore } from './useStore'
 import { useLogger } from './useLogger'
-import apps from '@/utils/registry'
+import apps, { supportsPlatform } from '@/utils/registry'
 import sendReport from '@/utils/sendReport'
 
-const allApps = () => Object.values(apps).map((m) => m.default)
+const allApps = () => {
+  const { info } = useStore()
+  const platform = info()?.provider
+  return Object.values(apps)
+    .map((m) => m.default)
+    .filter((app) => supportsPlatform(app, platform))
+}
 
 const runTest = async (app: App, test: AppTest) => {
   const { isRunning, setActiveApp, setActiveAppTest } = useStore()
@@ -60,10 +66,11 @@ export const runAll = async (onAppStart?: (app: App) => void) => {
 }
 
 export const runApp = async (appKey: string) => {
-  const { isRunning, setIsRunning, setResultsVisible } = useStore()
+  const { isRunning, setIsRunning, setResultsVisible, info } = useStore()
   const mod = apps[appKey]
   if (!mod || isRunning()) return
   const app = mod.default
+  if (!supportsPlatform(app, info()?.provider)) return
   setIsRunning(true)
   for (const test of app.tests) {
     test.status = 'pending'
@@ -82,10 +89,11 @@ export const runApp = async (appKey: string) => {
 }
 
 export const runSingle = async (appKey: string, testLabel: string) => {
-  const { isRunning, setIsRunning, setResultsVisible } = useStore()
+  const { isRunning, setIsRunning, setResultsVisible, info } = useStore()
   const mod = apps[appKey]
   if (!mod || isRunning()) return
   const app = mod.default
+  if (!supportsPlatform(app, info()?.provider)) return
   const test = app.tests.find(t => t.label.toLowerCase() === testLabel.toLowerCase().trim())
   if (!test) return
   setIsRunning(true)
