@@ -5,6 +5,7 @@ import Evexi from "evexi"
 class NexmosphereApp implements App {
   name = 'nexmosphere'
   label = 'Nexmosphere'
+  platforms: Platform[] = ['windows', 'linux', 'android', 'tizen']
 
   tests: AppTest[] = [
     new TestRunner({

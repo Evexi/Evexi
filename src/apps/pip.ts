@@ -5,6 +5,7 @@ import Evexi from "evexi"
 class PipApp implements App {
   name = 'pip'
   label = 'Picture in Picture'
+  platforms: Platform[] = ['webos', 'tizen']
 
   tests: AppTest[] = [
     new TestRunner({

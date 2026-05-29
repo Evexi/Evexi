@@ -5,6 +5,7 @@ import Evexi from "evexi"
 class PlayerMessagingApp implements App {
   name = 'playerMessaging'
   label = 'Player Messaging'
+  platforms: Platform[] = ['tizen', 'windows', 'linux', 'mac', 'android']
 
   tests: AppTest[] = [
     new TestRunner({

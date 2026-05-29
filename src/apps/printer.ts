@@ -5,6 +5,7 @@ import Evexi from "evexi"
 class PrinterApp implements App {
   name = 'printer'
   label = 'Printer'
+  platforms: Platform[] = ['tizen', 'windows', 'linux', 'mac', 'android']
 
   tests: AppTest[] = [
     new TestRunner({

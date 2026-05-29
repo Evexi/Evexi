@@ -6,6 +6,7 @@ import Evexi from "evexi"
 class KioskApp implements App {
   name = 'kiosk'
   label = 'Kiosk'
+  platforms: Platform[] = ['tizen', 'windows', 'linux', 'mac', 'android']
 
   tests: AppTest[] = [
     new TestRunner({
