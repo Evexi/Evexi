@@ -20,6 +20,7 @@ All filesystem methods returning a promise are wrapped in a timeout of 5 seconds
 * [Lifecycle](docs/lifecycle/index.md)
 * [File System](docs/fs/index.md)
 * [Touch To Engage](docs/touchToEngage/index.md)
+* [Player Messaging](docs/playerMessaging/index.md)
 * [Interactive](docs/interactive/index.md)
 * [Misc](docs/misc/index.md)
 * [Kiosk](docs/kiosk/index.md)
