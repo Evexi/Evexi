@@ -7,8 +7,6 @@ See a [working example here](./src/index.ts).
 #
 
 * [Barcode](#barcode)
-* [Serial](#serial)
-* [OTI](#oti)
 
 #
 
@@ -19,94 +17,6 @@ This method triggers the integrated barcode scanner for a 30 second period. Foll
 ```typescript
 try {
   const res = await Evexi.tizen.barcode() // string
-} catch (e) {
-  //
-}
-```
-
-### Serial
-
-Serial methods are used to communicate with a serial connected device. When writing data it will be sent as provided. When sending HEX please convert your string to HEX before writing. Each returned message will be 8 bits in length by default.
-
-```typescript
-// Messages from the serial device to the Kiosk
-Evexi.serial.onMessage((msg) => {
-  // msg string (hex)
-})
-
-// Open the communication port (Top port on Samsung Kiosk)
-const res = await Evexi.serial.open('PORT0') // bool
-
-// Write data to the serial port
-await Evexi.serial.write('PORT0', data) // bool
-
-// Close the communication port
-Evexi.serial.close('PORT0')
-```
-
-##
-
-You can override serial port configuration with the second argument to the open method. One or more overrides can be provided.
-
-```typescript
-export interface SerialOptions {
-  baudRate: number // Default: 9600
-  parity: string // Default: 'None'
-  dataBits: string // Default: 'BITS8'
-  stopBits: string // Default: '1'
-}
-```
-
-#
-
-### OTI
-
-OTI Telebox needs to be connected to the Samsung Kiosk on the middle port. Once connected your webapp can control the device using the "pay" and "cancel" methods. Successful connection to the Kiosk subsequently displays 'Welcome' on the OTI reader. If connection is not availble or working the OTI device will present 'Not Ready' on the reader and 'Error' will be returned when processing a transaction.
-
-##
-
-OTI configuration should include the following: Note: OTI should be on firmware 5.2.05 or higher.
-
-```bash
-# kiosk mode should be turned on
-KIOSK_ENABLED=1
-
-# connected to host via serial
-SERIAL_SCRIPT_INTERFACE_ENABLED=1
-# reader connected to dex serial port
-SERIAL_SCRIPT_INTERFACE_USE_DEX=1
-
-# disable min price
-MIN_PRICE_LIMIT=0
-```
-
-##
-
-Create a payment. If OTI is not ready to take a payment (no internet connection or updating etc) 'Error' will be returned. The return will provide a status along with a reference id, card type and a card reference number.
-
-```typescript
-try {
-  const res = await Evexi.oti.pay(5.2) // Payment for £5.20
-  // TransactionStatus = OK | Declined | Error | Timeout | Cancelled
-  // res = {status: TransactionStatus, ref?: string, cardType?: string, cardRef?: string}
-} catch (e) {
-  // catch will throw if Evexi does not get a response within timeout duration plus 10 milliseconds.
-}
-```
-
-Overriding currency code is performed with the second argument and timeout with the third argument. By default the timeout is set to 60 seconds unless specified.
-
-```typescript
-Evexi.oti.pay(0.55, 978, 30) // 0.55 Euros with timeout if no payment within 30 seconds
-```
-
-##
-
-To cancel a running transaction please wait for the response on oti.pay method which should be 'Cancelled' after running this method (if cancelled in time). If no transaction is currently running nothing will happen.
-
-```typescript
-try {
-  Evexi.oti.cancel()
 } catch (e) {
   //
 }

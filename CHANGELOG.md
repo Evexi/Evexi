@@ -1,3 +1,6 @@
+# 3.12.0-alpha.1 (3.12.0)
+* Removes support for `.oti` and `.serial` methods.
+
 # 3.11.0-alpha.2 (3.11.0)
 * [FEATURE] Adds documentation around the new `RichReceiptGenerator` class.
 
