@@ -8,7 +8,7 @@ export const supportsPlatform = (app: App, platform: Platform | undefined) => {
   return app.platforms.includes(platform)
 }
 
-const modules = import.meta.glob<Module>('../apps/*.ts', { eager: true })
+const modules = import.meta.glob<Module>('../apps/*/app.ts', { eager: true })
 
 const apps = Object.fromEntries(
   Object.entries(modules)
@@ -19,7 +19,7 @@ const apps = Object.fromEntries(
     })
     .filter(([, mod]) => !mod.default.skip)
     .map(([path, mod]) => {
-      const name = path.match(/\/([^/]+)\.ts$/)?.[1]
+      const name = path.match(/\/([^/]+)\/app\.ts$/)?.[1]
       // Wire _appName onto each TestRunner so getProperty can resolve values from the input store
       mod.default.tests.forEach(t => ((t as any)._appName = mod.default.name))
       return [name, mod] as [string, Module]

@@ -1,30 +1,20 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class CecApp implements App {
   name = 'cec'
-  label = 'HDMI-CEC'
+  label = 'CEC'
   platforms: Platform[] = ['brightsign']
 
   tests: AppTest[] = [
     new TestRunner({
       label: 'Send CEC Frame',
-      documentation: `# Send CEC Frame
-
-Sends a raw HDMI-CEC frame to the display over the HDMI connection. The frame is a hex string following the HDMI-CEC protocol. Only available on BrightSign with a CEC-enabled display.
-
-\`\`\`typescript
-// Active Source 2.0.0.0
-const response = await Evexi.cec.send('BF822000')
-if (response.success) {
-  console.log('CEC frame sent')
-} else {
-  console.error(response.error)
-}
-\`\`\`
-
-Use the code input above to send a custom raw CEC hex frame.`,
+      documentation: doc('Send CEC Frame'),
       properties: [
         { key: 'code', label: 'CEC Frame (hex)', type: 'text', default: 'BF822000' },
       ],

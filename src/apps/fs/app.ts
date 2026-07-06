@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class FsApp implements App {
   name = 'fs'
@@ -9,16 +13,7 @@ class FsApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Put File',
-      documentation: `# Put File
-
-Writes a file to the player's local storage. The second argument can be a string, object, or boolean — it is automatically encoded on write and decoded on read.
-
-\`\`\`typescript
-const success = await Evexi.fs.put('myFile.txt', 'Hello World!')
-// Returns true on success, false on failure
-\`\`\`
-
-Only \`.txt\` and \`.json\` files are supported. Use the filename and content inputs above to customise this test.`,
+      documentation: doc('Put File'),
       properties: [
         { key: 'filename', label: 'Filename', type: 'text', default: 'My JSON.json' },
         { key: 'content', label: 'Content', type: 'text', default: '{"content": "Hello World!"}' },
@@ -57,16 +52,7 @@ Only \`.txt\` and \`.json\` files are supported. Use the filename and content in
 
     new TestRunner({
       label: 'Get File',
-      documentation: `# Get File
-
-Retrieves a file from local storage and validates its content against the expected value.
-
-\`\`\`typescript
-const res = await Evexi.fs.get('myFile.txt')
-// { name: 'myFile.txt', data: 'Hello World!', type: 'text', error: null }
-\`\`\`
-
-For media files (images, video) \`data\` will be a local file path rather than the file's content.`,
+      documentation: doc('Get File'),
       properties: [
         { key: 'filename', label: 'Filename', type: 'text', default: 'My JSON.json' },
         { key: 'expected', label: 'Expected Content', type: 'text', default: 'Hello World!' },
@@ -117,14 +103,7 @@ For media files (images, video) \`data\` will be a local file path rather than t
 
     new TestRunner({
       label: 'Check File Exists',
-      documentation: `# Check File Exists
-
-Validates whether a named file is present in local storage.
-
-\`\`\`typescript
-const exists = await Evexi.fs.exists('myFile.txt')
-// Returns true if the file exists, false otherwise
-\`\`\``,
+      documentation: doc('Check File Exists'),
       properties: [
         { key: 'filename', label: 'Filename', type: 'text', default: 'My JSON.json' },
       ],
@@ -162,16 +141,7 @@ const exists = await Evexi.fs.exists('myFile.txt')
 
     new TestRunner({
       label: 'Download File',
-      documentation: `# Download File
-
-Downloads a remote file and saves it to local storage. Supported types: \`.html\`, \`.jpg\`, \`.jpeg\`, \`.png\`, \`.mp4\`. If the file already exists it returns as a successful download.
-
-\`\`\`typescript
-const res = await Evexi.fs.download('https://example.com/video.mp4', 'video.mp4')
-// { url: '...', data: '/path/to/video.mp4', error: null }
-\`\`\`
-
-An optional third argument supports bearer token authentication: \`{ bearer: 'Bearer TOKEN' }\`.`,
+      documentation: doc('Download File'),
       properties: [
         { key: 'url', label: 'URL', type: 'text', default: 'https://www.w3schools.com/html/mov_bbb.mp4' },
         { key: 'filename', label: 'Filename', type: 'text', default: 'My Video.mp4' },
@@ -211,16 +181,7 @@ An optional third argument supports bearer token authentication: \`{ bearer: 'Be
 
     new TestRunner({
       label: 'List Files',
-      documentation: `# List Files
-
-Returns all filenames currently in local storage. Expects both the text file and video file from previous tests to be present.
-
-\`\`\`typescript
-const files = await Evexi.fs.list()
-// ['My Video.mp4', 'My JSON.json'] or false on error
-\`\`\`
-
-An empty array is returned if storage is empty. \`false\` indicates an error.`,
+      documentation: doc('List Files'),
       properties: [],
       async execute() {
         try {
@@ -267,14 +228,7 @@ An empty array is returned if storage is empty. \`false\` indicates an error.`,
 
     new TestRunner({
       label: 'Delete File',
-      documentation: `# Delete File
-
-Removes a single named file from local storage.
-
-\`\`\`typescript
-const success = await Evexi.fs.del('myFile.txt')
-// Returns true on success, false on failure
-\`\`\``,
+      documentation: doc('Delete File'),
       properties: [
         { key: 'filename', label: 'Filename', type: 'text', default: 'My Video.mp4' },
       ],
@@ -311,14 +265,7 @@ const success = await Evexi.fs.del('myFile.txt')
 
     new TestRunner({
       label: 'List Files (Post-Delete)',
-      documentation: `# List Files (Post-Delete)
-
-Validates that the deleted video file is gone and only the text file remains.
-
-\`\`\`typescript
-const files = await Evexi.fs.list()
-// Should now only contain ['My JSON.json']
-\`\`\``,
+      documentation: doc('List Files (Post-Delete)'),
       properties: [],
       async execute() {
         try {
@@ -365,15 +312,7 @@ const files = await Evexi.fs.list()
 
     new TestRunner({
       label: 'Clear Files',
-      documentation: `# Clear Files
-
-Deletes all files from local storage and returns the count of items removed.
-
-\`\`\`typescript
-const count = await Evexi.fs.clear()
-// Returns the number of files deleted (e.g. 1)
-// Returns 0 if storage was already empty
-\`\`\``,
+      documentation: doc('Clear Files'),
       properties: [],
       async execute() {
         try {
@@ -416,16 +355,7 @@ const count = await Evexi.fs.clear()
     }),
     new TestRunner({
       label: 'List Files (Post-Clear)',
-      documentation: `# List Files
-
-Returns all filenames currently in local storage. Expects both the text file and video file from previous tests to be present.
-
-\`\`\`typescript
-const files = await Evexi.fs.list()
-// ['My Video.mp4', 'My JSON.json'] or false on error
-\`\`\`
-
-An empty array is returned if storage is empty. \`false\` indicates an error.`,
+      documentation: doc('List Files'),
       properties: [],
       async execute() {
         try {

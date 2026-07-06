@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class MiscApp implements App {
   name = 'misc'
@@ -9,18 +13,7 @@ class MiscApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Get Info',
-      documentation: `# Get Info
-
-Returns general information about the player the content is running on.
-
-\`\`\`typescript
-const info = await Evexi.info()
-// { deviceId: 'abc123', version: '2.9.0', provider: 'WebOS' }
-\`\`\`
-
-- **deviceId** — unique identifier for the device
-- **version** — current Evexi player software version
-- **provider** — the platform the player is running on (e.g. \`WebOS\`, \`Tizen\`, \`HTML\`)`,
+      documentation: doc('Get Info'),
       properties: [],
       async execute() {
         try {
@@ -55,15 +48,7 @@ const info = await Evexi.info()
 
     new TestRunner({
       label: 'Write Log',
-      documentation: `# Write Log
-
-Injects a message directly into the player's log file. Useful for debugging content behaviour from the admin portal.
-
-\`\`\`typescript
-Evexi.log('Something happened in my content.')
-\`\`\`
-
-Failed download events are also automatically written to the log by the API middleware.`,
+      documentation: doc('Write Log'),
       properties: [
         { key: 'message', label: 'Message', type: 'text', default: 'Test log entry from Evexi API test suite.' },
       ],

@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class InteractiveApp implements App {
   name = 'interactive'
@@ -10,15 +14,7 @@ class InteractiveApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Destroy Session',
-      documentation: `# Destroy Session
-
-Ends the interactive session and returns the player to its normal playlist. Call this when the user interaction is complete or when the session times out.
-
-\`\`\`typescript
-Evexi.interactive.destroy()
-\`\`\`
-
-This is also used by the Touch To Engage pattern — assign your content as \`application content\` and call \`destroy()\` when you want to hand control back to the playlist.`,
+      documentation: doc('Destroy Session'),
       properties: [],
       async execute() {
         try {
@@ -44,16 +40,7 @@ This is also used by the Touch To Engage pattern — assign your content as \`ap
 
     new TestRunner({
       label: 'Create Local Session',
-      documentation: `# Create Local Session
-
-Sets up a local interactive session on the player. Passing only \`maxRuntime\` creates a local session with no QR scan required — useful for offline or kiosk-style interactivity.
-
-\`\`\`typescript
-const session = await Evexi.interactive.create(180000)
-// { sessionId: '...', qr: '', url: '' }
-\`\`\`
-
-For a remote session (with QR scan), pass a \`clientUrl\` as the second argument. Use the max runtime input above to adjust the session length in milliseconds.`,
+      documentation: doc('Create Local Session'),
       properties: [
         { key: 'maxRuntime', label: 'Max Runtime (ms)', type: 'number', default: 180000 },
       ],
@@ -91,13 +78,7 @@ For a remote session (with QR scan), pass a \`clientUrl\` as the second argument
 
     new TestRunner({
       label: 'Start Session',
-      documentation: `# Start Session
-
-Activates the interactive session and pauses the player's playlist on the current content. Call this after creating a session and once any required client has connected.
-
-\`\`\`typescript
-Evexi.interactive.start()
-\`\`\``,
+      documentation: doc('Start Session'),
       properties: [],
       async execute() {
         try {

@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class PrinterApp implements App {
   name = 'printer'
@@ -10,24 +14,7 @@ class PrinterApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Print Receipt',
-      documentation: `# Print Receipt
-
-Generates a receipt using the receipt generator helper and sends it to the connected printer. Supported printers: Samsung Kiosk integrated printer and Star Micronics.
-
-\`\`\`typescript
-const data = new Evexi.helper.receiptGenerator()
-  .centre('TITLE')
-  .generate()
-
-const success = await Evexi.printer.print(data)
-\`\`\`
-
-**Optional override parameters** (second argument):
-- \`port\` — \`PRINTERPORT0\`, \`PRINTERPORT1\` (default), \`PRINTERPORT2\`
-- \`baudRate\` — default \`115200\`
-- \`parity\` — \`NONE\` (default), \`ODD\`, \`EVEN\`
-
-Use the title input above to customise the receipt header.`,
+      documentation: doc('Print Receipt'),
       properties: [
         { key: 'title', label: 'Title', type: 'text', default: 'EVEXI TEST PRINT' },
       ],

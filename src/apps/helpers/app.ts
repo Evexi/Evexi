@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class HelpersApp implements App {
   name = 'helpers'
@@ -9,22 +13,7 @@ class HelpersApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Generate Receipt',
-      documentation: `# Generate Receipt
-
-Builds formatted receipt text for the Samsung Kiosk integrated printer. Chain layout methods to design the receipt, then call \`generate()\` to produce the final output ready for \`Evexi.printer.print()\`.
-
-\`\`\`typescript
-const data = new Evexi.helper.receiptGenerator()
-  .blank(2)
-  .centre('COMPANY NAME')
-  .fill('*')
-  .stretch('Total', '£11.00')
-  .blank(2)
-  .centre('THANK YOU')
-  .generate()
-\`\`\`
-
-**Available methods:** \`blank(n)\`, \`centre(text)\`, \`left(text)\`, \`right(text)\`, \`stretch(left, right)\`, \`fill(char)\`, \`inject(data)\`, \`generate()\``,
+      documentation: doc('Generate Receipt'),
       properties: [
         { key: 'companyName', label: 'Company Name', type: 'text', default: 'COMPANY NAME' },
         { key: 'location', label: 'Location', type: 'text', default: 'COMPANY LOCATION' },

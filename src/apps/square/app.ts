@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class SquareApp implements App {
   name = 'square'
@@ -9,22 +13,7 @@ class SquareApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Register Event Listener',
-      documentation: `# Register Event Listener
-
-Registers a callback to receive Square webhook events forwarded by the player. Supported event types:
-
-- Catalog version updates
-- Order creation / updates
-- Payment updates
-- Terminal checkout updates
-
-\`\`\`typescript
-Evexi.square.event((message) => {
-  console.log(message) // parsed webhook payload
-})
-\`\`\`
-
-Requires \`ENVIRONMENT\`, \`LOCATION\`, and \`TERMINAL_ID\` env variables to be set on the player from the admin portal.`,
+      documentation: doc('Register Event Listener'),
       properties: [],
       async execute() {
         try {
@@ -55,18 +44,7 @@ Requires \`ENVIRONMENT\`, \`LOCATION\`, and \`TERMINAL_ID\` env variables to be 
 
     new TestRunner({
       label: 'Proxy Request',
-      documentation: `# Proxy Request
-
-Routes an HTTP request through the Evexi platform to the Square API, using the credentials configured on the player. This avoids CORS issues and keeps credentials off the client.
-
-\`\`\`typescript
-const res = await Evexi.proxy('/square/v2/catalog/list', { method: 'GET' })
-if (res.ok) {
-  console.log(res.json)
-}
-\`\`\`
-
-Requires \`LOCATION\`, \`TERMINAL_ID\`, and \`ENVIRONMENT\` (\`LIVE\` or \`SANDBOX\`) env variables set on the player. Use the endpoint and method inputs above to test a different Square API path.`,
+      documentation: doc('Proxy Request'),
       properties: [
         { key: 'endpoint', label: 'Endpoint', type: 'text', default: '/square/v2/catalog/list' },
         { key: 'method', label: 'Method', type: 'union', default: 'GET', options: ['GET', 'POST'] },

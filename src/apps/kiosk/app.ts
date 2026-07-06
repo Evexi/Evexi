@@ -2,6 +2,10 @@ import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import withTimeout from "@/utils/timeout"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class KioskApp implements App {
   name = 'kiosk'
@@ -11,16 +15,7 @@ class KioskApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Barcode Scan',
-      documentation: `# Barcode Scan
-
-Waits for the Samsung Kiosk integrated barcode scanner to read a code and returns the scanned value as a string.
-
-\`\`\`typescript
-const barcode = await Evexi.tizen.barcode()
-// Returns the scanned string, e.g. '1234567890128'
-\`\`\`
-
-This test will wait for a scan for the duration set in the timeout input above. If no scan is detected within that time, the test logs a warning and passes — indicating the API is responsive but no barcode was presented.`,
+      documentation: doc('Barcode Scan'),
       properties: [
         { key: 'timeout', label: 'Timeout (ms)', type: 'number', default: 10000 },
       ],
@@ -67,19 +62,7 @@ This test will wait for a scan for the duration set in the timeout input above. 
 
     new TestRunner({
       label: 'Open Serial Port',
-      documentation: `# Open Serial Port
-
-Registers a message listener and opens a named serial port for communication with a third-party serial device. Messages are received as hex-encoded strings.
-
-\`\`\`typescript
-Evexi.serial.onMessage((msg) => {
-  console.log('Received (hex):', msg)
-})
-
-const success = await Evexi.serial.open('PORT0')
-\`\`\`
-
-Use the port input above to select which serial port to open.`,
+      documentation: doc('Open Serial Port'),
       properties: [
         { key: 'port', label: 'Port', type: 'union', default: 'PORT0', options: ['PORT0', 'PORT1', 'PORT2'] },
       ],
@@ -125,15 +108,7 @@ Use the port input above to select which serial port to open.`,
 
     new TestRunner({
       label: 'Close Serial Port',
-      documentation: `# Close Serial Port
-
-Terminates the connection on the given serial port.
-
-\`\`\`typescript
-Evexi.serial.close('PORT0')
-\`\`\`
-
-Use the port input above to select which port to close.`,
+      documentation: doc('Close Serial Port'),
       properties: [
         { key: 'port', label: 'Port', type: 'union', default: 'PORT0', options: ['PORT0', 'PORT1', 'PORT2'] },
       ],

@@ -1,6 +1,10 @@
 import { addLog } from "@/hooks/useLogger"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
+import { parseDocs } from "@/utils/docs"
+import documentation from "./docs.md?raw"
+
+const doc = parseDocs(documentation)
 
 class PlayerMessagingApp implements App {
   name = 'playerMessaging'
@@ -10,18 +14,7 @@ class PlayerMessagingApp implements App {
   tests: AppTest[] = [
     new TestRunner({
       label: 'Register Message Listener',
-      documentation: `# Register Message Listener
-
-Registers a callback that fires whenever a message is received from another player in the same group. The message payload includes the sender's IP, the message data, and their player ID.
-
-\`\`\`typescript
-Evexi.playerMessaging.onMessage((message) => {
-  const { ip, data, deviceId } = message
-  console.log(\`Message from \${deviceId}: \${data}\`)
-})
-\`\`\`
-
-Players must be in the same group on the Evexi CMS and on the same network.`,
+      documentation: doc('Register Message Listener'),
       properties: [],
       async execute() {
         try {
@@ -52,20 +45,7 @@ Players must be in the same group on the Evexi CMS and on the same network.`,
 
     new TestRunner({
       label: 'Send Message',
-      documentation: `# Send Message
-
-Broadcasts a string message to all other players in the same group. The sender does not receive their own message.
-
-\`\`\`typescript
-const response = await Evexi.playerMessaging.send('Hello from player A')
-if (response.success) {
-  console.log('Message sent')
-} else {
-  console.error(response.error)
-}
-\`\`\`
-
-Use the message input above to customise what is broadcast.`,
+      documentation: doc('Send Message'),
       properties: [
         { key: 'message', label: 'Message', type: 'text', default: 'Hello from Evexi API test suite.' },
       ],

@@ -9,6 +9,29 @@ The application is fully self-contained and deploys as a single ZIP archive to t
 
 ---
 
+## Documentation
+
+Each app keeps its documentation in a dedicated `docs.md` file next to its implementation, under [`src/apps/`](./src/apps/). These files are the single source of truth for the in-app documentation panel.
+
+| App | Documentation | Covers |
+|---|---|---|
+| CEC | [`src/apps/cec/docs.md`](./src/apps/cec/docs.md) | Send CEC Frame |
+| Env Variables | [`src/apps/envVars/docs.md`](./src/apps/envVars/docs.md) | Get Env Variable, Listen For Env Variable Change |
+| File System | [`src/apps/fs/docs.md`](./src/apps/fs/docs.md) | Put File, Get File, Check File Exists, Download File, List Files, Delete File, List Files (Post-Delete), Clear Files |
+| Helpers | [`src/apps/helpers/docs.md`](./src/apps/helpers/docs.md) | Generate Receipt |
+| Interactive | [`src/apps/interactive/docs.md`](./src/apps/interactive/docs.md) | Create Local Session, Start Session, Destroy Session |
+| Kiosk | [`src/apps/kiosk/docs.md`](./src/apps/kiosk/docs.md) | Barcode Scan, Open Serial Port, Close Serial Port |
+| Lifecycle | [`src/apps/lifecycle/docs.md`](./src/apps/lifecycle/docs.md) | Register Playing Handler, Register Stopping Handler, Register Changed Handler |
+| Misc | [`src/apps/misc/docs.md`](./src/apps/misc/docs.md) | Get Info, Write Log |
+| Nexmosphere | [`src/apps/nexmosphere/docs.md`](./src/apps/nexmosphere/docs.md) | Open Connection, Write Command, Close Connection |
+| Picture in Picture | [`src/apps/pip/docs.md`](./src/apps/pip/docs.md) | Show PIP, Hide PIP |
+| Player Messaging | [`src/apps/playerMessaging/docs.md`](./src/apps/playerMessaging/docs.md) | Register Message Listener, Send Message |
+| Printer | [`src/apps/printer/docs.md`](./src/apps/printer/docs.md) | Print Receipt |
+| Square | [`src/apps/square/docs.md`](./src/apps/square/docs.md) | Register Event Listener, Proxy Request |
+| Stripe | [`src/apps/stripe/docs.md`](./src/apps/stripe/docs.md) | Proxy Request |
+
+---
+
 ## Environment Variables
 
 The application reads two environment variables from the Evexi admin portal at startup.
