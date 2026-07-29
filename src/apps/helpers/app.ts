@@ -61,6 +61,56 @@ class HelpersApp implements App {
         }
       }
     }),
+
+    new TestRunner({
+      label: 'Star Receipt Generator',
+      documentation: doc('Star Receipt Generator'),
+      properties: [
+        { key: 'companyName', label: 'Company Name', type: 'text', default: 'COMPANY NAME' },
+        { key: 'location', label: 'Location', type: 'text', default: 'COMPANY LOCATION' },
+      ],
+      async execute() {
+        const companyName = this.getProperty<string>('companyName')
+        const location = this.getProperty<string>('location')
+        try {
+          // Evexi.helper.starReceiptGenerator() builds a receipt for Star Micronics printers with per-line styling; call build() to produce the buffer ready for Evexi.printer.print()
+          const buffer = new Evexi.helper.starReceiptGenerator()
+            .center(companyName, { fontSize: 2, fontWeight: 'bold' })
+            .center(location, { fontSize: 1 })
+            .fill('*')
+            .blank(1)
+            .stretch({ content: 'Subtotal' }, { content: '£10.00' })
+            .stretch({ content: 'VAT' }, { content: '£1.00' })
+            .stretch({ content: 'Total', styles: { fontWeight: 'bold' } }, { content: '£11.00', styles: { fontWeight: 'bold' } })
+            .blank(1)
+            .center('THANK YOU')
+            .build()
+
+          if (buffer) {
+            addLog({
+              message: 'Star receipt generated successfully.',
+              type: 'info',
+            })
+
+            return true
+          }
+
+          addLog({
+            message: 'Star receipt generator returned empty output.',
+            type: 'error',
+          })
+
+          return false
+        } catch (e) {
+          addLog({
+            message: 'Failed to generate star receipt. Trace: ' + e,
+            type: 'error',
+          })
+
+          return false
+        }
+      }
+    }),
   ]
 }
 

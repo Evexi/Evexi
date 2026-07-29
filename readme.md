@@ -18,7 +18,7 @@ Each app keeps its documentation in a dedicated `docs.md` file next to its imple
 | CEC | [`src/apps/cec/docs.md`](./src/apps/cec/docs.md) | Send CEC Frame |
 | Env Variables | [`src/apps/envVars/docs.md`](./src/apps/envVars/docs.md) | Get Env Variable, Listen For Env Variable Change |
 | File System | [`src/apps/fs/docs.md`](./src/apps/fs/docs.md) | Put File, Get File, Check File Exists, Download File, List Files, Delete File, List Files (Post-Delete), Clear Files |
-| Helpers | [`src/apps/helpers/docs.md`](./src/apps/helpers/docs.md) | Generate Receipt |
+| Helpers | [`src/apps/helpers/docs.md`](./src/apps/helpers/docs.md) | Generate Receipt, Star Receipt Generator |
 | Interactive | [`src/apps/interactive/docs.md`](./src/apps/interactive/docs.md) | Create Local Session, Start Session, Destroy Session |
 | Kiosk | [`src/apps/kiosk/docs.md`](./src/apps/kiosk/docs.md) | Barcode Scan, Open Serial Port, Close Serial Port |
 | Lifecycle | [`src/apps/lifecycle/docs.md`](./src/apps/lifecycle/docs.md) | Register Playing Handler, Register Stopping Handler, Register Changed Handler |
@@ -26,7 +26,7 @@ Each app keeps its documentation in a dedicated `docs.md` file next to its imple
 | Nexmosphere | [`src/apps/nexmosphere/docs.md`](./src/apps/nexmosphere/docs.md) | Open Connection, Write Command, Close Connection |
 | Picture in Picture | [`src/apps/pip/docs.md`](./src/apps/pip/docs.md) | Show PIP, Hide PIP |
 | Player Messaging | [`src/apps/playerMessaging/docs.md`](./src/apps/playerMessaging/docs.md) | Register Message Listener, Send Message |
-| Printer | [`src/apps/printer/docs.md`](./src/apps/printer/docs.md) | Print Receipt |
+| Printer | [`src/apps/printer/docs.md`](./src/apps/printer/docs.md) | Print Receipt, Print Styled Text, Print All Alignments, Print QR Code, Print QR Code with Text, Print Logo, Print Logo with Text, Print Full Receipt, Print Blank Lines |
 | Square | [`src/apps/square/docs.md`](./src/apps/square/docs.md) | Register Event Listener, Proxy Request |
 | Stripe | [`src/apps/stripe/docs.md`](./src/apps/stripe/docs.md) | Proxy Request |
 
