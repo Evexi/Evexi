@@ -1,3 +1,6 @@
+# 3.13.0-alpha.2
+* [FEATURE] Star print methods
+
 # 3.13.0-alpha.1
 * [IMPROVEMENT] Complete rewrite of the application, built on top of Solid JS
 * [FEATURE] Created a unified application that can run on any panel supported by Evexi
