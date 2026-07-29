@@ -11,6 +11,8 @@ export default defineConfig({
     solidPlugin(),
     legacy({
       targets: ['chrome >= 38'],
+      modernPolyfills: true,
+      modernTargets: ['chrome >= 87'],
     }),
   ],
   server: {
@@ -18,7 +20,7 @@ export default defineConfig({
     allowedHosts: true
   },
   build: {
-    target: 'esnext',
+    target: 'chrome87',
   },
   resolve: {
     alias: {
