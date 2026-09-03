@@ -9,6 +9,54 @@ The application is fully self-contained and deploys as a single ZIP archive to t
 
 ---
 
+## Using The SDK In Your Own Content
+
+The sections below cover getting the `evexi` package into **your own** content project and packaging it for the Evexi platform. This is distinct from the [Development](#development) section further down, which covers building *this* test-suite app.
+
+### Install
+
+Install the Evexi package from [NPM](https://www.npmjs.com/package/evexi) into your content project.
+
+```bash
+yarn add evexi
+npm i evexi
+```
+
+```typescript
+import Evexi, { EvexiMock } from 'evexi'
+```
+
+The Evexi API is subject to change on a per version basis, so check your app definitions match the player version you're targeting. See [CHANGELOG.md](./CHANGELOG.md) for version history, and this repo's [API Reference](#api-reference) below for the current method surface — every namespace it documents is exercised live by the test suite in [`src/apps/`](./src/apps/).
+
+### Build
+
+Build your content with whatever bundler your project uses (Vite, Webpack, esbuild, etc.) to produce a static output directory containing an `index.html` and its assets. There's nothing Evexi-specific about this step — the platform just needs a set of static files it can serve, packaged as described below.
+
+### Packaging
+
+An Evexi `.zip` application must not contain hidden files and must consist of a flat structure (no nested directories for SSSP2). The `index.html` should be in the root of the zip. A zip should contain at least an `index.html` file in the root level.
+
+If you run `zipinfo` against the `.zip` file you should see an output like so:
+
+```bash
+Archive:  fs-240.zip
+Zip file size: 73108 bytes, number of entries: 2
+-rw-r--r--  3.0 unx      346 tx defN 21-Sep-21 09:35 index.html
+-rw-r--r--  3.0 unx   317567 tx defN 21-Sep-21 09:35 src.77de5100.js
+2 files, 317913 bytes uncompressed, 72780 bytes compressed:  77.1%
+```
+
+You can zip your application using the standard `zip` CLI:
+
+```bash
+cd app # go into your built output directory
+zip app.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at the current level
+```
+
+This repo's own build script follows the same rules — see [`scripts/build.sh`](./scripts/build.sh) for a worked example.
+
+---
+
 ## Documentation
 
 Each app keeps its documentation in a dedicated `docs.md` file next to its implementation, under [`src/apps/`](./src/apps/). These files are the single source of truth for the in-app documentation panel.
