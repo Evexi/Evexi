@@ -1,0 +1,153 @@
+.loading {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0f10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* subtle grid overlay */
+.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image:
+        linear-gradient(rgba(52, 211, 153, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* radial glow */
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(52, 211, 153, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.loading.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ── Corner brackets ── */
+.corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #34d399;
+    border-style: solid;
+    opacity: 0.5;
+}
+
+.corner[data-pos="tl"] { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+.corner[data-pos="tr"] { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+.corner[data-pos="bl"] { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+.corner[data-pos="br"] { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+
+/* ── Content stack ── */
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Logo ── */
+.logoWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content img {
+    width: 200px;
+}
+
+/* ── Spinner ── */
+.loader {
+    width: 48px;
+    height: 48px;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    margin: 2.5rem 0 2rem;
+    filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.5));
+}
+
+.loader .track {
+    fill: none;
+    stroke: rgba(20, 184, 166, 0.15);
+    stroke-width: 4;
+}
+
+.loader .arc {
+    fill: none;
+    stroke: #34d399;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 70 200;
+}
+
+/* ── Label ── */
+.label {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.label > * + * {
+    margin-left: 2px;
+}
+
+.dots::after {
+    content: '';
+    display: inline-block;
+    width: 1.2em;
+    -webkit-animation: dots 1.4s steps(4, end) infinite;
+    animation: dots 1.4s steps(4, end) infinite;
+}
+
+/* ── Keyframes ── */
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes dots {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+    100% { content: ''; }
+}

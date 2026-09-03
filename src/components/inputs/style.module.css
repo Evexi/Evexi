@@ -1,0 +1,58 @@
+.inputs {
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 7px 10px;
+    border-bottom: 1px solid #1f2c2f;
+    background: #0e1517;
+}
+
+.inputs > * {
+    margin-right: 12px;
+    margin-bottom: 6px;
+}
+
+.group {
+    display: flex;
+    align-items: center;
+}
+
+.group > * + * {
+    margin-left: 6px;
+}
+
+.label {
+    font-size: 11px;
+    color: #ffffff40;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.control {
+    background: #131e21;
+    border: 1px solid #1f2c2f;
+    border-radius: 6px;
+    color: #d4dee0;
+    font-size: 12px;
+    font-family: inherit;
+    padding: 3px 8px;
+    outline: none;
+    transition: border-color 0.15s ease;
+    min-width: 0;
+}
+
+.control:focus {
+    border-color: #14b8a6;
+}
+
+.number {
+    width: 90px;
+}
+
+.select {
+    cursor: pointer;
+    padding-right: 4px;
+}

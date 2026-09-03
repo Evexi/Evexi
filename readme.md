@@ -1,82 +1,402 @@
-# Evexi API
+# Evexi
 ![Banner](./banner.png)
 
 ## Introduction
-The Evexi API provides content connectivity to either the underlying player hardware, software or evexi platform features. This can be used in either zip media, web media, background tasks or assigned applications.
 
-It is important to note that it is the responsibility of the developer to manage any stored assets. The Evexi API has been tested to support Tizen firmware 2070 and later and we cannot guarantee the API to work reliably on previous firmware versions.
+This repository contains the interactive API documentation and test suite for the **Evexi Player SDK**. It runs directly on Evexi-managed displays (WebOS, Tizen, and HTML platforms) and provides a live environment for validating every API surface the SDK exposes — file system operations, lifecycle events, payment integrations, hardware peripherals, and more.
 
-All filesystem methods returning a promise are wrapped in a timeout of 5 seconds. If no response is received within this time an error will be thrown within the catch statement.
+The application is fully self-contained and deploys as a single ZIP archive to the Evexi platform. Each API group is represented as a standalone test module with inline documentation, configurable inputs, and real-time result logging.
 
-#
+---
 
-###### Overview
-* [Install](#install)
-* [Build](#build)
-* [Packaging](#packaging)
-* [Developer Tools](docs/mock/index.md)
+## Using The SDK In Your Own Content
 
-###### API Features & Methods
-* [Lifecycle](docs/lifecycle/index.md)
-* [File System](docs/fs/index.md)
-* [Touch To Engage](docs/touchToEngage/index.md)
-* [Player Messaging](docs/playerMessaging/index.md)
-* [Interactive](docs/interactive/index.md)
-* [Misc](docs/misc/index.md)
-* [Kiosk](docs/kiosk/index.md)
-* [Environment Variables](docs/envVars/index.md)
-* [Nexmosphere](docs/nexmosphere/index.md)
-* [Helpers](docs/helpers/index.md)
-* [Square](docs/square/index.md)
-* [Stripe](docs/stripe/index.md)
-* [Picture In Picture](docs/pip/index.md)
-
-#
+The sections below cover getting the `evexi` package into **your own** content project and packaging it for the Evexi platform. This is distinct from the [Development](#development) section further down, which covers building *this* test-suite app.
 
 ### Install
-Install the Evexi package from [NPM](https://www.npmjs.com/package/evexi). This Github repo provides examples and documentation. The Evexi API is subject to change on a per version basis so ensure to check the app definitions match the player version.
 
-````bash
+Install the Evexi package from [NPM](https://www.npmjs.com/package/evexi) into your content project.
+
+```bash
 yarn add evexi
 npm i evexi
-````
+```
 
-````typescript
-import {Evexi, EvexiMock} from 'evexi'
-````
+```typescript
+import Evexi, { EvexiMock } from 'evexi'
+```
 
-> Note: If you plan to target SSSP2 or SSSP4 platform you should use the legacy script. [Example Here](/docs/legacy/index.md)
-
-#
+The Evexi API is subject to change on a per version basis, so check your app definitions match the player version you're targeting. See [CHANGELOG.md](./CHANGELOG.md) for version history, and this repo's [API Reference](#api-reference) below for the current method surface — every namespace it documents is exercised live by the test suite in [`src/apps/`](./src/apps/).
 
 ### Build
 
-All examples shown in [/docs](./docs/) directory are built on Github CI and available to download from [Github Actions](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml). Alternatively clone this repo and build the examples locally. Once built you can upload to the Evexi platform and assign to a player. ![Build-Examples](https://github.com/Evexi/Evexi/actions/workflows/build-examples.yml/badge.svg)
-
-```bash
-yarn run build
-```
-
-#
+Build your content with whatever bundler your project uses (Vite, Webpack, esbuild, etc.) to produce a static output directory containing an `index.html` and its assets. There's nothing Evexi-specific about this step — the platform just needs a set of static files it can serve, packaged as described below.
 
 ### Packaging
 
-A Evexi `.zip` application must not contain hidden files and consist of a flat structure (no nested directories for SSSP2). The `index.html` should be in the root of the zip. A zip should contain at least an index.html file in the root level.
+An Evexi `.zip` application must not contain hidden files and must consist of a flat structure (no nested directories for SSSP2). The `index.html` should be in the root of the zip. A zip should contain at least an `index.html` file in the root level.
 
-If you run `zipinfo` against the .zip file you should see an output like so.
-````bash
+If you run `zipinfo` against the `.zip` file you should see an output like so:
+
+```bash
 Archive:  fs-240.zip
 Zip file size: 73108 bytes, number of entries: 2
 -rw-r--r--  3.0 unx      346 tx defN 21-Sep-21 09:35 index.html
 -rw-r--r--  3.0 unx   317567 tx defN 21-Sep-21 09:35 src.77de5100.js
 2 files, 317913 bytes uncompressed, 72780 bytes compressed:  77.1%
-````
+```
 
-#
+You can zip your application using the standard `zip` CLI:
 
-You can zip your application using standard `zip` CLI.
-````bash
-cd app # go into directory
-zip app.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at current level
-````
-Further examples can be found [here](./.build/build.sh#L63-L71).
+```bash
+cd app # go into your built output directory
+zip app.zip . -x '.*' -x '__MACOSX' -x '*.DS_Store' # zip all files at the current level
+```
+
+This repo's own build script follows the same rules — see [`scripts/build.sh`](./scripts/build.sh) for a worked example.
+
+---
+
+## Documentation
+
+Each app keeps its documentation in a dedicated `docs.md` file next to its implementation, under [`src/apps/`](./src/apps/). These files are the single source of truth for the in-app documentation panel.
+
+| App | Documentation | Covers |
+|---|---|---|
+| CEC | [`src/apps/cec/docs.md`](./src/apps/cec/docs.md) | Send CEC Frame |
+| Env Variables | [`src/apps/envVars/docs.md`](./src/apps/envVars/docs.md) | Get Env Variable, Listen For Env Variable Change |
+| File System | [`src/apps/fs/docs.md`](./src/apps/fs/docs.md) | Put File, Get File, Check File Exists, Download File, List Files, Delete File, List Files (Post-Delete), Clear Files |
+| Helpers | [`src/apps/helpers/docs.md`](./src/apps/helpers/docs.md) | Generate Receipt, Star Receipt Generator |
+| Interactive | [`src/apps/interactive/docs.md`](./src/apps/interactive/docs.md) | Create Local Session, Start Session, Destroy Session |
+| Kiosk | [`src/apps/kiosk/docs.md`](./src/apps/kiosk/docs.md) | Barcode Scan, Open Serial Port, Close Serial Port |
+| Lifecycle | [`src/apps/lifecycle/docs.md`](./src/apps/lifecycle/docs.md) | Register Playing Handler, Register Stopping Handler, Register Changed Handler |
+| Misc | [`src/apps/misc/docs.md`](./src/apps/misc/docs.md) | Get Info, Write Log |
+| Nexmosphere | [`src/apps/nexmosphere/docs.md`](./src/apps/nexmosphere/docs.md) | Open Connection, Write Command, Close Connection |
+| Picture in Picture | [`src/apps/pip/docs.md`](./src/apps/pip/docs.md) | Show PIP, Hide PIP |
+| Player Messaging | [`src/apps/playerMessaging/docs.md`](./src/apps/playerMessaging/docs.md) | Register Message Listener, Send Message |
+| Printer | [`src/apps/printer/docs.md`](./src/apps/printer/docs.md) | Print Receipt, Print Styled Text, Print All Alignments, Print QR Code, Print QR Code with Text, Print Logo, Print Logo with Text, Print Full Receipt, Print Blank Lines |
+| Square | [`src/apps/square/docs.md`](./src/apps/square/docs.md) | Register Event Listener, Proxy Request |
+| Stripe | [`src/apps/stripe/docs.md`](./src/apps/stripe/docs.md) | Proxy Request |
+
+---
+
+## Environment Variables
+
+The application reads two environment variables from the Evexi admin portal at startup.
+
+### `docs`
+
+Controls whether the inline documentation panel is visible for the currently selected test.
+
+| Value | Behaviour |
+|---|---|
+| `true` | The documentation panel is shown, displaying contextual notes and usage guidance for the selected API test |
+| `false` | The documentation panel is hidden |
+
+This is useful when deploying to a display where screen space should be reserved entirely for testing and results, with documentation toggled off unless needed.
+
+### `filter`
+
+Pre-sets which log types are visible in the live log panel. Accepts a comma-separated list of log type names.
+
+| Value | Behaviour |
+|---|---|
+| `info` | Show only info logs |
+| `warning` | Show only warning logs |
+| `error` | Show only error logs |
+| `error,warning` | Show errors and warnings only |
+| *(unset)* | All log types are visible |
+
+The filter can be changed at any time and the log panel updates immediately. Setting it back to an empty value restores the default (show all).
+
+### `results`
+
+Controls whether the run summary modal is open.
+
+| Value | Behaviour |
+|---|---|
+| `true` | Opens the run summary modal |
+| `false` | Closes the run summary modal |
+
+Useful for surfacing the results view on a remote display without physically interacting with the screen.
+
+### `reports_url`
+
+When set, the application will POST a JSON report to this URL at the end of every run. The payload has the following shape:
+
+```json
+{
+  "summary": {
+    "errors": {
+      "fs": { "Put File": ["error message"] }
+    },
+    "warnings": {
+      "fs": { "List Files": ["warning message"] }
+    }
+  }
+}
+```
+
+`errors` and `warnings` are only included when non-empty. Each key is an app label, with test labels as sub-keys mapping to arrays of log messages.
+
+| Value | Behaviour |
+|---|---|
+| *(unset)* | No report is sent |
+| `https://example.com/hook` | POSTs the summary JSON to the given URL after each run |
+
+---
+
+## Development
+
+```bash
+npm install
+npm run dev       # Start dev server at http://localhost:3000
+npm run build     # Produce dist/ and Evexi.zip in builds/
+```
+
+In development, an `EvexiMock` instance is automatically configured so the SDK can be exercised without a live player. Selective mocking is supported — only the API namespaces you need can be stubbed:
+
+```ts
+new EvexiMock(Evexi).fs().info().env({ run: 'all', docs: 'false' })
+```
+
+---
+
+## API Reference
+
+### `Evexi.fs` — File System
+
+Local file storage on the player device.
+
+| Method | Signature | Description |
+|---|---|---|
+| `put` | `(filename, content)` | Write a text or JSON file |
+| `get` | `(filename)` | Read a file |
+| `exists` | `(filename)` | Check whether a file exists |
+| `download` | `(url, filename, options?)` | Download a remote file; accepts optional `{ bearer }` token |
+| `list` | `()` | List all stored files |
+| `del` | `(filename)` | Delete a file |
+| `clear` | `()` | Delete all files |
+
+**Supported extensions:** `.txt` `.json` `.html` `.jpg` `.jpeg` `.png` `.mp4`
+
+---
+
+### `Evexi.env` — Environment Variables
+
+Variables are set per-device or per-group via the Evexi admin portal.
+
+| Method | Signature | Description |
+|---|---|---|
+| `env` | `(key)` | Retrieve the current value of an env variable |
+| `envChange` | `(key, callback)` | Subscribe to value changes; callback fires on every update |
+
+---
+
+### `Evexi.lifecycle` — Playback Lifecycle
+
+Hook into the player's content lifecycle.
+
+| Method | Description |
+|---|---|
+| `playing(callback)` | Fires when the content becomes visible on the display |
+| `stopping(callback)` | Fires just before content is hidden or destroyed |
+| `changed(callback)` | Fires when the active media item changes |
+
+---
+
+### `Evexi.printer` — Printing
+
+Send receipts and formatted data to connected thermal printers.
+
+**Supported hardware:** Samsung Kiosk (integrated), Star Micronics
+
+| Method | Signature | Description |
+|---|---|---|
+| `printer.print` | `(data, options?)` | Send data to printer |
+| `helper.receiptGenerator` | `()` | Returns a chainable receipt builder |
+
+**`receiptGenerator` builder methods:**
+
+```ts
+Evexi.helper.receiptGenerator()
+  .blank(2)
+  .centre('Thank you!')
+  .left('Item A')
+  .right('$4.99')
+  .stretch('Subtotal', '$9.99')
+  .fill('-')
+  .inject(rawData)
+  .generate()   // → string
+```
+
+**`print` options:**
+
+| Option | Values | Default |
+|---|---|---|
+| `port` | `PRINTERPORT0` \| `PRINTERPORT1` \| `PRINTERPORT2` | — |
+| `baudRate` | number | `115200` |
+| `parity` | `NONE` \| `ODD` \| `EVEN` | `NONE` |
+
+---
+
+### `Evexi.interactive` — Interactive Sessions
+
+Pause the playlist and hand control to an interactive experience, either locally or via a QR-scanned remote session.
+
+| Method | Signature | Description |
+|---|---|---|
+| `create` | `(maxRuntime, clientUrl?)` | Create a session. Pass `clientUrl` to generate a QR code for remote access |
+| `start` | `()` | Activate the session and pause the playlist |
+| `destroy` | `()` | End the session and resume the playlist |
+
+**`create` response:**
+
+```ts
+{ sessionId: string, qr: string, url: string }
+```
+
+---
+
+### `Evexi.playerMessaging` — Inter-Player Messaging
+
+Broadcast messages between players in the same group.
+
+| Method | Signature | Description |
+|---|---|---|
+| `onMessage` | `(callback)` | Register a listener for incoming messages |
+| `send` | `(message)` | Broadcast a message to the group |
+
+**Message shape:**
+
+```ts
+{ ip: string, data: string, playerId: string }
+```
+
+**`send` response:**
+
+```ts
+{ success: boolean, error?: string }
+```
+
+---
+
+### `Evexi.proxy` — HTTP Proxy
+
+Route HTTP requests through the player's secure proxy to avoid CORS issues and keep API credentials off the client. Credentials are configured in the Evexi admin portal and never exposed to the frontend.
+
+```ts
+const result = await Evexi.proxy<MyType>('/v1/endpoint', {
+  method: 'POST',
+  body: JSON.stringify(payload)
+})
+// result: { ok: boolean, json: MyType }
+```
+
+Used by the **Stripe** and **Square** integrations.
+
+---
+
+### `Evexi.square` — Square Integration
+
+| Method | Signature | Description |
+|---|---|---|
+| `square.event` | `(callback)` | Subscribe to Square webhook events (catalog, orders, payments, terminal checkout) |
+| `proxy` | `(endpoint, options)` | Proxy requests to the Square API |
+
+**Required env variables:** `ENVIRONMENT` (`LIVE` \| `SANDBOX`), `LOCATION`, `TERMINAL_ID`
+
+---
+
+### `Evexi.tizen` — Samsung Kiosk
+
+| Method | Description |
+|---|---|
+| `tizen.barcode()` | Read from the integrated barcode scanner |
+
+---
+
+### `Evexi.serial` — Serial Ports
+
+| Method | Signature | Description |
+|---|---|---|
+| `open` | `(port)` | Open a serial port (`PORT0` \| `PORT1` \| `PORT2`) |
+| `close` | `(port)` | Close a serial port |
+| `onMessage` | `(callback)` | Receive hex-encoded messages from the open port |
+| `write` | `(data)` | Send data to the open port |
+
+---
+
+### `Evexi.pip` — Picture-in-Picture *(WebOS only)*
+
+Overlay an external input source over the player content.
+
+| Method | Signature | Description |
+|---|---|---|
+| `pip.show` | `(config)` | Display a PIP overlay |
+| `pip.hide` | `()` | Remove the PIP overlay |
+
+**`show` config:**
+
+```ts
+{
+  type: 'HDMI' | 'DVI' | 'RGB' | 'COMPONENT',
+  number: number,
+  x: number,
+  y: number,
+  width: number,
+  height: number
+}
+```
+
+---
+
+### `Evexi.nexmosphere` — Nexmosphere Devices
+
+Control Nexmosphere experience triggers over USB. Requires Evexi **2.9.0+** on Windows or Linux.
+
+| Method | Signature | Description |
+|---|---|---|
+| `open` | `()` | Establish a USB connection |
+| `write` | `(command)` | Send a protocol command (e.g. `'X111B[Lc=R99008]'` to set LED colour) |
+| `onMessage` | `(callback)` | Receive messages from the device (e.g. `'X003A[3]'` for a button press) |
+| `close` | `()` | Terminate the connection |
+
+---
+
+### `Evexi.info` — Player Info
+
+```ts
+const info = await Evexi.info()
+// { deviceId: string, version: string, provider: 'WebOS' | 'Tizen' | 'HTML' }
+```
+
+---
+
+### `Evexi.log` — Player Logging
+
+```ts
+Evexi.log('message')   // Writes to the player's on-device log file
+```
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for the full version history.
+
+---
+
+## Support
+
+If you need help integrating the Evexi Player SDK, have a question about a specific API, or encounter an issue you cannot resolve, please get in touch with us directly.
+
+**Email:** [development@managedracks.co.uk](mailto:development@managedracks.co.uk)
+
+We're happy to assist.
+
+---
+
+## License
+
+MIT — Copyright Evexi
