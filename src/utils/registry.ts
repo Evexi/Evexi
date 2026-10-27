@@ -4,7 +4,8 @@ interface Module {
 
 export const supportsPlatform = (app: App, platform: Platform | undefined) => {
   if (!app.platforms?.length) return true
-  if (!platform) return false
+  // The dev mock reports no provider, so show every app locally rather than hiding platform-specific ones
+  if (!platform) return import.meta.env.DEV
   return app.platforms.includes(platform)
 }
 

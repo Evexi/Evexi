@@ -43,6 +43,7 @@ export const runAll = async (onAppStart?: (app: App) => void) => {
 
   if (isRunning()) return
   setIsRunning(true)
+  setResultsVisible(false)
   for (const app of allApps()) {
     for (const test of app.tests) {
       test.status = 'pending'
@@ -72,6 +73,7 @@ export const runApp = async (appKey: string) => {
   const app = mod.default
   if (!supportsPlatform(app, info()?.provider)) return
   setIsRunning(true)
+  setResultsVisible(false)
   for (const test of app.tests) {
     test.status = 'pending'
     test.duration = undefined
@@ -97,6 +99,7 @@ export const runSingle = async (appKey: string, testLabel: string) => {
   const test = app.tests.find(t => t.label.toLowerCase() === testLabel.toLowerCase().trim())
   if (!test) return
   setIsRunning(true)
+  setResultsVisible(false)
   test.status = 'pending'
   test.duration = undefined
   test.logs = undefined

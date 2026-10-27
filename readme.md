@@ -65,6 +65,7 @@ Each app keeps its documentation in a dedicated `docs.md` file next to its imple
 |---|---|---|
 | CEC | [`src/apps/cec/docs.md`](./src/apps/cec/docs.md) | Send CEC Frame |
 | Env Variables | [`src/apps/envVars/docs.md`](./src/apps/envVars/docs.md) | Get Env Variable, Listen For Env Variable Change |
+| GPIO | [`src/apps/gpio/docs.md`](./src/apps/gpio/docs.md) | Read State, Configure Pin, Write Pin, Write All, Pulse Pin, Stop Pulse, Listen for Events, Run Test 1-5 (multimeter) |
 | File System | [`src/apps/fs/docs.md`](./src/apps/fs/docs.md) | Put File, Get File, Check File Exists, Download File, List Files, Delete File, List Files (Post-Delete), Clear Files |
 | Helpers | [`src/apps/helpers/docs.md`](./src/apps/helpers/docs.md) | Generate Receipt, Star Receipt Generator |
 | Interactive | [`src/apps/interactive/docs.md`](./src/apps/interactive/docs.md) | Create Local Session, Start Session, Destroy Session |
@@ -361,6 +362,22 @@ Control Nexmosphere experience triggers over USB. Requires Evexi **2.9.0+** on W
 | `write` | `(command)` | Send a protocol command (e.g. `'X111B[Lc=R99008]'` to set LED colour) |
 | `onMessage` | `(callback)` | Receive messages from the device (e.g. `'X003A[3]'` for a button press) |
 | `close` | `()` | Terminate the connection |
+
+---
+
+### `Evexi.gpio` — GPIO *(BrightSign only)*
+
+Buttons, switches and sensors in; LEDs and relays out. Pins are numbered 0-7 and a mask is 8 bits (bit n = pin n). Every pin boots as an input. 3.3V logic, 24mA per pin, never connect 5V. Requires Evexi SDK **3.15.0+**.
+
+| Method | Signature | Description |
+|---|---|---|
+| `onEvent` | `(callback)` | Every input change: `{pin, state: 'down' \| 'up', mask, at}` |
+| `read` | `()` | Level of every pin (`mask`) and which are outputs (`outputs`) |
+| `configure` | `(pin, mode)` | Make a pin an `input` or `output` |
+| `write` | `(pin, on)` | Drive one output high (3.3V) or low |
+| `writeAll` | `(mask)` | Drive every output at once from a bitmask |
+| `pulse` | `(pin, pattern, {milliseconds, slices})` | Repeat an on/off pattern in hardware (timing shared by all pins) |
+| `stopPulse` | `(pin)` | Stop a pin's pulse pattern |
 
 ---
 
