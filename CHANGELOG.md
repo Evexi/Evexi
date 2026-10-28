@@ -1,3 +1,7 @@
+# 3.15.0-alpha.2
+* [FEATURE] Documented `groupLeader` in the `Evexi.info()` response, and the Get Info test logs it
+* [IMPROVEMENT] Bumped evexi to 3.15.0-alpha.3
+
 # 3.15.0-alpha.1
 * [FEATURE] GPIO page (BrightSign) with tests for every `Evexi.gpio` method and a multimeter run test for all 8 pins
 * [IMPROVEMENT] Bumped evexi to 3.15.0-alpha.2

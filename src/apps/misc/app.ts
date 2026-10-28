@@ -17,12 +17,12 @@ class MiscApp implements App {
       properties: [],
       async execute() {
         try {
-          // Evexi.info() returns device details including the deviceId, software version, and platform provider
+          // Evexi.info() returns device details including the deviceId, software version, platform provider and sync group role
           const info = await Evexi.info()
 
           if (info.deviceId && info.version && info.provider) {
             addLog({
-              message: `Info received. Device ID: ${info.deviceId}, Version: ${info.version}, Provider: ${info.provider}`,
+              message: `Info received. Device ID: ${info.deviceId}, Version: ${info.version}, Provider: ${info.provider}, Group leader: ${info.groupLeader ?? false}`,
               type: 'info',
             })
 
