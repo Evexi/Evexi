@@ -82,11 +82,11 @@ Evexi.gpio.onEvent(({ pin, state, mask, at }) => {
 
 Inputs have a 1k ohm pull-up to 3.3V, so wire a button between the GPIO pin and GND. Closing the contact gives `down` and opening it gives `up`. The input thresholds are 2.0V high and 0.8V low.
 
-**Note:** `onEvent` is a single slot. A second call replaces the first callback, and the Input Sweep and Loopback run tests below take it over.
+**Note:** `onEvent` is a single slot. A second call replaces the first callback, and there is no way to unregister one, so pass a no-op callback to stop listening. The Input Sweep and Loopback run tests below take the slot over and leave a no-op in it when they finish, so run this test again afterwards to keep logging events.
 
 # Run Test 1 - Reset
 
-Run tests 1 to 5 in order to prove every pin works with a multimeter. Each test logs exactly what the meter should read and when.
+Run tests 1 to 5 in order to prove every pin works with a multimeter. Each test logs exactly what the meter should read and when. Each run test also stops any pulses and puts every pin back to an input before it starts and again when it ends, even if it fails or you press Stop, so they can be run on their own in any order. GPIO tests are not part of Run All: run them from the GPIO page.
 
 **Kit:**
 - A multimeter set to DC volts (20V range).

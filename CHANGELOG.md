@@ -1,6 +1,8 @@
 # 3.15.0-alpha.2
 * [FEATURE] Documented `groupLeader` in the `Evexi.info()` response, and the Get Info test logs it
 * [IMPROVEMENT] Bumped evexi to 3.15.0-alpha.3
+* [IMPROVEMENT] GPIO tests are excluded from Run All; run them from the GPIO page
+* [FIX] GPIO run tests start from a clean state, release every pin on failure or Stop, react to Stop within 250ms, and free the `onEvent` slot when done
 
 # 3.15.0-alpha.1
 * [FEATURE] GPIO page (BrightSign) with tests for every `Evexi.gpio` method and a multimeter run test for all 8 pins

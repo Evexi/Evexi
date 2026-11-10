@@ -1,4 +1,5 @@
 import { addLog } from "@/hooks/useLogger"
+import { useStore } from "@/hooks/useStore"
 import { TestRunner } from "@/utils/test-runner"
 import Evexi from "evexi"
 import type { GpioEvent, GpioMode, GpioResponse } from "evexi"
@@ -13,6 +14,26 @@ const INPUT = 'input' as GpioMode
 const OUTPUT = 'output' as GpioMode
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+// Thrown when the user presses Stop mid run test, so execute() unwinds into its cleanup
+class Stopped extends Error {
+  constructor() { super('Stopped') }
+}
+
+// Sleeps up to ms, polling so Stop is noticed within a quarter second. Returns early once until() is true
+const wait = async (ms: number, until?: () => boolean) => {
+  const { isRunning } = useStore()
+  const end = Date.now() + ms
+  while (Date.now() < end) {
+    if (!isRunning()) throw new Stopped()
+    if (until?.()) return
+    await sleep(Math.min(250, end - Date.now()))
+  }
+  if (!isRunning()) throw new Stopped()
+}
+
+// onEvent has a single slot and no way to unregister, so park it on a no-op once a run test is done with it
+const releaseEvents = () => Evexi.gpio.onEvent(() => { })
 
 // Renders a mask as one column per pin, pin 7 on the left, e.g. "7 6 5 4 3 2 1 0 / 0 0 0 0 0 1 0 1"
 const bits = (mask: number) =>
@@ -39,10 +60,36 @@ const resetToInputs = async () => {
   return true
 }
 
+// Stops every pulse and puts every pin back to an input. Run tests call it before they start, so they never
+// depend on what an earlier test left behind, and in finally, so no pin is left driven after a failure or Stop
+const releasePins = async () => {
+  try {
+    // stopPulse is refused on a pin that is not pulsing, which is fine here
+    for (const pin of PINS) await Evexi.gpio.stopPulse(pin)
+    return await resetToInputs()
+  } catch (e) {
+    addLog({
+      message: 'Failed to release GPIO pins. Trace: ' + e,
+      type: 'error',
+    })
+
+    return false
+  }
+}
+
+// Logs how a run test ended early: a Stop is a warning, anything else is an error
+const logFailure = (e: unknown, action: string) => {
+  addLog(e instanceof Stopped
+    ? { message: `${action} stopped. Pins released.`, type: 'warning' }
+    : { message: `${action} failed. Trace: ` + e, type: 'error' })
+}
+
 class GpioApp implements App {
   name = 'gpio'
   label = 'GPIO'
   platforms: Platform[] = ['brightsign']
+  // These tests drive real pins and need a person with a meter or jumper, so Run All skips them
+  excludeFromRunAll = true
 
   tests: AppTest[] = [
     new TestRunner({
@@ -279,8 +326,7 @@ class GpioApp implements App {
       properties: [],
       async execute() {
         try {
-          for (const pin of PINS) await Evexi.gpio.stopPulse(pin)
-          if (!await resetToInputs()) return false
+          if (!await releasePins()) return false
 
           const response = await Evexi.gpio.read()
           if (!check(response, 'GPIO read')) return false
@@ -326,6 +372,9 @@ class GpioApp implements App {
         const hold = Number(this.getProperty<number>('hold')) * 1000
         let passed = true
         try {
+          // Start from all inputs, no pulses, so the read-back below only sees the pin under test
+          if (!await releasePins()) return false
+
           for (const pin of PINS) {
             const bit = 1 << pin
 
@@ -347,14 +396,14 @@ class GpioApp implements App {
               message: `GPIO ${pin} HIGH: measure ≈3.3V now`,
               type: 'warning',
             })
-            await sleep(hold)
+            await wait(hold)
 
             if (!check(await Evexi.gpio.writeAll(0), `Drive GPIO ${pin} low`)) return false
             addLog({
               message: `GPIO ${pin} LOW: expect ≈0V`,
               type: 'warning',
             })
-            await sleep(hold)
+            await wait(hold)
 
             if (!check(await Evexi.gpio.configure(pin, INPUT), `Configure GPIO ${pin} as input`)) return false
           }
@@ -368,12 +417,11 @@ class GpioApp implements App {
 
           return passed
         } catch (e) {
-          addLog({
-            message: 'Output sweep failed. Trace: ' + e,
-            type: 'error',
-          })
+          logFailure(e, 'Output sweep')
 
           return false
+        } finally {
+          await releasePins()
         }
       }
     }),
@@ -387,6 +435,9 @@ class GpioApp implements App {
       async execute() {
         const hold = Number(this.getProperty<number>('hold')) * 1000
         try {
+          // Clear any pulse first, a pulsing pin would override the patterns below
+          if (!await releasePins()) return false
+
           for (const pin of PINS) {
             if (!check(await Evexi.gpio.configure(pin, OUTPUT), `Configure GPIO ${pin} as output`)) return false
           }
@@ -401,7 +452,7 @@ class GpioApp implements App {
                 message: `Pattern ${i} done. All pins ≈0V, pattern ${i + 1} starts in 5 seconds`,
                 type: 'info',
               })
-              await sleep(5000)
+              await wait(5000)
             }
 
             if (!check(await Evexi.gpio.writeAll(mask), 'Write all GPIO')) return false
@@ -412,10 +463,8 @@ class GpioApp implements App {
               message: `Pattern ${i + 1} of ${patterns.length} ${bits(mask)}: GPIO ${high} ≈3.3V, GPIO ${low} ≈0V. Measure every pin now`,
               type: 'warning',
             })
-            await sleep(hold)
+            await wait(hold)
           }
-
-          if (!await resetToInputs()) return false
 
           addLog({
             message: 'Short check complete. A pin that read the same in both patterns is bridged or stuck.',
@@ -424,12 +473,11 @@ class GpioApp implements App {
 
           return true
         } catch (e) {
-          addLog({
-            message: 'Neighbour short check failed. Trace: ' + e,
-            type: 'error',
-          })
+          logFailure(e, 'Neighbour short check')
 
           return false
+        } finally {
+          await releasePins()
         }
       }
     }),
@@ -445,22 +493,18 @@ class GpioApp implements App {
         const down = new Set<number>()
         const done = new Set<number>()
         try {
-          if (!await resetToInputs()) return false
+          if (!await releasePins()) return false
 
-          const complete = new Promise<void>((resolve) => {
-            Evexi.gpio.onEvent((event: GpioEvent) => {
-              if (event.state === 'down') {
-                down.add(event.pin)
-              } else if (down.has(event.pin) && !done.has(event.pin)) {
-                done.add(event.pin)
-                addLog({
-                  message: `GPIO ${event.pin} OK (down + up). ${done.size}/8`,
-                  type: 'info',
-                })
-              }
-
-              if (done.size === PINS.length) resolve()
-            })
+          Evexi.gpio.onEvent((event: GpioEvent) => {
+            if (event.state === 'down') {
+              down.add(event.pin)
+            } else if (down.has(event.pin) && !done.has(event.pin)) {
+              done.add(event.pin)
+              addLog({
+                message: `GPIO ${event.pin} OK (down + up). ${done.size}/8`,
+                type: 'info',
+              })
+            }
           })
 
           addLog({
@@ -468,7 +512,7 @@ class GpioApp implements App {
             type: 'warning',
           })
 
-          await Promise.race([complete, sleep(timeout)])
+          await wait(timeout, () => done.size === PINS.length)
 
           if (done.size === PINS.length) {
             addLog({
@@ -486,12 +530,11 @@ class GpioApp implements App {
 
           return false
         } catch (e) {
-          addLog({
-            message: 'Input sweep failed. Trace: ' + e,
-            type: 'error',
-          })
+          logFailure(e, 'Input sweep')
 
           return false
+        } finally {
+          releaseEvents()
         }
       }
     }),
@@ -518,23 +561,22 @@ class GpioApp implements App {
             return false
           }
 
-          if (!check(await Evexi.gpio.configure(input, INPUT), `Configure GPIO ${input} as input`)) return false
+          // Every pin an input and no pulses, so only the chosen output can move the input
+          if (!await releasePins()) return false
           if (!check(await Evexi.gpio.configure(out, OUTPUT), `Configure GPIO ${out} as output`)) return false
           if (!check(await Evexi.gpio.write(out, true), `Drive GPIO ${out} high`)) return false
-          await sleep(200)
+          await wait(200)
 
           Evexi.gpio.onEvent((event) => {
             if (event.pin === input) events.push(event.state)
           })
 
           for (let i = 0; i < cycles; i++) {
-            await Evexi.gpio.write(out, false)
-            await sleep(300)
-            await Evexi.gpio.write(out, true)
-            await sleep(300)
+            if (!check(await Evexi.gpio.write(out, false), `Drive GPIO ${out} low`)) return false
+            await wait(300)
+            if (!check(await Evexi.gpio.write(out, true), `Drive GPIO ${out} high`)) return false
+            await wait(300)
           }
-
-          await Evexi.gpio.configure(out, INPUT)
 
           const expected = Array.from({ length: cycles }, () => 'down,up').join(',')
           if (events.join(',') === expected) {
@@ -553,12 +595,12 @@ class GpioApp implements App {
 
           return false
         } catch (e) {
-          addLog({
-            message: 'Loopback failed. Trace: ' + e,
-            type: 'error',
-          })
+          logFailure(e, 'Loopback')
 
           return false
+        } finally {
+          releaseEvents()
+          await releasePins()
         }
       }
     }),

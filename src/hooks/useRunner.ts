@@ -44,14 +44,15 @@ export const runAll = async (onAppStart?: (app: App) => void) => {
   if (isRunning()) return
   setIsRunning(true)
   setResultsVisible(false)
-  for (const app of allApps()) {
+  const apps = allApps().filter(app => !app.excludeFromRunAll)
+  for (const app of apps) {
     for (const test of app.tests) {
       test.status = 'pending'
       test.duration = undefined
       test.logs = undefined
     }
   }
-  for (const app of allApps()) {
+  for (const app of apps) {
     if (!isRunning()) break
     onAppStart?.(app)
     for (const test of app.tests) {
@@ -62,7 +63,7 @@ export const runAll = async (onAppStart?: (app: App) => void) => {
   if (isRunning()) {
     setIsRunning(false)
     setResultsVisible(true)
-    await sendReport(allApps())
+    await sendReport(apps)
   }
 }
 
