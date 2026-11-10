@@ -1,7 +1,7 @@
 {
   "name": "evexi",
   "description": "The Evexi Player API",
-  "version": "3.15.0-alpha.2",
+  "version": "3.15.0-alpha.3",
   "author": "Evexi <development@managedracks.co.uk>",
   "type": "module",
   "license": "MIT",
