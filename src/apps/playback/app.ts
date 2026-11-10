@@ -242,6 +242,8 @@ class PlaybackApp implements App {
   name = 'playback'
   label = 'Playback'
   // No platforms: the page runs everywhere so unsupported players can be checked for a graceful refusal
+  // These tests need test.mp4 on the SD card, an overlay deployment, and end the interactive session, so Run All skips them
+  excludeFromRunAll = true
 
   tests: AppTest[] = [
     new TestRunner({

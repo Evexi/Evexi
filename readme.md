@@ -419,7 +419,7 @@ if (!res.success && res.error === PlaybackError.NO_PROVIDER) {
 }
 ```
 
-**Testing:** copy `test.mp4` to the root of each BrightSign's SD card, then deploy this app as an overlay on a running playlist. Trigger the tests with the `run` env variable: `run=playback` runs the page, `run=playback.Play Video` runs a single test, and `run=all` runs everything. Results are POSTed to `reports_url`. On players other than BrightSign, every playback test passes only if each call is refused cleanly with `NO_PROVIDER` and nothing throws or hangs.
+**Testing:** copy `test.mp4` to the root of each BrightSign's SD card, then deploy this app as an overlay on a running playlist. Trigger the tests with the `run` env variable: `run=playback` runs the page, `run=playback.Play Video` runs a single test. Playback is not part of `run=all`: run it with `run=playback`. Results are POSTed to `reports_url`. On players other than BrightSign, every playback test passes only if each call is refused cleanly with `NO_PROVIDER` and nothing throws or hangs.
 
 ---
 
