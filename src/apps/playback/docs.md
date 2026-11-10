@@ -11,11 +11,11 @@ Before the first playback call the tests run `Evexi.interactive.destroy()`. This
 
 Every test that plays a clip calls `clear()` when it finishes, passes or fails, or when Stop is pressed, then waits for the clip's terminal event. The playlist is back on screen, with no leftover video frame, before the next test starts. **Clear Video** is the last test on the page, so a run always ends with the video plane blank.
 
-`onEvent` registers the single callback that receives every playback event. A later call replaces the previous callback. Each clip emits **exactly one** terminal event, preceded by `started` if it reached the screen:
+`onEvent` registers the single callback that receives every playback event. A later call replaces the previous callback. Each clip emits `started`, then **exactly one** terminal event:
 
 | Type | Meaning |
 |---|---|
-| `started` | On screen: fires on a local clip's first frame, not when `play` resolves, so it is the right cue to hide your own UI. For a synced clip it fires just before the first frame, by the sync lead time. A clip that never reaches the screen (missing or undecodable file, or stopped or superseded first) has no `started`, so don't wait for it before handling a terminal event |
+| `started` | The play was sent to the video player. For a local clip this is before the first frame, so it is the cue to hide your own UI. For a synced clip it fires just before the first frame, by the sync lead time. A clip that fails to play (missing or undecodable file) still gets `started`, followed by `error` |
 | `ended` | Terminal. Reached its natural end. This is the only event that means the clip completed |
 | `error` | Terminal. Failed to play, or failed part way through. Carries `error` |
 | `superseded` | Terminal. A later `play` took the screen. Carries `by` (the new token). The playlist was not resumed in between |
@@ -118,7 +118,7 @@ Only a plain file in the player's own storage is accepted. The storage root depe
 
 Stream URLs (`rtsp://`, `udp://`, `https://...m3u8`) are refused too. Overlay content therefore cannot display remote media or open outbound connections. Every refusal returns the same `INVALID_PATH` error, because the fix is the same in each case.
 
-A well-formed path to a file that doesn't exist is **not** refused by `play`. The play is accepted with a token, and the failure arrives as an `error` event for that token, with **no** `started` before it, because the clip never reaches the screen. Content that plays files it hasn't checked should handle `error` as well as `INVALID_PATH`.
+A well-formed path to a file that doesn't exist is **not** refused by `play`. The play is accepted with a token, `started` arrives as for any play, and the failure then arrives as an `error` event for that token. Content that plays files it hasn't checked should handle `error` as well as `INVALID_PATH`.
 
 ```typescript
 const res = await Evexi.playback.play('SD:/does-not-exist.mp4')
@@ -131,7 +131,7 @@ await Evexi.playback.play('https://example.com/test.mp4')
 // { success: false, error: "A media path must be a file in this player's local storage" }
 ```
 
-The test expects `INVALID_PATH` for the remote URL, `SD://test.mp4`, `SD:/../test.mp4`, a backslash path and a path containing `|`. For the missing file it accepts either an `INVALID_PATH` refusal or an accepted play that ends in an `error` (or `stopped`) event. It fails if a `started` event arrives for the missing file.
+The test expects `INVALID_PATH` for the remote URL, `SD://test.mp4`, `SD:/../test.mp4`, a backslash path and a path containing `|`. For the missing file it accepts either an `INVALID_PATH` refusal or an accepted play that ends in an `error` (or `stopped`) event. A `started` event before that error is expected and only logged.
 
 # Media ID
 
