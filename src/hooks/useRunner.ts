@@ -43,14 +43,16 @@ export const runAll = async (onAppStart?: (app: App) => void) => {
 
   if (isRunning()) return
   setIsRunning(true)
-  for (const app of allApps()) {
+  setResultsVisible(false)
+  const apps = allApps().filter(app => !app.excludeFromRunAll)
+  for (const app of apps) {
     for (const test of app.tests) {
       test.status = 'pending'
       test.duration = undefined
       test.logs = undefined
     }
   }
-  for (const app of allApps()) {
+  for (const app of apps) {
     if (!isRunning()) break
     onAppStart?.(app)
     for (const test of app.tests) {
@@ -61,7 +63,7 @@ export const runAll = async (onAppStart?: (app: App) => void) => {
   if (isRunning()) {
     setIsRunning(false)
     setResultsVisible(true)
-    await sendReport(allApps())
+    await sendReport(apps)
   }
 }
 
@@ -72,6 +74,7 @@ export const runApp = async (appKey: string) => {
   const app = mod.default
   if (!supportsPlatform(app, info()?.provider)) return
   setIsRunning(true)
+  setResultsVisible(false)
   for (const test of app.tests) {
     test.status = 'pending'
     test.duration = undefined
@@ -97,6 +100,7 @@ export const runSingle = async (appKey: string, testLabel: string) => {
   const test = app.tests.find(t => t.label.toLowerCase() === testLabel.toLowerCase().trim())
   if (!test) return
   setIsRunning(true)
+  setResultsVisible(false)
   test.status = 'pending'
   test.duration = undefined
   test.logs = undefined
