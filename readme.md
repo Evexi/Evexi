@@ -74,7 +74,7 @@ Each app keeps its documentation in a dedicated `docs.md` file next to its imple
 | Misc | [`src/apps/misc/docs.md`](./src/apps/misc/docs.md) | Get Info, Write Log |
 | Nexmosphere | [`src/apps/nexmosphere/docs.md`](./src/apps/nexmosphere/docs.md) | Open Connection, Write Command, Close Connection |
 | Picture in Picture | [`src/apps/pip/docs.md`](./src/apps/pip/docs.md) | Show PIP, Hide PIP |
-| Playback | [`src/apps/playback/docs.md`](./src/apps/playback/docs.md) | Register Event Listener, Play Video, Stop Video, Play To End, Supersede, Stop With Nothing Playing, Invalid Path, Media ID, Sync Play, Clear Video |
+| Playback | [`src/apps/playback/docs.md`](./src/apps/playback/docs.md) | Register Event Listener, Play Video, Stop Video, Play To End, Supersede, Stop With Nothing Playing, Invalid Path, Media ID, Sync Play |
 | Player Messaging | [`src/apps/playerMessaging/docs.md`](./src/apps/playerMessaging/docs.md) | Register Message Listener, Send Message |
 | Printer | [`src/apps/printer/docs.md`](./src/apps/printer/docs.md) | Print Receipt, Print Styled Text, Print All Alignments, Print QR Code, Print QR Code with Text, Print Logo, Print Logo with Text, Print Full Receipt, Print Blank Lines |
 | Square | [`src/apps/square/docs.md`](./src/apps/square/docs.md) | Register Event Listener, Proxy Request |
@@ -392,7 +392,6 @@ Play a video file from the player's own storage on its native decoder, taking th
 |---|---|---|
 | `play` | `(src, { sync?, mediaId? }?)` | Play a local file. Resolves on accept/refuse with `{ success, error?, token? }`, **not** when the clip ends |
 | `stop` | `(token?)` | Stop the current clip and hand back to the playlist. With a token, a no-op if that clip was already superseded. Holds the clip's last frame on screen |
-| `clear` | `()` | Stop the current clip like `stop` **and** blank the video plane. Valid with nothing playing, so it also removes a finished clip's last frame. Refused for a synced clip (`SYNCED_STOP`). Requires SDK 3.15.0-alpha.5+ |
 | `onEvent` | `(callback)` | Every playback event (single slot: a later call replaces the earlier callback) |
 
 **`play` options:**
@@ -402,7 +401,7 @@ Play a video file from the player's own storage on its native decoder, taking th
 | `sync` | Play across every panel in the sync group. Leader only; followers are refused with `SYNC_NOT_LEADER` (normal). A synced clip cannot be stopped |
 | `mediaId` | Evexi media id reported in proof of play and screenshots instead of the application. Letters, digits, `-`, `_`, max 64 |
 
-**Events:** `{ type, token, requestToken?, path, synced, at }`. Each clip emits exactly one of `ended` (natural finish, the only completion), `error` (`error`), `superseded` (`by`) or `stopped` (`reason`: `stopped`, `cleared` or `timeout`). It's preceded by `started` on the clip's first frame; a clip that never reaches the screen has no `started`.
+**Events:** `{ type, token, requestToken?, path, synced, at }`. Each clip emits exactly one of `ended` (natural finish, the only completion), `error` (`error`), `superseded` (`by`) or `stopped` (`reason`: `stopped` or `timeout`). It's preceded by `started` on the clip's first frame; a clip that never reaches the screen has no `started`.
 
 **Errors (`PlaybackError`):** `NO_PROVIDER`, `NOT_OVERLAY`, `PLAYLIST_NOT_RUNNING`, `PLAYLIST_DRIVEN`, `INVALID_PATH`, `INVALID_MEDIA_ID`, `SEND_FAILED`, `NO_ACTIVE_PLAYBACK`, `SYNC_UNAVAILABLE`, `SYNC_NOT_LEADER`, `SYNCED_STOP`. See [`src/apps/playback/docs.md`](./src/apps/playback/docs.md) for when each occurs.
 

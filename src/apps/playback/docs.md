@@ -9,7 +9,7 @@ Requirements:
 
 Before each playback test makes its first call it runs `Evexi.interactive.destroy()`. This app starts an interactive session when it loads, which holds the playlist paused, and playback needs a running playlist to interrupt and hand back to. When the test ends, passes or fails, or when Stop is pressed, it runs `Evexi.interactive.start()` to put the session back, so a test leaves the player as it found it and the page can be run again. Register Event Listener only registers the callback and leaves the session alone. Your own overlay content should not hold an interactive session open while it uses `Evexi.playback`.
 
-Every test that plays a clip calls `clear()` when it finishes, passes or fails, or when Stop is pressed, then waits for the clip's terminal event. The playlist is back on screen, with no leftover video frame, before the next test starts. **Clear Video** is the last test on the page, so a run always ends with the video plane blank.
+Every test that plays a clip calls `stop()` when it finishes, passes or fails, or when Stop is pressed, then waits for the clip's terminal event, so the playlist is back on screen before the next test starts.
 
 `onEvent` registers the single callback that receives every playback event. A later call replaces the previous callback. Each clip emits `started`, then **exactly one** terminal event:
 
@@ -19,7 +19,7 @@ Every test that plays a clip calls `clear()` when it finishes, passes or fails, 
 | `ended` | Terminal. Reached its natural end. This is the only event that means the clip completed |
 | `error` | Terminal. Failed to play, or failed part way through. Carries `error` |
 | `superseded` | Terminal. A later `play` took the screen. Carries `by` (the new token). The playlist was not resumed in between |
-| `stopped` | Terminal. Cut short by `stop()`, `clear()` or the player's safety timeout. `reason` is `'stopped'`, `'cleared'` or `'timeout'` |
+| `stopped` | Terminal. Cut short by `stop()` or the player's safety timeout. `reason` is `'stopped'` or `'timeout'` |
 
 ```typescript
 import Evexi, { PlaybackEventType } from 'evexi'
@@ -67,7 +67,7 @@ const res = await Evexi.playback.stop(token)
 // { success: true }  -> a 'stopped' event follows for token
 ```
 
-`stop()` leaves the clip's last frame on the video plane. It shows through anything the playlist puts on screen next that doesn't cover it, such as HTML content or a letterboxed image. Use `clear()` to stop **and** blank it.
+`stop()` leaves the clip's last frame on the video plane. It shows through anything the playlist puts on screen next that doesn't cover it, such as HTML content or a letterboxed image.
 
 The test plays, waits for `started`, stops, and expects a `stopped` event for the same token.
 
@@ -157,22 +157,3 @@ const res = await Evexi.playback.play('SD:/test.mp4', { sync: true })
 Synced events carry `synced: true`, and `requestToken` holds the token `play` returned. A synced clip **cannot be stopped** on any panel, the leader included (`SYNCED_STOP`). It ends only at its natural end or at the player's safety timeout. While a local (unsynced) play is on screen, that panel refuses incoming synced starts and the other panels still take them.
 
 The test passes when the play is refused with `SYNC_UNAVAILABLE` or `SYNC_NOT_LEADER`, and logs a warning. On the leader it checks that `stop` is refused and that the clip runs to `ended`.
-
-# Clear Video
-
-Stops the current clip, as `stop()` does, and also **blanks the video plane**, so its last frame isn't left on screen. The clip reports `stopped` with `reason: 'cleared'`.
-
-```typescript
-const res = await Evexi.playback.clear()
-// { success: true }  -> a 'stopped' event with reason 'cleared' follows for the playing clip
-```
-
-Differences from `stop()`:
-- `clear()` takes no token, and is valid with **nothing playing**. A clip that has already ended or been stopped leaves its last frame behind, and `clear()` removes it.
-- It never interrupts the playlist's own video, which already covers the plane.
-- A synced clip is refused with `SYNCED_STOP`, as for `stop()`.
-- Players older than SDK 3.15.0-alpha.5 don't answer, so the request times out. The test treats no answer within 15s as a failure.
-
-Call `clear()` when your content is done with playback and wants nothing left on screen. Use `stop()` only when something else will immediately cover the video plane.
-
-The test plays, waits for `started`, then calls `clear()`. It expects a `stopped` event with reason `cleared`, then calls `clear()` again with nothing playing and expects that to succeed. It is the last test on the page, and like every playback test it ends by clearing, so a run finishes with no video left on screen. On non-BrightSign players it passes when `clear()` is cleanly refused with `NO_PROVIDER`.

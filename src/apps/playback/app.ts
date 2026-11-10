@@ -69,11 +69,6 @@ const play = (path: string, options?: { sync?: boolean, mediaId?: string }) =>
 const stop = (token?: string) =>
   withTimeout(Evexi.playback.stop(token), `stop(${token ?? ''})`)
 
-// Stops like stop() and also blanks the video plane; valid with nothing playing. Old players never answer
-// TEMP: unused while clear() is disabled for testing
-// const clear = () =>
-//   withTimeout(Evexi.playback.clear(), 'clear()')
-
 // The mock in development stands in for a BrightSign so the BrightSign path can be exercised off-device
 const isBrightSign = () => import.meta.env.DEV || useStore().info()?.provider === 'brightsign'
 
@@ -200,22 +195,11 @@ const unsupported = async (calls: Array<[string, () => Promise<Response>]>) => {
   return true
 }
 
-// Runs after every test that calls prepare(): clears the video plane, so neither a playing clip nor the last
-// frame of a finished one is left on screen, waits until each clip the test started has a terminal event,
-// then restarts the interactive session
+// Runs after every test that calls prepare(): stops anything still playing, waits until each clip the test
+// started has a terminal event, then restarts the interactive session
 const cleanup = async (...tokens: Array<string | null>) => {
   if (!isBrightSign()) return
   try {
-    // TEMP: clear() disabled while testing; cleanup stops with stop() as before, which holds the last frame
-    // const res = await clear()
-    // if (res.success) {
-    //   addLog({ message: 'Cleanup: video plane cleared.', type: 'info' })
-    // } else if (res.error === PlaybackError.SYNCED_STOP) {
-    //   addLog({ message: 'Cleanup: a synced clip is still playing and cannot be cleared; it will run to its end.', type: 'warning' })
-    // } else {
-    //   addLog({ message: `Cleanup: could not clear playback. Error: ${res.error}`, type: 'warning' })
-    // }
-
     // No token: stops whatever is claimed, including a clip this test did not get a token for
     const res = await stop()
     if (res.success) {
@@ -234,7 +218,7 @@ const cleanup = async (...tokens: Array<string | null>) => {
       if (!findEvent(token, TERMINAL)) addLog({ message: `Cleanup: no terminal event for ${token} after stop.`, type: 'warning' })
     }
   } catch (e) {
-    addLog({ message: 'Cleanup: failed to clear playback. Trace: ' + e, type: 'warning' })
+    addLog({ message: 'Cleanup: failed to stop playback. Trace: ' + e, type: 'warning' })
   } finally {
     restore()
   }
@@ -572,49 +556,6 @@ class PlaybackApp implements App {
         }
       }
     }),
-
-    // TEMP: Clear Video disabled while testing; re-enable to run playback.clear() as the last check
-    /*
-    new TestRunner({
-      label: 'Clear Video',
-      documentation: doc('Clear Video'),
-      properties: [PATH_PROPERTY],
-      async execute() {
-        const path = this.getProperty<string>('path')
-        let token: string | null = null
-        try {
-          await prepare()
-          if (!isBrightSign()) return await unsupported([['Clear', () => clear()]])
-
-          token = await playAndStart(path)
-          if (!token) return false
-
-          // Evexi.playback.clear() stops the clip like stop() and blanks the video plane, so no last frame is left behind
-          const res = await clear()
-          if (!res.success) return refused(res, 'Clear')
-          addLog({ message: 'Clear accepted.', type: 'info' })
-
-          const terminal = await waitForEvent(token, TERMINAL, STOP_TIMEOUT)
-          if (!terminal) return fail(`No terminal event for ${token} within ${STOP_TIMEOUT / 1000}s.`)
-          if (terminal.type !== PlaybackEventType.STOPPED) return fail(`Expected stopped, got ${terminal.type}.`)
-          if (terminal.reason !== 'cleared') return fail(`Expected stopped reason 'cleared', got '${terminal.reason}'.`)
-          if (!assertLifecycle(token)) return false
-
-          // Unlike stop(), clear() is valid with nothing playing: it removes a finished clip's last frame
-          const again = await clear()
-          if (!again.success) return refused(again, 'Clear with nothing playing')
-          addLog({ message: 'Clear with nothing playing accepted.', type: 'info' })
-          return true
-        } catch (e) {
-          logFailure(e, 'Clear video')
-          return false
-        } finally {
-          // The last check on the page, so the run always finishes with the video plane blank
-          await cleanup(token)
-        }
-      }
-    }),
-    */
   ]
 }
 
