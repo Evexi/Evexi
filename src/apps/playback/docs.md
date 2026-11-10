@@ -7,7 +7,7 @@ Requirements:
 - A player-driven playlist must be running. Otherwise the call is refused with `PLAYLIST_NOT_RUNNING` or `PLAYLIST_DRIVEN`.
 - The path must be a plain file in the player's local storage (BrightSign: `SD:/...` or `/storage/sd/...`; the drive is case-sensitive, and `SD://` is refused). Stream and http URLs are refused.
 
-Before the first playback call the tests run `Evexi.interactive.destroy()`. This app starts an interactive session when it loads, which holds the playlist paused, and playback needs a running playlist to interrupt and hand back to. Your own overlay content should not hold an interactive session open while it uses `Evexi.playback`.
+Before each playback test makes its first call it runs `Evexi.interactive.destroy()`. This app starts an interactive session when it loads, which holds the playlist paused, and playback needs a running playlist to interrupt and hand back to. When the test ends, passes or fails, or when Stop is pressed, it runs `Evexi.interactive.start()` to put the session back, so a test leaves the player as it found it and the page can be run again. Register Event Listener only registers the callback and leaves the session alone. Your own overlay content should not hold an interactive session open while it uses `Evexi.playback`.
 
 Every test that plays a clip calls `clear()` when it finishes, passes or fails, or when Stop is pressed, then waits for the clip's terminal event. The playlist is back on screen, with no leftover video frame, before the next test starts. **Clear Video** is the last test on the page, so a run always ends with the video plane blank.
 

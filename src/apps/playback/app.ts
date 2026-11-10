@@ -77,14 +77,12 @@ const stop = (token?: string) =>
 // The mock in development stands in for a BrightSign so the BrightSign path can be exercised off-device
 const isBrightSign = () => import.meta.env.DEV || useStore().info()?.provider === 'brightsign'
 
-// Every event the player has pushed since the listener was registered
+// Every event the player has pushed since the listener was first registered
 const events: PlaybackEvent[] = []
-let listening = false
 
-// onEvent has a single slot, so register once and fan out to the shared events array
+// onEvent has a single slot, so registering again replaces the callback rather than adding one. It is
+// registered on every prepare() because interactive.destroy() may drop listeners the session owned
 const listen = () => {
-  if (listening) return
-  listening = true
   Evexi.playback.onEvent((event) => {
     events.push(event)
     const detail = 'error' in event ? ` error: ${event.error}`
@@ -98,22 +96,30 @@ const listen = () => {
   })
 }
 
-let prepared = false
-
-// The first step of every playback test, run once per page load. App.tsx starts an interactive session on
-// load, which holds the playlist paused; playback interrupts a running playlist and hands back to it, so
-// end that session first, give the playlist a moment to resume, then register the event listener.
+// The first step of every playback test. App.tsx starts an interactive session on load, which holds the
+// playlist paused; playback interrupts a running playlist and hands back to it, so end that session first,
+// give the playlist a moment to resume, then register the event listener. restore() undoes this when the
+// test ends, so each test leaves the session as it found it and the page can be run more than once.
 const prepare = async () => {
-  if (!prepared) {
-    prepared = true
-    if (isBrightSign()) {
-      // Evexi.interactive.destroy() ends the interactive session and returns the player to its playlist
-      Evexi.interactive.destroy()
-      addLog({ message: 'Interactive session destroyed so the playlist runs under playback.', type: 'info' })
-      await wait(2000)
-    }
+  if (isBrightSign()) {
+    // Evexi.interactive.destroy() ends the interactive session and returns the player to its playlist
+    Evexi.interactive.destroy()
+    addLog({ message: 'Interactive session destroyed so the playlist runs under playback.', type: 'info' })
+    await wait(2000)
   }
   listen()
+}
+
+// Puts back the interactive session App.tsx started on load, so the playlist is held paused again
+const restore = () => {
+  if (!isBrightSign()) return
+  try {
+    // Evexi.interactive.start() pauses the playlist and hands control back to this app
+    Evexi.interactive.start()
+    addLog({ message: 'Interactive session restarted.', type: 'info' })
+  } catch (e) {
+    addLog({ message: 'Cleanup: failed to restart the interactive session. Trace: ' + e, type: 'warning' })
+  }
 }
 
 // A synced play reports the player's own id as token and the id play() returned as requestToken
@@ -194,8 +200,9 @@ const unsupported = async (calls: Array<[string, () => Promise<Response>]>) => {
   return true
 }
 
-// Runs after every test that plays: clears the video plane, so neither a playing clip nor the last frame
-// of a finished one is left on screen, then waits until each clip the test started has a terminal event
+// Runs after every test that calls prepare(): clears the video plane, so neither a playing clip nor the last
+// frame of a finished one is left on screen, waits until each clip the test started has a terminal event,
+// then restarts the interactive session
 const cleanup = async (...tokens: Array<string | null>) => {
   if (!isBrightSign()) return
   try {
@@ -228,6 +235,8 @@ const cleanup = async (...tokens: Array<string | null>) => {
     }
   } catch (e) {
     addLog({ message: 'Cleanup: failed to clear playback. Trace: ' + e, type: 'warning' })
+  } finally {
+    restore()
   }
 }
 
@@ -252,8 +261,9 @@ class PlaybackApp implements App {
       properties: [],
       async execute() {
         try {
-          // Evexi.playback.onEvent() registers the single callback that receives started and the terminal event for every clip
-          await prepare()
+          // Evexi.playback.onEvent() registers the single callback that receives started and the terminal event for every clip.
+          // No prepare(): registering a listener does not need the interactive session ended
+          listen()
           addLog({ message: 'Playback event listener registered.', type: 'info' })
           return true
         } catch (e) {
@@ -419,6 +429,8 @@ class PlaybackApp implements App {
         } catch (e) {
           logFailure(e, 'Stop with nothing playing')
           return false
+        } finally {
+          await cleanup()
         }
       }
     }),
