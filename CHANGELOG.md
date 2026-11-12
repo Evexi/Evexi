@@ -1,3 +1,19 @@
+# 3.15.0-alpha.3
+* [FEATURE] Playback page documenting and testing `Evexi.playback` (BrightSign): play, stop, events, play to end, supersede, invalid path, media id and sync play against a local `SD:/test.mp4`
+* [FEATURE] On non-BrightSign players the playback tests pass only on a graceful `NO_PROVIDER` refusal
+* [IMPROVEMENT] Readme API reference for `Evexi.playback`
+* [IMPROVEMENT] Invalid Path fails if a missing file reports `started`, matching the SDK's "started on first frame" contract
+
+# 3.15.0-alpha.2
+* [FEATURE] Documented `groupLeader` in the `Evexi.info()` response, and the Get Info test logs it
+* [IMPROVEMENT] Bumped evexi to 3.15.0-alpha.3
+* [IMPROVEMENT] GPIO tests are excluded from Run All; run them from the GPIO page
+* [FIX] GPIO run tests start from a clean state, release every pin on failure or Stop, react to Stop within 250ms, and free the `onEvent` slot when done
+
+# 3.15.0-alpha.1
+* [FEATURE] GPIO page (BrightSign) with tests for every `Evexi.gpio` method and a multimeter run test for all 8 pins
+* [IMPROVEMENT] Bumped evexi to 3.15.0-alpha.2
+
 # 3.13.0-alpha.2
 * [FEATURE] Star print methods
 

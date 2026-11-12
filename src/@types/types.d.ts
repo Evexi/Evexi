@@ -16,6 +16,8 @@ declare global {
     label: string
     order?: number
     skip?: boolean
+    // Excluded from Run All (hardware / interactive tests); still runnable per app or per test
+    excludeFromRunAll?: boolean
     platforms?: Platform[]
     tests: AppTest[]
   }
