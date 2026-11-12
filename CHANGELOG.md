@@ -1,3 +1,9 @@
+# 3.15.0-alpha.3
+* [FEATURE] Playback page documenting and testing `Evexi.playback` (BrightSign): play, stop, events, play to end, supersede, invalid path, media id and sync play against a local `SD:/test.mp4`
+* [FEATURE] On non-BrightSign players the playback tests pass only on a graceful `NO_PROVIDER` refusal
+* [IMPROVEMENT] Readme API reference for `Evexi.playback`
+* [IMPROVEMENT] Invalid Path fails if a missing file reports `started`, matching the SDK's "started on first frame" contract
+
 # 3.15.0-alpha.2
 * [FEATURE] Documented `groupLeader` in the `Evexi.info()` response, and the Get Info test logs it
 * [IMPROVEMENT] Bumped evexi to 3.15.0-alpha.3
