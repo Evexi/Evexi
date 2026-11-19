@@ -1,4 +1,4 @@
-# 3.15.0-alpha.3
+# 3.15.0-alpha.3 (3.15.0)
 * [FEATURE] Playback page documenting and testing `Evexi.playback` (BrightSign): play, stop, events, play to end, supersede, invalid path, media id and sync play against a local `SD:/test.mp4`
 * [FEATURE] On non-BrightSign players the playback tests pass only on a graceful `NO_PROVIDER` refusal
 * [IMPROVEMENT] Readme API reference for `Evexi.playback`
